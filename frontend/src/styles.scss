@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Hammersmith+One');
+*{
+    // font-family: 'Fjalla One', sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
+}
+.preview-name{
+font-size: 2rem;
+}
+
 body{
     background-color: #f2f6f5;
 }
@@ -7,11 +16,12 @@ ul {
     padding: 0;
     &.business-list{
         display: grid;
-        grid-template-columns: repeat(4,1fr);
-        grid-gap: 10px;
+        grid-template-columns: repeat(4,minmax(min-content, auto));
+        grid-gap: 10px 20px;
+        padding: 20px;
 
         li{
-            height: 300px;
+            // height: 300px;
         }
     }
 }
@@ -36,10 +46,10 @@ ul {
 .home-filter{
     input{
         width: 60vw;
-        height: 50px;
+        height: 60px;
         background-color: white;
         border: 1px solid #e7e7e7;
-        border-radius: 3px;
+        border-radius: 5px;
         text-align: center
     }
 }

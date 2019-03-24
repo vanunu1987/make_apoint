@@ -35,7 +35,7 @@ export default {
     async filterList(filterBy) {
       console.log("scroll");
       await this.$store.dispatch({ type: "loadBusinesses", filterBy });
-      this.$scrollTo("#list", 300);
+      this.$scrollTo("#list", 500);
     }
   },
   created() {
