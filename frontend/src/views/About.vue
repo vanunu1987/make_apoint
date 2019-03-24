@@ -4,41 +4,28 @@
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum incidunt est, officiis accusamus voluptates expedita nam fuga error, inventore harum dolores alias autem exercitationem fugiat! Ea rerum tenetur pariatur obcaecati?
     </p>
-<div
-    v-resize.count="onResize"
-    class="kept"
-  >
-    <div>
-      <b>Resize count : {{resizeCount}} </b>
+    <button @click="showCalendar = !showCalendar">Add appoint</button>
+ <div  v-if="showCalendar">
+        <business-calendar @closecalendar ="closeCalendar" ></business-calendar>
     </div>
-    <div class="ui-widget-content">
-      <b>kept alive</b>
-    </div>
-  </div>
+
   </div>
 </template>
+
 <script>
-import resize from 'vue-resize-directive'
+import BusinessCalendar from '../components/BusinessCalendar.vue'
 export default {
-  directives: {
-    resize
+  components:{
+    BusinessCalendar
   },
-  data() {
-    return {
-      resizeCount: 0
-    };
-  },
-  methods: {
-    onResize() {
-      this.resizeCount++;
+  data(){
+    return{
+      showCalendar:false,
     }
+  },
+  methods:{closeCalendar(){
+          this.showCalendar = false
+        }
   }
-};
-</script>
-<style>
-.kept {
-  width: 20%;
-  height: 20%;
-  background-color: antiquewhite;
 }
-</style>
+</script>

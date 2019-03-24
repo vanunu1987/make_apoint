@@ -1,0 +1,69 @@
+[
+    {
+        "dayOfTheWeek": 0,
+        "timeRanges": [
+            {
+                "from": "09:00",
+                "to": " 11:00"
+            },
+            {
+                "from": "12:00",
+                "to": " 15:00"
+            }
+        ]
+    },
+    {
+        "dayOfTheWeek": 1,
+        "timeRanges": [
+            {
+                "from": "08:00",
+                "to": " 17:00"
+            }
+        ]
+    },
+    {
+        "dayOfTheWeek": 2,
+        "timeRanges": [
+            {
+                "from": "09:00",
+                "to": " 11:00"
+            }
+        ]
+    },
+    {
+        "dayOfTheWeek": 3,
+        "timeRanges": [
+            {
+                "from": "09:00",
+                "to": " 11:00"
+            }
+        ]
+    },
+    {
+        "dayOfTheWeek": 4,
+        "timeRanges": [
+            {
+                "from": "09:00",
+                "to": " 11:00"
+            }
+        ]
+    },
+    {
+        "dayOfTheWeek": 5,
+        "timeRanges": [
+            {
+                "from": "09:00",
+                "to": " 11:00"
+            }
+        ]
+    },
+    {
+        "dayOfTheWeek": 6,
+        "timeRanges": [
+            {
+                "from": "09:00",
+                "to": " 11:00"
+            }
+        ]
+    }
+]

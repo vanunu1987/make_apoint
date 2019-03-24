@@ -8,6 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './registerServiceWorker'
 import VueDraggable from 'vue-draggable'
 import resize from 'vue-resize-directive'
+import moment from 'moment'
+window.moment = moment
+// main.js
+import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
+
+
  
 Vue.use(VueDraggable)
 Vue.use(resize)
