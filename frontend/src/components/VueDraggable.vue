@@ -40,9 +40,9 @@
 
   </div>
     <div class="inputs">
-  <input type="text" v-model="currBusiness.name" class="inputName"/>
-  <input type="text" v-model="currBusiness.adrres"  class="inputadress"/>
-  <input type="text" v-model="currBusiness.phone" class="inputPhone"/>
+  <input type="text" placeholder="business name" v-model="currBusiness.name" class="inputName"/>
+  <input type="text" placeholder="business address- street, house, city" v-model="currBusiness.address"  class="inputadress"/>
+  <input type="text" placeholder="phone" v-model="currBusiness.phone" class="inputPhone"/>
   </div>
   <div class="option-bar">
     <button @click="toggleImg" class="fas fa-image"></button>
@@ -62,7 +62,7 @@ export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
     return {
-        currBusiness:{phone:'',name:'',adrres:''},
+        currBusiness:{phone:'',name:'',address:''},
         isMapModal:false,
         cmps:[],
       groups: [
@@ -109,12 +109,16 @@ export default {
     },
     addMap(val){
         this.isMapModal=false
-        this.adrres=val
-        let loc= this.$store.getters.currBusiness.loc
+        this.currBusiness.address=val
+        let loc= this.$store.getters.currBusiness.location
+        console.log(loc);
         this.cmps.push({type:"MapCmp",loc})
     },
     savePage(){
-
+     var hederImgArr=items.filter((item)=>item.groupId===2)
+      // this.currBusiness.
+    console.log(this.currBusiness);
+ 
     }
   },
   components:{
@@ -126,7 +130,7 @@ export default {
 
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then((res)=>{
-      this.currBusiness=res
+      this.currBusiness=this.$store.getters.currBusiness
     })
   }
 };

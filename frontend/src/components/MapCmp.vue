@@ -10,8 +10,8 @@
     :key="index"
     v-for="(m, index) in markers"
     :position="m.position"
-    :clickable="false"
-    :draggable="false"
+    :clickable="true"
+    :draggable="true"
   />
 </GmapMap>
 </template>
