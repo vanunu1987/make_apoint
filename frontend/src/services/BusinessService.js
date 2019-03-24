@@ -5,8 +5,6 @@ const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/business' : '//loc
 
 
 async function query(filterBy){
-    // if (!filterBy) filterBy = ''
-    // else filterBy = `?name=${filterBy.name}&sortBy=${filterBy.sortBy}`;
     var filterBy = `?name=${filterBy.name}&locationLat=${filterBy.currUserLocation.lat}&locationLng=${filterBy.currUserLocation.lng}&type=${filterBy.type}&sortBy=${filterBy.sortBy}`;
     console.log(filterBy);
     var res = await axios.get(`${BASE_URL}${filterBy}`)
@@ -21,6 +19,10 @@ async function getById(businessId){
     var business = await res.data
     console.log(business);
     return business
+}
+
+async function add(currBusiness){
+    console.log(currBusiness);
 }
 
 function _getEmptyBusiness(){
@@ -153,5 +155,6 @@ function _getEmptyBusiness(){
 
 export default {
     query,
-    getById
+    getById,
+    add
 }

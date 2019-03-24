@@ -50,7 +50,7 @@ export default {
       console.log(this.newUserCredentials);
       var credentials = { ...this.newUserCredentials };
       this.$store.dispatch({ type: "signUpUser", credentials });
-       this.newUserCredentials.userName = null;
+      this.newUserCredentials.userName = null;
       this.newUserCredentials.password = null;
       this.newUserCredentials.phone = null;
     },

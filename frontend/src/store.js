@@ -98,17 +98,18 @@ export default new Vuex.Store({
       context.commit({type:'setLoggedInUser',user})
     },
 
-    async signUpUser(context, { credentials }) {
+    async signUpUser(context, { credentials,isNewBusiness }) {
       console.log('dispatched : ', credentials);
       var user = await UserService.signUpUser(credentials)
       console.log('user:', user)
       if (!user) return
       context.commit({type:'setLoggedInUser',user})
+      var currBusiness = context.getters.currBusiness
+      if(isNewBusiness) BusinessService.add(currBusiness)
     },
 
     async setCurrBusiness(context,{currBusiness}){
       context.commit({type:'setCurrBusiness',business:currBusiness})
-
     }
 
   }
