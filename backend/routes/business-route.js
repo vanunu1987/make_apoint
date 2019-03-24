@@ -28,7 +28,7 @@ function addBusinessRoutes(app) {
         var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
         businessService.query(filterBy)
             .then(business => {
-                console.log('HERE', business);
+                // console.log('HERE', business);
                 res.json(business)
                 
             })
