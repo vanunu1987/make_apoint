@@ -9,6 +9,7 @@
 import UserLoginSignup from "@/components/UserLoginSignup.vue";
 export default {
 
+
   components: {
     UserLoginSignup
   }
