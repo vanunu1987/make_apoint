@@ -9,10 +9,12 @@
 </template>
 
 <script>
+
 import WorkHours from '@/components/WorkHours.vue'
 export default {
   components:{
     WorkHours
+
   }
 }
 </script>

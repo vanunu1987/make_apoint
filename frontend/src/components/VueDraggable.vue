@@ -145,7 +145,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $ease-out: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 $to-do: #f4ce46;
 $in-progress: #2a92bf;
