@@ -2,16 +2,21 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import BusinessService from './services/BusinessService.js'
+import AppointsService from './services/AppointsService.js'
+import UserService from './services/UserService.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     businessList: [],
+    appointsList: [],
     currBusiness: {},
     filterBy: {
       name: '',
-      sortBy: ''
+      type: '',
+      sortBy: '',
+      currUserLocation: { lat: 32.087971200000005, lng: 34.8031581 },
     },
   },
   getters: {
@@ -20,6 +25,9 @@ export default new Vuex.Store({
     },
     currBusiness(state) {
       return state.currBusiness
+    },
+    filterBy(state){
+      return state.filterBy
     }
   },
 
@@ -33,7 +41,10 @@ export default new Vuex.Store({
     },
     setLoc(state,{loc}){
       state.currBusiness.loc=loc
-    }
+    },
+    getAppointsList(state, {appointsList}) {
+      state.appointsList = appointsList
+    },
 
   },
   actions: {
@@ -54,8 +65,20 @@ export default new Vuex.Store({
     },
     saveAdrres(context,{loc}){
       console.log(loc);
-      
       context.commit({ type: 'setLoc', loc })
+    },
+    async loadAppoints(context) {
+      var businessId = context.state.currBusiness._id
+      var appointsList = await AppointsService.query(businessId)
+      context.commit({ type: 'getAppointsList', appointsList})
+      console.log(appointsList);
+      return appointsList
+    },
+    async loginUser(context, {credentials}){
+      console.log('dispatched : ',credentials);
+      await UserService.checkLogin(credentials)
+
+      
     }
 
   }
