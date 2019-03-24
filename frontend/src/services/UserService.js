@@ -7,6 +7,7 @@ const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/user' : '//localho
 async function checkLogin(credentials){
    var res = await axios.put(`${BASE_URL}/login`,credentials)
    console.log(res.data);
+   return res.data
 }
 
 

@@ -10,7 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     businessList: [],
-    appointsList: [],
+    loggedInUser: {},
+    currBusinessAppoints: [],
     currBusiness: {},
     filterBy: {
       name: '',
@@ -26,8 +27,11 @@ export default new Vuex.Store({
     currBusiness(state) {
       return state.currBusiness
     },
-    filterBy(state){
+    filterBy(state) {
       return state.filterBy
+    },
+    loggedInUser(state){
+      return state.loggedInUser
     }
   },
 
@@ -39,12 +43,16 @@ export default new Vuex.Store({
       state.businessList = payload.businessList
       state.filterBy = payload.filterBy
     },
-    setLoc(state,{loc}){
-      state.currBusiness.loc=loc
+    setLoc(state, { loc }) {
+      state.currBusiness.loc = loc
     },
-    getAppointsList(state, {appointsList}) {
+    getAppointsList(state, { appointsList }) {
       state.appointsList = appointsList
     },
+    setLoggedInUser(state, { user }) {
+      console.log('setLoggedInUser activated!')
+      state.loggedInUser = user
+    }
 
   },
   actions: {
@@ -63,22 +71,23 @@ export default new Vuex.Store({
       console.log(businessList);
       return businessList
     },
-    saveAdrres(context,{loc}){
+    saveAdrres(context, { loc }) {
       console.log(loc);
       context.commit({ type: 'setLoc', loc })
     },
     async loadAppoints(context) {
       var businessId = context.state.currBusiness._id
       var appointsList = await AppointsService.query(businessId)
-      context.commit({ type: 'getAppointsList', appointsList})
+      context.commit({ type: 'getAppointsList', appointsList })
       console.log(appointsList);
       return appointsList
     },
-    async loginUser(context, {credentials}){
-      console.log('dispatched : ',credentials);
-      await UserService.checkLogin(credentials)
-
-      
+    async loginUser(context, { credentials }) {
+      console.log('dispatched : ', credentials);
+      var user = await UserService.checkLogin(credentials)
+      console.log('user:', user)
+      if (!user) return
+      context.commit({type:'setLoggedInUser',user})
     }
 
   }
