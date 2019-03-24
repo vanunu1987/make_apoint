@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import BusinessCalender from '../components/BusinessCalender.vue'
+import BusinessCalendar from '../components/BusinessCalendar.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
-    BusinessCalender,
+    BusinessCalendar,
     BusinessService,
     vueDraggable,
     mapCmp
