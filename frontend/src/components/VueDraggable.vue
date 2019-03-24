@@ -40,9 +40,9 @@
 
   </div>
     <div class="inputs">
-  <input type="text" value="Moshe saparut" class="inputName"/>
-  <input type="text" v-model="adrres"  class="inputadress"/>
-  <input type="text" value="0525223290" class="inputPhone"/>
+  <input type="text" placeholder="business name" v-model="currBusiness.name" class="inputName"/>
+  <input type="text" placeholder="business address- street, house, city" v-model="currBusiness.address"  class="inputadress"/>
+  <input type="text" placeholder="phone" v-model="currBusiness.phone" class="inputPhone"/>
   </div>
   <div class="option-bar">
     <button @click="toggleImg" class="fas fa-image"></button>
@@ -51,6 +51,7 @@
     <button @click="isMapModal=!isMapModal" class="fas fa-map-pin"></button>
 </div>
 <loc-modal v-if="isMapModal" @setMap="addMap"/>
+<button @click="savePage">Done</button>
   </section>
 </template>
 
@@ -61,7 +62,7 @@ export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
     return {
-        adrres:"habonim 4 ramt-gan",
+        currBusiness:{phone:'',name:'',address:''},
         isMapModal:false,
         cmps:[],
       groups: [
@@ -88,7 +89,10 @@ export default {
   computed: {
     filteredItems() {
       return groupId => this.items.filter(item => item.groupId === groupId);
-    }
+    },
+    //  currBusiness() {
+    //   return this.$store.getters.currBusiness;
+    // },
   },
   methods: {
     updateItemsWithNewGroupId(itemsIds, groupId) {
@@ -105,14 +109,29 @@ export default {
     },
     addMap(val){
         this.isMapModal=false
-        this.adrres=val
-        let loc= this.$store.getters.currBusiness.loc
+        this.currBusiness.address=val
+        let loc= this.$store.getters.currBusiness.location
+        console.log(loc);
         this.cmps.push({type:"MapCmp",loc})
+    },
+    savePage(){
+     var hederImgArr=items.filter((item)=>item.groupId===2)
+      // this.currBusiness.
+    console.log(this.currBusiness);
+ 
     }
   },
   components:{
       MapCmp,
       LocModal
+  },
+  created() {
+    let { businessId } = this.$route.params;
+
+    this.$store.dispatch({ type: "loadBusiness", businessId })
+    .then((res)=>{
+      this.currBusiness=this.$store.getters.currBusiness
+    })
   }
 };
 </script>
