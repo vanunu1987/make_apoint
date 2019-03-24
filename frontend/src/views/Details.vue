@@ -141,6 +141,7 @@ button:focus {
 
 }
 div.calendar{
+  background-color:rgb(255, 233, 137);
   width:90%;
    position: absolute;
   top: 50%;
