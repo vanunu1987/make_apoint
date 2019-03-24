@@ -9,20 +9,19 @@ function getFromStorage(key) {
     localStorage.setItem(key, JSON.stringify(val))
 }
 
-async function getLocationByAdrres(adrres){
-    console.log(adrres);
-    const url=`https://maps.googleapis.com/maps/api/geocode/json?address=${adrres}&key=${API_KEY}`
+async function getLocationByAddress(address){
+    console.log(address);
+    const url=`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`
     const res =await fetch(url)
          const json= await  res.json();
          console.log(json);
-         
         return(json.results[0].geometry.location);
  }
 
 export default {
     getFromStorage,
     saveToStorage,
-    getLocationByAdrres
+    getLocationByAddress
 
 }
   

@@ -1,8 +1,8 @@
 <template>
   <div class="ModalContiner">
     <div class="modalMain">
-      <input type="text" v-model="adrres" placeholder="your full adrres">
-      <button @click="saveAdrres">save</button>
+      <input type="text" v-model="address" placeholder="your full address">
+      <button @click="saveAddress">save</button>
     </div>
   </div>
 </template>
@@ -11,21 +11,21 @@ import UtilService from '@/services/UtilService.js'
 export default {
     data(){
         return{
-            adrres: '',
+            address: '',
             loc:{}
         }
     },
     methods:{
-        saveAdrres(){
-            let addressloc= UtilService.getLocationByAdrres(this.adrres)
+        saveAddress(){
+            let addressloc= UtilService.getLocationByAddress(this.address)
              return addressloc
              .then(res=>{
         console.log('loc',res);
         this.loc=res
-            this.$store.dispatch({ type: "saveAdrres", loc:res })
+            this.$store.dispatch({ type: "saveAddress", loc:res })
         })
         .then(()=>{
-            this.$emit('setMap',this.adrres)
+            this.$emit('setMap',this.address)
         })
              }
     },
