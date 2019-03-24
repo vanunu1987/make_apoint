@@ -26,6 +26,17 @@ export default {
             name:'',
             phone:''
         }
+    },
+    computed:{
+        user(){
+            return {
+                userName:this.name,
+                phone:this.phone,
+                pass:null,
+                appoints_id:[],
+                business_id:null
+            }
+        }
     }
 }
 </script>

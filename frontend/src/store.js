@@ -99,6 +99,9 @@ export default new Vuex.Store({
     },
 
     async signUpUser(context, { credentials,isNewBusiness }) {
+
+      console.log(isNewBusiness);
+
       console.log('dispatched : ', credentials);
       var user = await UserService.signUpUser(credentials)
       console.log('user:', user)

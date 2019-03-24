@@ -53,16 +53,18 @@
 </div>
 <loc-modal v-if="isMapModal" @setMap="addMap"/>
 <button @click="savePage">Done</button>
+<login :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="isSignUp=!isSignUp" />
   </section>
 </template>
-
 <script>
+import Login from '@/views/Login.vue'
 import MapCmp from '@/components/MapCmp.vue'
 import LocModal from '@/components/LocModal.vue'
 export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
     return {
+        isSignUp: false,
         currBusiness:{phone:'',name:'',address:'',prefs:{description:""}},
         isMapModal:false,
         cmps:[],
@@ -127,12 +129,14 @@ export default {
 
     console.log(this.currBusiness);
     this.$store.dispatch({ type: "setCurrBusiness",currBusiness: this.currBusiness })
+    this.isSignUp=true;
  
     }
   },
   components:{
       MapCmp,
-      LocModal
+      LocModal,
+      Login
   },
   created() {
     let { businessId } = this.$route.params;
@@ -432,5 +436,8 @@ ul {
             list-style: none;
             margin: 10px;
         }
+    }
+    .login{
+      z-index: 100;
     }
 </style>
