@@ -10,7 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     businessList: [],
-    loggedInUser: {},
+    loggedInUser: null,
     currBusinessAppoints: [],
     currBusiness: {},
     filterBy: {
@@ -38,6 +38,8 @@ export default new Vuex.Store({
   mutations: {
     setCurrBusiness(state, { business }) {
       state.currBusiness = business
+      console.log(state.currBusiness);
+      
     },
     getBusinessList(state, payload) {
       state.businessList = payload.businessList
@@ -54,7 +56,7 @@ export default new Vuex.Store({
     setLoggedInUser(state, { user }) {
       console.log('setLoggedInUser activated!',user)
       state.loggedInUser = user
-    }
+    },
 
   },
   actions: {
@@ -95,6 +97,7 @@ export default new Vuex.Store({
       if (!user) return
       context.commit({type:'setLoggedInUser',user})
     },
+
     async signUpUser(context, { credentials }) {
       console.log('dispatched : ', credentials);
       var user = await UserService.signUpUser(credentials)
@@ -102,6 +105,11 @@ export default new Vuex.Store({
       if (!user) return
       context.commit({type:'setLoggedInUser',user})
     },
+
+    async setCurrBusiness(context,{currBusiness}){
+      context.commit({type:'setCurrBusiness',business:currBusiness})
+
+    }
 
   }
 

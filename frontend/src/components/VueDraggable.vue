@@ -16,14 +16,15 @@
             v-for="item in filteredItems(group.id)"
             :key="item.id"
             :data-id="item.id"
+            :style="{backgroundImage: `url(${item.url})` }"
           >
-            <div class="drag-item-text">{{ item.name }}</div>
+            <div  class="drag-item-text">{{ item.name }}</div>
           </li>
         </ul>
       </li>
     </ul>
     <input type="text" value="My-Site" class="inputHheder"/>
-    <textarea class="description" name="desc" id="" cols="80" rows="1">
+    <textarea class="description" name="desc" id="" cols="80" rows="1" v-model="currBusiness.prefs.description">
         "Heir cut for man and woman in a decent price!"
     </textarea>
       <div class="mainContiner">
@@ -62,7 +63,7 @@ export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
     return {
-        currBusiness:{phone:'',name:'',address:''},
+        currBusiness:{phone:'',name:'',address:'',prefs:{description:""}},
         isMapModal:false,
         cmps:[],
       groups: [
@@ -71,8 +72,8 @@ export default {
         { id: 3, name: "profile" ,serial:3}
       ],
       items: [
-        { id: 8, name: "Item 8", groupId: 2 },
-        { id: 9, name: "Item 9", groupId: 2 },
+        { id: 8, name: "Item 8", groupId: 2 ,url:"https://www.gstatic.com/webp/gallery/1.jpg"},
+        { id: 9, name: "Item 9", groupId: 2 ,url:"https://picsum.photos/250"},
 
       ],
       options: {
@@ -115,9 +116,17 @@ export default {
         this.cmps.push({type:"MapCmp",loc})
     },
     savePage(){
-     var hederImgArr=items.filter((item)=>item.groupId===2)
-      // this.currBusiness.
+      var cmps=[]
+     var hederImgArr=this.items.filter((item)=>item.groupId===1)
+     var cmpHeder={type:"header_imgs",data:{img_urls:hederImgArr}}
+      cmps.push(cmpHeder)
+     var profileImg=this.items.find((item)=>item.groupId===3)
+     var cmpProfile={type:"profile_imgs",data:{img_urls:profileImg}}
+      cmps.push(cmpProfile)
+      this.currBusiness.cmps=cmps
+
     console.log(this.currBusiness);
+    this.$store.dispatch({ type: "setCurrBusiness",currBusiness: this.currBusiness })
  
     }
   },
@@ -136,7 +145,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $ease-out: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 $to-do: #f4ce46;
 $in-progress: #2a92bf;
@@ -255,7 +264,7 @@ ul {
   height: 100px;
   background: rgba(black, 0.4);
   transition: $ease-out;
-  background-image: url("https://www.gstatic.com/webp/gallery/1.jpg");
+  // background-image: url("https://www.gstatic.com/webp/gallery/1.jpg");
   border-radius: 5px;
   /* items grabbed state */
   &[aria-grabbed="true"] {
