@@ -2,6 +2,7 @@
   <v-layout>
     <v-flex>
       <v-sheet height="400">
+        
         <v-btn fab outline small absolute left color="primary" @click="moveWeeks(-1)">
           <v-icon dark>keyboard_arrow_left</v-icon>
         </v-btn>
@@ -10,19 +11,7 @@
         </v-btn>
         <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
         <v-calendar ref="calendar" :now="today" :value="dateToShow" color="primary" type="week">
-          <!-- the events at the top (all-day) -->
-          <template v-slot:dayHeadere="{ date }">
-            <template v-for="event in eventsMap[date]">
-              <!-- all day events don't have time -->
-              <div
-                v-if="!event.time"
-                :key="event.title"
-                class="my-event"
-                @click="open(event)"
-                v-html="event.title"
-              ></div>
-            </template>
-          </template>
+        
           <!-- the events at the bottom (timed) -->
           <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
             <template v-for="event in eventsMap[date]">
@@ -30,26 +19,31 @@
               <div
                 v-if="event.time"
                 :key="event.title"
-                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) -5+ 'px' }"
                 class="my-event with-time"
                 @click="open(event)"
-                v-html="event.title"
-              ></div>
+              >{{event.time}}<v-icon style="color:#f8fff5;">add_circle_outline</v-icon></div>
             </template>
           </template>
         </v-calendar>
       </v-sheet>
     </v-flex>
+    <h1>hello</h1>
+    <!-- <DialogCalendar></DialogCalendar> -->
   </v-layout>
 </template>
 
 <script>
 import CalendarService from "../services/CalendarService.js";
 import workHours from "../services/testWorkHours.json";
+import DialogCalendar from "./DialogCalendar"
 
 console.log(workHours);
 
 export default {
+  components:{
+DialogCalendar
+  },
   data: () => ({
     today: "2019-01-09",
     dateToShow: "2019-01-09"
@@ -59,7 +53,7 @@ export default {
       var date = moment(this.dateToShow);
       var now = moment(this.today);
       return CalendarService.getEvents(
-        workHours,
+        this.$store.getters.currBusiness.workHours,
         now > date ? this.today : this.dateToShow
       );
     },
@@ -96,22 +90,22 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border-radius: 2px;
-  background-color: #1867c0;
-  color: #ffffff;
-  border: 1px solid #1867c0;
-  font-size: 12px;
+  border-radius:5px;
+  background-color: #88de2b;
+  color: #f8fff5;
+  font-size: 16px;
   padding: 3px;
   cursor: pointer;
   margin-bottom: 1px;
-  left: 4px;
+  left: 3px;
   margin-right: 8px;
   position: relative;
 
   &.with-time {
     position: absolute;
-    right: 4px;
+    right: 3px;
     margin-right: 0px;
+    margin-top:3px;
   }
 }
 </style>

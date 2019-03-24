@@ -23,8 +23,8 @@
   />
 </GmapMap>
 <button @click="showCalender = !showCalender">Add appoint</button>
- <div class="calender" v-if="showCalender">
-        <business-calender @closecalender ="closeCalender"></business-calender>
+ <div class="calendar" v-if="showCalender">
+        <business-calendar @closecalender ="closeCalender"></business-calendar>
     </div>
 </div>
 <vue-draggable/>
@@ -105,7 +105,7 @@ export default {
     },
 }
 </script>
-<style>
+<style scoped>
 .details-header {
   width: 100%;
   height: 50vh;
@@ -140,13 +140,13 @@ button:focus {
   border: none;
 
 }
-div.calender{
-  background-color:black;
+div.calendar{
   width:90%;
    position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
 }
 </style>
 
