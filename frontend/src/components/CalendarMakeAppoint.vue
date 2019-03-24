@@ -33,12 +33,10 @@
 
 <script>
 import CalendarService from "../services/CalendarService.js";
-import DialogCalendar from "./DialogCalendar"
 
 
 export default {
   components:{
-DialogCalendar
   },
   data: () => ({
     today: "2019-01-09",
