@@ -10,7 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     businessList: [],
-    loggedInUser: {},
+    loggedInUser: null,
     currBusinessAppoints: [],
     currBusiness: {},
     filterBy: {
