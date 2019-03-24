@@ -24,11 +24,27 @@ export default {
     },
     methods:{
        setTime(idx) {
-           if (!this.hours[idx].isMarked) return this.hours[idx].isMarked=false
-           else if (clicks===1)  {
+           console.log(idx);
+           
+           if (this.hours[idx].isMarked) {
+               this.hours[idx].isMarked=false
+               this.clicks=1
+               return
+           } 
+           else if (this.clicks===1)  {
                this.hours[idx].isMarked=true
                this.clicks=2
                return
+           }else {
+             
+             while (!this.hours[idx].isMarked){
+                 console.log(idx);
+                 
+                 this.hours[idx].isMarke=true
+                 console.log(this.hours[idx]);
+                 
+                 idx--
+             }
            }
        }
     }
@@ -40,6 +56,10 @@ export default {
     display: flex;
     flex-direction: column;
     color: black;
+}
+.marked{
+    background-color: greenyellow;
+    
 }
 </style>
 
