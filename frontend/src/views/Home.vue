@@ -13,6 +13,7 @@
 // @ is an alias to /src
 import HomeFilter from "@/components/HomeFilter.vue";
 import BusinessList from "@/components/BusinessList.vue";
+import UtilService from '@/services/UtilService.js'
 
 export default {
   name: "home",
@@ -40,6 +41,7 @@ export default {
   created() {
     var filterBy = this.$store.getters.filterBy
     this.$store.dispatch({ type: "loadBusinesses", filterBy });
+    UtilService.getLocation();
   }
 };
 </script>
