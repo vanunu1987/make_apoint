@@ -19,24 +19,31 @@ async function getLocationByAddress(address){
  }
 
 
+var userLocation = null
 
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(_showPosition);
+    navigator.geolocation.getCurrentPosition(_showPosition)
+    return userLocation
   } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
+   console.log(navigator.geolocation);
+   
   }
 }
 
 function _showPosition(position) {
  console.log(position.coords.latitude,position.coords.longitude)
+ userLocation =  {lat : position.coords.latitude,lng:position.coords.longitude }
+console.log(userLocation);
+  
 }
 
 export default {
     getFromStorage,
     saveToStorage,
     getLocationByAddress,
-    getLocation
+    getLocation,
+    userLocation
 
 }
   

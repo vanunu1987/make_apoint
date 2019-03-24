@@ -52,7 +52,7 @@ export default new Vuex.Store({
       state.appointsList = appointsList
     },
     setLoggedInUser(state, { user }) {
-      console.log('setLoggedInUser activated!')
+      console.log('setLoggedInUser activated!',user)
       state.loggedInUser = user
     }
 
@@ -94,7 +94,14 @@ export default new Vuex.Store({
       console.log('user:', user)
       if (!user) return
       context.commit({type:'setLoggedInUser',user})
-    }
+    },
+    async signUpUser(context, { credentials }) {
+      console.log('dispatched : ', credentials);
+      var user = await UserService.signUpUser(credentials)
+      console.log('user:', user)
+      if (!user) return
+      context.commit({type:'setLoggedInUser',user})
+    },
 
   }
 

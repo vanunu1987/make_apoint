@@ -25,6 +25,7 @@ export default {
     find(ev) {
       ev.target.blur();
       this.filterBy.name = ev.target.value;
+      this.filterBy.type = ev.target.value;
       this.$emit("find", {...this.filterBy});
       ev.target.value = ''
       this.filterBy.name = ev.target.value;
