@@ -38,6 +38,8 @@ export default new Vuex.Store({
   mutations: {
     setCurrBusiness(state, { business }) {
       state.currBusiness = business
+      console.log(state.currBusiness);
+      
     },
     getBusinessList(state, payload) {
       state.businessList = payload.businessList
@@ -54,7 +56,7 @@ export default new Vuex.Store({
     setLoggedInUser(state, { user }) {
       console.log('setLoggedInUser activated!')
       state.loggedInUser = user
-    }
+    },
 
   },
   actions: {
@@ -94,6 +96,10 @@ export default new Vuex.Store({
       console.log('user:', user)
       if (!user) return
       context.commit({type:'setLoggedInUser',user})
+    },
+    async setCurrBusiness(context,{currBusiness}){
+      context.commit({type:'setCurrBusiness',business:currBusiness})
+
     }
 
   }
