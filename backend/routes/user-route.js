@@ -20,11 +20,11 @@ function addRoutes(app) {
     //         })
     // })
 
-    // app.post('/singup', (req, res) => {
-    //     const nickName = req.body.nickName
-    //     userService.addUser({ nickName })
-    //         .then(user => res.json(user))
-    // })
+    app.post(`${BASE}/signup`, (req, res) => {
+        const credentials = req.body
+        userService.addUser(credentials)
+            .then(user => res.json(user))
+    })
 
     app.put(`${BASE}/login`, (req, res) => {
         const credentials = req.body

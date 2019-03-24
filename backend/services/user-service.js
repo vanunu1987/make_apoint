@@ -12,6 +12,23 @@ function checkLogin(credentials) {
         .then(db => db.collection('users').findOne(queryToMongo))
 }
 
+// todo  - add user only if nickname is not taken
+function addUser(credentials) {
+    // var user = { credentials }
+    var user = {}
+    user.isReg = true
+    user.pass = credentials.password
+    user.userName = credentials.userName
+    user.appoints_id = []
+    user.phone = credentials.phone
+    user.business_id = null
+    return mongoService.connect()
+        .then(db => db.collection('users').insertOne(user))
+        .then(res => {
+            user._id = res.insertedId
+            return user
+        })
+}
 
 // function getById(id) {
 //     const _id = new ObjectId(id)
@@ -26,16 +43,7 @@ function checkLogin(credentials) {
 //         .then(db => db.collection('toys').find({}).toArray())
 // }
 
-// // todo  - add user only if nickname is not taken
-// function addUser({ nickName }) {
-//     var user = { nickName }
-//     return mongoService.connect()
-//         .then(db => db.collection('user').insertOne(user))
-//         .then(res => {
-//             user._id = res.insertedId
-//             return user
-//         })
-// }
+
 
 
 
@@ -46,6 +54,6 @@ function checkLogin(credentials) {
 module.exports = {
     // query,
     // getById,
-    // addUser,
+    addUser,
     checkLogin
 }

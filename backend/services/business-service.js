@@ -10,6 +10,7 @@ function getById(id) {
 }
 
 
+
 function query(filterBy) {
     if (!filterBy) {
         return mongoService.connect()
@@ -17,9 +18,11 @@ function query(filterBy) {
     } else {
         var queryToMongo = {}
         var name = filterBy.name
-        var sortBy = filterBy.sortBy
+        var type = filterBy.type
         var reg = new RegExp(name,'i')
         if (name) queryToMongo.name = { '$regex': reg }
+        if (type) queryToMongo.type = { '$regex': reg }
+        queryToMongo = { $or: [ { name: { '$regex': reg } }, {type: { '$regex': reg }} ] }
         console.log('QUERY : ',queryToMongo);
         return mongoService.connect()
             .then((db) => {
