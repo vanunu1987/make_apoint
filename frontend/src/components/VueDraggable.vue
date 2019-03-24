@@ -40,9 +40,9 @@
 
   </div>
     <div class="inputs">
-  <input type="text" value="Moshe saparut" class="inputName"/>
-  <input type="text" v-model="adrres"  class="inputadress"/>
-  <input type="text" value="0525223290" class="inputPhone"/>
+  <input type="text" v-model="currBusiness.name" class="inputName"/>
+  <input type="text" v-model="currBusiness.adrres"  class="inputadress"/>
+  <input type="text" v-model="currBusiness.phone" class="inputPhone"/>
   </div>
   <div class="option-bar">
     <button @click="toggleImg" class="fas fa-image"></button>
@@ -51,6 +51,7 @@
     <button @click="isMapModal=!isMapModal" class="fas fa-map-pin"></button>
 </div>
 <loc-modal v-if="isMapModal" @setMap="addMap"/>
+<button @click="savePage">Done</button>
   </section>
 </template>
 
@@ -61,7 +62,7 @@ export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
     return {
-        adrres:"habonim 4 ramt-gan",
+        currBusiness:{phone:'',name:'',adrres:''},
         isMapModal:false,
         cmps:[],
       groups: [
@@ -88,7 +89,10 @@ export default {
   computed: {
     filteredItems() {
       return groupId => this.items.filter(item => item.groupId === groupId);
-    }
+    },
+    //  currBusiness() {
+    //   return this.$store.getters.currBusiness;
+    // },
   },
   methods: {
     updateItemsWithNewGroupId(itemsIds, groupId) {
@@ -108,11 +112,22 @@ export default {
         this.adrres=val
         let loc= this.$store.getters.currBusiness.loc
         this.cmps.push({type:"MapCmp",loc})
+    },
+    savePage(){
+
     }
   },
   components:{
       MapCmp,
       LocModal
+  },
+  created() {
+    let { businessId } = this.$route.params;
+
+    this.$store.dispatch({ type: "loadBusiness", businessId })
+    .then((res)=>{
+      this.currBusiness=res
+    })
   }
 };
 </script>
