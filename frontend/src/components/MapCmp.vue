@@ -1,0 +1,39 @@
+<template>
+    
+     <GmapMap
+  :center="mapCenter"
+  :zoom="16"
+  map-type-id="terrain"
+  style="width: 280px; height:350px"
+>
+  <GmapMarker
+    :key="index"
+    v-for="(m, index) in markers"
+    :position="m.position"
+    :clickable="false"
+    :draggable="false"
+  />
+</GmapMap>
+</template>
+
+<script>
+export default {
+    props:["loc"],
+    data() {
+    return {
+      m: {
+        position: { lat: 34.38, lng: 34.8 }
+      },
+      mapCenter: this.loc,
+      markers: [
+        {
+          label: "a place",
+          position: this.loc
+        }
+      ],
+   
+    }
+  },
+}
+</script>
+
