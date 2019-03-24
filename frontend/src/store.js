@@ -43,8 +43,10 @@ export default new Vuex.Store({
       state.businessList = payload.businessList
       state.filterBy = payload.filterBy
     },
-    setLoc(state, { loc }) {
-      state.currBusiness.loc = loc
+
+    setLoc(state,{loc}){
+      state.currBusiness.location=loc
+
     },
     getAppointsList(state, { appointsList }) {
       state.appointsList = appointsList
@@ -64,14 +66,18 @@ export default new Vuex.Store({
       })
       return
     },
-    async loadBusinesses(context) {
-      var filterBy = context.state.filterBy
+    async loadBusinesses(context , {filterBy}) {
+      console.log(filterBy);
+      
+      // var filterBy = context.state.filterBy
       var businessList = await BusinessService.query(filterBy)
       context.commit({ type: 'getBusinessList', businessList, filterBy })
       console.log(businessList);
       return businessList
     },
-    saveAdrres(context, { loc }) {
+
+    saveAddress(context,{loc}){
+
       console.log(loc);
       context.commit({ type: 'setLoc', loc })
     },

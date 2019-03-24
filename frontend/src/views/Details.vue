@@ -54,7 +54,7 @@ export default {
       this.imgPath=this.currBusiness.cmps[0].data.img_urls
       console.log(this.imgPath);
       
-      let addressloc= BusinessService.getLocationByAdrres(this.address)
+      let addressloc= BusinessService.getLocationByAddress(this.address)
       return addressloc
       .then(res=>{
         console.log('loc',res);
