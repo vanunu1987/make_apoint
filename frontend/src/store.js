@@ -98,7 +98,9 @@ export default new Vuex.Store({
       context.commit({type:'setLoggedInUser',user})
     },
 
-    async signUpUser(context, { credentials }) {
+    async signUpUser(context, { credentials,isNewBusiness }) {
+      console.log(isNewBusiness);
+      
       console.log('dispatched : ', credentials);
       var user = await UserService.signUpUser(credentials)
       console.log('user:', user)
