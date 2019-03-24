@@ -2,7 +2,7 @@
   <div class="home">
     <header>
       <!-- <a href="#" v-scroll-to="'#list'">Search</a> -->
-      <HomeFilter @find="scrollToList"/>
+      <HomeFilter @find="filterList"/>
     </header>
     <div v-if="isScroll" class="secondary-header"></div>
     <BusinessList id="list" :business="businessToShow"/>
@@ -31,13 +31,15 @@ export default {
     }
   },
   methods: {
-    scrollToList() {
+    async filterList(filterBy) {
       console.log("scroll");
-      this.$scrollTo("#list", 1000);
+      await this.$store.dispatch({ type: "loadBusinesses", filterBy });
+      this.$scrollTo("#list", 300);
     }
   },
   created() {
-    this.$store.dispatch("loadBusinesses");
+    var filterBy = this.$store.getters.filterBy
+    this.$store.dispatch({ type: "loadBusinesses", filterBy });
   }
 };
 </script>
