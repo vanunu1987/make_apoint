@@ -7,24 +7,35 @@
 
 <script>
 export default {
-  name: 'HomeFilter',
+  name: "HomeFilter",
   props: {
     msg: String
   },
-  methods:{
-    find(ev){
-      ev.target.blur()
-      console.log('emiting');
-      this.$emit('find')
+  data() {
+    return {
+      filterBy: {
+        name: "",
+        type: "",
+        sortBy: "",
+        currUserLocation: { lat: 32.087971200000005, lng: 34.8031581 }
+      }
+    };
+  },
+  methods: {
+    find(ev) {
+      ev.target.blur();
+      this.filterBy.name = ev.target.value;
+      this.$emit("find", {...this.filterBy});
+      ev.target.value = ''
+      this.filterBy.name = ev.target.value;
     },
-    blur(ev){
-      ev.target.blur()
+    blur(ev) {
+      ev.target.blur();
     }
   }
-}
+};
 </script>
 
 
 <style scoped lang="scss">
-
 </style>

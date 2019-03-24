@@ -5,8 +5,11 @@ const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/business' : '//loc
 
 
 async function query(filterBy){
-    if (!filterBy) filterBy = ''
-    else filterBy = `?name=${filterBy.name}&sortBy=${filterBy.sortBy}`;
+    // if (!filterBy) filterBy = ''
+    // else filterBy = `?name=${filterBy.name}&sortBy=${filterBy.sortBy}`;
+    var filterBy = `?name=${filterBy.name}&locationLat=${filterBy.currUserLocation.lat}&locationLng=${filterBy.currUserLocation.lng}&type=${filterBy.type}&sortBy=${filterBy.sortBy}`;
+    console.log(filterBy);
+    
     var res = await axios.get(`${BASE_URL}${filterBy}`)
     var businessList = await res.data
     return businessList;
