@@ -3,11 +3,34 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> | 
-       <router-link to="/login">Log in</router-link>
+       <router-link to="/login">Log in</router-link> | 
+       <section v-if="loggedUser" class="user-name">Hello {{loggedUser}}</section> 
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: "app",
+  data() {
+    return {
+  
+    };
+  },
+  computed: {
+    loggedUser(){
+      var currUser = this.$store.getters.loggedInUser
+      if (!currUser) return 
+      return currUser.userName
+    }
+  },
+  methods: {
+    
+  },
+  created() {}
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -19,7 +42,10 @@
 }
 #nav {
   padding: 30px;
-  a {
+  display: flex;
+  a,.user-name {
+    margin-right: 5px;
+    margin-left: 5px;
     font-weight: bold;
     color: #2c3e50;
     text-decoration: none;

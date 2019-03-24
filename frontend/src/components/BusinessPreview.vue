@@ -21,10 +21,17 @@
           </div>
         </v-expand-transition></v-img>
       <!-- <section class="preview-details-container"> -->
-        <v-card-title>
-          <!-- <div> -->
-            <span>{{currBusiness.name}}</span><br>
+        <!-- <v-card-title> -->
+
+           <v-card-title primary-title>
+          <div>
+            <div class="headline">{{currBusiness.name}}</div>
             <span class="grey--text">{{adress}}</span>
+          </div>
+        </v-card-title>
+          <!-- <div> -->
+            <!-- <span>{{currBusiness.name}}</span><br>
+            <span class="grey--text">{{adress}}</span> -->
             <!-- <el-rate
           v-model="currBusiness.rank.avg"
           disabled
@@ -33,7 +40,7 @@
           score-template="{value} points">
         </el-rate> -->
           <!-- </div> -->
-        </v-card-title>
+        <!-- </v-card-title> -->
         <!-- <h3>{{currBusiness.name}}</h3>
         <p>{{adress}}</p> -->
         <section class="rank">
@@ -71,9 +78,11 @@ export default {
   },
   computed:{
       adress(){
-          var location = this.currBusiness.location
-          return location.street + ' Street ' + location.number + ', ' + location.city + ' ' + location.state
+          // var location = this.currBusiness.location
+          // return location.street + ' Street ' + location.number + ', ' + location.city + ' ' + location.state
+          return this.currBusiness.dist / 1000 + ' Km from you'
       }
+
   },
 }
 </script>

@@ -29,7 +29,15 @@ function addBusinessRoutes(app) {
         businessService.query(filterBy)
             .then(business => {
                 // console.log('HERE', business);
-                res.json(business)
+                var newArr = business.map((bus) => {
+        
+                    bus.dist = geolib.getDistance(   
+                    {latitude: bus.location.lat, longitude: bus.location.lng},
+                    {latitude: filterBy.locationLat, longitude: filterBy.locationLng}
+                    );
+                    return bus
+                })
+                res.json(newArr)
                 
             })
 

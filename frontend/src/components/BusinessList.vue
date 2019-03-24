@@ -1,7 +1,7 @@
 <template>
   <div class="list">
 
-     <el-carousel :interval="2500" type="card" height="300px">
+     <el-carousel :interval="2500" type="card" height="350px">
         <el-carousel-item v-for="currBusiness in business" :key="currBusiness._id">
           <BusinessPreview :currBusiness="currBusiness"/>
         </el-carousel-item>

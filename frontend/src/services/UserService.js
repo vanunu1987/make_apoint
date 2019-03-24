@@ -9,8 +9,14 @@ async function checkLogin(credentials){
    console.log(res.data);
    return res.data
 }
+async function signUpUser(credentials){
+   var res = await axios.post(`${BASE_URL}/signup`,credentials)
+   console.log('signed: ',res.data);
+   return res.data
+}
 
 
 export default {
-    checkLogin
+    checkLogin,
+    signUpUser
 }

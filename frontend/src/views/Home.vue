@@ -39,9 +39,12 @@ export default {
     }
   },
   created() {
+    UtilService.getLocation()
     var filterBy = this.$store.getters.filterBy
+    var userLocation = UtilService.userLocation;
+    console.log('location : ',userLocation);
+    if (userLocation) filterBy.currUserLocation = userLocation
     this.$store.dispatch({ type: "loadBusinesses", filterBy });
-    UtilService.getLocation();
   }
 };
 </script>
