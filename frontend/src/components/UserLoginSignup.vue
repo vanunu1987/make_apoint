@@ -2,8 +2,6 @@
   <div class="login">
     <div class="sign-background"></div>
     <section class="form-container">
-       isNewUser: {{isNewUser}}
-    isNewUserProp: {{isNewUserProp}}
     <form v-if="!isNewUser" @submit.prevent="login">
       <h1>LOGIN</h1>
       <input type="text" placeholder="User Name" v-model="userCredentials.userName">

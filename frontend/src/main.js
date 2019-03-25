@@ -12,7 +12,7 @@ import moment from 'moment'
 window.moment = moment
 // main.js
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
-
+import '@/filter.js'
 
  
 Vue.use(VueDraggable)

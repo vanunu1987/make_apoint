@@ -1,6 +1,6 @@
 <template>
   <section>
-    <component :is="displayCmp.type" @event-pressed="checkIfLogin"></component>
+    <component :is="displayCmp.type" :payload="displayCmp.payload" @event-pressed="checkIfLogin"></component>
   </section>
 </template>
 
@@ -17,19 +17,24 @@ export default {
   data() {
     return {
       displayCmp: { type: "CalendarMakeAppoint" },
-      cmps: []
+      cmps: [],
+      selectedProduct:null,
     };
   },
   methods: {
-    moveToCmp(cmpName) {
-      this.displayCmp = this.cmps.find(cmp => cmp.type === cmpName);
+    cmpSetter(cmpName,payload) {
+      //get the chosen cmp
+      var component = this.cmps.find(cmp => cmp.type === cmpName);
+      //upload payload on cmp and set the cmp
+      component.payload = payload
+      this.displayCmp = component
     },
     checkIfLogin(payload) {
       console.log("check if login activated!",payload);
       if (this.$store.getters.loggedInUser) {
-        this.moveToCmp("CalendarMakeAppointAdd");
+        this.cmpSetter("CalendarMakeAppointAdd",payload);
       } else {
-        this.moveToCmp("CalendarMakeAppointRegister");
+        this.cmpSetter("CalendarMakeAppointRegister",payload);
       }
     }
   },
