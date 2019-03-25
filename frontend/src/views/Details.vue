@@ -1,18 +1,45 @@
 <template>
-    <section v-if="!!currBusiness.prefs">
-        <div  class="details-header"  :style="{backgroundImage: `url(${imgPath[imgIdx]})` }">
-            <button class="fas fa-chevron-left" @click="changeImgIdx(-1)" v-if="imgPath.length>1"></button>
-            <h1>{{currBusiness.name}}</h1>
-            <button class="fas fa-chevron-right" @click="changeImgIdx(1)" v-if="imgPath.length>1"></button>
+    <section class="page-continer" v-if="!!currBusiness.prefs">
+        <div  class="img-header"  :style="{backgroundImage: `url(${imgPath.header_img_url})` }">
         </div>
-        <p>{{currBusiness.prefs.description}}</p>
-        <p>{{address}}</p>
+        <div class="profile-detais culomn">
+          <div class="details-head flex">
+          <h1 class="name" >{{currBusiness.name}}</h1>
+        <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"/>
+
+          </div>
+          <span class="flex">
+         <span class="fas fa-map-pin"></span> 
+         <h2 class="address-h2">Address</h2> 
+         </span>
+         <h3>{{currBusiness.address}}</h3>
+          <span class="flex">
+         <span class="fas fa-phone"></span> 
+         <h2>Phone number</h2> 
+         </span>
+         <h3>{{currBusiness.phone}}</h3>
+          <span class="flex">
+         <span class="fas fa-address-card"></span>
+         <h2>About Us</h2> 
+        </span>
+        <h3>{{currBusiness.prefs.description}}</h3>
+          <span class="flex">
+         <span class="fas fa-star-half-alt"></span>
+         <h2>Rating</h2> 
+        </span>
+        <span class="flex">
+        <h3>{{currBusiness.rank.avg}}</h3>
+        ,
+        <h3>{{currBusiness.rank.qty}}</h3>
+        </span>
+        </div>
         <div class="midle">
         <GmapMap
+  class="map"      
   :center="mapCenter"
   :zoom="16"
   map-type-id="terrain"
-  style="width: 500px; height: 300px"
+  style="width: 100vw; height: 300px"
 >
   <GmapMarker
     :key="index"
@@ -28,8 +55,6 @@
     </div>
 </div>
 
-        {{imgPath}}
-        <!-- {{currBusiness}} -->
     </section>
 </template>
 
@@ -50,19 +75,13 @@ export default {
 
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
-      this.imgPath=this.currBusiness.cmps[0].data.img_urls
+      this.imgPath=this.currBusiness.prefs
       console.log(this.imgPath);
-      
-      let addressloc= BusinessService.getLocationByAddress(this.address)
-      return addressloc
-      .then(res=>{
-        console.log('loc',res);
-        
-        this.mapCenter=res
-        this.markers[0].position=res
+        this.mapCenter=currBusiness.location
+        this.markers[0].position=currBusiness.location
 
       })
-    })
+ 
   },
   data() {
     return {
@@ -79,8 +98,9 @@ export default {
         }
       ],
       imgPath:'',
-   
+      editMode:false
     }
+
   },
  
   computed: {
@@ -104,15 +124,82 @@ export default {
     },
 }
 </script>
-<style scoped>
-.details-header {
+<style lang="scss" scoped>
+
+// helpers
+.flex{
+  display: flex;
+  flex: none;
+}
+.culomn{
+  display: flex;
+  flex-direction: column;
+}
+span.flex{
+      align-items: baseline;
+      margin-top: 20px;
+      span{
+        margin: 3px;
+      }
+}
+h1,h2,h3{
+  font-weight: 100;
+  letter-spacing: .2px;
+  
+}
+.name{
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+.page-continer{
+  background-color: white;
+ display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr;
+    grid-template-rows: 1fr 1fr 1fr .5fr;
+     grid-gap: 10px 20px;
+        // padding: 20px;
+    .img-header{
+      grid-column: 1/5;
+      grid-row: 1;
+    }
+    .profile-detais{
+      grid-column: 2;
+      grid-row: 2;      
+
+    }
+    .midle{
+       grid-column: 1/5;
+      grid-row: 3;
+    }
+}
+.profile-detais{
+// margin-left: 30px;
+word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.375em !important;
+    color: #484848 !important;
+}
+.details-head{
+align-items: center;
+}
+.img-profile{
+  width: 75px;
+    height: 75px;
+    background-size: cover;
+    border-radius: 50px;
+    background-position: center;
+  margin-left: 10px;
+
+}
+
+.img-header {
   width: 100%;
   height: 50vh;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-position: center;
 }
 button {
   background-color: #ffdead00;
@@ -120,13 +207,19 @@ button {
   font-weight: 800;
   font-size: 1.5rem;
 }
+h3{
+  text-align: left;
+}
+.address-h2{
+margin-left: 6px;
+}
 button:focus {
   border: none;
   outline: none;
 }
 .midle{
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
 
 }
 .fas{

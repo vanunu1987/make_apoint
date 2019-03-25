@@ -4,7 +4,7 @@
   :center="mapCenter"
   :zoom="16"
   map-type-id="terrain"
-  style="width: 280px; height:350px"
+  style="width: 100vw; height:350px"
 >
   <GmapMarker
     :key="index"

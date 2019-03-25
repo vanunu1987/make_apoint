@@ -3,9 +3,10 @@
     
   <div class="drag-container" v-drag-and-drop:options="options">
     <ul class="drag-list">
-      <li class="drag-column" v-for="group in groups" :key="group.id"
-      :id="'b'+group.serial"
-      >
+      <li class="drag-column" 
+          v-for="group in groups" 
+          :key="group.id"
+          :id="'b'+group.serial">
 
         <ul :id="'a'+group.serial" class="drag-inner-list" :data-id="group.id">
           <li
@@ -19,11 +20,30 @@
           </li>
         </ul>
       </li>
+      <div class="mapContiner">
+        <li class="component"  v-for="(currCmp, idx) in mapCmps"
+         :key="idx">
+                    <component                  
+                        :is="currCmp.type" 
+                        :loc="currCmp.loc"
+                        style="{width:280px;height:350px"
+                        >
+
+            </component>
+            </li>
+  </div>
+      <div class="inputs">
+  <input type="text" placeholder="business name" v-model="currBusiness.name" class="inputName"/>
+  <input type="text" placeholder="business address- street, house, city" v-model="currBusiness.address"  class="inputadress"/>
+  <input type="text" placeholder="phone" v-model="currBusiness.phone" class="inputPhone"/>
+  </div>
+
+
     </ul>
     <input type="text" value="My-Site" class="inputHheder"/>
-    <textarea placeholder="Write short description" class="description" name="desc" id="" cols="80" rows="1" v-model="currBusiness.prefs.description">
+    <!-- <textarea placeholder="Write short description" class="description" name="desc" id="" cols="80" rows="1" v-model="currBusiness.prefs.description">
         
-    </textarea>
+    </textarea> -->
       <div class="mainContiner">
         <li class="component"  v-for="(currCmp, idx) in cmps"
          :key="idx">
@@ -36,12 +56,7 @@
             </component>
             </li>
   </div>
-
-  </div>
-    <div class="inputs">
-  <input type="text" placeholder="business name" v-model="currBusiness.name" class="inputName"/>
-  <input type="text" placeholder="business address- street, house, city" v-model="currBusiness.address"  class="inputadress"/>
-  <input type="text" placeholder="phone" v-model="currBusiness.phone" class="inputPhone"/>
+      
   </div>
   <div class="option-bar">
     <button @click="toggleImg" class="fas fa-image"></button>
@@ -70,6 +85,7 @@ export default {
         currBusiness:{phone:'',name:'',address:'',prefs:{description:""}},
         isMapModal:false,
         cmps:[],
+        mapCmps:[],
       groups: [
         { id: 1, name: "header",isShow:true ,serial:1},
         { id: 2, name: "img bar",isShow:false,serial:8},
@@ -117,7 +133,7 @@ export default {
         this.currBusiness.address=val
         let loc= this.$store.getters.currBusiness.location
         console.log(loc);
-        this.cmps.push({type:"MapCmp",loc})
+        this.mapCmps.push({type:"MapCmp",loc})
     },
     setWorkTime(workTime){
       this.isCalendar= false
@@ -180,16 +196,46 @@ body {
   font-weight: 300;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+
 }
-.page{
-    display: flex;
-    flex-direction: column;
+.drag-list{
+    // display: flex;
+    // flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 2fr 1fr;
+    grid-auto-rows: 2fr 2fr 1fr .5fr;
+    #b1{
+      grid-column: 1/5;
+      grid-row: 1;
+      background-color: #5cc1a6;
+      
+    }
+   
+    
+    #b3{
+      grid-column: 2;
+      grid-row: 2;
+
+ 
+    }
+    .mapContiner{
+      grid-column: 1/5;
+      grid-row: 3;
+
+    }
+    .inputs{
+ grid-column: 2;
+      grid-row: 2;
+
+    }
+    
 }
 .option-bar{
     display: flex;
     flex-direction: column;
     position: fixed;
-    margin-top: 220px;
+    top:150px;
+    // margin-top: 220px;
     
     button{
         z-index: 10;
@@ -213,14 +259,14 @@ ul {
 }
 
 .drag-container {
- height: 555px;
+//  height: 555px;
  
 }
 
 .drag-list {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
+  // display: flex;
+  // align-items: flex-start;
+  // flex-direction: column;
 
   @media (max-width: 690px) {
     display: block;
@@ -229,10 +275,10 @@ ul {
 }
 
 .drag-column {
-  flex: 1;
-  position: relative;
-  background: rgba(black, 0.2);
-  overflow: hidden;
+  // flex: 1;
+  // position: relative;
+  // background: rgba(black, 0.2);
+  // overflow: hidden;
 
   @media (max-width: 690px) {
     margin-bottom: 30px;
@@ -281,7 +327,7 @@ ul {
 }
 
 .drag-item {
-  height: 100px;
+  // height: 100px;
   background: rgba(black, 0.4);
   transition: $ease-out;
   border-radius: 5px;
@@ -312,7 +358,7 @@ ul {
 }
 
 .item-dropzone-area {
-  height: 6rem;
+  // height: 6rem;
   background: #888;
   opacity: 0.8;
   animation-duration: 0.5s;
@@ -322,11 +368,12 @@ ul {
 }
 #a3{
     // background-color: #fff;
-    height: 33vh;
-    min-width: 320px;
+    // height: 33vh;
+    // min-width: 320px;
     border-radius: 100%;
     .drag-item{
-      height: 33vh;
+      max-height:270px;
+      max-height: 245px;
     border-radius: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -336,12 +383,12 @@ ul {
 }
         #a1{
         // background-color: #fff;
-        height: 40vh;
-        width: 100vw;
+        // height: 40vh;
+        // width: 100vw;
         
         border-radius: 5px;
         .drag-item{
-          height: 40vh;
+          height: 90vh;
         width:100vw;
         border-radius: 5px;
         background-repeat: no-repeat;
@@ -359,6 +406,7 @@ ul {
         padding: 5px;
          .drag-item{
            margin: 4px;
+           height: 100px;
            background-position: center;
           background-size: contain;
           }
@@ -373,10 +421,13 @@ ul {
                
         }
     #b3{
-    margin-left: 255px;
-    margin-top: 15px;
+    // margin-left: 255px;
+    // margin-top: 15px;
     border-radius: 5px;
     padding: 5px;
+    // grid-column: 2;
+    height: 310px;
+    background-color: #00b961;
 
     }
     .inputHheder{
@@ -423,7 +474,7 @@ ul {
 
     }
     .description{
-        position: absolute;
+        // position: absolute;
         top:270px;
         left: 445px;
         font-size: 1rem;
@@ -436,11 +487,10 @@ ul {
     .inputs{
         display: flex;
         flex-direction: column;
-        margin-left: 255px;
-        margin-top: 35px;
+        margin-top: 275px;
          background-color: #fff;
         border: dotted;
-        width: 330px;
+        width: 393px;
         height: 130px;
         padding: 3px;
     }
@@ -449,11 +499,11 @@ ul {
         height: 400px;
         background-color: #fff;
         border: dotted;
-        position: absolute;
-        top: 322px;
-        left: 595px;;
-        display: flex;
-        z-index: -1;
+        // position: absolute;
+        // top: 322px;
+        // left: 595px;;
+        // display: flex;
+        // z-index: -1;
         li{
             list-style: none;
             margin: 10px;
