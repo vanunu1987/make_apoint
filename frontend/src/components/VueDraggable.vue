@@ -6,9 +6,6 @@
       <li class="drag-column" v-for="group in groups" :key="group.id"
       :id="'b'+group.serial"
       >
-        <span class="drag-column-header">
-          <h2>{{ group.name }}</h2>
-        </span>
 
         <ul :id="'a'+group.serial" class="drag-inner-list" :data-id="group.id">
           <li
@@ -18,14 +15,14 @@
             :data-id="item.id"
             :style="{backgroundImage: `url(${item.url})` }"
           >
-            <div  class="drag-item-text">{{ item.name }}</div>
+            <div  class="drag-item-text"></div>
           </li>
         </ul>
       </li>
     </ul>
     <input type="text" value="My-Site" class="inputHheder"/>
-    <textarea class="description" name="desc" id="" cols="80" rows="1" v-model="currBusiness.prefs.description">
-        "Heir cut for man and woman in a decent price!"
+    <textarea placeholder="Write short description" class="description" name="desc" id="" cols="80" rows="1" v-model="currBusiness.prefs.description">
+        
     </textarea>
       <div class="mainContiner">
         <li class="component"  v-for="(currCmp, idx) in cmps"
@@ -33,6 +30,7 @@
                     <component                  
                         :is="currCmp.type" 
                         :loc="currCmp.loc"
+                        style="{width:280px;height:350px"
                         >
 
             </component>
@@ -47,23 +45,27 @@
   </div>
   <div class="option-bar">
     <button @click="toggleImg" class="fas fa-image"></button>
-    <button class="fas fa-calendar-alt"></button>
+    <button @click="isCalendar=!isCalendar" class="fas fa-calendar-alt"></button>
     <button class="fas fa-palette"></button>
     <button @click="isMapModal=!isMapModal" class="fas fa-map-pin"></button>
 </div>
 <loc-modal v-if="isMapModal" @setMap="addMap"/>
 <button @click="savePage">Done</button>
-<login :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="isSignUp=!isSignUp" />
+<user-login-signUp :isNewUserProp="true" :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="isSignUp=!isSignUp" />
+<work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
   </section>
 </template>
 <script>
-import Login from '@/views/Login.vue'
+import userLoginSignUp from '@/components/UserLoginSignup.vue'
 import MapCmp from '@/components/MapCmp.vue'
 import LocModal from '@/components/LocModal.vue'
+import WorkHours from '@/components/WorkHours.vue'
+import CalendarMakeAppoint from '@/components/CalendarMakeAppoint.vue'
 export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
     return {
+      isCalendar:false,
         isSignUp: false,
         currBusiness:{phone:'',name:'',address:'',prefs:{description:""}},
         isMapModal:false,
@@ -74,8 +76,8 @@ export default {
         { id: 3, name: "profile" ,serial:3}
       ],
       items: [
-        { id: 8, name: "Item 8", groupId: 2 ,url:"https://www.gstatic.com/webp/gallery/1.jpg"},
-        { id: 9, name: "Item 9", groupId: 2 ,url:"https://picsum.photos/250"},
+        { id: 8, name: "Item 8", groupId: 2 ,url:"http://www.cndajin.com/data/wls/113/10786885.jpg"},
+        { id: 9, name: "Item 9", groupId: 2 ,url:"http://www.cndajin.com/data/wls/113/10786784.jpg"},
 
       ],
       options: {
@@ -117,6 +119,12 @@ export default {
         console.log(loc);
         this.cmps.push({type:"MapCmp",loc})
     },
+    setWorkTime(workTime){
+      this.isCalendar= false
+      this.currBusiness.workHours=workTime
+        this.cmps.push({type:"CalendarMakeAppoint"})
+
+    },
     savePage(){
       var cmps=[]
      var hederImgArr=this.items.filter((item)=>item.groupId===1)
@@ -136,7 +144,9 @@ export default {
   components:{
       MapCmp,
       LocModal,
-      Login
+      userLoginSignUp,
+      WorkHours,
+      CalendarMakeAppoint
   },
   created() {
     let { businessId } = this.$route.params;
@@ -158,7 +168,11 @@ $approved: #00b961;
 * {
   box-sizing: border-box;
 }
-
+.workHourCmp{
+  position: fixed;
+  top: 200px;
+  left:450px;
+}
 body {
   background: #33363d;
   color: white;
@@ -179,11 +193,15 @@ body {
     
     button{
         z-index: 10;
-        padding: 10px;
+        padding: 15px;
         margin: 10px;
+        font-size: 2rem;
         background-color: #fff;
         border-radius: 100%;
         box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
+         &:focus{
+            outline:none;
+        }
     }
 }
 
@@ -212,7 +230,6 @@ ul {
 
 .drag-column {
   flex: 1;
-  margin: 0 10px;
   position: relative;
   background: rgba(black, 0.2);
   overflow: hidden;
@@ -260,15 +277,13 @@ ul {
 
 .drag-inner-list {
   height: 85vh;
-  overflow: auto;
+  // overflow: auto;
 }
 
 .drag-item {
-  margin: 10px;
   height: 100px;
   background: rgba(black, 0.4);
   transition: $ease-out;
-  // background-image: url("https://www.gstatic.com/webp/gallery/1.jpg");
   border-radius: 5px;
   /* items grabbed state */
   &[aria-grabbed="true"] {
@@ -307,12 +322,11 @@ ul {
 }
 #a3{
     // background-color: #fff;
-    height: 30vh;
-    width: 20vw;
+    height: 33vh;
+    min-width: 320px;
     border-radius: 100%;
     .drag-item{
-      height: 30vh;
-    width: 20vw;
+      height: 33vh;
     border-radius: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -322,12 +336,12 @@ ul {
 }
         #a1{
         // background-color: #fff;
-        height: 30vh;
+        height: 40vh;
         width: 100vw;
         
         border-radius: 5px;
         .drag-item{
-          height: 30vh;
+          height: 40vh;
         width:100vw;
         border-radius: 5px;
         background-repeat: no-repeat;
@@ -341,8 +355,15 @@ ul {
         height: 50vh;
         border-radius: 5px;
         margin-left: 40px;
-        margin-top: 200px
-    }
+        margin-top: 200px;
+        padding: 5px;
+         .drag-item{
+           margin: 4px;
+           background-position: center;
+          background-size: contain;
+          }
+         }
+    
      #a8{
          visibility: hidden;
     }
@@ -353,8 +374,9 @@ ul {
         }
     #b3{
     margin-left: 255px;
-    margin-top: 25px;
+    margin-top: 15px;
     border-radius: 5px;
+    padding: 5px;
 
     }
     .inputHheder{
@@ -415,11 +437,11 @@ ul {
         display: flex;
         flex-direction: column;
         margin-left: 255px;
-        margin-top: 10px;
+        margin-top: 35px;
          background-color: #fff;
         border: dotted;
-        width: 290px;
-        height: 125px;
+        width: 330px;
+        height: 130px;
         padding: 3px;
     }
     .mainContiner{
@@ -428,8 +450,8 @@ ul {
         background-color: #fff;
         border: dotted;
         position: absolute;
-        top: 292px;
-        left: 565px;;
+        top: 322px;
+        left: 595px;;
         display: flex;
         z-index: -1;
         li{

@@ -27,7 +27,6 @@
         <business-calendar @closecalender ="closeCalender"></business-calendar>
     </div>
 </div>
-<vue-draggable/>
 
         {{imgPath}}
         <!-- {{currBusiness}} -->
