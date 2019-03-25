@@ -7,6 +7,13 @@
 font-size: 2rem;
 }
 
+.user-appoints{
+    z-index: 100;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
 body{
     background-color: #f2f6f5;
 }
@@ -30,6 +37,7 @@ ul {
     position: absolute;
     // width: 100%;
     padding: 10px;
+    z-index: 10;
     // text-align: left;
 }
 .home{

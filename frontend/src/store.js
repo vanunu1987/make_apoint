@@ -13,6 +13,7 @@ export default new Vuex.Store({
     loggedInUser: null,
     currBusinessAppoints: [],
     currBusiness: {},
+    appointsList:[],
     filterBy: {
       name: '',
       type: '',
@@ -30,8 +31,11 @@ export default new Vuex.Store({
     filterBy(state) {
       return state.filterBy
     },
-    loggedInUser(state){
+    loggedInUser(state) {
       return state.loggedInUser
+    },
+    appointsList(state){
+      return state.appointsList
     }
   },
 
@@ -39,22 +43,22 @@ export default new Vuex.Store({
     setCurrBusiness(state, { business }) {
       state.currBusiness = business
       console.log(state.currBusiness);
-      
+
     },
     getBusinessList(state, payload) {
       state.businessList = payload.businessList
       state.filterBy = payload.filterBy
     },
 
-    setLoc(state,{loc}){
-      state.currBusiness.location=loc
+    setLoc(state, { loc }) {
+      state.currBusiness.location = loc
 
     },
     getAppointsList(state, { appointsList }) {
       state.appointsList = appointsList
     },
     setLoggedInUser(state, { user }) {
-      console.log('setLoggedInUser activated!',user)
+      console.log('setLoggedInUser activated!', user)
       state.loggedInUser = user
     },
 
@@ -68,51 +72,55 @@ export default new Vuex.Store({
       })
       return
     },
-    async loadBusinesses(context , {filterBy}) {
-      console.log(filterBy);
-      
-      // var filterBy = context.state.filterBy
+    async loadBusinesses(context, { filterBy }) {
       var businessList = await BusinessService.query(filterBy)
       context.commit({ type: 'getBusinessList', businessList, filterBy })
-      console.log(businessList);
       return businessList
     },
 
-    saveAddress(context,{loc}){
-
-      console.log(loc);
+    saveAddress(context, { loc }) {
       context.commit({ type: 'setLoc', loc })
     },
-    async loadAppoints(context) {
-      var businessId = context.state.currBusiness._id
-      var appointsList = await AppointsService.query(businessId)
+    async loadAppoints(context,{listRequire}) {
+      console.log(listRequire);
+      var user = context.getters.loggedInUser;
+      if (!user) return
+
+      var listRequireId = (listRequire === 'business') ? context.getters.currBusiness._id : context.getters.loggedInUser._id
+      // var businessId = context.state.currBusiness._id
+      // var appointsList = await AppointsService.query(businessId)
+      var appointsList = await AppointsService.query(listRequireId)
       context.commit({ type: 'getAppointsList', appointsList })
       console.log(appointsList);
       return appointsList
     },
+    async loadUserAppoints(context) {
+      var user = context.getters.loggedInUser;
+      if (!user) return
+     var userId = user._id;
+     var appointsList = await AppointsService
+     console.log(userId);
+    },
     async loginUser(context, { credentials }) {
-      console.log('dispatched : ', credentials);
       var user = await UserService.checkLogin(credentials)
-      console.log('user:', user)
       if (!user) return
-      context.commit({type:'setLoggedInUser',user})
+      context.commit({ type: 'setLoggedInUser', user })
     },
 
-    async signUpUser(context, { credentials,isNewBusiness }) {
-
-      console.log(isNewBusiness);
-
-      console.log('dispatched : ', credentials);
+    async signUpUser(context, { credentials, isNewBusiness }) {
       var user = await UserService.signUpUser(credentials)
-      console.log('user:', user)
       if (!user) return
-      context.commit({type:'setLoggedInUser',user})
+      context.commit({ type: 'setLoggedInUser', user })
       var currBusiness = context.getters.currBusiness
-      if(isNewBusiness) BusinessService.add(currBusiness)
+      if (isNewBusiness) BusinessService.add(currBusiness)
+      .then ((res) => {
+        user.business_id = res._id
+        UserService.updateUser(user)
+      })
     },
 
-    async setCurrBusiness(context,{currBusiness}){
-      context.commit({type:'setCurrBusiness',business:currBusiness})
+    async setCurrBusiness(context, { currBusiness }) {
+      context.commit({ type: 'setCurrBusiness', business: currBusiness })
     }
 
   }

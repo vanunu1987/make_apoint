@@ -4,20 +4,17 @@ const geolib = require('geolib')
 
 function addBusinessRoutes(app) {
 
-    // function _checkAdmin(req, res, next) {
-    //     console.log('INSIDE MIDDLEWARE: ', req.session.user);
-    //     if (!req.session.user || !req.session.user.isAdmin ) {
-    //         res.status(401).end('Unauthorized');
-    //         return;
-    //     }
-    //     next();
-    // }
-    // // CARS REST API:
+    function _checkAdmin(req, res, next) {
+        console.log('INSIDE MIDDLEWARE: ', req.session.user);
+        if (!req.session.user || !req.session.user._id ) {
+            res.status(401).end('Unauthorized');
+            return;
+        }
+        next();
+    }
 
     // LIST
     app.get('/business', (req, res) => {
-
-        // TODO : USER CURR LOCATION , BUSINESS LOCATION
 
         var dist = geolib.getDistance(
             {latitude: 51.5103, longitude: 7.49347},
@@ -63,14 +60,15 @@ function addBusinessRoutes(app) {
     //         .then(() => res.end(`Toy ${toyId} Deleted `))
     // })
 
-    // // CREATE
-    // app.post('/toy',_checkAdmin, (req, res) => {
-    //     const toy = req.body;
-    //     toyService.add(toy)
-    //         .then(toy => {
-    //             res.json(toy)
-    //         })
-    // })
+    // CREATE
+    app.post('/business',_checkAdmin, (req, res) => {
+        console.log('hereeeeeeeeeeeeeeeeeeeeeeeeeeee');
+        const business = req.body;
+        businessService.add(business)
+            .then(business => {
+                res.json(business)
+            })
+    })
 
     // // UPDATE
     // app.put('/toy/:toyId',_checkAdmin, (req, res) => {

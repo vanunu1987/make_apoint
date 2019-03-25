@@ -33,17 +33,17 @@ function query(filterBy) {
 }
 
 
-// function add(toy) {
-//     return mongoService.connect()
-//         .then(db => {
-//             const collection = db.collection('toys');
-//             return collection.insertOne(toy)
-//                 .then(result => {
-//                     toy._id = result.insertedId;
-//                     return toy;
-//                 })
-//         })
-// }
+function add(business) {
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('business');
+            return collection.insertOne(business)
+                .then(result => {
+                    business._id = result.insertedId;
+                    return business;
+                })
+        })
+}
 
 // function remove(toyId) {
 //     toyId = new ObjectId(toyId)
@@ -69,7 +69,7 @@ function query(filterBy) {
 module.exports = {
     query,
     getById,
-    // add,
+    add,
     // remove,
     // update
 }

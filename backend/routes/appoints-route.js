@@ -8,14 +8,27 @@ function addAppointsRoutes(app) {
     //         })
     // })
 
-    app.get('/appoints/:businessId', (req, res) => {
-        console.log('GET : ',req.params);
-        const businessId = req.params.businessId;
-        appointsService.query(businessId)
+    app.get('/appoints/:listRequireId', (req, res) => {
+        console.log('ID : ',req.params);
+        var listRequireId = req.params.listRequireId;
+        var user = req.session.user;
+        console.log('USER : ',user);
+        var listRequire = (user.business_id) ? 'business' : 'user'
+        const appointsQuery = {listRequire,listRequireId}
+        // const listRequireId = req.params.listRequireId;
+        appointsService.query(appointsQuery)
             .then((appoints) => {
                 res.json(appoints)
             })
     })
+    // app.get('/appoints/:businessId', (req, res) => {
+    //     console.log('GET : ',req.params);
+    //     const businessId = req.params.businessId;
+    //     appointsService.query(businessId)
+    //         .then((appoints) => {
+    //             res.json(appoints)
+    //         })
+    // })
 
     // app.post(BASE, (req,res) => {
     //     var review ={

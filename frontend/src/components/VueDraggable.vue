@@ -50,7 +50,7 @@
                     <component                  
                         :is="currCmp.type" 
                         :loc="currCmp.loc"
-                        style="{width:280px;height:350px"
+                        style="{width:580px;height:350px"
                         >
 
             </component>

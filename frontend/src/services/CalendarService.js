@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 function getEvents(workHours, today) {
+  console.log('get event activated: prop:',workHours)
   var eventList = []
   var days = _getWeekDaysLeft(today)
   days = days.map((day) => _adjustTimeRange(day,workHours))
@@ -8,6 +9,7 @@ function getEvents(workHours, today) {
   days.forEach((day) => {
     eventList.push(..._getDayEvents(day.date, day.timeRanges))
   })
+  console.log('done!',eventList)
   return eventList
 }
 
@@ -25,8 +27,15 @@ function _getWeekDaysLeft(startDate) {
 }
 
 function _adjustTimeRange(date,workHours) {
+  console.log('date',date,'workHours',workHours)
   var weekDay = moment(date).day()
-  var timeRanges = workHours.find((day) => day.dayOfTheWeek === weekDay).timeRanges
+  console.log('weekday',weekDay)
+  var timeRanges = workHours.find((day) =>{
+    console.log(day.dayOfTheWeek)
+    console.log(weekDay)
+   return day.dayOfTheWeek == weekDay
+  }).timeRanges
+  console.log('timeRanges',timeRanges)
   return {
     date,
     timeRanges
