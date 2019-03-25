@@ -1,5 +1,9 @@
 
-import axios from 'axios'
+// import axios from 'axios'
+import Axios from 'axios';
+var axios = Axios.create({
+   withCredentials:true
+});
 
 const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/user' : '//localhost:3003/user';
 
@@ -14,9 +18,16 @@ async function signUpUser(credentials){
    console.log('signed: ',res.data);
    return res.data
 }
+async function updateUser(user){
+   var res = await axios.put(`${BASE_URL}/${user._id}`,user)
+   console.log('UPDATED : ', res.data);
+   return res.data
+   
+}
 
 
 export default {
     checkLogin,
-    signUpUser
+    signUpUser,
+    updateUser
 }

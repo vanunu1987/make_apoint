@@ -30,6 +30,18 @@ function addUser(credentials) {
         })
 }
 
+function update(user) {
+    user._id = new ObjectId(user._id)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('users');
+            return collection.updateOne({ _id: user._id }, { $set: user })
+                .then(result => {
+                    return user;
+                })
+        })
+}
+
 // function getById(id) {
 //     const _id = new ObjectId(id)
 //     return mongoService.connect()
@@ -54,6 +66,7 @@ function addUser(credentials) {
 module.exports = {
     // query,
     // getById,
+    update,
     addUser,
     checkLogin
 }

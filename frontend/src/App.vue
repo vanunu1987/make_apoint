@@ -1,9 +1,11 @@
 <template>
   <div id="app">
+    <userAppoints/>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> | 
        <router-link to="/login">Log in</router-link> | 
+       <router-link to="/edit">Add business</router-link> | 
        <section v-if="loggedUser" class="user-name">Hello {{loggedUser}}</section> 
     </div>
     <router-view/>
@@ -11,8 +13,12 @@
 </template>
 
 <script>
+import userAppoints from '@/components/UserAppoints.vue'
 export default {
   name: "app",
+  components:{
+    userAppoints
+  },
   data() {
     return {
   

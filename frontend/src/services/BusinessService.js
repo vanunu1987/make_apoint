@@ -1,5 +1,11 @@
 import UtilService from './UtilService.js'
-import axios from 'axios'
+import UserService from './UserService.js'
+// import axios from 'axios'
+
+import Axios from 'axios';
+var axios = Axios.create({
+   withCredentials:true
+});
 
 const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/business' : '//localhost:3003/business';
 
@@ -23,6 +29,10 @@ async function getById(businessId){
 
 async function add(currBusiness){
     console.log(currBusiness);
+    var res = await axios.post(`${BASE_URL}`,currBusiness)
+    console.log('GOT NEW BUS : ', res.data);
+    var business = await res.data
+    return business
 }
 
 function _getEmptyBusiness(){

@@ -22,6 +22,14 @@
             <span>Thursday</span>
             <from-to @setWorkTime="setWorkTimeArr($event,4)"/>
         </div>
+        <div class="day thu">
+            <span>Friday</span>
+            <from-to @setWorkTime="setWorkTimeArr($event,5)"/>
+        </div>
+        <div class="day thu">
+            <span>Saterday</span>
+            <from-to @setWorkTime="setWorkTimeArr($event,6)"/>
+        </div>
         </div>
         <button @click="saveWorkTime">Done</button>
     </section>
@@ -37,30 +45,38 @@ export default {
             workHour:[
             {
                 dayOfTheWeek:0,
-                timeRanges:{}
+                timeRanges:[]
             },
             {
                 dayOfTheWeek:1,
-                timeRanges:{}
+                timeRanges:[]
             },
             {
                 dayOfTheWeek:2,
-                timeRanges:{}
+                timeRanges:[]
             },
             {
                 dayOfTheWeek:3,
-                timeRanges:{}
+                timeRanges:[]
             },
             {
                 dayOfTheWeek:4,
-                timeRanges:{}
+                timeRanges:[]
+            },
+            {
+                dayOfTheWeek:5,
+                timeRanges:[]
+            },
+            {
+                dayOfTheWeek:6,
+                timeRanges:[]
             }
             ]
         }
     },
     methods:{
         setWorkTimeArr(val,num){
-            var work={dayOfTheWeek:num, timeRanges:val}
+            var work={dayOfTheWeek:num, timeRanges:[val]}
             this.workHour.splice(num,1,work)
         },
             saveWorkTime(){

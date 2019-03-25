@@ -23,7 +23,10 @@ function addRoutes(app) {
     app.post(`${BASE}/signup`, (req, res) => {
         const credentials = req.body
         userService.addUser(credentials)
-            .then(user => res.json(user))
+            .then(user =>{
+                req.session.user = user
+                res.json(user)
+            })
     })
 
     app.put(`${BASE}/login`, (req, res) => {
@@ -35,6 +38,15 @@ function addRoutes(app) {
                 console.log('FOUND',user);
                 res.json(user)
             })
+    })
+
+    app.put(`${BASE}/:userId`, (req, res) => {
+        const userId = req.params.userId;
+        const user = req.body;
+        console.log('ID : ',userId);
+        console.log('USER : ',user,);
+        userService.update(user)
+            .then(user => res.json(user))
     })
 
 }
