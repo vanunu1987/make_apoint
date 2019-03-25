@@ -1,5 +1,10 @@
 <template>
 <section>
+    <h1>{{payload}}</h1>
+    <h1>{{event.title}}</h1>
+    <h1>{{event.date}}</h1>
+    <h1>{{event.time}}</h1>
+    <h1>{{event.duration}}</h1>
 <h1>not a user!</h1>
 <h1>register:</h1>
 <h1> or give details:</h1>
@@ -21,6 +26,7 @@
 
 <script>
 export default {
+    props:['payload'],
     data(){
         return {
             name:'',
@@ -28,6 +34,9 @@ export default {
         }
     },
     computed:{
+        event(){
+            return this.payload.event
+        },
         user(){
             return {
                 userName:this.name,

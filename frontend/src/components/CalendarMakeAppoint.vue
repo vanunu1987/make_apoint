@@ -27,16 +27,18 @@
           </template>
         </v-calendar>
       </v-sheet>
+      <calendar-product-select></calendar-product-select>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import CalendarService from "../services/CalendarService.js";
-
+import CalendarProductSelect from '@/components/CalendarProductSelect.vue'
 
 export default {
   components:{
+    CalendarProductSelect
   },
   data: () => ({
     today: "2019-01-09",
@@ -67,7 +69,6 @@ export default {
   },
   methods: {
     open(event) {
-      alert(JSON.stringify(event))
       this.$emit('event-pressed',{event})
     },
     moveWeeks(weekCount) {

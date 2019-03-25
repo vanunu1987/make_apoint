@@ -4,17 +4,15 @@
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum incidunt est, officiis accusamus voluptates expedita nam fuga error, inventore harum dolores alias autem exercitationem fugiat! Ea rerum tenetur pariatur obcaecati?
     </p>
-     <Work-hours/>
+    <calendar-date-picker style="width:500px;"></calendar-date-picker>
   </div>
 </template>
 
 <script>
-
-import WorkHours from '@/components/WorkHours.vue'
+import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 export default {
   components:{
-    WorkHours
-
+CalendarDatePicker
   }
 }
 </script>

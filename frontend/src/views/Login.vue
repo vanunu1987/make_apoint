@@ -1,7 +1,6 @@
 <template>
   <div class="login">
-    <h1>hi</h1>
-    <user-login-signup :isNewUserProp="true"></user-login-signup>
+    <user-login-signup :isNewUserProp="false"></user-login-signup>
   </div>
 </template>
 
