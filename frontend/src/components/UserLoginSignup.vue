@@ -25,7 +25,7 @@
 <script>
 export default {
   name: "loginSignup",
-  props:['isNewUserProp'],
+  props:['isNewUserProp',"isNewBus"],
   components: {},
   data() {
     return {
@@ -53,13 +53,17 @@ export default {
     signup() {
       console.log(this.newUserCredentials);
       var credentials = { ...this.newUserCredentials };
-      this.$store.dispatch({ type: "signUpUser", credentials });
+      this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus });
        this.newUserCredentials.userName = null;
       this.newUserCredentials.password = null;
       this.newUserCredentials.phone = null;
+      this.$emit('closeSignUp')
+
     },
   },
   created() {
+    console.log(this.isNewUserProp);
+    
       this.isNewUser = this.isNewUserProp
   }
 };
