@@ -30,15 +30,16 @@ function addBusinessRoutes(app) {
             .then(business => {
                 // console.log('HERE', business);
                 var newArr = business.map((bus) => {
-        
                     bus.dist = geolib.getDistance(   
                     {latitude: bus.location.lat, longitude: bus.location.lng},
                     {latitude: filterBy.locationLat, longitude: filterBy.locationLng}
                     );
                     return bus
                 })
+                newArr.sort((busA,busB) => {
+                    return busA.dist - busB.dist;
+                })
                 res.json(newArr)
-                
             })
 
     })

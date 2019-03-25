@@ -1,11 +1,11 @@
 <template>
   <div class="list">
 
-     <!-- <el-carousel :interval="2500" type="card" height="350px">
+     <el-carousel v-if="!isSearch" :interval="2500" type="card" height="350px">
         <el-carousel-item v-for="currBusiness in business" :key="currBusiness._id">
           <BusinessPreview :currBusiness="currBusiness"/>
         </el-carousel-item>
-          </el-carousel> -->
+      </el-carousel>
 
 
       <ul class="business-list">
@@ -25,7 +25,7 @@ import BusinessPreview from "@/components/BusinessPreview.vue";
 
 export default {
   name: 'list',
-  props:['business'],
+  props:['business','isSearch'],
   components: {
       BusinessPreview
   },
