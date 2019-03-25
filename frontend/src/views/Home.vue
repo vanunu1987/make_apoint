@@ -5,7 +5,7 @@
       <HomeFilter @find="filterList"/>
     </header>
     <div v-if="isScroll" class="secondary-header"></div>
-    <BusinessList id="list" :business="businessToShow"/>
+    <BusinessList id="list" :business="businessToShow" :isSearch="isSearch"/>
   </div>
 </template>
 
@@ -23,7 +23,8 @@ export default {
   },
   data() {
     return {
-      isScroll: false
+      isScroll: false,
+      isSearch: false
     };
   },
   computed: {
@@ -33,9 +34,9 @@ export default {
   },
   methods: {
     async filterList(filterBy) {
-      console.log("scroll");
       await this.$store.dispatch({ type: "loadBusinesses", filterBy });
-      this.$scrollTo("#list", 300);
+      this.$scrollTo("#list", 500);
+      this.isSearch = true;
     }
   },
   created() {
