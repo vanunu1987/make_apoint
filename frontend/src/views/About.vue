@@ -4,15 +4,17 @@
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum incidunt est, officiis accusamus voluptates expedita nam fuga error, inventore harum dolores alias autem exercitationem fugiat! Ea rerum tenetur pariatur obcaecati?
     </p>
-    <calendar-date-picker style="width:500px;"></calendar-date-picker>
+
+    <make-appoint style="width:500px;"></make-appoint>
+    
   </div>
 </template>
 
 <script>
-import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
+import MakeAppoint from '@/components/MakeAppoint.vue'
 export default {
   components:{
-CalendarDatePicker
+MakeAppoint
   }
 }
 </script>
