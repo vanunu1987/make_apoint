@@ -14,6 +14,8 @@ export default new Vuex.Store({
     currBusinessAppoints: [],
     currBusiness: null,
     appointsList:[],
+    imgList:[],
+    BusinessTypes:['Barber','Tattoo Artist','Cosmetics'],
     filterBy: {
       name: '',
       type: '',
@@ -36,6 +38,12 @@ export default new Vuex.Store({
     },
     appointsList(state){
       return state.appointsList
+    },
+    BusinessTypes(state){
+      return state.BusinessTypes
+    },
+    imgList(state){
+      return state.imgList
     }
   },
 
@@ -61,6 +69,9 @@ export default new Vuex.Store({
       console.log('setLoggedInUser activated!', user)
       state.loggedInUser = user
     },
+    setImgList(state,{imgList}){
+      state.imgList = imgList
+    }
 
   },
   actions: {
@@ -99,12 +110,12 @@ export default new Vuex.Store({
       if (!user) return
      var userId = user._id;
      var appointsList = await AppointsService
-     console.log(userId);
     },
     async loginUser(context, { credentials }) {
       var user = await UserService.checkLogin(credentials)
       if (!user) return
       context.commit({ type: 'setLoggedInUser', user })
+      context.dispatch({type:'loadAppoints',listRequire:'user'})
     },
 
     async signUpUser(context, { credentials, isNewBusiness }) {
@@ -121,8 +132,14 @@ export default new Vuex.Store({
 
     async setCurrBusiness(context, { currBusiness }) {
       context.commit({ type: 'setCurrBusiness', business: currBusiness })
-    }
+    },
 
+    async loadImgs(context, { Businesstype }){
+      var imgList = await BusinessService.getImgs(Businesstype)
+      console.log('gotitititiitit : ',imgList);
+      context.commit({ type: 'setImgList', imgList })
+      
+    }
   }
 
 })

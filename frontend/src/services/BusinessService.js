@@ -18,6 +18,13 @@ async function query(filterBy){
     console.log('list : ',businessList);
     return businessList;
 }
+async function getImgs(type){
+    var filterBy = `?type=${type}`;
+    console.log(filterBy);
+    var res = await axios.get(`${BASE_URL}/imgs${filterBy}`)
+    console.log('gotttttt : ', res.data);
+    return res.data
+}
 
 async function getById(businessId){
     if (!businessId) return _getEmptyBusiness()
@@ -34,6 +41,7 @@ async function add(currBusiness){
     var business = await res.data
     return business
 }
+
 
 function _getEmptyBusiness(){
     return {
@@ -140,5 +148,6 @@ function _getEmptyBusiness(){
 export default {
     query,
     getById,
-    add
+    add,
+    getImgs
 }
