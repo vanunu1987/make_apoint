@@ -1,0 +1,66 @@
+[
+    {
+        "type":"Barber",
+        "imgs" : [
+            {
+                "url": "https://media.istockphoto.com/vectors/barber-shop-vintage-poster-banner-label-badge-or-emblem-with-barber-vector-id953222094" ,
+                "filter": "header"
+        },{
+            "url":"http://www.cndajin.com/data/wls/113/10786784.jpg" ,
+                "filter": "profile"
+        },
+            {
+                "url": "http://www.cndajin.com/data/wls/113/10786885.jpg" ,
+                "filter": "header"
+        },{
+            "url":"http://www.cndajin.com/data/wls/113/10787021.jpg" ,
+                "filter": "profile"
+        },
+            {
+                "url": "http://www.cndajin.com/data/wls/113/10787168.jpg" ,
+                "filter": "header"
+        },{
+            "url":"http://www.cndajin.com/data/wls/113/10788561.jpg" ,
+                "filter": "profile"
+        },
+            {
+                "url": "http://www.cndajin.com/data/wls/113/10787906.jpg" ,
+                "filter": "header"
+        },{
+            "url":"http://www.cndajin.com/data/wls/113/10788267.jpg" ,
+                "filter": "profile"
+        }
+    ]
+    },
+    {
+        "type":"Tattoo Artist",
+        "imgs" : [
+            {
+                "url": "https://wallpapercave.com/wp/Sc6b7A9.jpg" ,
+                "filter": "header"
+        },{
+                "url":"https://wallpapercave.com/wp/Sc6b7A9.jpg" ,
+                "filter": "profile"
+        },
+            {
+                "url": "https://www.wallpaperup.com/uploads/wallpapers/2014/04/12/330153/5778dcd9136ec04e7f087a661548fead-1000.jpg" ,
+                "filter": "header"
+        },{
+                "url":"https://www.wallpaperup.com/uploads/wallpapers/2014/04/12/330153/5778dcd9136ec04e7f087a661548fead-1000.jpg" ,
+                "filter": "profile"
+        }
+    ]
+    },
+    {
+        "type":"Cosmetics",
+        "imgs" : [
+            {
+                "url": "https://www.wallpaperup.com/uploads/wallpapers/2014/04/10/329301/df648533b1408cca96d315c40e35c3d9-700.jpg" ,
+                "filter": "header"
+        },{
+                "url":"https://www.wallpaperup.com/uploads/wallpapers/2014/04/10/329301/df648533b1408cca96d315c40e35c3d9-700.jpg" ,
+                "filter": "profile"
+        }
+    ]
+    }
+]

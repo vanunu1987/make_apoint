@@ -1,5 +1,6 @@
 <template>
   <div v-if="currUser" class="user-appoints">
+      <div v-if="appoints" class="notifications">{{upcomingCount}}</div>
     <button @click="getUserAppoints">{{currUser.userName}}</button>
   <div v-if="isOpen" class="appoints-card">
       <ul>
@@ -30,9 +31,8 @@ export default {
         if (this.isOpen) return this.isOpen = !this.isOpen
         this.$store.dispatch({type:'loadAppoints',listRequire:'user'})
         .then(res =>{
-            console.log('got ittt',res)
             this.isOpen = !this.isOpen
-            } 
+            },
         )
     }
   },
@@ -40,9 +40,16 @@ export default {
     currUser(){
         return this.$store.getters.loggedInUser
     },
+    upcomingCount(){
+        var counter = this.appoints.reduce((acc,appoint) => {
+            if (appoint.timeStamp - Date.now() <= 60 * 60 * 24 * 1000) return ++acc
+            
+        },0)
+        return counter
+    },
     appoints(){
         var appoints =  this.$store.getters.appointsList
-        appoints = appoints.map((appoint) => {
+        appoints.forEach((appoint,idx) => {
             var timeStamp = new Date(appoint.date)
             var day = timeStamp.getDay()
             switch (day){
@@ -74,12 +81,12 @@ export default {
         var timeToShow = day + ', ' +  month + ' ' + timeStamp.getDate() + ' ' + year
         appoint.timeStamp = timeStamp;
         appoint.timeToShow = timeToShow;
+        appoints.splice(idx,1,appoint)
         console.log(appoint);
-        return appoint
+        // return appoint
         })
     return appoints
-    },
-   
+    }
   }
 };
 </script>
