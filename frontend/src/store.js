@@ -12,7 +12,7 @@ export default new Vuex.Store({
     businessList: [],
     loggedInUser: null,
     currBusinessAppoints: [],
-    currBusiness: {},
+    currBusiness: null,
     appointsList:[],
     filterBy: {
       name: '',

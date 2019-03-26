@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Details from './views/Details.vue'
-import Edit from './views/Edit.vue'
+import AddEdit from './views/AddEdit.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
 
@@ -31,7 +31,7 @@ export default new Router({
     {
       path: '/edit',
       name: 'edit',
-      component: Edit
+      component: AddEdit
     },
     {
       path: '/login',
