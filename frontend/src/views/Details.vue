@@ -9,7 +9,7 @@
           <div class="details-head flex">
                 <h1 class="name" >{{currBusiness.name}}</h1>
               <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }">
-
+          </div>
               </div>
                 <span class="flex">
                     <span class="fas fa-map-pin"></span> 
@@ -35,7 +35,8 @@
                 ,
                 <h3>{{currBusiness.rank.qty}}</h3>
                 </span>
-          </div>
+          
+      </div>
           <div class="midle">
                 <GmapMap
                     class="map"      
@@ -55,7 +56,7 @@
                     <business-calendar @closecalender ="closeCalender"></business-calendar>
                 </div>
           </div>
-    </div>
+   
   </section>
 </template>
 

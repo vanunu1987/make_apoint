@@ -2,11 +2,13 @@
   <div class="ModalContiner">
     <div class="modalMain">
         <select  v-model="selctedType">
+            <option value="">choose your busines type</option>
             <option v-for="(type,idx) in businessType " 
             :key="idx"
            >
            {{type}}
             </option>
+            
         </select>
       <button @click="saveType">save</button>
     </div>
@@ -32,14 +34,15 @@ export default {
     },
     created(){
             
-                this.businessType=this.$store.getters.businessTypes
-            
+                this.businessType=this.$store.getters.BusinessTypes
+                console.log(this.businessType);
+                
 
     }
 }
 </script>
 
-<style lang="scss" >
+<style lang="scss"  >
 .ModalContiner {
   display: flex;
   flex-direction: column;
@@ -49,6 +52,7 @@ export default {
   background-color: #f0ffff4d;
   justify-content: center;
   align-items: center;
+  z-index: 100;
   .modalMain {
     height: 50vw;
     width: 50vw;
@@ -59,5 +63,6 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
 }
 </style>

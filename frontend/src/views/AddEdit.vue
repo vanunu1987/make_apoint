@@ -5,7 +5,7 @@
 
         <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
               <div class="column">
-              <button @click="isGalleryHeaderImg=!isGalleryHeaderImg" title="Add image" class="far fa-images"></button>
+              <button @click="setFilterBy('header')" title="Add image" class="far fa-images"></button>
              <h3>Add your header image here</h3> 
              </div>
 
@@ -14,7 +14,7 @@
           <div class="details-head flex">
          <input v-model="currBusiness.name" placeholder="Insert your business name here"  type="text" />
         <div  class="img-profile flex"  :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }">
-              <button title="Add profile image" class="fas fa-user-plus"></button>
+              <button @click="setFilterBy('profile')" title="Add profile image" class="fas fa-user-plus"></button>
           </div>
 
           </div>
@@ -52,7 +52,7 @@
   :center="mapCenter"
   :zoom="16"
   map-type-id="terrain"
-  style="width: 100vw; height: 300px"
+  style=" height: 300px"
 >
   <GmapMarker
     :key="index"
@@ -66,7 +66,13 @@
  <div class="calendar" v-if="showCalender">
         <business-calendar @closecalender ="closeCalender"></business-calendar>
     </div>
+   
 </div>
+ <div class="setings">
+    <button title="Setting" class="fas fa-cog Setting"></button>
+    <button v-show="isGalleryHeaderImg" title="addImg" class="fas fa-plus addImg"></button>
+      
+
       <div v-if="isGalleryHeaderImg" class="headerGallery">
           <ul>
             <li
@@ -81,7 +87,7 @@
             </li>
           </ul>
       </div>
-    <button title="Setting" class="fas fa-cog Setting"></button>
+      </div>
   </section>
 </template>
 
@@ -100,7 +106,6 @@ export default {
     mapCmp,
     CalendarDatePicker,
     BusinessTypeModal,
-    isTypeModal: false
   },
   created() {
     let { businessId } = this.$route.params;
@@ -114,7 +119,7 @@ export default {
   },
   data() {
     return {
-      filterby:"",
+      filterBy:"",
       isGalleryHeaderImg:false,
       // imgUrls:[],
       showCalender:false,
@@ -132,6 +137,7 @@ export default {
       imgPath:'',
       editMode:false,
       currBusiness:{},
+      isTypeModal:false
        
     }
   },
@@ -146,26 +152,40 @@ export default {
           this.showCalender = false
         },
         setHeaderImg(img,filter){
+          console.log('img',img);
+          
           if (filter==="header"){
-          this.currBusiness.prefs.header_img_url=img
+          this.currBusiness.prefs.header_img_url=img.url
+          this.isGalleryHeaderImg=false
           console.log(this.currBusiness);
           }else{
-          this.currBusiness.prefs.profile_img_url=img
+          this.currBusiness.prefs.profile_img_url=img.url
+          this.isGalleryHeaderImg=false
           }
         },
         filteredItems(){
-         return this.imgUrls.filter((img)=>img.filter===this.filterBy)
+          console.log(this.currBusiness.type);
+          console.log(this.imgUrls);
+          
+         return this.imgUrls[0].imgs.filter((img)=>img.filter===this.filterBy)
         },
         setType(val){
-          console.log(val);
           this.isTypeModal=false
+          console.log(this.isTypeModal);
           this.currBusiness.type=val
-        this.$store.dispatch({ type: "loadImgs", type:this.currBusiness.type })
+          this.$store.dispatch({type: 'loadImgs',Businesstype:this.currBusiness.type})
+
+        },
+        setFilterBy(val){
+          if (!this.isGalleryHeaderImg){
+          this.isGalleryHeaderImg=!this.isGalleryHeaderImg
+          this.filterBy=val
+          }else this.filterBy=val
         }
     },
     computed:{
       imgUrls(){
-        return this.$store.getters.imgUrls
+        return this.$store.getters.imgList
       }
     }
 }
@@ -189,16 +209,28 @@ span.flex{
       }
 }
 .Setting{
-  position: fixed;
+  // position: fixed;
   font-size: 2.5rem;
   padding: 10px;
   border-radius: 100%;
   box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
-  margin-top: 100px;
+  margin-top: 20px;
   margin-left: 5px;
   z-index: 10;
 background-color: white;
 }
+  .addImg{
+    position: absolute;
+    font-size: 2.5rem;
+  padding: 10px;
+  border-radius: 100%;
+  box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
+  margin-top: 105px;
+  margin-left: -55px;
+  z-index: 10;
+background-color: white;
+  
+  }
 input{
   
   &:focus{
@@ -217,12 +249,12 @@ h1,h2,h3{
 .page-continer{
   background-color: white;
  display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.5fr;
+    grid-template-columns: 0.5fr 2fr 1fr 0.8fr;
     grid-template-rows: 1fr 1fr 1fr .5fr;
      grid-gap: 10px 20px;
         // padding: 20px;
     .img-header{
-      grid-column: 1/5;
+      grid-column: 1/4;
       grid-row: 1;
     }
     .profile-detais{
@@ -237,9 +269,17 @@ h1,h2,h3{
       display: inline;
     }
     .midle{
-       grid-column: 1/5;
+       grid-column: 1/4;
       grid-row: 3;
     }
+    .setings{
+      grid-column: 4;
+      grid-row: 1/5;
+    }
+}
+
+.setings{
+  background-color: black;
 }
 .profile-detais{
 // margin-left: 30px;
@@ -323,19 +363,20 @@ div.calendar{
   // z-index: 3;
 }
 .headerGallery{
-  height: 90vh;
+  height: 100vh;
   width: 15vw;
-  background-color: #484848d1;
-  position: fixed;
-  top: 10px;
+  // background-color: #484848d1;
+  // position: fixed;
+  // top: 10px;
   right: 0px;
   border-radius: 5px;
+  margin-top: 100px;
 }
 .galleryItem{
-  margin: 4px;
+  margin: 7px;
   height: 100px;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   cursor: pointer;
 }
 </style>
