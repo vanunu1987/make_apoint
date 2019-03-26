@@ -53,7 +53,7 @@
 </GmapMap>
 <button @click="showCalender = !showCalender">Add appoint</button>
  <div class="calendar" v-if="showCalender">
-        <business-calendar @closecalender ="closeCalender"></business-calendar>
+        <make-appoint @closecalender ="closeCalender"></make-appoint>
     </div>
 </div>
 
@@ -61,14 +61,14 @@
 </template>
 
 <script>
-import BusinessCalendar from '../components/BusinessCalendar.vue'
+import MakeAppoint from '../components/MakeAppoint.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
-    BusinessCalendar,
+    MakeAppoint,
     BusinessService,
     vueDraggable,
     mapCmp,
@@ -79,6 +79,9 @@ export default {
 
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
+      this.$store.dispatch({type:'loadAppoints' ,listRequire:'business'}).then(()=>{
+        console.log('done!')
+      })
       // this.imgPath=this.currBusiness.prefs
       //   console.log(this.imgPath);
       //   this.mapCenter=currBusiness.location

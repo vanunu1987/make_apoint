@@ -5,13 +5,11 @@ function getEvents(workHours, today) {
   var eventList = []
   var days = _getWeekDaysLeft(today)
   days = days.map((day) => _adjustTimeRange(day,workHours))
-  console.log('days', days)
   days.forEach((day) => {
     eventList.push(..._getDayEvents(day.date, day.timeRanges))
   })
-  console.log('done!',eventList)
   return eventList
-}
+} 
 
 
 
@@ -27,15 +25,10 @@ function _getWeekDaysLeft(startDate) {
 }
 
 function _adjustTimeRange(date,workHours) {
-  console.log('date',date,'workHours',workHours)
   var weekDay = moment(date).day()
-  console.log('weekday',weekDay)
   var timeRanges = workHours.find((day) =>{
-    console.log(day.dayOfTheWeek)
-    console.log(weekDay)
    return day.dayOfTheWeek == weekDay
   }).timeRanges
-  console.log('timeRanges',timeRanges)
   return {
     date,
     timeRanges
@@ -49,10 +42,8 @@ function _getDayEvents(date, timeRanges) {
     for (let i = 0; i < eventCount; i++) {
       var time = timeRange.from.split(':')
       time = moment({ hour: time[0], minute: time[1] }).add(i, 'hours').format('HH:mm')
-      console.log(time)
       eventList.push(
         {
-          title: 'Haircut',
           date: date,
           time: time,
           duration: 60
@@ -65,6 +56,6 @@ function _getDayEvents(date, timeRanges) {
 
 
 export default {
-  getEvents
+  getEvents: getEvents
 }
 

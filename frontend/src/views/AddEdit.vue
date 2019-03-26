@@ -61,10 +61,7 @@
     :draggable="true"
   />
 </GmapMap>
-<button @click="showCalender = !showCalender">Add appoint</button>
- <div class="calendar" v-if="showCalender">
-        <business-calendar @closecalender ="closeCalender"></business-calendar>
-    </div>
+
 </div>
       <div v-if="isGalleryHeaderImg" class="headerGallery">
           <ul>
@@ -85,14 +82,14 @@
 </template>
 
 <script>
-import BusinessCalendar from '../components/BusinessCalendar.vue'
+// import BusinessCalendar from '../components/BusinessCalendar.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
-    BusinessCalendar,
+    // BusinessCalendar,
     BusinessService,
     vueDraggable,
     mapCmp,
