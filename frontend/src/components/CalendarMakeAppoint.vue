@@ -54,6 +54,7 @@ export default {
       this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
       return map;
     }
+    
   },
   created() {
     // this.dateToShow = moment().format('YYYY-MM-DD')
