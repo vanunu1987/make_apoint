@@ -5,6 +5,7 @@ import Details from './views/Details.vue'
 import AddEdit from './views/AddEdit.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
+import BusinessManage from './views/BusinessManage.vue'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/manage/:businessId',
+      name: 'BusinessManage',
+      component: BusinessManage
     },
   ]
 })

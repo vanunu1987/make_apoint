@@ -1,8 +1,6 @@
 <template>
   <div class="home">
     <header>
-      <!-- <a href="#" v-scroll-to="'#list'">Search</a> -->
-      <button @click="test">TETSSSSSSSSSSSSSSSS</button>
       <HomeFilter @find="filterList"/>
     </header>
     <div v-if="isScroll" class="secondary-header"></div>
@@ -39,9 +37,6 @@ export default {
       this.$scrollTo("#list", 500);
       this.isSearch = true;
     },
-    test(){
-      this.$store.dispatch({type: 'loadImgs',Businesstype:'Barber'})
-    }
   },
   created() {
     UtilService.getLocation()
