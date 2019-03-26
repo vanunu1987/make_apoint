@@ -3,6 +3,11 @@
     // font-family: 'Fjalla One', sans-serif;
     font-family: 'Hammersmith One', sans-serif;
 }
+
+button:focus {
+    outline: none;
+}
+
 .preview-name{
 font-size: 2rem;
 }
