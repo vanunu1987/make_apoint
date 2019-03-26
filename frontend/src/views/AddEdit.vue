@@ -1,5 +1,6 @@
 <template>
-    <section class="page-continer" v-if="!!currBusiness.prefs">
+  <section class="page-continer" v-if="!!currBusiness.prefs">
+    <business-type-modal  @saveType="setType" v-if="isTypeModal"/>
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
 
         <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
@@ -69,19 +70,19 @@
       <div v-if="isGalleryHeaderImg" class="headerGallery">
           <ul>
             <li
-            v-for="(img,idx) in imgUrls"
+            v-for="(img,idx) in filteredItems()"
             :key="idx"
             >
                 <div class="galleryItem"
-                :style="{backgroundImage: `url(${img})` }"
-                @click="setHeaderImg(img)"
+                :style="{backgroundImage: `url(${img.url})` }"
+                @click="setHeaderImg(img,img.filter)"
                 >
                 </div>
             </li>
           </ul>
       </div>
     <button title="Setting" class="fas fa-cog Setting"></button>
-    </section>
+  </section>
 </template>
 
 <script>
@@ -89,6 +90,7 @@ import BusinessCalendar from '../components/BusinessCalendar.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
+import BusinessTypeModal from '@/components/BusinessTypeModal.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
@@ -96,11 +98,13 @@ export default {
     BusinessService,
     vueDraggable,
     mapCmp,
-    CalendarDatePicker
+    CalendarDatePicker,
+    BusinessTypeModal,
+    isTypeModal: false
   },
   created() {
     let { businessId } = this.$route.params;
-
+    if (!businessId) this.isTypeModal=true
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then((res)=>{
       this.currBusiness=this.$store.getters.currBusiness
@@ -110,8 +114,9 @@ export default {
   },
   data() {
     return {
+      filterby:"",
       isGalleryHeaderImg:false,
-      imgUrls:["http://www.cndajin.com/data/wls/113/10786885.jpg","http://www.cndajin.com/data/wls/113/10786784.jpg"],
+      // imgUrls:[],
       showCalender:false,
       imgIdx: 0,
       m: {
@@ -131,15 +136,6 @@ export default {
     }
   },
  
-  // computed: {
-  //   currBusiness() {
-  //     return this.$store.getters.currBusiness;
-  //   },
-  //   address(){
-  //     let loc= this.currBusiness.location
-  //     return `${loc.street} ${loc.number} ${loc.city} ${loc.state}`
-  //   }
-  // },
     methods:{
         changeImgIdx(val){
             if (this.imgIdx+val<0||this.imgIdx+val>this.imgPath.length-1)return
@@ -149,21 +145,28 @@ export default {
         closeCalender(){
           this.showCalender = false
         },
-        setHeaderImg(img){
+        setHeaderImg(img,filter){
+          if (filter==="header"){
           this.currBusiness.prefs.header_img_url=img
           console.log(this.currBusiness);
-          
+          }else{
+          this.currBusiness.prefs.profile_img_url=img
+          }
+        },
+        filteredItems(){
+         return this.imgUrls.filter((img)=>img.filter===this.filterBy)
+        },
+        setType(val){
+          console.log(val);
+          this.isTypeModal=false
+          this.currBusiness.type=val
+        this.$store.dispatch({ type: "loadImgs", type:this.currBusiness.type })
         }
     },
-    watch:{
-      // currBusiness:{
-      //   handler: function(){
-      //     console.log('watch',this.currBusiness);
-          
-      //     },
-      //     deep:true
-      
-      // }
+    computed:{
+      imgUrls(){
+        return this.$store.getters.imgUrls
+      }
     }
 }
 </script>

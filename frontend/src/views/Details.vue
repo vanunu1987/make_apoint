@@ -1,63 +1,62 @@
 <template>
-    <section class="page-continer" v-if="currBusiness">
+  <section class="page-continer" v-if="currBusiness">
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
 
-        <div  class="img-header"  :style="{backgroundImage: `url(${imgPath.header_img_url})` }">
+        <div  class="img-header"  
+        :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
         </div>
         <div class="profile-detais culomn">
           <div class="details-head flex">
-          <h1 class="name" >{{currBusiness.name}}</h1>
-        <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"/>
+                <h1 class="name" >{{currBusiness.name}}</h1>
+              <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }">
 
+              </div>
+                <span class="flex">
+                    <span class="fas fa-map-pin"></span> 
+                    <h2 class="address-h2">Address</h2> 
+                </span>
+                <h3>{{currBusiness.address}}</h3>
+                <span class="flex">
+                    <span class="fas fa-phone"></span> 
+                    <h2>Phone number</h2> 
+              </span>
+              <h3>{{currBusiness.phone}}</h3>
+                <span class="flex">
+                    <span class="fas fa-address-card"></span>
+                    <h2>About Us</h2> 
+                </span>
+                <h3>{{currBusiness.prefs.description}}</h3>
+                <span class="flex">
+                    <span class="fas fa-star-half-alt"></span>
+                    <h2>Rating</h2> 
+                </span>
+                <span class="flex">
+                <h3>{{currBusiness.rank.avg}}</h3>
+                ,
+                <h3>{{currBusiness.rank.qty}}</h3>
+                </span>
           </div>
-          <span class="flex">
-         <span class="fas fa-map-pin"></span> 
-         <h2 class="address-h2">Address</h2> 
-         </span>
-         <h3>{{currBusiness.address}}</h3>
-          <span class="flex">
-         <span class="fas fa-phone"></span> 
-         <h2>Phone number</h2> 
-         </span>
-         <h3>{{currBusiness.phone}}</h3>
-          <span class="flex">
-         <span class="fas fa-address-card"></span>
-         <h2>About Us</h2> 
-        </span>
-        <h3>{{currBusiness.prefs.description}}</h3>
-          <span class="flex">
-         <span class="fas fa-star-half-alt"></span>
-         <h2>Rating</h2> 
-        </span>
-        <span class="flex">
-        <h3>{{currBusiness.rank.avg}}</h3>
-        ,
-        <h3>{{currBusiness.rank.qty}}</h3>
-        </span>
-        </div>
-        <div class="midle">
-        <GmapMap
-  class="map"      
-  :center="mapCenter"
-  :zoom="16"
-  map-type-id="terrain"
-  style="width: 100vw; height: 300px"
->
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in markers"
-    :position="mapCenter"
-    :clickable="true"
-    :draggable="true"
-  />
-</GmapMap>
-<button @click="showCalender = !showCalender">Add appoint</button>
- <div class="calendar" v-if="showCalender">
-        <business-calendar @closecalender ="closeCalender"></business-calendar>
+          <div class="midle">
+                <GmapMap
+                    class="map"      
+                    :center="mapCenter"
+                    :zoom="16"
+                    map-type-id="terrain"
+                    style="width: 100vw; height: 300px">
+                <GmapMarker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="mapCenter"
+                    :clickable="true"
+                    :draggable="true"/>
+                </GmapMap>
+                <button @click="showCalender = !showCalender">Add appoint</button>
+                <div class="calendar" v-if="showCalender">
+                    <business-calendar @closecalender ="closeCalender"></business-calendar>
+                </div>
+          </div>
     </div>
-</div>
-
-    </section>
+  </section>
 </template>
 
 <script>
@@ -76,16 +75,9 @@ export default {
   },
   created() {
     let { businessId } = this.$route.params;
-
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
-      // this.imgPath=this.currBusiness.prefs
-      //   console.log(this.imgPath);
-      //   this.mapCenter=currBusiness.location
-      //   this.markers[0].position=currBusiness.location
-
       })
- 
   },
   data() {
     return {
@@ -99,7 +91,6 @@ export default {
       ],
       editMode:false
     }
-
   },
  
  
