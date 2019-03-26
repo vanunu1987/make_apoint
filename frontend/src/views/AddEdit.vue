@@ -1,30 +1,40 @@
 <template>
-    <section class="page-continer" v-if="currBusiness">
+    <section class="page-continer" v-if="!!currBusiness.prefs">
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
 
-        <div  class="img-header"  :style="{backgroundImage: `url(${imgPath.header_img_url})` }">
+        <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
+              <div class="column">
+              <button @click="isGalleryHeaderImg=!isGalleryHeaderImg" title="Add image" class="far fa-images"></button>
+             <h3>Add your header image here</h3> 
+             </div>
+
         </div>
         <div class="profile-detais culomn">
           <div class="details-head flex">
-          <h1 class="name" >{{currBusiness.name}}</h1>
-        <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"/>
+         <input v-model="currBusiness.name" placeholder="Insert your business name here"  type="text" />
+        <div  class="img-profile flex"  :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }">
+              <button title="Add profile image" class="fas fa-user-plus"></button>
+          </div>
 
           </div>
+          <h5>Profile image</h5>
+         
+      
           <span class="flex">
          <span class="fas fa-map-pin"></span> 
          <h2 class="address-h2">Address</h2> 
          </span>
-         <h3>{{currBusiness.address}}</h3>
+         <input v-model="currBusiness.address" placeholder="Insert your address here"  type="text" />
           <span class="flex">
          <span class="fas fa-phone"></span> 
          <h2>Phone number</h2> 
          </span>
-         <h3>{{currBusiness.phone}}</h3>
+         <input v-model="currBusiness.phone" placeholder="Insert your phone number here"  type="text" />
           <span class="flex">
          <span class="fas fa-address-card"></span>
          <h2>About Us</h2> 
         </span>
-        <h3>{{currBusiness.prefs.description}}</h3>
+         <input v-model="currBusiness.prefs.description" placeholder="Insert short description here" type="text" />
           <span class="flex">
          <span class="fas fa-star-half-alt"></span>
          <h2>Rating</h2> 
@@ -46,7 +56,7 @@
   <GmapMarker
     :key="index"
     v-for="(m, index) in markers"
-    :position="mapCenter"
+    :position="m.position"
     :clickable="true"
     :draggable="true"
   />
@@ -56,7 +66,21 @@
         <business-calendar @closecalender ="closeCalender"></business-calendar>
     </div>
 </div>
-
+      <div v-if="isGalleryHeaderImg" class="headerGallery">
+          <ul>
+            <li
+            v-for="(img,idx) in imgUrls"
+            :key="idx"
+            >
+                <div class="galleryItem"
+                :style="{backgroundImage: `url(${img})` }"
+                @click="setHeaderImg(img)"
+                >
+                </div>
+            </li>
+          </ul>
+      </div>
+    <button title="Setting" class="fas fa-cog Setting"></button>
     </section>
 </template>
 
@@ -78,47 +102,44 @@ export default {
     let { businessId } = this.$route.params;
 
     this.$store.dispatch({ type: "loadBusiness", businessId })
-    .then(()=>{
-      // this.imgPath=this.currBusiness.prefs
-      //   console.log(this.imgPath);
-      //   this.mapCenter=currBusiness.location
-      //   this.markers[0].position=currBusiness.location
-
-      })
- 
+    .then((res)=>{
+      this.currBusiness=this.$store.getters.currBusiness
+      console.log(this.currBusiness);
+      
+    })
   },
   data() {
     return {
+      isGalleryHeaderImg:false,
+      imgUrls:["http://www.cndajin.com/data/wls/113/10786885.jpg","http://www.cndajin.com/data/wls/113/10786784.jpg"],
       showCalender:false,
       imgIdx: 0,
+      m: {
+        position: { lat: 34.38, lng: 34.8 }
+      },
+      mapCenter: { lat: 32.087971200000005, lng: 34.8031581 },
       markers: [
         {
           label: "a place",
           position: { lat: 32.0877, lng: 34.8032 }
         }
       ],
-      editMode:false
-    }
-
-  },
- 
- 
-  computed: {
-    currBusiness() {
-      return this.$store.getters.currBusiness;
-    },
-    address(){
-      let loc= this.currBusiness.location
-      return `${loc.street} ${loc.number} ${loc.city} ${loc.state}`
-    },
-    imgPath(){
-     return this.currBusiness.prefs
-    },
-    mapCenter(){
-      return this.$store.getters.currBusiness.location;
-
+      imgPath:'',
+      editMode:false,
+      currBusiness:{},
+       
     }
   },
+ 
+  // computed: {
+  //   currBusiness() {
+  //     return this.$store.getters.currBusiness;
+  //   },
+  //   address(){
+  //     let loc= this.currBusiness.location
+  //     return `${loc.street} ${loc.number} ${loc.city} ${loc.state}`
+  //   }
+  // },
     methods:{
         changeImgIdx(val){
             if (this.imgIdx+val<0||this.imgIdx+val>this.imgPath.length-1)return
@@ -127,8 +148,23 @@ export default {
         },
         closeCalender(){
           this.showCalender = false
+        },
+        setHeaderImg(img){
+          this.currBusiness.prefs.header_img_url=img
+          console.log(this.currBusiness);
+          
         }
     },
+    watch:{
+      // currBusiness:{
+      //   handler: function(){
+      //     console.log('watch',this.currBusiness);
+          
+      //     },
+      //     deep:true
+      
+      // }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -148,6 +184,23 @@ span.flex{
       span{
         margin: 3px;
       }
+}
+.Setting{
+  position: fixed;
+  font-size: 2.5rem;
+  padding: 10px;
+  border-radius: 100%;
+  box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
+  margin-top: 100px;
+  margin-left: 5px;
+  z-index: 10;
+background-color: white;
+}
+input{
+  
+  &:focus{
+             outline:none;
+         }
 }
 h1,h2,h3{
   font-weight: 100;
@@ -196,6 +249,9 @@ word-wrap: break-word !important;
 }
 .details-head{
 align-items: center;
+input{
+  min-width: 245px;
+}
 }
 .img-profile{
   width: 75px;
@@ -204,6 +260,8 @@ align-items: center;
     border-radius: 50px;
     background-position: center;
   margin-left: 10px;
+  border: 1.3px dotted;
+  justify-content: center;
 
 }
 
@@ -213,6 +271,13 @@ align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+   border: 1.3px dotted;
+  justify-content: center;
+  align-items: center;
+  button{
+    font-size: 2.5rem;
+    padding: 5px;
+  }
 }
 button {
   background-color: #ffdead00;
@@ -253,6 +318,22 @@ div.calendar{
   // left: 50%;
   // transform: translate(-50%, -50%);
   // z-index: 3;
+}
+.headerGallery{
+  height: 90vh;
+  width: 15vw;
+  background-color: #484848d1;
+  position: fixed;
+  top: 10px;
+  right: 0px;
+  border-radius: 5px;
+}
+.galleryItem{
+  margin: 4px;
+  height: 100px;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
 }
 </style>
 
