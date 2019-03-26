@@ -37,14 +37,8 @@ export default {
       return moment(this.start).format("MMMM");
     },
   },
-  methods:{
-print(event){
-console.log('event',event)
-}
-  },
   watch:{
     start:function (){
-      console.log('hihih')
       this.$emit('update-appoint',{property:'date',value:this.start})
     }
   }
