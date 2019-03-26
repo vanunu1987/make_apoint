@@ -59,36 +59,10 @@ function _getEmptyBusiness(){
         ],
         "prefs": {
             "description": "",
-            "preview_img_url": ""
+            "preview_img_url": "",
+            "profile_img_url": "",
+            "header_img_url": ""
         },
-        "cmps": [
-            {
-                "type": "header_imgs",
-                "data": {
-                    "img_urls": []
-                }
-            },
-            {
-                "type": "profile_img",
-                "data": {
-                    "img_url": "",
-                    "shape": "circle"
-                }
-            },
-            {
-                "type": "header_txt",
-                "data": {
-                    "main_txt": "",
-                    "sub_txt": ""
-                }
-            },
-            {
-                "type": "desc_txt",
-                "data": {
-                    "txt" : ""
-                }
-            }
-        ],
         "workHours": [
             {
                 "dayOfTheWeek": 0,
