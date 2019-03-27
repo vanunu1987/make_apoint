@@ -1,5 +1,11 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
+<<<<<<< HEAD
+ <router-link :to="'/edit/'+businessId" >edit</router-link>
+
+    <make-appoint class="calendar" ></make-appoint>
+=======
+>>>>>>> 12d29232cf9a5b7eaab47d3e6b5b983e3886db97
 
  <router-link v-if="isAdmin" :to="'/edit/'+businessId" >edit</router-link>
     <make-appoint class="calendar" style="width:500px;"></make-appoint>
@@ -54,10 +60,7 @@
     :draggable="true"
   />
 </GmapMap>
-<button @click="showCalender = !showCalender">Add appoint</button>
- <div class="calendar" v-if="showCalender">
-        <make-appoint @closecalender ="closeCalender"></make-appoint>
-    </div>
+ 
 </div>
 
     </section>
@@ -167,7 +170,7 @@ h1,h2,h3{
 .page-continer{
   background-color: white;
  display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.5fr;
+    grid-template-columns: 20px 1fr 1fr 20px;
     grid-template-rows: 1fr 1fr 1fr .5fr;
      grid-gap: 10px 20px;
         // padding: 20px;

@@ -1,25 +1,35 @@
 
 
 <template>
-  <section class="make-appoint2">
-    <calendar-date-picker
-      @to-cmp-appoint-picker="sendToCmpAppointPicker"
-      @update-appoint="updateAppoint"
-    ></calendar-date-picker>
-
-    <calendar-appoint-picker @move-to-cmp="moveToCmp" :date="selectedDay"></calendar-appoint-picker>
+  <section class="make-appoint3">
+    <h1>leave contacts for host</h1>
+    <input type="text" v-model="userName" placeholder="name"/>
+    <input type="text" v-model="phone" placeholder="phone"/>
+    <v-btn @click="sendAddUser">ok</v-btn>
+  
   </section>
 </template>
 
 <script>
-import CalendarDatePicker from "@/components/CalendarDatePicker.vue";
-import CalendarAppointPicker from "@/components/CalendarAppointPicker.vue";
 
 export default {
-  data() {
-    return {
-      selectedDay: '2019-03-27'
-    };
+  props:['appoint'],
+  data(){
+    return{
+      userName:'',
+      phone:null,
+    }
+  },
+  computed:{
+    user(){
+      return {
+      userName:this.userName,
+      phone:this.phone,
+      pass:null,
+      isReg:false,
+      business_id:null
+      }
+    }
   },
   methods: {
     sendToCmpAppointPicker(payload) {
@@ -31,15 +41,32 @@ export default {
     },
     updateAppoint(payload) {
       console.log(
-        "update appoint recevied in makeappoint2 cmp with this payload",
+        "update appoint recevied in makeappoint5 cmp with this payload",
         payload
-      );
+      )
       this.$emit("update-appoint", payload);
+    },
+    sendAddUser(){
+       this.$emit("add-user",this.user)
     }
   },
-  components: {
-    CalendarDatePicker,
-    CalendarAppointPicker
-  }
+ 
 };
 </script>
+
+<style lang="scss">
+.make-appoint3{
+  height: 100%;
+  display:flex;
+  flex-direction:column;
+ justify-content: space-between;
+ button.v-btn{
+   background-color:rgb(25, 136, 240) !important;
+   opacity: 0.9;
+ }
+ input{
+   border:1px black solid;
+ }
+}
+</style>
+

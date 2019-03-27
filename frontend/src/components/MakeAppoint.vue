@@ -8,7 +8,9 @@
     :appoint = "appoint"
     @set-cmp="setCmp" 
     @make-appoint="makeAppoint"
-    @update-appoint="updateAppoint">
+    @update-appoint="updateAppoint"
+    @add-user="addUser"
+    >
     </component>
   </section>
 </template>
@@ -50,6 +52,13 @@ export default {
       console.log('updateAppoint activated',value)
       this.appoint[property] = value
       console.log('appoint is updated:',this.appoint)
+    },
+    addUser(user){
+      this.$store.dispatch({type:'signUpUser',credentials:user,isNewBusiness:false}).then(()=>{
+        console.log('promise return')
+        this.setCmp('MakeAppoint5')
+      })
+      console.log(user)
     },
     makeAppoint(){
 this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.log('sucsess!'))
