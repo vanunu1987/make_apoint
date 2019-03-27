@@ -130,7 +130,8 @@ export default new Vuex.Store({
     },
 
     async setCurrBusiness(context, { currBusiness }) {
-      context.commit({ type: 'setCurrBusiness', business: currBusiness })
+     await context.commit({ type: 'setCurrBusiness', business: currBusiness })
+     return
     },
 
     async loadImgs(context, { Businesstype }){

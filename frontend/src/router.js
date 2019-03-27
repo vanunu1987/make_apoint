@@ -30,7 +30,7 @@ export default new Router({
       component: About
     },
     {
-      path: '/edit',
+      path: '/edit/:businessId?',
       name: 'edit',
       component: AddEdit
     },
