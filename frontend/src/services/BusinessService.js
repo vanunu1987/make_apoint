@@ -51,10 +51,6 @@ async function add(currBusiness){
     return business
 }
 
-async function getData(businessId){
-    console.log('service id : ',businessId);
-    
-}
 
 
 
@@ -173,4 +169,5 @@ export default {
     add,
     getImgs,
     saveImage
+
 }

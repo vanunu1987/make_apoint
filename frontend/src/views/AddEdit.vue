@@ -65,11 +65,7 @@
     :draggable="true"
   />
 </GmapMap>
-<button @click="showCalender = !showCalender">Add appoint</button>
- <div class="calendar" v-if="showCalender">
-        <business-calendar @closecalender ="closeCalender"></business-calendar>
-    </div>
-   
+
 </div>
  <div class="setings" >
    <div class="culomn">
@@ -104,6 +100,7 @@
 </template>
 
 <script>
+
 const cloudinary = require('cloudinary/lib/cloudinary')
 
 
@@ -111,7 +108,7 @@ const cloudinary = require('cloudinary/lib/cloudinary')
 var axios = Axios.create({
    withCredentials:true
 });
-import BusinessCalendar from '../components/BusinessCalendar.vue'
+
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
@@ -126,7 +123,6 @@ import userLoginSignUp from '@/components/UserLoginSignup.vue'
 
 export default {
   components:{
-    BusinessCalendar,
     BusinessService,
     vueDraggable,
     mapCmp,

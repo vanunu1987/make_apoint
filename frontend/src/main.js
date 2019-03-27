@@ -9,14 +9,20 @@ import './registerServiceWorker'
 import VueDraggable from 'vue-draggable'
 import resize from 'vue-resize-directive'
 import moment from 'moment'
+import CalendarService from './services/CalendarService.js'
 window.moment = moment
+window.CalendarService = CalendarService
 // main.js
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import '@/filter.js'
 
+import VueCharts from 'vue-chartjs'
+// import { Bar, Line } from 'vue-chartjs'
+Vue.use(VueCharts)
  
 Vue.use(VueDraggable)
 Vue.use(resize)
+
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
