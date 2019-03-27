@@ -37,7 +37,13 @@ export default {
     }
   },
   methods: {
-    
+    showReminder(){
+       const h = this.$createElement;
+        this.$notify({
+          title: 'Title',
+          message: h('i', { style: 'color: teal' }, 'This is a reminder')
+    });
+    }
   },
   created() {}
 };
