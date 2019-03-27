@@ -1,95 +1,127 @@
 <template>
   <section class="page-continer" v-if="!!currBusiness.prefs">
-    <business-type-modal  @saveType="setType" v-if="isTypeModal"/>
+    <business-type-modal @saveType="setType" v-if="isTypeModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
-<user-login-signUp :isNewUserProp="true" :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="closeSignUp" />
+    <user-login-signUp
+      :isNewUserProp="true"
+      :isNewBus="true"
+      class="login"
+      v-if="isSignUp"
+      @closeSignUp="closeSignUp"
+    />
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
-        <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
-              <div class="column">
-              <button @click="setFilterBy('header')" title="Add image" class="far fa-images"></button>
-             <h3>Add your header image here</h3> 
-             </div>
-        </div>
-        <div class="profile-detais culomn">
-          <div class="details-head flex">
-         <input v-model="currBusiness.name" placeholder="Insert your business name here"  type="text" />
-        <div  class="img-profile flex"  :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }">
-              <button @click="setFilterBy('profile')" title="Add profile image" class="fas fa-user-plus"></button>
-          </div>
-          </div>
-          <h5>Profile image</h5>
-          <span class="flex">
-         <span class="fas fa-map-pin"></span> 
-         <h2 class="address-h2">Address</h2> 
-         </span>
-         <input v-model="currBusiness.address" placeholder="Insert your address here"  type="text" />
-          <span class="flex">
-         <span class="fas fa-phone"></span> 
-         <h2>Phone number</h2> 
-         </span>
-         <input v-model="currBusiness.phone" placeholder="Insert your phone number here"  type="text" />
-          <span class="flex">
-         <span class="fas fa-address-card"></span>
-         <h2>About Us</h2> 
-        </span>
-         <input v-model="currBusiness.prefs.description" placeholder="Insert short description here" type="text" />
-          <span class="flex">
-         <span class="fas fa-star-half-alt"></span>
-         <h2>Rating</h2> 
-        </span>
-        <span class="flex">
-        <h3>{{currBusiness.rank.avg}}</h3>
-        ,
-        <h3>{{currBusiness.rank.qty}}</h3>
-        </span>
-        </div>
-        <div class="midle">
-        <GmapMap
-  class="map"      
-  :center="mapCenter"
-  :zoom="16"
-  map-type-id="terrain"
-  style=" height: 300px"
->
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in markers"
-    :position="m.position"
-    :clickable="true"
-    :draggable="true"
-  />
-</GmapMap>
-
-</div>
- <div class="setings" >
-   <div class="culomn">
-    <button title="Setting" class="fas fa-cog Setting"></button>
-    <button v-show="isGalleryHeaderImg" title="addImg" class="fas fa-plus addImg"></button>
-    <button @click="isProductModal=true" v-show="!isGalleryHeaderImg" title="addImg" class="fas fa-barcode addImg"></button>
-    <product-form   v-show="!isGalleryHeaderImg"/>
-    <button  v-show="!isGalleryHeaderImg" @click="isCalendar=!isCalendar" class="fas fa-calendar-alt addImg"></button>
-    <button   v-show="!isGalleryHeaderImg" class="fas fa-save addImg" @click="saveCog"></button>
-
+    <div
+      class="img-header flex"
+      :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }"
+    >
+      <div class="column">
+        <button @click="setFilterBy('header')" title="Add image" class="far fa-images"></button>
+        <h3>Add your header image here</h3>
+      </div>
     </div>
-      <!-- <input @change="loadImg" name="uploadedfile" type="file" /> -->
-  <input :disabled="loadingImg" 
-                class="above-btn" type="file" accept="image/*" required
-                @change="saveImage"/>
+    <div class="profile-detais culomn">
+      <div class="details-head flex">
+        <input v-model="currBusiness.name" placeholder="Insert your business name here" type="text">
+        <div
+          class="img-profile flex"
+          :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }"
+        >
+          <button
+            @click="setFilterBy('profile')"
+            title="Add profile image"
+            class="fas fa-user-plus"
+          ></button>
+        </div>
+      </div>
+      <h5>Profile image</h5>
+      <span class="flex">
+        <span class="fas fa-map-pin"></span>
+        <h2 class="address-h2">Address</h2>
+      </span>
+      <input v-model="currBusiness.address" placeholder="Insert your address here" type="text">
+      <span class="flex">
+        <span class="fas fa-phone"></span>
+        <h2>Phone number</h2>
+      </span>
+      <input v-model="currBusiness.phone" placeholder="Insert your phone number here" type="text">
+      <span class="flex">
+        <span class="fas fa-address-card"></span>
+        <h2>About Us</h2>
+      </span>
+      <input
+        v-model="currBusiness.prefs.description"
+        placeholder="Insert short description here"
+        type="text"
+      >
+      <span class="flex">
+        <span class="fas fa-star-half-alt"></span>
+        <h2>Rating</h2>
+      </span>
+      <span class="flex">
+        <h3>{{currBusiness.rank.avg}}</h3>,
+        <h3>{{currBusiness.rank.qty}}</h3>
+      </span>
+    </div>
+    <div class="midle">
+      <GmapMap
+        class="map"
+        :center="mapCenter"
+        :zoom="16"
+        map-type-id="terrain"
+        style=" height: 300px"
+      >
+        <GmapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :clickable="true"
+          :draggable="true"
+        />
+      </GmapMap>
+    </div>
+    <div class="setings">
+      <div class="culomn">
+        <button title="Setting" class="fas fa-cog Setting"></button>
+        <button
+          @click="isProductModal=true"
+          v-show="!isGalleryHeaderImg"
+          title="addImg"
+          class="fas fa-barcode addImg"
+        ></button>
+        <product-form v-show="!isGalleryHeaderImg"/>
+        <button
+          v-show="!isGalleryHeaderImg"
+          @click="isCalendar=!isCalendar"
+          class="fas fa-calendar-alt addImg"
+        ></button>
+        <button v-show="!isGalleryHeaderImg" class="fas fa-save addImg" @click="saveCog"></button>
+      </div>
+   
+      <input
+      hidden
+        ref="file"
+        name="file"
+        :disabled="loadingImg"
+        class="inputfile"
+        type="file"
+        accept="image/*"
+        required
+        @change="saveImage"
+      >
+      <button @click="$refs.file.click()"  v-show="isGalleryHeaderImg" title="addImg" class="fas fa-plus addImg"></button>
+    
       <div v-if="isGalleryHeaderImg" class="headerGallery">
-          <ul>
-            <li
-            v-for="(img,idx) in filteredItems()"
-            :key="idx"
-            >
-                <div class="galleryItem"
-                :style="{backgroundImage: `url(${img.url})` }"
-                @click="setHeaderImg(img,img.filter)"
-                >
-                </div>
-            </li>
-          </ul>
+        <ul>
+          <li v-for="(img,idx) in filteredItems()" :key="idx">
+            <div
+              class="galleryItem"
+              :style="{backgroundImage: `url(${img.url})` }"
+              @click="setHeaderImg(img,img.filter)"
+            ></div>
+          </li>
+        </ul>
       </div>
-      </div>
+    </div>
   </section>
 </template>
 
@@ -150,7 +182,6 @@ export default {
       imageFile:"",
       filterBy:"",
       isGalleryHeaderImg:false,
-      // imgUrls:[],
       showCalender:false,
       imgIdx: 0,
       m: {
@@ -168,10 +199,9 @@ export default {
       currBusiness:{},
       isTypeModal:false,
       cloudinary:{
-    cloud_name: 'dmr7h2h2h',
-    api_key: '684627237884771',
-    uploadPreset: 'kpalsqih'
-       
+      cloud_name: 'dmr7h2h2h',
+      api_key: '684627237884771',
+      uploadPreset: 'kpalsqih'
     },
     loadingImg: false,
     imageData:'',
@@ -218,28 +248,8 @@ export default {
           this.filterBy=val
           }else this.filterBy=val
         },
-        upload(file){
-          // console.log('val',val.target.value);
-          this.loadingImg = true;
-          const formData = new FormData();
-          formData.append('file', file[0]);
-          formData.append('upload_preset', this.cloudinary.uploadPreset);
-          formData.append('tags', 'gs-vue,gs-vue-uploaded');
-          // BusinessService.saveImage(formData)
-          // console.log(file.target.value);
-          
-          axios.post(this.clUrl, formData).then(res => {
-            console.log(res.data.secure_url);
-            
-          // this.$emit('uploadImg', res.data.secure_url);
-          // this.thumbs.unshift({
-          //   url: res.data.secure_url
-          // });
-          // this.uploadImgCount++;
-
-          this.loadingImg = false;
-      });
-        },
+        
+     
         setWorkTime(workTime){
       this.isCalendar= false
       this.currBusiness.workHours=workTime
@@ -257,12 +267,9 @@ export default {
     },
     saveCog(){
        let { businessId } = this.$route.params;
-
        this.saveAddress()
        .then(() => {
-
          if (!this.loggedInUser) this.isSignUp=true
-
        else{
          console.log('cmp : ',this.currBusiness);
        this.$store.dispatch({ type: "addBusiness",currBusiness: this.currBusiness })
@@ -271,37 +278,20 @@ export default {
        })
     },
     closeSignUp(){
-    
         console.log(this.loggedInUser);
         this.isSignUp= false
-     
     },
    
-   saveImage(event){
-      // var input = event.target
-  //     var reader = new FileReader()
-  //     reader.onload = e => {
-  //       this.imageData = e.target.result
-  //     }
-  //     reader.readAsDataURL(input.files[0])
-  //     var imageToSave = this.imageData
-  //     this.loadImg(imageToSave)
-  //    .then( res => {
-  //      console.log('the image was saved',res);
-  //     //  this.user.image = res
-  //    })
-  //  },
-  //  loadImg(imageToSave) {
-  //   console.log('imageToSave',{imageToSave});
-  //   return cloudinary.v2.uploader.upload(imageToSave).then((data) =>{
-  //       console.log(data);
-  //      return data.secure_url
-        
-    // })
-    cloudinaryService.doUploadImg(event)
+   saveImage(e){
+     var files = e.target.files || e.dataTransfer.files;
+     if (!files.length) return;
+     this.imageFile = files[0];
+    cloudinaryService.doUploadImg(this.imageFile)
+    .then((res)=>{
+      if (this.filterBy==='header')this.currBusiness.prefs.header_img_url=res.secure_url
+      else this.currBusiness.prefs.profile_img_url=res.secure_url
+    })
  } 
-
-
     },
     computed:{
       imgUrls(){
@@ -317,125 +307,124 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 // helpers
-.flex{
+.flex {
   display: flex;
   flex: none;
 }
-.culomn{
+.culomn {
   display: flex;
   flex-direction: column;
 }
-span.flex{
-      align-items: baseline;
-      margin-top: 20px;
-      span{
-        margin: 3px;
-      }
+span.flex {
+  align-items: baseline;
+  margin-top: 20px;
+  span {
+    margin: 3px;
+  }
 }
-.Setting{
+
+.Setting {
   // position: fixed;
   font-size: 2.5rem;
   padding: 10px;
   border-radius: 100%;
-  box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
+  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
   margin-top: 20px;
   margin-left: 35px;
   z-index: 10;
   width: 65px;
 
-background-color: white;
+  background-color: white;
 }
-  .addImg{
-    // position: absolute;
+.addImg {
+  // position: absolute;
   font-size: 2.5rem;
   padding: 10px;
   border-radius: 100%;
-  box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
+  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
   margin: 10px;
   z-index: 10;
   width: 65px;
   margin-left: 35px;
   margin-top: 40px;
   background-color: white;
-  
+}
+input {
+  border: 0.8px dashed;
+  &:focus {
+    outline: none;
   }
-input{
-  border: .8px dashed;
-  &:focus{
-             outline:none;
-         }
 }
-h1,h2,h3{
+h1,
+h2,
+h3 {
   font-weight: 100;
-  letter-spacing: .2px;
-  
+  letter-spacing: 0.2px;
 }
-.name{
+.name {
   font-size: 2.5rem;
   font-weight: 500;
 }
-.page-continer{
+.page-continer {
   background-color: white;
- display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 0.8fr;
-    grid-template-rows: 1fr 1fr 1fr .5fr;
-     grid-gap: 10px 20px;
-        // padding: 20px;
-    .img-header{
-      grid-column: 1/5;
-      grid-row: 1;
-    }
-    .profile-detais{
-      grid-column: 2;
-      grid-row: 2;      
-
-    }
-    .calendar{
-       grid-column: 3;
-      grid-row: 2; 
-      position: relative;
-      display: inline;
-    }
-    .midle{
-       grid-column: 1/5;
-      grid-row: 3;
-    }
-    .setings{
-      grid-column: 5;
-      grid-row: 1/5;
-    }
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 0.5fr 0.8fr;
+  grid-template-rows: 1fr 1fr 1fr 0.5fr;
+  grid-gap: 10px 20px;
+  // padding: 20px;
+  .img-header {
+    grid-column: 1/5;
+    grid-row: 1;
+  }
+  .profile-detais {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .calendar {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    display: inline;
+  }
+  .midle {
+    grid-column: 1/5;
+    grid-row: 3;
+  }
+  .setings {
+    grid-column: 5;
+    grid-row: 1/5;
+  }
 }
 
-.setings{
+.setings {
   background-color: black;
 }
-.profile-detais{
-// margin-left: 30px;
-word-wrap: break-word !important;
-    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.375em !important;
-    color: #484848 !important;
+.profile-detais {
+  // margin-left: 30px;
+  word-wrap: break-word !important;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
 }
-.details-head{
-align-items: center;
-input{
-  min-width: 245px;
+.details-head {
+  align-items: center;
+  input {
+    min-width: 245px;
+  }
 }
-}
-.img-profile{
+.img-profile {
   width: 75px;
-    height: 75px;
-    background-size: cover;
-    border-radius: 50px;
-    background-position: center;
+  height: 75px;
+  background-size: cover;
+  border-radius: 50px;
+  background-position: center;
   margin-left: 10px;
   border: 1.3px dashed;
   justify-content: center;
-
 }
 
 .img-header {
@@ -444,10 +433,10 @@ input{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-   border: 1.3px dashed;
+  border: 1.3px dashed;
   justify-content: center;
   align-items: center;
-  button{
+  button {
     font-size: 2.5rem;
     padding: 5px;
   }
@@ -458,53 +447,50 @@ button {
   font-weight: 800;
   font-size: 1.5rem;
 }
-h3{
+h3 {
   text-align: left;
 }
-.address-h2{
-margin-left: 6px;
+.address-h2 {
+  margin-left: 6px;
 }
 button:focus {
   border: none;
   outline: none;
 }
-.midle{
-
+.midle {
 }
-.fas{
+.fas {
   color: black;
-
 }
-.add-appoint{
+.add-appoint {
   border-radius: 5px;
   padding: 5px;
   border: none;
-
 }
-div.calendar{
+div.calendar {
 }
-.headerGallery{
+.headerGallery {
   height: 100vh;
   width: 15vw;
   right: 0px;
   border-radius: 5px;
   margin-top: 50px;
 }
-.galleryItem{
+.galleryItem {
   margin: 7px;
   height: 100px;
   background-position: center;
   background-size: cover;
   cursor: pointer;
 }
-.workHourCmp{
+.workHourCmp {
   position: fixed;
   top: 200px;
-  left:450px;
+  left: 450px;
   z-index: 1000;
 }
- .login{
-      z-index: 1000;
-    }
+.login {
+  z-index: 1000;
+}
 </style>
 
