@@ -51,11 +51,13 @@ export default {
     signup() {
       console.log(this.newUserCredentials);
       var credentials = { ...this.newUserCredentials };
-      this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus });
-       this.newUserCredentials.userName = null;
+      this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus })
+      .then(() => {
+        this.$emit('closeSignUp')
+      })
+      this.newUserCredentials.userName = null;
       this.newUserCredentials.password = null;
       this.newUserCredentials.phone = null;
-      this.$emit('closeSignUp')
 
     },
   },
