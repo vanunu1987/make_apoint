@@ -1,8 +1,8 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
- <router-link :to="'/edit/'+businessId" >edit</router-link>
+ <router-link v-if="businessId" :to="'/edit/'+businessId" >edit</router-link>
 
-    <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
+    <make-appoint class="calendar" style="width:500px;"></make-appoint>
 
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
@@ -69,7 +69,7 @@
 import MakeAppoint from '../components/MakeAppoint.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
-import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
+import MakeAppoint from '@/components/MakeAppoint.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
@@ -77,7 +77,7 @@ export default {
     BusinessService,
     vueDraggable,
     mapCmp,
-    CalendarDatePicker
+    MakeAppoint
   },
   created() {
     let { businessId } = this.$route.params;

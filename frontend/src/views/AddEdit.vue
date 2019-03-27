@@ -74,7 +74,7 @@
       <!-- <input @change="loadImg" name="uploadedfile" type="file" /> -->
   <input :disabled="loadingImg" 
                 class="above-btn" type="file" accept="image/*" required
-                @change="upload($event.target.files)"/>
+                @change="saveImage"/>
       <div v-if="isGalleryHeaderImg" class="headerGallery">
           <ul>
             <li
@@ -108,6 +108,7 @@ import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 import BusinessTypeModal from '@/components/BusinessTypeModal.vue'
 import BusinessService from '@/services/BusinessService.js'
+import cloudinaryService from '@/services/cloudinary-service.js'
 import UtilService from '@/services/UtilService.js'
 import ProductForm from '@/components/ProductForm.vue'
 import WorkHours from '@/components/WorkHours.vue'
@@ -124,7 +125,8 @@ export default {
     BusinessTypeModal,
     ProductForm,
     WorkHours,
-    userLoginSignUp
+    userLoginSignUp,
+    cloudinaryService
   },
   created() {
     let { businessId } = this.$route.params;
@@ -275,19 +277,29 @@ export default {
      
     },
    
-   saveImage(){
-      var reader = new FileReader()
-      reader.onload = e => {
-        this.imageData = e.target.result
-      }
-      reader.readAsDataURL(input.files[0])
-      var imageToSave = this.imageData
-      this.$store.dispatch({type: "saveImage", imageToSave})
-     .then( res => {
-       console.log('the image was saved',res);
-      //  this.user.image = res
-     })
-   }
+   saveImage(event){
+      // var input = event.target
+  //     var reader = new FileReader()
+  //     reader.onload = e => {
+  //       this.imageData = e.target.result
+  //     }
+  //     reader.readAsDataURL(input.files[0])
+  //     var imageToSave = this.imageData
+  //     this.loadImg(imageToSave)
+  //    .then( res => {
+  //      console.log('the image was saved',res);
+  //     //  this.user.image = res
+  //    })
+  //  },
+  //  loadImg(imageToSave) {
+  //   console.log('imageToSave',{imageToSave});
+  //   return cloudinary.v2.uploader.upload(imageToSave).then((data) =>{
+  //       console.log(data);
+  //      return data.secure_url
+        
+    // })
+    cloudinaryService.doUploadImg(event)
+ } 
 
 
     },
