@@ -6,8 +6,8 @@
       <router-link to="/about">About</router-link> | 
        <router-link to="/login">Log in</router-link> | 
        <router-link to="/edit">Add business</router-link> | 
-       <router-link v-if="currBusiness" :to="'manage/'+currBusiness._id">Business</router-link> | 
-       <section v-if="loggedUser" class="user-name">Hello {{loggedUser}}</section> 
+       <router-link v-if="currBusiness" :to="'manage/'+currBusiness._id">Business</router-link>
+       <!-- <section v-if="loggedUser" class="user-name">Hello {{loggedUser}}</section>  -->
     </div>
     <router-view/>
   </div>
@@ -37,7 +37,13 @@ export default {
     }
   },
   methods: {
-    
+    showReminder(){
+       const h = this.$createElement;
+        this.$notify({
+          title: 'Title',
+          message: h('i', { style: 'color: teal' }, 'This is a reminder')
+    });
+    }
   },
   created() {}
 };

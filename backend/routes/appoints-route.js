@@ -4,7 +4,8 @@ function addAppointsRoutes(app) {
 
     function _checkAdmin(req, res, next) {
         console.log('INSIDE MIDDLEWARE: ', req.session.user);
-        if (!req.session.user || !req.session.user.business_id ) {
+        // if (!req.session.user || !req.session.user.business_id ) {
+        if (!req.session.user ) {
             res.status(401).end('Unauthorized');
             return;
         }
@@ -42,7 +43,15 @@ function addAppointsRoutes(app) {
             })
     })
 
-
+    app.post('/appoints',_checkAdmin, (req, res) => {
+        var appoint = req.body
+        console.log('got this in backend : ',appoint)
+        appointsService.add(appoint)
+        .then((appoint) => {
+            console.log('APPOINT ADDED ON BACK : ',appoint);
+            res.json(appoint)
+        })
+    })
 
 
 

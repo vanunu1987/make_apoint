@@ -47,10 +47,7 @@ function addBusinessRoutes(app) {
     // SINGLE - GET Full details including reviews
     app.get('/business/:businessId', (req, res) => {
         const businessId = req.params.businessId;
-
             businessService.getById(businessId)
-            // reviewService.query({ toyId })
-    
             .then((business) => {
                 res.json(business)
             })
@@ -66,7 +63,6 @@ function addBusinessRoutes(app) {
 
     // CREATE
     app.post('/business',_checkAdmin, (req, res) => {
-        console.log('hereeeeeeeeeeeeeeeeeeeeeeeeeeee');
         const business = req.body;
         businessService.add(business)
             .then(business => {
@@ -74,12 +70,13 @@ function addBusinessRoutes(app) {
             })
     })
 
-    // // UPDATE
-    // app.put('/toy/:toyId',_checkAdmin, (req, res) => {
-    //     const toy = req.body;
-    //     toyService.update(toy)
-    //         .then(toy => res.json(toy))
-    // })
+    // UPDATE
+    app.put('/business/:businessId',_checkAdmin, (req, res) => {
+        const business = req.body;
+        console.log('BACK END UPDATE' ,business );
+        businessService.update(business)
+            .then(business => res.json(business))
+    })
 
 }
 

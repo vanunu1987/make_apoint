@@ -13,6 +13,7 @@ export default new Vuex.Store({
     loggedInUser: null,
     currBusiness: null,
     appointsList:[],
+    userAppointsList:[],
     imgList:[],
     businessData:null,
     BusinessTypes:['Barber','Tattoo Artist','Cosmetics'],
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     appointsList(state){
       return state.appointsList
+    },
+    userAppointsList(state){
+      return state.userAppointsList
     },
     BusinessTypes(state){
       return state.BusinessTypes
@@ -68,6 +72,9 @@ export default new Vuex.Store({
     getAppointsList(state, { appointsList }) {
       state.appointsList = appointsList
     },
+    getUserAppointsList(state, { appointsList }) {
+      state.userAppointsList = appointsList
+    },
     setLoggedInUser(state, { user }) {
       console.log('setLoggedInUser activated!', user)
       state.loggedInUser = user
@@ -77,6 +84,9 @@ export default new Vuex.Store({
     },
     setBusinessData(state,{businessData}){
       state.businessData = businessData
+    },
+    updateUser(state,{user}){
+      state.loggedInUser = user
     }
 
   },
@@ -111,7 +121,7 @@ export default new Vuex.Store({
         var listRequireId = context.getters.loggedInUser._id
         var filterBy = {listRequire,listRequireId}
         var appointsList = await AppointsService.query(filterBy)
-        context.commit({ type: 'getAppointsList', appointsList })
+        context.commit({ type: 'getUserAppointsList', appointsList })
         return appointsList
       }
     },
@@ -126,13 +136,22 @@ export default new Vuex.Store({
     async signUpUser(context, { credentials, isNewBusiness }) {
       var user = await UserService.signUpUser(credentials)
       if (!user) return
-      context.commit({ type: 'setLoggedInUser', user })
       var currBusiness = context.getters.currBusiness
-      if (isNewBusiness) BusinessService.add(currBusiness)
-      .then ((res) => {
-        user.business_id = res._id
-        UserService.updateUser(user)
-      })
+      if (isNewBusiness){
+        BusinessService.add(currBusiness)
+        .then ((res) => {
+          user.business_id = res._id
+          UserService.updateUser(user)
+          context.commit({ type: 'setLoggedInUser', user })
+          context.commit({ type: 'setCurrBusiness', business: res })
+          return res
+        }) 
+      }
+      else {
+        context.commit({ type: 'setLoggedInUser', user })
+        // context.commit({ type: 'setCurrBusiness', business: res })
+        return
+      } 
     },
 
     async setCurrBusiness(context, { currBusiness }) {
@@ -151,9 +170,29 @@ export default new Vuex.Store({
       var businessId = context.getters.currBusiness._id
       var businessData = await AppointsService.getBusinessData(businessId)
       context.commit({ type: 'setBusinessData', businessData })
-      
+    },
 
+    async addBusiness(context , {currBusiness}){
+      var businessId = currBusiness._id
+      if (!businessId){
+        var business = await BusinessService.add(currBusiness)
+        var user = context.getters.loggedInUser
+        user._businessId = business._id
+        UserService.updateUser(user)
+        context.commit({ type: 'updateUser', user })
+        return
+      } else {
+        console.log('store : ',currBusiness);
+        var business = await BusinessService.update(currBusiness)
+        context.commit({ type: 'setCurrBusiness', business: business })
+        return
+      }
+    },
+    async addAppoint(context , {appoint}) {
+      var res = await AppointsService.add(appoint)
+      return res
     }
+
   }
 
 })

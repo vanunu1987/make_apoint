@@ -17,16 +17,6 @@ async function query(filterBy){
     return appointsList;
 }
 
-
-// async function query(filterBy){
-//     var filterBy = `?name=${filterBy.name}&locationLat=${filterBy.currUserLocation.lat}&locationLng=${filterBy.currUserLocation.lng}&type=${filterBy.type}&sortBy=${filterBy.sortBy}`;
-//     console.log(filterBy);
-//     var res = await axios.get(`${BASE_URL}${filterBy}`)
-//     var businessList = await res.data
-//     console.log('list : ',businessList);
-//     return businessList;
-// }
-
 async function getBusinessData(businessId){
     console.log('service id : ',businessId);
     var res = await axios.get(`${BASE_URL}/data/${businessId}`)
@@ -35,8 +25,18 @@ async function getBusinessData(businessId){
     return businessData
 }
 
+async function add(appoint) {
+    console.log(appoint);
+    var res = await axios.post(`${BASE_URL}`,appoint)
+    console.log('GOT NEW appoint : ', res.data);
+    var appoint = await res.data
+    return appoint
+
+}
+
 
 export default {
     query,
-    getBusinessData
+    getBusinessData,
+    add
 }

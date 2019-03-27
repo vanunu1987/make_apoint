@@ -1,9 +1,14 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
+<<<<<<< HEAD
  <router-link :to="'/edit/'+businessId" >edit</router-link>
 
     <make-appoint class="calendar" ></make-appoint>
+=======
+>>>>>>> 12d29232cf9a5b7eaab47d3e6b5b983e3886db97
 
+ <router-link v-if="isAdmin" :to="'/edit/'+businessId" >edit</router-link>
+    <make-appoint class="calendar" style="width:500px;"></make-appoint>
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
         </div>
@@ -13,6 +18,7 @@
               <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }">
           </div>
           </div>
+
           <span class="flex">
          <span class="fas fa-map-pin"></span> 
          <h2 class="address-h2">Address</h2> 
@@ -65,7 +71,7 @@
 import MakeAppoint from '../components/MakeAppoint.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
-import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
+// import MakeAppoint from '@/components/MakeAppoint.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
@@ -73,13 +79,14 @@ export default {
     BusinessService,
     vueDraggable,
     mapCmp,
-    CalendarDatePicker
+    MakeAppoint
   },
   created() {
     let { businessId } = this.$route.params;
-    this.businessId=businessId
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
+      var user=this.$store.getters.loggedInUser
+    if (businessId===user.business_id) this.isAdmin= true
 
       this.$store.dispatch({type:'loadAppoints',listRequire:'business'})
 
@@ -96,10 +103,14 @@ export default {
         }
       ],
       editMode:false,
-    businessId:null
+    businessId:null,
+    isAdmin:false
     }
   },
- 
+ mounted(){
+   var user = this.$store.getters.loggedInUser
+   console.log('MOUNTED : ',user);
+ },
  
   computed: {
     currBusiness() {

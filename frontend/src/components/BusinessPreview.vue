@@ -1,12 +1,12 @@
 <template>
   <!-- <v-hover> -->
     <v-card class="mx-auto" color="grey lighten-4">
-    <!-- <v-card slot-scope="{ hover }" class="mx-auto" color="grey lighten-4"> -->
       <router-link :to="'business/'+currBusiness._id">
+    <!-- <v-card slot-scope="{ hover }" class="mx-auto" color="grey lighten-4"> -->
         <!-- <div class="preview-img-container" 
       :style="{ backgroundImage: 'url(' + currBusiness.prefs.preview_img_url + ')' }">
         </div>-->
-        <v-img :src="currBusiness.prefs.preview_img_url" class="white--text" height="200px">
+        <v-img :src="currBusiness.prefs.header_img_url" class="white--text" height="200px">
           <!-- <v-expand-transition>
             <div
               v-if="hover"
