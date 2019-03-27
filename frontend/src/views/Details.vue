@@ -14,7 +14,6 @@
           </div>
           </div>
 
-
           <span class="flex">
          <span class="fas fa-map-pin"></span> 
          <h2 class="address-h2">Address</h2> 

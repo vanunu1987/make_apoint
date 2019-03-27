@@ -169,9 +169,9 @@ export default new Vuex.Store({
         context.commit({ type: 'updateUser', user })
       } else {
         var business = await BusinessService.update(currBusiness)
-
       }
     }
+
   }
 
 })
