@@ -247,22 +247,32 @@ export default {
              return addressloc
              .then(res=>{
         console.log('loc',res);
-        this.currBusiness.location=res
+        this.currBusiness.location.lat=res.lat
+        this.currBusiness.location.lng=res.lng
+        console.log(this.currBusiness);
+        return res
              })
     },
     saveCog(){
        let { businessId } = this.$route.params;
 
        this.saveAddress()
-       if (!this.loggedInUser) this.isSignUp=true
+       .then(() => {
+
+         if (!this.loggedInUser) this.isSignUp=true
 
        else{
-       console.log(this.currBusiness);
+         console.log('cmp : ',this.currBusiness);
        this.$store.dispatch({ type: "addBusiness",currBusiness: this.currBusiness })
+       .then(() => this.$router.push('/business/' + this.currBusiness._id))
        }
+       })
     },
     closeSignUp(){
-      if (this.loggedInUser) this.isSignUp= false
+    
+        console.log(this.loggedInUser);
+        this.isSignUp= false
+     
     },
    
    saveImage(){

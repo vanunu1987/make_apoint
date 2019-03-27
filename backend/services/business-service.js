@@ -69,6 +69,7 @@ function add(business) {
 
 function update(business) {
     business._id = new ObjectId(business._id)
+    console.log('BACKEND SERVICE : ',business.location);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('business');

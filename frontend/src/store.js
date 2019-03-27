@@ -136,9 +136,14 @@ export default new Vuex.Store({
           user.business_id = res._id
           UserService.updateUser(user)
           context.commit({ type: 'setLoggedInUser', user })
+          context.commit({ type: 'setCurrBusiness', business: res })
+          return res
         }) 
       }
-      else context.commit({ type: 'setLoggedInUser', user })
+      else {
+        context.commit({ type: 'setLoggedInUser', user })
+        context.commit({ type: 'setCurrBusiness', business: res })
+      } 
     },
 
     async setCurrBusiness(context, { currBusiness }) {
@@ -167,9 +172,17 @@ export default new Vuex.Store({
         user._businessId = business._id
         UserService.updateUser(user)
         context.commit({ type: 'updateUser', user })
+        return
       } else {
+        console.log('store : ',currBusiness);
         var business = await BusinessService.update(currBusiness)
+        context.commit({ type: 'setCurrBusiness', business: business })
+        return
       }
+    },
+    async addAppoint(context , {appoint}) {
+      var appoint = await AppointsService.add(appoint)
+      return appoint
     }
 
   }

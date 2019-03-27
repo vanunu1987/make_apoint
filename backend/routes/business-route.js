@@ -63,7 +63,6 @@ function addBusinessRoutes(app) {
 
     // CREATE
     app.post('/business',_checkAdmin, (req, res) => {
-        console.log('hereeeeeeeeeeeeeeeeeeeeeeeeeeee');
         const business = req.body;
         businessService.add(business)
             .then(business => {
@@ -73,8 +72,8 @@ function addBusinessRoutes(app) {
 
     // UPDATE
     app.put('/business/:businessId',_checkAdmin, (req, res) => {
-        console.log('BACK END UPDATE');
         const business = req.body;
+        console.log('BACK END UPDATE' ,business );
         businessService.update(business)
             .then(business => res.json(business))
     })

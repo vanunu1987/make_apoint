@@ -15,6 +15,19 @@ function query(filterBy) {
             return db.collection('appoints').find(queryToMongo).toArray()
         })
 }
+
+
+function add(appoint) {
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('appoints');
+            return collection.insertOne(appoint)
+                .then(result => {
+                    appoint._id = result.insertedId;
+                    return appoint;
+                })
+        })
+}
 // function queryAll(appointsQuery) {
 //     var queryToMongo = {}
 //     if (appointsQuery.listRequire === 'business') queryToMongo.business_id = appointsQuery.listRequireId
@@ -52,42 +65,9 @@ function getBusinessData(businessId) {
         })
 
 }
-// function getBusinessData(businessId){
-//     var queryToMongo = {business_id:businessId}
-//     return mongoService.connect()
-//             .then((db) => {
-//                 return db.collection('appoints').aggregate(
-//                     [
-//                         {$match:queryToMongo},
-//                         {$group:{_id:"$date",total:{$sum:"$product.price"},count: { $sum: 1 }}},
-//                         {$sort:{_id:1}}
-//                     ]
-//                 ).toArray()
-//                 .then((res) => {
-//                     return {byDate : res, byProduct:  db.collection('appoints').aggregate(
-//                         [
-//                             {$match:queryToMongo},
-//                             {$group:{_id:"$date",total:{$sum:"$product.price"},count: { $sum: 1 }}},
-//                             {$sort:{_id:1}}
-//                         ]
-//                         ).toArray()}
-//                     })
-
-//             })
-
-// }
-// function query(businessId){
-//     var queryToMongo = {}
-//     queryToMongo.business_id = businessId
-//     // queryToMongo.business_id = new ObjectId(businessId)
-//     return mongoService.connect()
-//             .then((db) => {
-//                 return db.collection('appoints').find(queryToMongo).toArray()
-//             })
-// }
-
 
 module.exports = {
     query,
-    getBusinessData
+    getBusinessData,
+    add
 }
