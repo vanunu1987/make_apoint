@@ -77,6 +77,9 @@ export default new Vuex.Store({
     },
     setBusinessData(state,{businessData}){
       state.businessData = businessData
+    },
+    updateUser(state,{user}){
+      state.loggedInUser = user
     }
 
   },
@@ -126,13 +129,21 @@ export default new Vuex.Store({
     async signUpUser(context, { credentials, isNewBusiness }) {
       var user = await UserService.signUpUser(credentials)
       if (!user) return
-      context.commit({ type: 'setLoggedInUser', user })
       var currBusiness = context.getters.currBusiness
-      if (isNewBusiness) BusinessService.add(currBusiness)
-      .then ((res) => {
-        user.business_id = res._id
-        UserService.updateUser(user)
-      })
+      if (isNewBusiness){
+        BusinessService.add(currBusiness)
+        .then ((res) => {
+          user.business_id = res._id
+          UserService.updateUser(user)
+          context.commit({ type: 'setLoggedInUser', user })
+          context.commit({ type: 'setCurrBusiness', business: res })
+          return res
+        }) 
+      }
+      else {
+        context.commit({ type: 'setLoggedInUser', user })
+        context.commit({ type: 'setCurrBusiness', business: res })
+      } 
     },
 
     async setCurrBusiness(context, { currBusiness }) {
@@ -151,9 +162,29 @@ export default new Vuex.Store({
       var businessId = context.getters.currBusiness._id
       var businessData = await AppointsService.getBusinessData(businessId)
       context.commit({ type: 'setBusinessData', businessData })
-      
+    },
 
+    async addBusiness(context , {currBusiness}){
+      var businessId = currBusiness._id
+      if (!businessId){
+        var business = await BusinessService.add(currBusiness)
+        var user = context.getters.loggedInUser
+        user._businessId = business._id
+        UserService.updateUser(user)
+        context.commit({ type: 'updateUser', user })
+        return
+      } else {
+        console.log('store : ',currBusiness);
+        var business = await BusinessService.update(currBusiness)
+        context.commit({ type: 'setCurrBusiness', business: business })
+        return
+      }
+    },
+    async addAppoint(context , {appoint}) {
+      var appoint = await AppointsService.add(appoint)
+      return appoint
     }
+
   }
 
 })

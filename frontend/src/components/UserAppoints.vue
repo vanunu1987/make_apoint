@@ -23,7 +23,6 @@
               </el-card>
           </li>
       </ul>
-       <br><hr><br>
       <ul>
           <li v-for="appoint in appoints" :key="appoint._id">
               <section class="appoint-container" v-if="!appoint.isComingUp">
@@ -181,7 +180,8 @@ export default {
     background-color: #a2f7b5;
     padding: 3px;
     margin-bottom: 5px;
-     position: relative;
+    position: relative;
+    height: 400px;
 }
 .notifications{
     position: fixed;

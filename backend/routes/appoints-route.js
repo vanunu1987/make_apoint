@@ -42,7 +42,15 @@ function addAppointsRoutes(app) {
             })
     })
 
-
+    app.post('/appoints',_checkAdmin, (req, res) => {
+        var appoint = req.body
+        console.log('got this in backend : ',appoint)
+        appointsService.add(appoint)
+        .then((appoint) => {
+            console.log('APPOINT ADDED ON BACK : ',appoint);
+            res.json(appoint)
+        })
+    })
 
 
 
