@@ -42,10 +42,6 @@ async function add(currBusiness){
     return business
 }
 
-async function getData(businessId){
-    console.log('service id : ',businessId);
-    
-}
 
 
 function _getEmptyBusiness(){
@@ -154,5 +150,5 @@ export default {
     query,
     getById,
     add,
-    getImgs
+    getImgs,
 }

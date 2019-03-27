@@ -81,14 +81,7 @@ export default {
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
 
-      this.$store.dispatch({type:'loadAppoints' ,listRequire:'business'}).then(()=>{
-        console.log('done!')
-      })
-      // this.imgPath=this.currBusiness.prefs
-      //   console.log(this.imgPath);
-      //   this.mapCenter=currBusiness.location
-      //   this.markers[0].position=currBusiness.location
-
+      this.$store.dispatch({type:'loadAppoints',listRequire:'business'})
 
       })
   },
