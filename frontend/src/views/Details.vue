@@ -10,65 +10,67 @@
                 <h1 class="name" >{{currBusiness.name}}</h1>
               <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }">
           </div>
-              </div>
-                <span class="flex">
-                    <span class="fas fa-map-pin"></span> 
-                    <h2 class="address-h2">Address</h2> 
-                </span>
-                <h3>{{currBusiness.address}}</h3>
-                <span class="flex">
-                    <span class="fas fa-phone"></span> 
-                    <h2>Phone number</h2> 
-              </span>
-              <h3>{{currBusiness.phone}}</h3>
-                <span class="flex">
-                    <span class="fas fa-address-card"></span>
-                    <h2>About Us</h2> 
-                </span>
-                <h3>{{currBusiness.prefs.description}}</h3>
-                <span class="flex">
-                    <span class="fas fa-star-half-alt"></span>
-                    <h2>Rating</h2> 
-                </span>
-                <span class="flex">
-                <h3>{{currBusiness.rank.avg}}</h3>
-                ,
-                <h3>{{currBusiness.rank.qty}}</h3>
-                </span>
-          
-      </div>
-          <div class="midle">
-                <GmapMap
-                    class="map"      
-                    :center="mapCenter"
-                    :zoom="16"
-                    map-type-id="terrain"
-                    style="width: 100vw; height: 300px">
-                <GmapMarker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="mapCenter"
-                    :clickable="true"
-                    :draggable="true"/>
-                </GmapMap>
-                <button @click="showCalender = !showCalender">Add appoint</button>
-                <div class="calendar" v-if="showCalender">
-                    <business-calendar @closecalender ="closeCalender"></business-calendar>
-                </div>
-          </div>
-   
-  </section>
+
+          <span class="flex">
+         <span class="fas fa-map-pin"></span> 
+         <h2 class="address-h2">Address</h2> 
+         </span>
+         <h3>{{currBusiness.address}}</h3>
+          <span class="flex">
+         <span class="fas fa-phone"></span> 
+         <h2>Phone number</h2> 
+         </span>
+         <h3>{{currBusiness.phone}}</h3>
+          <span class="flex">
+         <span class="fas fa-address-card"></span>
+         <h2>About Us</h2> 
+        </span>
+        <h3>{{currBusiness.prefs.description}}</h3>
+          <span class="flex">
+         <span class="fas fa-star-half-alt"></span>
+         <h2>Rating</h2> 
+        </span>
+        <span class="flex">
+        <h3>{{currBusiness.rank.avg}}</h3>
+        ,
+        <h3>{{currBusiness.rank.qty}}</h3>
+        </span>
+        </div>
+        <div class="midle">
+        <GmapMap
+  class="map"      
+  :center="mapCenter"
+  :zoom="16"
+  map-type-id="terrain"
+  style="width: 100vw; height: 300px"
+>
+  <GmapMarker
+    :key="index"
+    v-for="(m, index) in markers"
+    :position="mapCenter"
+    :clickable="true"
+    :draggable="true"
+  />
+</GmapMap>
+<button @click="showCalender = !showCalender">Add appoint</button>
+ <div class="calendar" v-if="showCalender">
+        <make-appoint @closecalender ="closeCalender"></make-appoint>
+    </div>
+</div>
+
+    </section>
+
 </template>
 
 <script>
-import BusinessCalendar from '../components/BusinessCalendar.vue'
+import MakeAppoint from '../components/MakeAppoint.vue'
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 import BusinessService from '@/services/UtilService.js'
 export default {
   components:{
-    BusinessCalendar,
+    MakeAppoint,
     BusinessService,
     vueDraggable,
     mapCmp,
@@ -78,6 +80,16 @@ export default {
     let { businessId } = this.$route.params;
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
+
+      this.$store.dispatch({type:'loadAppoints' ,listRequire:'business'}).then(()=>{
+        console.log('done!')
+      })
+      // this.imgPath=this.currBusiness.prefs
+      //   console.log(this.imgPath);
+      //   this.mapCenter=currBusiness.location
+      //   this.markers[0].position=currBusiness.location
+
+
       })
   },
   data() {

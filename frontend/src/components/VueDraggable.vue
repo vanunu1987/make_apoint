@@ -75,7 +75,6 @@ import userLoginSignUp from '@/components/UserLoginSignup.vue'
 import MapCmp from '@/components/MapCmp.vue'
 import LocModal from '@/components/LocModal.vue'
 import WorkHours from '@/components/WorkHours.vue'
-import CalendarMakeAppoint from '@/components/CalendarMakeAppoint.vue'
 export default {
   data() {
     const updateItemsWithNewGroupId = this.updateItemsWithNewGroupId;
@@ -162,7 +161,6 @@ export default {
       LocModal,
       userLoginSignUp,
       WorkHours,
-      CalendarMakeAppoint
   },
   created() {
     let { businessId } = this.$route.params;
