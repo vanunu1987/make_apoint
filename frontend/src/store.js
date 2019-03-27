@@ -15,6 +15,7 @@ export default new Vuex.Store({
     currBusiness: null,
     appointsList:[],
     imgList:[],
+    businessData:null,
     BusinessTypes:['Barber','Tattoo Artist','Cosmetics'],
     filterBy: {
       name: '',
@@ -44,6 +45,9 @@ export default new Vuex.Store({
     },
     imgList(state){
       return state.imgList
+    },
+    businessData(state){
+      return state.businessData
     }
   },
 
@@ -71,6 +75,9 @@ export default new Vuex.Store({
     },
     setImgList(state,{imgList}){
       state.imgList = imgList
+    },
+    setBusinessData(state,{businessData}){
+      state.businessData = businessData
     }
 
   },
@@ -94,21 +101,21 @@ export default new Vuex.Store({
       context.commit({ type: 'setLoc', loc })
     },
     async loadAppoints(context,{listRequire}) {
-      console.log(listRequire);
       var user = context.getters.loggedInUser;
-      if (!user) return
-      var listRequireId = (listRequire === 'business') ? context.getters.currBusiness._id : context.getters.loggedInUser._id
-      var appointsList = await AppointsService.query(listRequireId)
-      context.commit({ type: 'getAppointsList', appointsList })
-      console.log(appointsList);
-      return appointsList
+      if (!user || listRequire === 'business'){
+        var listRequireId = context.getters.currBusiness._id
+        var filterBy = {listRequire,listRequireId}
+        var appointsList = await AppointsService.query(filterBy)
+        context.commit({ type: 'getAppointsList', appointsList })
+        return appointsList
+      } else {
+        var listRequireId = context.getters.loggedInUser._id
+        var filterBy = {listRequire,listRequireId}
+        var appointsList = await AppointsService.query(filterBy)
+        context.commit({ type: 'getAppointsList', appointsList })
+        return appointsList
+      }
     },
-    // async loadUserAppoints(context) {
-    //   var user = context.getters.loggedInUser;
-    //   if (!user) return
-    //  var userId = user._id;
-    //  var appointsList = await AppointsService
-    // },
     async loginUser(context, { credentials }) {
       var user = await UserService.checkLogin(credentials)
       if (!user) return
@@ -142,7 +149,9 @@ export default new Vuex.Store({
 
     async loadBusinessData(context){
       var businessId = context.getters.currBusiness._id
-      var businessData = await BusinessService.getData(businessId)
+      var businessData = await AppointsService.getBusinessData(businessId)
+      context.commit({ type: 'setBusinessData', businessData })
+      
 
     }
   }

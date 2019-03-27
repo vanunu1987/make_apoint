@@ -78,6 +78,7 @@ export default {
     let { businessId } = this.$route.params;
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
+      this.$store.dispatch({type:'loadAppoints',listRequire:'business'})
       })
   },
   data() {

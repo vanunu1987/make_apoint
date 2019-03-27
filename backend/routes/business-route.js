@@ -15,17 +15,9 @@ function addBusinessRoutes(app) {
 
     // LIST
     app.get('/business', (req, res) => {
-
-        // var dist = geolib.getDistance(
-        //     {latitude: 51.5103, longitude: 7.49347},
-        //     {latitude: "51° 31' N", longitude: "7° 28' E"}
-        // );
-        // console.log('dist : ',dist);
-        // console.log('FILTER:', req.query)
         var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
         businessService.query(filterBy)
             .then(business => {
-                // console.log('HERE', business);
                 var newArr = business.map((bus) => {
                     bus.dist = geolib.getDistance(   
                     {latitude: bus.location.lat, longitude: bus.location.lng},
@@ -38,8 +30,8 @@ function addBusinessRoutes(app) {
                 })
                 res.json(newArr)
             })
-
     })
+    
     app.get('/business/imgs', (req, res) => {
         var filterBy = req.query
         console.log('imgs query : ', filterBy);

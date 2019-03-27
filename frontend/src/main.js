@@ -14,9 +14,13 @@ window.moment = moment
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import '@/filter.js'
 
+import VueCharts from 'vue-chartjs'
+// import { Bar, Line } from 'vue-chartjs'
+Vue.use(VueCharts)
  
 Vue.use(VueDraggable)
 Vue.use(resize)
+
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
