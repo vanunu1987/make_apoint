@@ -3,15 +3,12 @@
     <business-type-modal  @saveType="setType" v-if="isTypeModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
 <user-login-signUp :isNewUserProp="true" :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="closeSignUp" />
-
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
-
         <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
               <div class="column">
               <button @click="setFilterBy('header')" title="Add image" class="far fa-images"></button>
              <h3>Add your header image here</h3> 
              </div>
-
         </div>
         <div class="profile-detais culomn">
           <div class="details-head flex">
@@ -19,11 +16,8 @@
         <div  class="img-profile flex"  :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }">
               <button @click="setFilterBy('profile')" title="Add profile image" class="fas fa-user-plus"></button>
           </div>
-
           </div>
           <h5>Profile image</h5>
-         
-      
           <span class="flex">
          <span class="fas fa-map-pin"></span> 
          <h2 class="address-h2">Address</h2> 
@@ -178,6 +172,7 @@ export default {
        
     },
     loadingImg: false,
+    imageData:'',
     }
   },
  
@@ -257,8 +252,6 @@ export default {
     },
     saveCog(){
        let { businessId } = this.$route.params;
-       console.log(businessId);
-       
        this.saveAddress()
        if (!this.loggedInUser) this.isSignUp=true
        else{
@@ -268,7 +261,23 @@ export default {
     },
     closeSignUp(){
       if (this.loggedInUser) this.isSignUp= false
-    }
+    },
+   
+   saveImage(){
+      var reader = new FileReader()
+      reader.onload = e => {
+        this.imageData = e.target.result
+      }
+      reader.readAsDataURL(input.files[0])
+      var imageToSave = this.imageData
+      this.$store.dispatch({type: "saveImage", imageToSave})
+     .then( res => {
+       console.log('the image was saved',res);
+      //  this.user.image = res
+     })
+   }
+
+
     },
     computed:{
       imgUrls(){
