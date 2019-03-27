@@ -181,8 +181,8 @@ export default new Vuex.Store({
       }
     },
     async addAppoint(context , {appoint}) {
-      var appoint = await AppointsService.add(appoint)
-      return appoint
+      var res = await AppointsService.add(appoint)
+      return res
     }
 
   }

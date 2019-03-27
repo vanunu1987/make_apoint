@@ -4,7 +4,8 @@ function addAppointsRoutes(app) {
 
     function _checkAdmin(req, res, next) {
         console.log('INSIDE MIDDLEWARE: ', req.session.user);
-        if (!req.session.user || !req.session.user.business_id ) {
+        // if (!req.session.user || !req.session.user.business_id ) {
+        if (!req.session.user ) {
             res.status(401).end('Unauthorized');
             return;
         }
