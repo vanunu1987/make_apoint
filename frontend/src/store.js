@@ -153,7 +153,8 @@ export default new Vuex.Store({
       context.commit({ type: 'setBusinessData', businessData })
       
 
-    }
+    },
+  
   }
 
 })

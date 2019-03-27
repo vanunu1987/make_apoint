@@ -2,16 +2,13 @@
   <section class="page-continer" v-if="!!currBusiness.prefs">
     <business-type-modal  @saveType="setType" v-if="isTypeModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
-<user-login-signUp :isNewUserProp="true" :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="isSignUp=!isSignUp" />
-
+<user-login-signUp :isNewUserProp="true" :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="closeSignUp" />
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
-
         <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
               <div class="column">
               <button @click="setFilterBy('header')" title="Add image" class="far fa-images"></button>
              <h3>Add your header image here</h3> 
              </div>
-
         </div>
         <div class="profile-detais culomn">
           <div class="details-head flex">
@@ -19,11 +16,8 @@
         <div  class="img-profile flex"  :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }">
               <button @click="setFilterBy('profile')" title="Add profile image" class="fas fa-user-plus"></button>
           </div>
-
           </div>
           <h5>Profile image</h5>
-         
-      
           <span class="flex">
          <span class="fas fa-map-pin"></span> 
          <h2 class="address-h2">Address</h2> 
@@ -178,6 +172,7 @@ export default {
        
     },
     loadingImg: false,
+    imageData:'',
     }
   },
  
@@ -257,16 +252,32 @@ export default {
     },
     saveCog(){
        let { businessId } = this.$route.params;
-       console.log(businessId);
-       
        this.saveAddress()
-       if (!businessId||currBusiness._id) this.isSignUp=true
+       if (!this.loggedInUser) this.isSignUp=true
        else{
        console.log(this.currBusiness);
-       this.$store.dispatch({ type: "setCurrBusiness",currBusiness: this.currBusiness })
+       this.$store.dispatch({ type: "addBusiness",currBusiness: this.currBusiness })
        }
-      //  .then(()=>this.$router.push('/business/'+businessId))
-    }
+    },
+    closeSignUp(){
+      if (this.loggedInUser) this.isSignUp= false
+    },
+   
+   saveImage(){
+      var reader = new FileReader()
+      reader.onload = e => {
+        this.imageData = e.target.result
+      }
+      reader.readAsDataURL(input.files[0])
+      var imageToSave = this.imageData
+      this.$store.dispatch({type: "saveImage", imageToSave})
+     .then( res => {
+       console.log('the image was saved',res);
+      //  this.user.image = res
+     })
+   }
+
+
     },
     computed:{
       imgUrls(){
@@ -274,6 +285,9 @@ export default {
       },
        clUrl() {
       return `https://api.cloudinary.com/v1_1/${this.cloudinary.cloud_name}/upload`;
+    },
+    loggedInUser(){
+      return this.$store.getters.loggedInUser
     }
     }
 }
@@ -432,8 +446,6 @@ button:focus {
   outline: none;
 }
 .midle{
-    // display: flex;
-    // justify-content: space-between;
 
 }
 .fas{
@@ -447,20 +459,10 @@ button:focus {
 
 }
 div.calendar{
-  // background-color:rgb(255, 233, 137);
-  // width:90%;
-  //  position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // z-index: 3;
 }
 .headerGallery{
   height: 100vh;
   width: 15vw;
-  // background-color: #484848d1;
-  // position: fixed;
-  // top: 10px;
   right: 0px;
   border-radius: 5px;
   margin-top: 50px;
