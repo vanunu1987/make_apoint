@@ -2,6 +2,10 @@
   <section>
     <h1>jfdslkfj</h1>
     {{events}}
+    <div v-for="event in events" :key="event.time">
+      {{event.date}}
+      {{event.time}}
+    </div>
   </section>
 </template>
 
@@ -9,6 +13,7 @@
 import CalendarService from "../services/CalendarService.js";
 
 export default {
+  props:['date'],
   data: () => ({
     today: "2019-01-09",
     dateToShow: "2019-01-09"
@@ -17,9 +22,9 @@ export default {
     events() {
       var date = moment(this.dateToShow);
       var now = moment(this.today);
-      return CalendarService.getEvents(
+      return CalendarService.getDayEventsForCalendar(this.today,
         this.$store.getters.currBusiness.workHours,
-        now > date ? this.today : this.dateToShow
+        this.$store.getters.appointsList
       );
     },
     // convert the list of events into a map of lists keyed by date

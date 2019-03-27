@@ -40,6 +40,7 @@ export default {
   watch:{
     start:function (){
       this.$emit('update-appoint',{property:'date',value:this.start})
+      this.$emit('to-cmp-appoint-picker',{property:'date',value:this.start})
     }
   }
 
