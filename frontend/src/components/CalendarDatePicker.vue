@@ -1,5 +1,6 @@
 <template>
   <section class="calendar-date-picker">
+    <div class="calendar-container">
     <div class="calendar-options-container">
       <span dark>{{monthName}}</span>
       <div class="calendar-button-container">
@@ -14,12 +15,9 @@
     {{start}}
     {{myData}}
     <v-layout wrap>
-      <v-flex xs12 class="mb-3">
-        <v-sheet height="500">
-          <v-calendar ref="calendar" v-model="start" :type="type" :end="end" color="primary"></v-calendar>
-        </v-sheet>
-      </v-flex>
+      <v-calendar ref="calendar" v-model="start" :type="type" :end="end" color="primary"></v-calendar>
     </v-layout>
+    </div>
   </section>
 </template>
 
@@ -71,6 +69,29 @@ span{
 
 <style lang="scss" >
 $primary-color: rgb(0, 132, 137);
+
+section.calendar-date-picker.calendar{
+  width:100% !important;
+  height: 0 !important; 
+  padding-top:100% !important;
+  position:relative !important;
+}
+div.layout.wrap{
+flex:1 !important;
+}
+div.flex.mb-3.xs12{
+height: 100% !important;
+}
+
+.calendar-container{
+  display:flex !important;
+  position: absolute !important;
+  flex-direction:column !important;
+  top:0px !important;
+  left:0px !important;
+  width:100% !important;
+  height: 100% !important;
+}
 
 .v-calendar-weekly__head-weekday {
   &.v-outside,&.v-future,&.v-present,&.v-past{

@@ -2,7 +2,7 @@
   <section class="page-continer" v-if="currBusiness">
  <router-link :to="'/edit/'+businessId" >edit</router-link>
 
-    <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
+    <make-appoint class="calendar" ></make-appoint>
 
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
@@ -54,10 +54,7 @@
     :draggable="true"
   />
 </GmapMap>
-<button @click="showCalender = !showCalender">Add appoint</button>
- <div class="calendar" v-if="showCalender">
-        <make-appoint @closecalender ="closeCalender"></make-appoint>
-    </div>
+ 
 </div>
 
     </section>
@@ -162,7 +159,7 @@ h1,h2,h3{
 .page-continer{
   background-color: white;
  display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.5fr;
+    grid-template-columns: 20px 1fr 1fr 20px;
     grid-template-rows: 1fr 1fr 1fr .5fr;
      grid-gap: 10px 20px;
         // padding: 20px;

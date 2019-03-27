@@ -42,10 +42,13 @@ export default {
         .format("YYYY-MM-DD");
     },
     checkIfLogin(selectedTime){
+      this.$emit('update-appoint',{property:'time',value:selectedTime})
       if(this.$store.getters.loggedInUser){
-        console.log('f checkIfLogin activated in CalendarAppointPicker cmp')
-         this.$emit('update-appoint',{property:'time',value:selectedTime})
+         
          this.$emit('move-to-cmp','MakeAppoint5')
+      }else{
+         
+         this.$emit('move-to-cmp','MakeAppoint3')
       }
     }
   }
