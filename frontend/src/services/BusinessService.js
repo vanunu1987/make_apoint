@@ -51,6 +51,13 @@ async function add(currBusiness){
     return business
 }
 
+async function update(currBusiness){
+    var res = await axios.put(`${BASE_URL}`,currBusiness)
+    console.log('UPDATED : ', res.data);
+    var business = await res.data
+    return business
+}
+
 
 
 
@@ -168,6 +175,7 @@ export default {
     getById,
     add,
     getImgs,
-    saveImage
+    saveImage,
+    update
 
 }

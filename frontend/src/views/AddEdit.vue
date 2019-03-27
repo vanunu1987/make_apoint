@@ -252,8 +252,10 @@ export default {
     },
     saveCog(){
        let { businessId } = this.$route.params;
+
        this.saveAddress()
        if (!this.loggedInUser) this.isSignUp=true
+
        else{
        console.log(this.currBusiness);
        this.$store.dispatch({ type: "addBusiness",currBusiness: this.currBusiness })
@@ -325,17 +327,16 @@ background-color: white;
 }
   .addImg{
     // position: absolute;
-    font-size: 2.5rem;
+  font-size: 2.5rem;
   padding: 10px;
   border-radius: 100%;
   box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
- margin: 10px;
+  margin: 10px;
   z-index: 10;
   width: 65px;
   margin-left: 35px;
   margin-top: 40px;
-
-background-color: white;
+  background-color: white;
   
   }
 input{
