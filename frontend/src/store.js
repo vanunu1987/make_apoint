@@ -179,6 +179,10 @@ export default new Vuex.Store({
         context.commit({ type: 'setCurrBusiness', business: business })
         return
       }
+    },
+    async addAppoint(context , {appoint}) {
+      var appoint = await AppointsService.add(appoint)
+      return appoint
     }
 
   }

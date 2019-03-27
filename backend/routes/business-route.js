@@ -63,7 +63,6 @@ function addBusinessRoutes(app) {
 
     // CREATE
     app.post('/business',_checkAdmin, (req, res) => {
-        console.log('hereeeeeeeeeeeeeeeeeeeeeeeeeeee');
         const business = req.body;
         businessService.add(business)
             .then(business => {
