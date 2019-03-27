@@ -27,7 +27,7 @@ async function getBusinessData(businessId){
 
 async function add(appoint) {
     console.log(appoint);
-    var res = await axios.post(`${BASE_URL}`,appoints)
+    var res = await axios.post(`${BASE_URL}`,appoint)
     console.log('GOT NEW appoint : ', res.data);
     var appoint = await res.data
     return appoint
