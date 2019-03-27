@@ -2,10 +2,19 @@ import UtilService from './UtilService.js'
 import UserService from './UserService.js'
 // import axios from 'axios'
 
+const cloudinary = require('cloudinary/lib/cloudinary')
+cloudinary.config({
+    cloud_name: 'dmr7h2h2h',
+    api_key: '684627237884771',
+    api_secret: 'UzOASIxY-D3Bcyu83yo7dLy4lpE'
+ })
 import Axios from 'axios';
 var axios = Axios.create({
    withCredentials:true
 });
+
+
+
 
 const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/business' : '//localhost:3003/business';
 
@@ -41,6 +50,7 @@ async function add(currBusiness){
     var business = await res.data
     return business
 }
+
 
 
 
@@ -144,11 +154,20 @@ function _getEmptyBusiness(){
     }
 }
 
-
+function saveImage(imageToSave) {
+    console.log('imageToSave',imageToSave);
+    return cloudinary.v2.uploader.upload(imageToSave).then((data) =>{
+        console.log(data);
+       return data.secure_url
+        
+    })
+ } 
 
 export default {
     query,
     getById,
     add,
     getImgs,
+    saveImage
+
 }

@@ -1,6 +1,9 @@
 <template>
   <section class="page-continer" v-if="!!currBusiness.prefs">
     <business-type-modal  @saveType="setType" v-if="isTypeModal"/>
+    <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
+<user-login-signUp :isNewUserProp="true" :isNewBus="true" class="login" v-if="isSignUp" @closeSignUp="isSignUp=!isSignUp" />
+
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
 
         <div  class="img-header flex"  :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }">
@@ -64,11 +67,20 @@
 </GmapMap>
 
 </div>
- <div class="setings">
+ <div class="setings" >
+   <div class="culomn">
     <button title="Setting" class="fas fa-cog Setting"></button>
     <button v-show="isGalleryHeaderImg" title="addImg" class="fas fa-plus addImg"></button>
-      
+    <button @click="isProductModal=true" v-show="!isGalleryHeaderImg" title="addImg" class="fas fa-barcode addImg"></button>
+    <product-form   v-show="!isGalleryHeaderImg"/>
+    <button  v-show="!isGalleryHeaderImg" @click="isCalendar=!isCalendar" class="fas fa-calendar-alt addImg"></button>
+    <button   v-show="!isGalleryHeaderImg" class="fas fa-save addImg" @click="saveCog"></button>
 
+    </div>
+      <!-- <input @change="loadImg" name="uploadedfile" type="file" /> -->
+  <input :disabled="loadingImg" 
+                class="above-btn" type="file" accept="image/*" required
+                @change="upload($event.target.files)"/>
       <div v-if="isGalleryHeaderImg" class="headerGallery">
           <ul>
             <li
@@ -88,33 +100,58 @@
 </template>
 
 <script>
-// import BusinessCalendar from '../components/BusinessCalendar.vue'
+
+const cloudinary = require('cloudinary/lib/cloudinary')
+
+
+ import Axios from 'axios';
+var axios = Axios.create({
+   withCredentials:true
+});
+
 import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 import BusinessTypeModal from '@/components/BusinessTypeModal.vue'
-import BusinessService from '@/services/UtilService.js'
+import BusinessService from '@/services/BusinessService.js'
+import UtilService from '@/services/UtilService.js'
+import ProductForm from '@/components/ProductForm.vue'
+import WorkHours from '@/components/WorkHours.vue'
+import userLoginSignUp from '@/components/UserLoginSignup.vue'
+
+
+
 export default {
   components:{
-    // BusinessCalendar,
     BusinessService,
     vueDraggable,
     mapCmp,
     CalendarDatePicker,
     BusinessTypeModal,
+    ProductForm,
+    WorkHours,
+    userLoginSignUp
   },
   created() {
     let { businessId } = this.$route.params;
-    if (!businessId) this.isTypeModal=true
+    console.log(businessId);
+    
+   
+   
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then((res)=>{
       this.currBusiness=this.$store.getters.currBusiness
       console.log(this.currBusiness);
-      
+       if (!businessId) this.isTypeModal=true
+      else  this.$store.dispatch({type: 'loadImgs',Businesstype:this.currBusiness.type})
     })
   },
   data() {
     return {
+      isSignUp:false,
+      isCalendar:false,
+      isProductModal:false,
+      imageFile:"",
       filterBy:"",
       isGalleryHeaderImg:false,
       // imgUrls:[],
@@ -133,8 +170,14 @@ export default {
       imgPath:'',
       editMode:false,
       currBusiness:{},
-      isTypeModal:false
+      isTypeModal:false,
+      cloudinary:{
+    cloud_name: 'dmr7h2h2h',
+    api_key: '684627237884771',
+    uploadPreset: 'kpalsqih'
        
+    },
+    loadingImg: false,
     }
   },
  
@@ -177,12 +220,61 @@ export default {
           this.isGalleryHeaderImg=!this.isGalleryHeaderImg
           this.filterBy=val
           }else this.filterBy=val
-        }
+        },
+        upload(file){
+          // console.log('val',val.target.value);
+          this.loadingImg = true;
+          const formData = new FormData();
+          formData.append('file', file[0]);
+          formData.append('upload_preset', this.cloudinary.uploadPreset);
+          formData.append('tags', 'gs-vue,gs-vue-uploaded');
+          // BusinessService.saveImage(formData)
+          // console.log(file.target.value);
+          
+          axios.post(this.clUrl, formData).then(res => {
+            console.log(res.data.secure_url);
+            
+          // this.$emit('uploadImg', res.data.secure_url);
+          // this.thumbs.unshift({
+          //   url: res.data.secure_url
+          // });
+          // this.uploadImgCount++;
+
+          this.loadingImg = false;
+      });
+        },
+        setWorkTime(workTime){
+      this.isCalendar= false
+      this.currBusiness.workHours=workTime
+    },
+    saveAddress(){
+            let addressloc= UtilService.getLocationByAddress(this.currBusiness.address)
+             return addressloc
+             .then(res=>{
+        console.log('loc',res);
+        this.currBusiness.location=res
+             })
+    },
+    saveCog(){
+       let { businessId } = this.$route.params;
+       console.log(businessId);
+       
+       this.saveAddress()
+       if (!businessId||currBusiness._id) this.isSignUp=true
+       else{
+       console.log(this.currBusiness);
+       this.$store.dispatch({ type: "setCurrBusiness",currBusiness: this.currBusiness })
+       }
+      //  .then(()=>this.$router.push('/business/'+businessId))
+    }
     },
     computed:{
       imgUrls(){
         return this.$store.getters.imgList
-      }
+      },
+       clUrl() {
+      return `https://api.cloudinary.com/v1_1/${this.cloudinary.cloud_name}/upload`;
+    }
     }
 }
 </script>
@@ -211,24 +303,29 @@ span.flex{
   border-radius: 100%;
   box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
   margin-top: 20px;
-  margin-left: 5px;
+  margin-left: 35px;
   z-index: 10;
+  width: 65px;
+
 background-color: white;
 }
   .addImg{
-    position: absolute;
+    // position: absolute;
     font-size: 2.5rem;
   padding: 10px;
   border-radius: 100%;
   box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
-  margin-top: 105px;
-  margin-left: -55px;
+ margin: 10px;
   z-index: 10;
+  width: 65px;
+  margin-left: 35px;
+  margin-top: 40px;
+
 background-color: white;
   
   }
 input{
-  
+  border: .8px dashed;
   &:focus{
              outline:none;
          }
@@ -245,12 +342,12 @@ h1,h2,h3{
 .page-continer{
   background-color: white;
  display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.8fr;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 0.8fr;
     grid-template-rows: 1fr 1fr 1fr .5fr;
      grid-gap: 10px 20px;
         // padding: 20px;
     .img-header{
-      grid-column: 1/4;
+      grid-column: 1/5;
       grid-row: 1;
     }
     .profile-detais{
@@ -265,11 +362,11 @@ h1,h2,h3{
       display: inline;
     }
     .midle{
-       grid-column: 1/4;
+       grid-column: 1/5;
       grid-row: 3;
     }
     .setings{
-      grid-column: 4;
+      grid-column: 5;
       grid-row: 1/5;
     }
 }
@@ -299,7 +396,7 @@ input{
     border-radius: 50px;
     background-position: center;
   margin-left: 10px;
-  border: 1.3px dotted;
+  border: 1.3px dashed;
   justify-content: center;
 
 }
@@ -310,7 +407,7 @@ input{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-   border: 1.3px dotted;
+   border: 1.3px dashed;
   justify-content: center;
   align-items: center;
   button{
@@ -366,7 +463,7 @@ div.calendar{
   // top: 10px;
   right: 0px;
   border-radius: 5px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .galleryItem{
   margin: 7px;
@@ -375,5 +472,14 @@ div.calendar{
   background-size: cover;
   cursor: pointer;
 }
+.workHourCmp{
+  position: fixed;
+  top: 200px;
+  left:450px;
+  z-index: 1000;
+}
+ .login{
+      z-index: 1000;
+    }
 </style>
 

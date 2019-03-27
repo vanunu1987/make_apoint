@@ -1,5 +1,7 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
+ <router-link :to="'/edit/'+businessId" >edit</router-link>
+
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
 
         <div  class="img-header"  
@@ -78,6 +80,7 @@ export default {
   },
   created() {
     let { businessId } = this.$route.params;
+    this.businessId=businessId
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
 
@@ -95,7 +98,8 @@ export default {
           position: { lat: 32.0877, lng: 34.8032 }
         }
       ],
-      editMode:false
+      editMode:false,
+    businessId:null
     }
   },
  

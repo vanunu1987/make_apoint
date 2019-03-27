@@ -6,15 +6,17 @@
     </p>
 
     <make-appoint style="width:500px;"></make-appoint>
-    
+    <product-form/>
   </div>
 </template>
 
 <script>
 import MakeAppoint from '@/components/MakeAppoint.vue'
+import ProductForm from '@/components/ProductForm.vue'
 export default {
   components:{
-MakeAppoint
+MakeAppoint,
+ProductForm
   }
 }
 </script>
