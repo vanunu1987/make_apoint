@@ -2,7 +2,7 @@ import UtilService from './UtilService.js'
 import UserService from './UserService.js'
 // import axios from 'axios'
 
-const cloudinary = require('cloudinary/lib/cloudinary')
+const cloudinary = require('cloudinary/lib/cloudinary.js')
 cloudinary.config({
     cloud_name: 'dmr7h2h2h',
     api_key: '684627237884771',

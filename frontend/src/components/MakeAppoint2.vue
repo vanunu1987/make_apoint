@@ -7,7 +7,7 @@
       @update-appoint="updateAppoint"
     ></calendar-date-picker>
 
-    <calendar-appoint-picker :date="selectedDay"></calendar-appoint-picker>
+    <calendar-appoint-picker @move-to-cmp="moveToCmp" @update-appoint="updateAppoint" :date="selectedDay"></calendar-appoint-picker>
   </section>
 </template>
 
@@ -18,7 +18,7 @@ import CalendarAppointPicker from "@/components/CalendarAppointPicker.vue";
 export default {
   data() {
     return {
-      selectedDay: ""
+      selectedDay: ''
     };
   },
   methods: {

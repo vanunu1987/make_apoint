@@ -33,7 +33,7 @@ function getAvailableDayEvents(dayEvents,dayAppoints){
 
 
 function getDayAppoints(date,appoints){
-return appoints.filter((apppoint)=>appoint.date === date)
+return appoints.filter((appoint)=>appoint.date === date)
 }
 
 function _getWeekDaysLeft(startDate) {

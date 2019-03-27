@@ -5,7 +5,9 @@
     <component 
     :is="currCmp.name" 
     :payload="currCmp.payload"
+    :appoint = "appoint"
     @set-cmp="setCmp" 
+    @make-appoint="makeAppoint"
     @update-appoint="updateAppoint">
     </component>
   </section>
@@ -14,6 +16,10 @@
 <script>
 import MakeAppoint1 from "@/components/MakeAppoint1.vue";
 import MakeAppoint2 from "@/components/MakeAppoint2.vue";
+import MakeAppoint3 from "@/components/MakeAppoint3.vue";
+import MakeAppoint4 from "@/components/MakeAppoint4.vue";
+import MakeAppoint5 from "@/components/MakeAppoint5.vue";
+import MakeAppoint6 from "@/components/MakeAppoint6.vue";
 
 export default {
   data() {
@@ -24,8 +30,8 @@ export default {
           date:null,
           time:null,
           user_id:null,
-          business_id:null,
-          product:null
+          business_id:this.$store.getters.currBusiness._id,
+          product:this.$store.getters.currBusiness.products[0]
         }
     };
   },
@@ -44,15 +50,27 @@ export default {
       console.log('updateAppoint activated',value)
       this.appoint[property] = value
       console.log('appoint is updated:',this.appoint)
+    },
+    makeAppoint(){
+this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.log('sucsess!'))
     }
   },
   created() {
     this.cmps.push({ name: "MakeAppoint1" });
     this.cmps.push({ name: "MakeAppoint2" });
+    this.cmps.push({ name: "MakeAppoint3" });
+    this.cmps.push({ name: "MakeAppoint4" });
+    this.cmps.push({ name: "MakeAppoint5" });
+    this.cmps.push({ name: "MakeAppoint6" });
+    if(this.$store.getters.loggedInUser) this.appoint.user_id = this.$store.getters.loggedInUser._id
   },
   components: {
     MakeAppoint1,
-    MakeAppoint2
+    MakeAppoint2,
+    MakeAppoint3,
+    MakeAppoint4,
+    MakeAppoint5,
+    MakeAppoint6,
   }
 };
 </script>
