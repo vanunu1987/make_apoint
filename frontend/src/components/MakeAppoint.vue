@@ -28,7 +28,7 @@ export default {
         cmps:[],
         appoint:{
           date:null,
-          time:null,
+          startTime:null,
           user_id:null,
           business_id:this.$store.getters.currBusiness._id,
           product:this.$store.getters.currBusiness.products[0]

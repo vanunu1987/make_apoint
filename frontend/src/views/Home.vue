@@ -45,7 +45,7 @@ export default {
     console.log('location : ',userLocation);
     if (userLocation) filterBy.currUserLocation = userLocation
     this.$store.dispatch({ type: "loadBusinesses", filterBy });
-  }
+  },
 };
 </script>
 

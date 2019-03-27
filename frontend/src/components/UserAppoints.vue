@@ -1,40 +1,33 @@
 <template>
   <div v-if="currUser" class="user-appoints">
   <!-- <el-card class="box-card"> -->
-      <div v-if="appoints" class="notifications">{{upcomingCount}}</div>
+      <div v-if="upcomingCount > 0" class="notifications">{{upcomingCount}}</div>
     <button @click="getUserAppoints">{{currUser.userName}}</button>
   <div v-if="isOpen" class="appoints-card">
       <ul>
           <li v-for="appoint in appoints" :key="appoint._id">
-              <el-card class="appoint-container box-card" 
-              v-if="appoint.isComingUp" :class="{ comingUp: appoint.isComingUp }">
+              <section class="appoint-container box-card" v-if="appoint.timeStamp >= Date.now()"
+              :class="{ comingUp: appoint.isComingUp }">
                 <transition name="fade">
-                   <v-badge v-if="showComing" color="#ff5c5d" left overlap>
+                   <v-badge v-if="showComing && appoint.isComingUp" color="#ff5c5d" left overlap>
                         <template v-slot:badge>
                             <v-icon dark small>far fa-calendar-alt</v-icon>
                         </template>
                     </v-badge>
                 </transition>
-              <router-link :to="'business/'+appoint.business_id">
-                {{appoint.product.title}}<br>
-                {{appoint.timeToShow}}<br> At {{appoint.startTime}}<br>
-                {{appoint.timeRemaining}}
+              <router-link :to="'/business/'+appoint.business_id" @click.stop.prevent>
+              <h3>{{appoint.product.title}}</h3>
+              <p>{{appoint.timeToShow}}</p>
+              <p>At {{appoint.startTime}} ({{appoint.timeRemaining}})</p>
               </router-link>
-              </el-card>
-          </li>
-      </ul>
-      <ul>
-          <li v-for="appoint in appoints" :key="appoint._id">
-              <section class="appoint-container" v-if="!appoint.isComingUp">
-              <router-link :to="'business/'+appoint.business_id">
-                {{appoint.product.title}}<br>
-                {{appoint.timeToShow}}<br> At {{appoint.startTime}}<br>
-                <!-- Approximatly {{appoint.product.duration}} Minutes<br> -->
-                {{appoint.timeRemaining}}
-              </router-link>
+              <!-- <button @click.stop="getDetails(appoint.business_id)"></button> -->
               </section>
           </li>
       </ul>
+
+     
+
+      
   </div>
   <!-- </el-card> -->
   </div>
@@ -49,18 +42,23 @@ export default {
   data() {
     return {
         isOpen:false,
-        showComing:false
+        showComing:false,
+        interval :null
     };
   },
   methods: {
+      getDetails(businessId){
+          this.$router.push('/business/'+businessId)
+      },
+
     getUserAppoints(){
         if (this.isOpen) return this.isOpen = !this.isOpen
             this.isOpen = !this.isOpen
             if (this.isOpen && this.upcomingCount > 0) {
-                var banner = setInterval(() => {
+                this.interval = setInterval(() => {
                     this.showComing = !this.showComing
                 }, 2000);
-                if (!this.isOpen) clearInterval(banner)
+                if (!this.isOpen) clearInterval(this.interval)
             }
         // this.$store.dispatch({type:'loadAppoints',listRequire:'user'})
         // .then(res =>{
@@ -73,19 +71,16 @@ export default {
     currUser(){
         return this.$store.getters.loggedInUser
     },
-    test(){
-     return  moment(Date.now()).fromNow()
-    },
     upcomingCount(){
         var counter = this.appoints.reduce((acc,appoint) => {
             console.log(acc);
-            if (appoint.timeStamp - Date.now() <= 60 * 60 * 24 * 1000) return ++acc
+            if (appoint.timeStamp >= Date.now() && appoint.timeStamp - Date.now() <= 60 * 60 * 24 * 1000) return ++acc
             else return acc
         },0)
         return counter
     },
     appoints(){
-        var appoints =  this.$store.getters.appointsList
+        var appoints =  this.$store.getters.userAppointsList
         appoints.forEach((appoint,idx) => {
             var timeStamp = new Date(appoint.date)
             var day = timeStamp.getDay()
@@ -126,14 +121,32 @@ export default {
         console.log(appoint);
         // return appoint
         })
-    return appoints
+    return appoints.sort((app1,app2) => {
+        return app1.timeStamp - app2.timeStamp
+    })
     }
+  },
+  destroyed(){
+      clearInterval(this.interval)
   }
 };
 </script>
 
 
 <style scoped lang="scss">
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+p{
+    margin-bottom: 5px;
+}
+
+.el-card__body {
+    padding: 5px;
+}
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
@@ -170,18 +183,23 @@ export default {
     top: 70px;
     // height: 300px;
     width: 250px;
-    padding: 5px;
+    padding: 10px;
     background: white;
     border-radius: 5px;
+    height: 400px;
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
 }
-
+$base-color: #a2f7b5;
 .appoint-container{
     cursor: pointer;
     background-color: #a2f7b5;
     padding: 3px;
     margin-bottom: 5px;
     position: relative;
-    height: 400px;
+    border-radius: 5px;
+    &:hover{
+        background-color:darken( $base-color, 10% )
+    }
 }
 .notifications{
     position: fixed;

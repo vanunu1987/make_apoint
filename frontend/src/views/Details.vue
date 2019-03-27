@@ -1,9 +1,7 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
  <router-link :to="'/edit/'+businessId" >edit</router-link>
-
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
-
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
         </div>
@@ -103,7 +101,10 @@ export default {
     businessId:null
     }
   },
- 
+ mounted(){
+   var user = this.$store.getters.loggedInUser
+   console.log('MOUNTED : ',user);
+ },
  
   computed: {
     currBusiness() {

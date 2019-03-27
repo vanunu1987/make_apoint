@@ -13,6 +13,7 @@ export default new Vuex.Store({
     loggedInUser: null,
     currBusiness: null,
     appointsList:[],
+    userAppointsList:[],
     imgList:[],
     businessData:null,
     BusinessTypes:['Barber','Tattoo Artist','Cosmetics'],
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     appointsList(state){
       return state.appointsList
+    },
+    userAppointsList(state){
+      return state.userAppointsList
     },
     BusinessTypes(state){
       return state.BusinessTypes
@@ -67,6 +71,9 @@ export default new Vuex.Store({
     },
     getAppointsList(state, { appointsList }) {
       state.appointsList = appointsList
+    },
+    getUserAppointsList(state, { appointsList }) {
+      state.userAppointsList = appointsList
     },
     setLoggedInUser(state, { user }) {
       console.log('setLoggedInUser activated!', user)
@@ -114,7 +121,7 @@ export default new Vuex.Store({
         var listRequireId = context.getters.loggedInUser._id
         var filterBy = {listRequire,listRequireId}
         var appointsList = await AppointsService.query(filterBy)
-        context.commit({ type: 'getAppointsList', appointsList })
+        context.commit({ type: 'getUserAppointsList', appointsList })
         return appointsList
       }
     },
@@ -142,7 +149,8 @@ export default new Vuex.Store({
       }
       else {
         context.commit({ type: 'setLoggedInUser', user })
-        context.commit({ type: 'setCurrBusiness', business: res })
+        // context.commit({ type: 'setCurrBusiness', business: res })
+        return
       } 
     },
 
