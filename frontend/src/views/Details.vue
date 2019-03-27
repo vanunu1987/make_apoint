@@ -1,15 +1,16 @@
 <template>
-    <section class="page-continer" v-if="currBusiness">
+  <section class="page-continer" v-if="currBusiness">
     <calendar-date-picker class="calendar" style="width:500px;"></calendar-date-picker>
 
-        <div  class="img-header"  :style="{backgroundImage: `url(${imgPath.header_img_url})` }">
+        <div  class="img-header"  
+        :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
         </div>
         <div class="profile-detais culomn">
           <div class="details-head flex">
-          <h1 class="name" >{{currBusiness.name}}</h1>
-        <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"/>
-
+                <h1 class="name" >{{currBusiness.name}}</h1>
+              <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }">
           </div>
+
           <span class="flex">
          <span class="fas fa-map-pin"></span> 
          <h2 class="address-h2">Address</h2> 
@@ -58,6 +59,7 @@
 </div>
 
     </section>
+
 </template>
 
 <script>
@@ -76,9 +78,9 @@ export default {
   },
   created() {
     let { businessId } = this.$route.params;
-
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
+
       this.$store.dispatch({type:'loadAppoints' ,listRequire:'business'}).then(()=>{
         console.log('done!')
       })
@@ -87,8 +89,8 @@ export default {
       //   this.mapCenter=currBusiness.location
       //   this.markers[0].position=currBusiness.location
 
+
       })
- 
   },
   data() {
     return {
@@ -102,7 +104,6 @@ export default {
       ],
       editMode:false
     }
-
   },
  
  

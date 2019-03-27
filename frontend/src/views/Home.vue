@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <header>
-      <!-- <a href="#" v-scroll-to="'#list'">Search</a> -->
       <HomeFilter @find="filterList"/>
     </header>
     <div v-if="isScroll" class="secondary-header"></div>
@@ -37,7 +36,7 @@ export default {
       await this.$store.dispatch({ type: "loadBusinesses", filterBy });
       this.$scrollTo("#list", 500);
       this.isSearch = true;
-    }
+    },
   },
   created() {
     UtilService.getLocation()

@@ -13,6 +13,8 @@ export default new Vuex.Store({
     loggedInUser: null,
     currBusiness: null,
     appointsList:[],
+    imgList:[],
+    BusinessTypes:['Barber','Tattoo Artist','Cosmetics'],
     filterBy: {
       name: '',
       type: '',
@@ -35,6 +37,12 @@ export default new Vuex.Store({
     },
     appointsList(state){
       return state.appointsList
+    },
+    BusinessTypes(state){
+      return state.BusinessTypes
+    },
+    imgList(state){
+      return state.imgList
     }
   },
 
@@ -60,10 +68,14 @@ export default new Vuex.Store({
       console.log('setLoggedInUser activated!', user)
       state.loggedInUser = user
     },
+    setImgList(state,{imgList}){
+      state.imgList = imgList
+    }
 
   },
   actions: {
     async loadBusiness(context, { businessId }) {
+      console.log('got id :: ',businessId);
       var business = await BusinessService.getById(businessId)
       context.commit({
         type: 'setCurrBusiness',
@@ -84,26 +96,24 @@ export default new Vuex.Store({
       console.log(listRequire);
       var user = context.getters.loggedInUser;
       if (!user) return
-
       var listRequireId = (listRequire === 'business') ? context.getters.currBusiness._id : context.getters.loggedInUser._id
-      // var businessId = context.state.currBusiness._id
-      // var appointsList = await AppointsService.query(businessId)
       var appointsList = await AppointsService.query(listRequireId)
       context.commit({ type: 'getAppointsList', appointsList })
       console.log(appointsList);
       return appointsList
     },
-    async loadUserAppoints(context) {
-      var user = context.getters.loggedInUser;
-      if (!user) return
-     var userId = user._id;
-     var appointsList = await AppointsService
-     console.log(userId);
-    },
+    // async loadUserAppoints(context) {
+    //   var user = context.getters.loggedInUser;
+    //   if (!user) return
+    //  var userId = user._id;
+    //  var appointsList = await AppointsService
+    // },
     async loginUser(context, { credentials }) {
       var user = await UserService.checkLogin(credentials)
       if (!user) return
+      if (user.business_id) context.dispatch({type:'loadBusiness',businessId:user.business_id})
       context.commit({ type: 'setLoggedInUser', user })
+      context.dispatch({type:'loadAppoints',listRequire:'user'})
     },
 
     async signUpUser(context, { credentials, isNewBusiness }) {
@@ -120,8 +130,20 @@ export default new Vuex.Store({
 
     async setCurrBusiness(context, { currBusiness }) {
       context.commit({ type: 'setCurrBusiness', business: currBusiness })
-    }
+    },
 
+    async loadImgs(context, { Businesstype }){
+      var imgList = await BusinessService.getImgs(Businesstype)
+      console.log('gotitititiitit : ',imgList);
+      context.commit({ type: 'setImgList', imgList })
+      
+    },
+
+    async loadBusinessData(context){
+      var businessId = context.getters.currBusiness._id
+      var businessData = await BusinessService.getData(businessId)
+
+    }
   }
 
 })

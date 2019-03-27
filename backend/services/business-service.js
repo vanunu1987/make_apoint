@@ -32,6 +32,19 @@ function query(filterBy) {
     }
 }
 
+function getImgs(filterBy){
+    var type = filterBy.type
+    var queryToMongo = {type:filterBy.type}
+    // console.log(queryToMongo);
+    console.log(type);
+    
+    return mongoService.connect()
+            .then((db) => {
+                return db.collection('imgs').find(queryToMongo).toArray()
+            })
+
+}
+
 
 function add(business) {
     return mongoService.connect()
@@ -70,6 +83,7 @@ module.exports = {
     query,
     getById,
     add,
+    getImgs
     // remove,
     // update
 }
