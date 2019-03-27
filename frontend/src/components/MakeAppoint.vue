@@ -2,7 +2,12 @@
 
 <template>
   <section class="make-appoint">
-    <component @set-cmp="setCmp" @update-appoint="updateAppoint" :is="currCmp.name" :payload="currCmp.payload"></component>
+    <component 
+    :is="currCmp.name" 
+    :payload="currCmp.payload"
+    @set-cmp="setCmp" 
+    @update-appoint="updateAppoint">
+    </component>
   </section>
 </template>
 
