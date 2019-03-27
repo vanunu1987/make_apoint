@@ -14,15 +14,13 @@ import CalendarService from "../services/CalendarService.js";
 
 export default {
   props:['date'],
-  data: () => ({
-    today: "2019-01-09",
-    dateToShow: "2019-01-09"
-  }),
-  computed: {
+  computed:{
+    dayDate(){
+      return this.date
+    },
     events() {
-      var date = moment(this.dateToShow);
-      var now = moment(this.today);
-      return CalendarService.getDayEventsForCalendar(this.today,
+      console.log('service paramss',this.dayDate,this.$store.getters.currBusiness.workHours, this.$store.getters.appointsList)
+      return CalendarService.getDayEventsForCalendar(this.dayDate,
         this.$store.getters.currBusiness.workHours,
         this.$store.getters.appointsList
       );
