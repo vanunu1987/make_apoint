@@ -67,23 +67,23 @@ function add(business) {
 //         })
 // }
 
-// function update(toy) {
-//     toy._id = new ObjectId(toy._id)
-//     return mongoService.connect()
-//         .then(db => {
-//             const collection = db.collection('toys');
-//             return collection.updateOne({ _id: toy._id }, { $set: toy })
-//                 .then(result => {
-//                     return toy;
-//                 })
-//         })
-// }
+function update(business) {
+    business._id = new ObjectId(business._id)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('business');
+            return collection.updateOne({ _id: business._id }, { $set: business })
+                .then(result => {
+                    return business;
+                })
+        })
+}
 
 module.exports = {
     query,
     getById,
     add,
-    getImgs
+    getImgs,
     // remove,
-    // update
+    update
 }
