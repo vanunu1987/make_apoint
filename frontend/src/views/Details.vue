@@ -1,9 +1,8 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
+
  <router-link v-if="isAdmin" :to="'/edit/'+businessId" >edit</router-link>
-
     <make-appoint class="calendar" style="width:500px;"></make-appoint>
-
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
         </div>
@@ -105,7 +104,10 @@ export default {
     isAdmin:false
     }
   },
- 
+ mounted(){
+   var user = this.$store.getters.loggedInUser
+   console.log('MOUNTED : ',user);
+ },
  
   computed: {
     currBusiness() {

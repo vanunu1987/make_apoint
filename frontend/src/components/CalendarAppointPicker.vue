@@ -44,7 +44,7 @@ export default {
     checkIfLogin(selectedTime){
       if(this.$store.getters.loggedInUser){
         console.log('f checkIfLogin activated in CalendarAppointPicker cmp')
-         this.$emit('update-appoint',{property:'time',value:selectedTime})
+         this.$emit('update-appoint',{property:'startTime',value:selectedTime})
          this.$emit('move-to-cmp','MakeAppoint5')
       }
     }
