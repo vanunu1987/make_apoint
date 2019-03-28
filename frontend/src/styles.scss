@@ -31,7 +31,8 @@ ul {
     padding: 0;
     &.business-list{
         display: grid;
-        grid-template-columns: repeat(4,minmax(min-content, auto));
+        // grid-template-columns: repeat(4,minmax(min-content, auto));
+        grid-template-columns: repeat(4,1fr);
         grid-gap: 10px 20px;
         padding: 20px;
 
@@ -46,13 +47,17 @@ ul {
     // width: 100%;
     padding: 10px;
     z-index: 10;
-    right: 0;
+    left: 0;
+    background-image: linear-gradient(to right, white , #ffffff00);
+    width: 100%;
+    z-index: 1000;
 }
 .home{
     header{
         height: 100vh;
         background-image: url('./assets/cover2.jpg');
         // background-image: url('./assets/main-cover-3.png');
+        background-attachment: fixed;
         background-size: cover;
         // background-size: contain;
         display: flex;

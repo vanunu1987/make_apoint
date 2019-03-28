@@ -340,28 +340,43 @@ margin-left: 250px;
 .Setting {
   // position: fixed;
   font-size: 2.5rem;
-  padding: 10px;
-  border-radius: 100%;
-  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+  // padding: 10px;
+  // border-radius: 100%;
+  // box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
   margin-top: 20px;
   margin-left: 35px;
   z-index: 10;
   width: 65px;
-
-  background-color: white;
+  color: white;
+  // background-color: white;
+}
+button{
+  text-align: center;
+  &.fa-cog{
+    color: white
+  }
+  &.fa-barcode{
+    color: white
+  }
+  &.fa-calendar-alt{
+    color: white
+  }
+  &.fa-save{
+    color: white
+  }
 }
 .addImg {
   // position: absolute;
   font-size: 2.5rem;
-  padding: 10px;
-  border-radius: 100%;
-  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+  // padding: 10px;
+  // border-radius: 100%;
+  // box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
   margin: 10px;
   z-index: 10;
   width: 65px;
   margin-left: 35px;
   margin-top: 40px;
-  background-color: white;
+  // background-color: white;
 }
 
 input {
@@ -475,8 +490,7 @@ button:focus {
   border: none;
   outline: none;
 }
-.midle {
-}
+
 .fas {
   color: black;
 }
@@ -485,8 +499,7 @@ button:focus {
   padding: 5px;
   border: none;
 }
-div.calendar {
-}
+
 .headerGallery {
   height: 100vh;
   right: 0px;

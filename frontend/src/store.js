@@ -198,6 +198,7 @@ export default new Vuex.Store({
     },
     async addAppoint(context , {appoint}) {
       var res = await AppointsService.add(appoint)
+      context.dispatch({type:'loadAppoints',listRequire:'user'})
       return res
     },
 

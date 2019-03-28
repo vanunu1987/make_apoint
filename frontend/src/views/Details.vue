@@ -1,6 +1,7 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
- <router-link v-if="isAdmin" :to="'/edit/'+businessId" >edit</router-link>
+ <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId" ></router-link>
+
     <make-appoint class="calendar" style="width:500px;"></make-appoint>
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
@@ -31,10 +32,11 @@
          <span class="fas fa-star-half-alt"></span>
          <h2>Rating</h2> 
         </span>
-        <span class="flex">
-        <h3>{{currBusiness.rank.avg}}</h3>
-        ,
-        <h3>{{currBusiness.rank.qty}}</h3>
+        <span class="rating-container flex">
+       <v-rating
+            :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
+          size="14" ></v-rating>
+        <h3>({{currBusiness.rank.qty}})</h3>
         </span>
         </div>
         <div class="midle">
@@ -169,7 +171,7 @@ h1,h2,h3{
   background-color: white;
  display: grid;
     grid-template-columns: 20px 1fr 1fr 20px;
-    grid-template-rows: 1fr 1fr 1fr .5fr;
+    grid-template-rows: 1.3fr 1fr 1fr .5fr;
      grid-gap: 10px 20px;
         // padding: 20px;
     .img-header{
@@ -203,6 +205,8 @@ word-wrap: break-word !important;
 }
 .details-head{
 align-items: center;
+justify-content: space-between;
+padding-right: 20px;
 }
 .img-profile{
   width: 75px;
@@ -216,10 +220,11 @@ align-items: center;
 
 .img-header {
   width: 100%;
-  height: 50vh;
+  // height: 50vh;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-attachment: fixed;
+  background-position: center !important;
 }
 button {
   background-color: #ffdead00;
@@ -237,10 +242,13 @@ button:focus {
   border: none;
   outline: none;
 }
-.midle{
-    // display: flex;
-    // justify-content: space-between;
-
+span{
+  &.rating-container{
+    margin-top: 5px;
+     display: flex;
+  // justify-content: center;
+  padding-bottom: 10px;
+  }
 }
 .fas{
   color: black;
@@ -251,6 +259,25 @@ button:focus {
   padding: 5px;
   border: none;
 
+}
+
+a{
+  text-decoration: none;
+  font-size: 2rem;
+  padding: 5px;
+  text-align: center;
+  border-radius: 100%;
+  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+  margin: 10px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  // margin-left: 35px;
+  // margin-top: 40px;
+  background-color: white;
 }
 div.calendar{
   // background-color:rgb(255, 233, 137);

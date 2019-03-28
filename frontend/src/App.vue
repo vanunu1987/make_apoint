@@ -6,8 +6,9 @@
       <router-link to="/about">About</router-link> | 
        <router-link to="/login">Log in</router-link> | 
        <router-link to="/edit">Add business</router-link> | 
-       <router-link v-if="currBusiness" :to="'manage/'+currBusiness._id">Business</router-link>
-       <!-- <section v-if="loggedUser" class="user-name">Hello {{loggedUser}}</section>  -->
+       <router-link v-if="loggedUser && loggedUser.business_id" :to="'business/'+currBusiness._id">{{loggedUser.userName}}'s Page</router-link>
+       <!-- <router-link v-if="currBusiness" :to="'manage/'+currBusiness._id">Business</router-link> -->
+       <!-- <section v-if="loggedUser.name" class="user-name">Hello {{loggedUser.name}}</section>  -->
     </div>
     <router-view/>
   </div>
@@ -29,7 +30,7 @@ export default {
     loggedUser(){
       var currUser = this.$store.getters.loggedInUser
       if (!currUser) return 
-      return currUser.userName
+      return currUser
     },
     currBusiness(){
       console.log(this.$store.getters.currBusiness);

@@ -20,16 +20,11 @@
               <p>{{appoint.timeToShow}}</p>
               <p>At {{appoint.startTime}} ({{appoint.timeRemaining}})</p>
               </router-link>
-              <!-- <button @click.stop="getDetails(appoint.business_id)"></button> -->
               </section>
           </li>
       </ul>
-
-     
-
-      
   </div>
-  <!-- </el-card> -->
+
   </div>
 </template>
 
@@ -60,11 +55,6 @@ export default {
                 }, 2000);
                 if (!this.isOpen) clearInterval(this.interval)
             }
-        // this.$store.dispatch({type:'loadAppoints',listRequire:'user'})
-        // .then(res =>{
-        //     this.isOpen = !this.isOpen
-        //     },
-        // )
     }
   },
   computed:{
@@ -98,7 +88,6 @@ export default {
         appoint.isComingUp = isComingUp;
         appoints.splice(idx,1,appoint)
         console.log(appoint);
-        // return appoint
         })
     return appoints.sort((app1,app2) => {
         return app1.timeStamp - app2.timeStamp
@@ -147,7 +136,7 @@ p{
     button{
     position: absolute;
     right: 20px;
-    top: 30px;
+    top: 20px;
     background-color: #a2f7b5;
     height: 60px;
     width: 60px;

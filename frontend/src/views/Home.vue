@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png">
+    <!-- <img src="../assets/logo.png"> -->
     <header>
       <HomeFilter @find="filterList"/>
     </header>
