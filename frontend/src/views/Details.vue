@@ -1,12 +1,5 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
-<<<<<<< HEAD
- <router-link :to="'/edit/'+businessId" >edit</router-link>
-
-    <make-appoint class="calendar" ></make-appoint>
-=======
->>>>>>> 12d29232cf9a5b7eaab47d3e6b5b983e3886db97
-
  <router-link v-if="isAdmin" :to="'/edit/'+businessId" >edit</router-link>
     <make-appoint class="calendar" style="width:500px;"></make-appoint>
         <div  class="img-header"  
@@ -51,6 +44,8 @@
   :zoom="16"
   map-type-id="terrain"
   style="width: 100vw; height: 300px"
+  :disableAutoPan="true"
+   :options="{scrollwheel: false}"
 >
   <GmapMarker
     :key="index"
@@ -58,6 +53,8 @@
     :position="mapCenter"
     :clickable="true"
     :draggable="true"
+    :disableAutoPan="true"
+   :options="{scrollwheel: false}"
   />
 </GmapMap>
  
@@ -83,6 +80,7 @@ export default {
   },
   created() {
     let { businessId } = this.$route.params;
+    this.businessId=businessId
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
       var user=this.$store.getters.loggedInUser

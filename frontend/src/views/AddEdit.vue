@@ -1,6 +1,6 @@
 <template>
   <section class="page-continer" v-if="!!currBusiness.prefs">
-    <business-type-modal @saveType="setType" v-if="isTypeModal"/>
+    <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
     <user-login-signUp
       :isNewUserProp="true"
@@ -14,9 +14,10 @@
       class="img-header flex"
       :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }"
     >
-      <div class="column">
-        <button @click="setFilterBy('header')" title="Add image" class="far fa-images"></button>
-        <h3>Add your header image here</h3>
+      <div class="column" ref="header">
+        <button v-if="!currBusiness.prefs.header_img_url" @click="setFilterBy('header')" title="Add image" class="addBlanc far fa-images"></button>
+        <button v-if="currBusiness.prefs.header_img_url" @click="setFilterBy('header')" title="Add image" class="editHeader far fa-edit"></button>
+        <h3 v-if="!currBusiness.prefs.header_img_url">Add your header image here</h3>
       </div>
     </div>
     <div class="profile-detais culomn">
@@ -27,13 +28,20 @@
           :style="{backgroundImage: `url(${currBusiness.prefs.profile_img_url})` }"
         >
           <button
+            v-if="!currBusiness.prefs.profile_img_url"
             @click="setFilterBy('profile')"
             title="Add profile image"
             class="fas fa-user-plus"
           ></button>
+          <button
+            v-if="currBusiness.prefs.profile_img_url"
+            @click="setFilterBy('profile')"
+            title="Add profile image"
+            class="editProfile fas fa-edit"
+          ></button>
         </div>
       </div>
-      <h5>Profile image</h5>
+      <h5 class="profilTag">Profile image</h5>
       <span class="flex">
         <span class="fas fa-map-pin"></span>
         <h2 class="address-h2">Address</h2>
@@ -76,19 +84,21 @@
           :position="m.position"
           :clickable="true"
           :draggable="true"
+          :disableAutoPan="true"
+
         />
       </GmapMap>
     </div>
     <div class="setings">
-      <div class="culomn">
-        <button title="Setting" class="fas fa-cog Setting"></button>
+      <div class="bar culomn">
+        <button @click="isGalleryHeaderImg=!isGalleryHeaderImg" title="Setting" class="fas fa-cog Setting"></button>
         <button
           @click="isProductModal=true"
           v-show="!isGalleryHeaderImg"
           title="addImg"
           class="fas fa-barcode addImg"
         ></button>
-        <product-form v-show="!isGalleryHeaderImg"/>
+        <!-- <product-form v-show="!isGalleryHeaderImg"/> -->
         <button
           v-show="!isGalleryHeaderImg"
           @click="isCalendar=!isCalendar"
@@ -108,7 +118,7 @@
         required
         @change="saveImage"
       >
-      <button @click="$refs.file.click()"  v-show="isGalleryHeaderImg" title="addImg" class="fas fa-plus addImg"></button>
+      <button @click="$refs.file.click()"  v-show="isGalleryHeaderImg" title="addImg" class="fas fa-image addImg"></button>
     
       <div v-if="isGalleryHeaderImg" class="headerGallery">
         <ul>
@@ -163,9 +173,6 @@ export default {
   created() {
     let { businessId } = this.$route.params;
     console.log(businessId);
-    
-   
-   
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then((res)=>{
       this.currBusiness=this.$store.getters.currBusiness
@@ -323,7 +330,13 @@ span.flex {
     margin: 3px;
   }
 }
-
+.bar{
+  align-items: center;
+}
+.profilTag{
+width: 90px;
+margin-left: 250px;
+}
 .Setting {
   // position: fixed;
   font-size: 2.5rem;
@@ -350,11 +363,16 @@ span.flex {
   margin-top: 40px;
   background-color: white;
 }
+
 input {
   border: 0.8px dashed;
+  max-width: 250px;
   &:focus {
     outline: none;
   }
+}
+.businessType{
+box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
 }
 h1,
 h2,
@@ -369,7 +387,7 @@ h3 {
 .page-continer {
   background-color: white;
   display: grid;
-  grid-template-columns: 0.5fr 2fr 1fr 0.5fr 0.8fr;
+  grid-template-columns: 20px 2fr 1fr 20px 0.8fr;
   grid-template-rows: 1fr 1fr 1fr 0.5fr;
   grid-gap: 10px 20px;
   // padding: 20px;
@@ -436,7 +454,7 @@ h3 {
   border: 1.3px dashed;
   justify-content: center;
   align-items: center;
-  button {
+  button.addBlanc {
     font-size: 2.5rem;
     padding: 5px;
   }
@@ -471,7 +489,6 @@ div.calendar {
 }
 .headerGallery {
   height: 100vh;
-  width: 15vw;
   right: 0px;
   border-radius: 5px;
   margin-top: 50px;
@@ -491,6 +508,25 @@ div.calendar {
 }
 .login {
   z-index: 1000;
+}
+.editHeader{
+    background-color: white;
+    border-radius: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+  margin-top: 355px;
+}
+.editProfile{
+  background-color: white;
+    border-radius: 100%;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+  margin-left: 80px;
+  height: 33px;
 }
 </style>
 
