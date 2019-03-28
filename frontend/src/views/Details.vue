@@ -233,11 +233,7 @@ button:focus {
   border: none;
   outline: none;
 }
-.midle{
-    // display: flex;
-    // justify-content: space-between;
 
-}
 .fas{
   color: black;
 
@@ -248,14 +244,6 @@ button:focus {
   border: none;
 
 }
-div.calendar{
-  // background-color:rgb(255, 233, 137);
-  // width:90%;
-  //  position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // z-index: 3;
-}
+
 </style>
 
