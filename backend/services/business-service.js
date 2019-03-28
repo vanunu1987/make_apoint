@@ -58,15 +58,6 @@ function add(business) {
         })
 }
 
-// function remove(toyId) {
-//     toyId = new ObjectId(toyId)
-//     return mongoService.connect()
-//         .then(db => {
-//             const collection = db.collection('toys');
-//             return collection.remove({ _id: toyId })
-//         })
-// }
-
 function update(business) {
     business._id = new ObjectId(business._id)
     console.log('BACKEND SERVICE : ',business.location);

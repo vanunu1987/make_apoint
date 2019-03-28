@@ -27,7 +27,6 @@ function getLocation() {
     return userLocation
   } else {
    console.log(navigator.geolocation);
-   
   }
 }
 

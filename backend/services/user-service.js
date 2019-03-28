@@ -12,9 +12,7 @@ function checkLogin(credentials) {
         .then(db => db.collection('users').findOne(queryToMongo))
 }
 
-// todo  - add user only if nickname is not taken
 function addUser(credentials) {
-    // var user = { credentials }
     var user = {}
     user.isReg = true
     user.pass = credentials.password
@@ -42,30 +40,8 @@ function update(user) {
         })
 }
 
-// function getById(id) {
-//     const _id = new ObjectId(id)
-//     return mongoService.connect()
-//         .then(db => db.collection('user').findOne({ _id }))
-// }
-
-
-
-// function query() {
-//     return mongoService.connect()
-//         .then(db => db.collection('toys').find({}).toArray())
-// }
-
-
-
-
-
-
-
-
 
 module.exports = {
-    // query,
-    // getById,
     update,
     addUser,
     checkLogin

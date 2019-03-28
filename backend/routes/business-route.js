@@ -42,9 +42,7 @@ function addBusinessRoutes(app) {
 
     })
 
-
-
-    // SINGLE - GET Full details including reviews
+    // SINGLE 
     app.get('/business/:businessId', (req, res) => {
         const businessId = req.params.businessId;
             businessService.getById(businessId)
@@ -52,14 +50,6 @@ function addBusinessRoutes(app) {
                 res.json(business)
             })
     })
-
-    
-    // // DELETE
-    // app.delete('/toy/:toyId',_checkAdmin, (req, res) => {
-    //     const toyId = req.params.toyId;
-    //     toyService.remove(toyId)
-    //         .then(() => res.end(`Toy ${toyId} Deleted `))
-    // })
 
     // CREATE
     app.post('/business',_checkAdmin, (req, res) => {
