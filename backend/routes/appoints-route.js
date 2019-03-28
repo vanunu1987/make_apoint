@@ -14,10 +14,6 @@ function addAppointsRoutes(app) {
 
     app.get('/appoints', (req, res) => {
         var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
-        console.log('appoints filter : ',filterBy);
-        // var user = req.session.user;
-        // const appointsQuery = {listRequire,listRequireId}
-        // const listRequireId = req.params.listRequireId;
         appointsService.query(filterBy)
             .then((appoints) => {
                 console.log('APPOINTS : ',appoints);

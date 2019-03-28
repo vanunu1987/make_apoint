@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import BusinessService from './services/BusinessService.js'
 import AppointsService from './services/AppointsService.js'
 import UserService from './services/UserService.js'
+import { stat } from 'fs';
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
       sortBy: '',
       currUserLocation: { lat: 32.087971200000005, lng: 34.8031581 },
     },
+    currUserLocation:null
   },
   getters: {
     businessList(state) {
@@ -51,6 +53,9 @@ export default new Vuex.Store({
     },
     businessData(state){
       return state.businessData
+    },
+    currUserLocation(state){
+      return state.currUserLocation
     }
   },
 
@@ -87,6 +92,9 @@ export default new Vuex.Store({
     },
     updateUser(state,{user}){
       state.loggedInUser = user
+    },
+    setCurrUserLocation(state,{userLocation}){
+      state.currUserLocation = userLocation
     }
 
   },
@@ -191,8 +199,19 @@ export default new Vuex.Store({
     async addAppoint(context , {appoint}) {
       var res = await AppointsService.add(appoint)
       return res
-    }
+    },
 
+    loadUserLocation(context){
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+        var userLocation =  {lat : position.coords.latitude,lng:position.coords.longitude }
+        context.commit({type:'setCurrUserLocation',userLocation})
+        })
+      } else {
+        console.log(navigator.geolocation);
+      }
+      
+    }
   }
 
 })

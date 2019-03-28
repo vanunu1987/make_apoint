@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <img src="../assets/logo.png">
     <header>
       <HomeFilter @find="filterList"/>
     </header>
@@ -39,17 +40,15 @@ export default {
     },
   },
   created() {
-    UtilService.getLocation()
+    this.$store.dispatch('loadUserLocation')
     var filterBy = this.$store.getters.filterBy
-    var userLocation = UtilService.userLocation;
-    console.log('location : ',userLocation);
-    if (userLocation) filterBy.currUserLocation = userLocation
     this.$store.dispatch({ type: "loadBusinesses", filterBy });
   },
 };
 </script>
 
-<style>
+<style <style lang="scss" scoped>
+
 .secondary-header {
   position: fixed;
   top: 0;
@@ -58,5 +57,14 @@ export default {
   background-color: black;
   z-index: 1;
 }
+img{
+  position: absolute;
+  height: 100px;
+  width: auto;
+  left: 5px;
+  top: 0;
+}
+
+
 </style>
 

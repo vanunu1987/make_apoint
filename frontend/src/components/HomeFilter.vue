@@ -17,16 +17,23 @@ export default {
         name: "",
         type: "",
         sortBy: "",
-        currUserLocation: { lat: 32.087971200000005, lng: 34.8031581 }
+        // currUserLocation: { lat: 32.087971200000005, lng: 34.8031581 }
       }
     };
+  },
+  computed:{
+    currUserLocation(){
+      return this.$store.getters.currUserLocation
+    }  
   },
   methods: {
     find(ev) {
       ev.target.blur();
       this.filterBy.name = ev.target.value;
       this.filterBy.type = ev.target.value;
-      this.$emit("find", {...this.filterBy});
+      this.filterBy.currUserLocation = this.currUserLocation
+      var filterBy = JSON.parse(JSON.stringify(this.filterBy))
+      this.$emit("find", filterBy);
       ev.target.value = ''
       this.filterBy.name = ev.target.value;
     },

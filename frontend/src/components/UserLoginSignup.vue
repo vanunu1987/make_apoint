@@ -45,8 +45,9 @@ export default {
       console.log(this.userCredentials);
       var credentials = { ...this.userCredentials };
       this.$store.dispatch({ type: "loginUser", credentials });
-       this.userCredentials.userName = null;
+      this.userCredentials.userName = null;
       this.userCredentials.password = null;
+      this.$emit('routeHome')
     },
     signup() {
       console.log(this.newUserCredentials);
@@ -54,12 +55,15 @@ export default {
       this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus })
       .then(() => {
         this.$emit('closeSignUp')
+        this.$emit('routeHome')
       })
       this.newUserCredentials.userName = null;
       this.newUserCredentials.password = null;
       this.newUserCredentials.phone = null;
-
     },
+    routeHome(){
+      this.$emit('routeHome')
+    }
   },
   created() {
     console.log(this.isNewUserProp);
