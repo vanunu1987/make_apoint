@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     adress() {
-      return this.currBusiness.dist / 1000 + " Km from you";
+      return (this.currBusiness.dist / 1000).toFixed(1) + " Km from you";
     }
   }
 };
@@ -52,6 +52,7 @@ a {
 
 .v-card{
   border-radius: 5px;
+  height: 100%;
 }
 .v-img{
   border-radius: 5px 5px 0 0;

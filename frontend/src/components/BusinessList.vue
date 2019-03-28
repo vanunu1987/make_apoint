@@ -48,11 +48,14 @@ ul {
     position: relative;
     top: 0;
     text-align: center;
-    transition: all 0.3s;
+    transition: all 0.4s;
 
     &:hover {
-      top: -15px;
+      top: -5px;
       box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+    }
+    .BusinessPreview {
+      height: 100%;
     }
   }
 }
