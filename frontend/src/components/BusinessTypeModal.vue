@@ -1,8 +1,9 @@
 <template>
   <div class="ModalContiner">
     <div class="modalMain">
+        <h2>Pick your business type</h2>
         <select  v-model="selctedType">
-            <option value="">choose your busines type</option>
+            <option value="">Busines type</option>
             <option v-for="(type,idx) in businessType " 
             :key="idx"
            >
@@ -53,9 +54,11 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 100;
+
   .modalMain {
-    height: 50vw;
-    width: 50vw;
+  box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+    height: 30vw;
+    width: 30vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
@@ -64,5 +67,16 @@ export default {
     align-items: center;
   }
 
+  select{
+      text-align: center;
+       &:focus {
+      text-align: center;
+    outline: none;
+    border: dashed;
+  }
+  }
+}
+button{
+    margin-top: 10px;
 }
 </style>
