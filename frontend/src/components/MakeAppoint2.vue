@@ -62,13 +62,16 @@ section.make-appoint2{
     z-index: 3;
   }
   .appoint-picker{
+    border: 2px solid grey;
+    padding: 10px;
     background-color: white;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    position:absolute;
+    top: 33%;
+    left: -26%;
+    transform: translate(-50%, -50%);
+    position: absolute;
     z-index: 4;
-  }
+}
+  
 
 
 }

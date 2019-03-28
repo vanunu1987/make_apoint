@@ -1,11 +1,5 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
-<<<<<<< HEAD
- <router-link :to="'/edit/'+businessId" >edit</router-link>
-
-    <make-appoint class="calendar" ></make-appoint>
-=======
->>>>>>> 12d29232cf9a5b7eaab47d3e6b5b983e3886db97
 
  <router-link v-if="isAdmin" :to="'/edit/'+businessId" >edit</router-link>
     <make-appoint class="calendar" style="width:500px;"></make-appoint>

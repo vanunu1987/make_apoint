@@ -1,12 +1,11 @@
 <template>
   <section class="calendar-appoint-picker">
-   
     <i class="far fa-calendar-alt"></i> {{dayDate}}
     <br/>
     <div class="appoint" v-for="event in events" :key="event.time">
      <div>
      <h5><i class="far fa-clock"></i> start time: {{ event.time}} </h5>
-     <h5><i class="far fa-hourglass"></i> duration: {{ event.duration}}</h5>
+     <h5><i class="far fa-hourglass"></i> duration: {{ event.duration | hours}}</h5>
      </div>
      <v-btn @click="checkIfLogin(event.time)" outline color="indigo">choose</v-btn>
     </div>
@@ -44,12 +43,7 @@ export default {
     checkIfLogin(selectedTime){
       this.$emit('update-appoint',{property:'time',value:selectedTime})
       if(this.$store.getters.loggedInUser){
-<<<<<<< HEAD
          
-=======
-        console.log('f checkIfLogin activated in CalendarAppointPicker cmp')
-         this.$emit('update-appoint',{property:'startTime',value:selectedTime})
->>>>>>> 12d29232cf9a5b7eaab47d3e6b5b983e3886db97
          this.$emit('move-to-cmp','MakeAppoint5')
       }else{
          
@@ -65,6 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .calendar-appoint-picker{
+  font-size:23px;
 div.appoint{
   border-top:1px grey solid;
   display:flex;
