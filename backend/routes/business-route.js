@@ -22,7 +22,7 @@ function addBusinessRoutes(app) {
                     bus.dist = geolib.getDistance(   
                     {latitude: bus.location.lat, longitude: bus.location.lng},
                     {latitude: filterBy.locationLat, longitude: filterBy.locationLng}
-                    );
+                    );         
                     return bus
                 })
                 newArr.sort((busA,busB) => {

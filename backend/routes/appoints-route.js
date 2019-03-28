@@ -21,23 +21,23 @@ function addAppointsRoutes(app) {
             })
     })
 
-    app.get('/business', (req, res) => {
-        var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
-        businessService.query(filterBy)
-            .then(business => {
-                var newArr = business.map((bus) => {
-                    bus.dist = geolib.getDistance(   
-                    {latitude: bus.location.lat, longitude: bus.location.lng},
-                    {latitude: filterBy.locationLat, longitude: filterBy.locationLng}
-                    );
-                    return bus
-                })
-                newArr.sort((busA,busB) => {
-                    return busA.dist - busB.dist;
-                })
-                res.json(newArr)
-            })
-    })
+    // app.get('/business', (req, res) => {
+    //     var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
+    //     businessService.query(filterBy)
+    //         .then(business => {
+    //             var newArr = business.map((bus) => {
+    //                 bus.dist = geolib.getDistance(   
+    //                 {latitude: bus.location.lat, longitude: bus.location.lng},
+    //                 {latitude: filterBy.locationLat, longitude: filterBy.locationLng}
+    //                 );
+    //                 return bus
+    //             })
+    //             newArr.sort((busA,busB) => {
+    //                 return busA.dist - busB.dist;
+    //             })
+    //             res.json(newArr)
+    //         })
+    // })
 
     app.post('/appoints',_checkAdmin, (req, res) => {
         var appoint = req.body
