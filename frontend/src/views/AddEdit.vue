@@ -1,6 +1,7 @@
 <template>
   <section class="page-continer" v-if="!!currBusiness.prefs">
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
+    <business-path-modal class="businessType"  v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
     <user-login-signUp
       :isNewUserProp="true"
@@ -149,6 +150,7 @@ import mapCmp from '../components/MapCmp.vue'
 import vueDraggable from '../components/VueDraggable.vue'
 import CalendarDatePicker from '@/components/CalendarDatePicker.vue'
 import BusinessTypeModal from '@/components/BusinessTypeModal.vue'
+import BusinessPathModal from '@/components/BusinessTypeModal.vue'
 import BusinessService from '@/services/BusinessService.js'
 import cloudinaryService from '@/services/cloudinary-service.js'
 import UtilService from '@/services/UtilService.js'
@@ -178,7 +180,11 @@ export default {
       this.currBusiness=this.$store.getters.currBusiness
       console.log(this.currBusiness);
        if (!businessId) this.isTypeModal=true
-      else  this.$store.dispatch({type: 'loadImgs',Businesstype:this.currBusiness.type})
+      // else  this.$store.dispatch({type: 'loadImgs',Businesstype:this.currBusiness.type})
+      else  {
+        this.$store.dispatch({type: 'loadImgs',Businesstype:this.currBusiness.type})
+        this.isPathModal=true
+      }
     })
   },
   data() {
@@ -212,6 +218,7 @@ export default {
     },
     loadingImg: false,
     imageData:'',
+    isPathModal:false
     }
   },
  
