@@ -14,10 +14,9 @@ function checkLogin(credentials) {
 
 function addUser(credentials) {
     var user = {}
-    user.isReg = true
+    user.isReg = credentials.isReg
     user.pass = credentials.password
     user.userName = credentials.userName
-    user.appoints_id = []
     user.phone = credentials.phone
     user.business_id = null
     return mongoService.connect()

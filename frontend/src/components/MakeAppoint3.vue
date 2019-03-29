@@ -58,14 +58,23 @@ export default {
 .make-appoint3{
   height: 100%;
   display:flex;
+  font-size: 23px;
   flex-direction:column;
  justify-content: space-between;
+ align-items: center;
+ background-image: linear-gradient(rgb(97, 183, 253), rgb(159, 236, 255));
  button.v-btn{
-   background-color:rgb(25, 136, 240) !important;
+   background-color:#2f71ff !important;
    opacity: 0.9;
  }
  input{
-   border:1px black solid;
+  //  border:1px black solid;
+  background-color: #eeeeee;
+  width: 50%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+   
  }
 }
 </style>

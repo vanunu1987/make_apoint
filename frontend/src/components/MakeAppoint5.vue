@@ -2,7 +2,13 @@
 
 <template>
   <section class="make-appoint5">
-    {{appoint}}
+    <h1>make A ppoint!</h1>
+    <h1>aapointment details:</h1>
+    <h1>{{appoint.date}}</h1>
+    <h1>{{appoint.startTime}}</h1>
+    <h1>{{appoint.product.title}}</h1>
+    <h1>{{appoint.product.duration | hours}}</h1>
+    <h1>{{appoint.product.price | dollar}}</h1>
     <v-btn @click="sendAddAppoint">confirm</v-btn>
   
   </section>
@@ -29,6 +35,7 @@ export default {
     },
     sendAddAppoint(){
        this.$emit("make-appoint")
+       this.$emit('set-cmp','MakeAppoint6')
     }
   },
  
@@ -37,8 +44,11 @@ export default {
 
 <style lang="scss">
 .make-appoint5{
+   background-image: linear-gradient(rgb(97, 183, 253), rgb(159, 236, 255));
+   height: 100%;
+   font-size:29px;
   .v-btn:before{
-  background-color:rgb(43, 255, 0);
+  background-color:rgb(0, 238, 255);
   opacity: 0.9;
 }
 

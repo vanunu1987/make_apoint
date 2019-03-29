@@ -1,26 +1,16 @@
 
 
 <template>
-  <section class="make-appoint2">
-    <calendar-date-picker
-      @to-cmp-appoint-picker="sendToCmpAppointPicker"
-      @update-appoint="updateAppoint"
-    ></calendar-date-picker>
-
-    <calendar-appoint-picker @move-to-cmp="moveToCmp" :date="selectedDay"></calendar-appoint-picker>
+  <section class="make-appoint6">
+    <h1>see you there!</h1>
+  <img src="../assets/success.gif">
   </section>
 </template>
 
 <script>
-import CalendarDatePicker from "@/components/CalendarDatePicker.vue";
-import CalendarAppointPicker from "@/components/CalendarAppointPicker.vue";
 
 export default {
-  data() {
-    return {
-      selectedDay: '2019-03-27'
-    };
-  },
+  props:['appoint'],
   methods: {
     sendToCmpAppointPicker(payload) {
       console.log("sendToCmpAppointPicker", payload);
@@ -31,15 +21,30 @@ export default {
     },
     updateAppoint(payload) {
       console.log(
-        "update appoint recevied in makeappoint2 cmp with this payload",
+        "update appoint recevied in makeappoint5 cmp with this payload",
         payload
-      );
+      )
       this.$emit("update-appoint", payload);
+    },
+    sendAddAppoint(){
+       this.$emit("make-appoint")
+       this.$emit('set-cmp','MakeAppoint6')
     }
   },
-  components: {
-    CalendarDatePicker,
-    CalendarAppointPicker
-  }
+ 
 };
 </script>
+
+<style lang="scss">
+.make-appoint6{
+   background-image: linear-gradient(rgb(23, 156, 245), rgb(255, 255, 248));
+   font-size:50px;
+   img{
+     max-width:100%;
+max-height:100%;
+   }
+
+
+}
+</style>
+

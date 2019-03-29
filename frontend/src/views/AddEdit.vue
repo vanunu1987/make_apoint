@@ -364,6 +364,12 @@ button{
   &.fa-save{
     color: white
   }
+  &.fa-plus{
+    color: white
+  }
+  &.fa-image{
+    color: white
+  }
 }
 .addImg {
   // position: absolute;

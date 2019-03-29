@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One|Hammersmith+One');
+
+@font-face{
+    font-family: AirbnbCereal;
+    src: url('./assets/fonts/AirbnbCereal-Book.ttf')
+
+}
 *{
     // font-family: 'Fjalla One', sans-serif;
-    font-family: 'Hammersmith One', sans-serif;
+    // font-family: 'Hammersmith One', sans-serif;
+    font-family: 'AirbnbCereal', sans-serif;
 }
 
 
@@ -40,6 +47,19 @@ ul {
             // height: 300px;
         }
     }
+}
+
+@media (max-width: 740px){
+    ul {
+        list-style: none;
+        padding: 0;
+        &.business-list{
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 20px;
+        }
+    }
+
 }
 
 #nav{

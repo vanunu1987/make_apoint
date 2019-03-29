@@ -15,11 +15,9 @@ function addRoutes(app) {
 
     app.put(`${BASE}/login`, (req, res) => {
         const credentials = req.body
-        console.log(req.body);
         userService.checkLogin(credentials)
             .then(user => {
                 req.session.user = user
-                console.log('FOUND',user);
                 res.json(user)
             })
     })
@@ -27,8 +25,6 @@ function addRoutes(app) {
     app.put(`${BASE}/:userId`, (req, res) => {
         const userId = req.params.userId;
         const user = req.body;
-        console.log('ID : ',userId);
-        console.log('USER : ',user,);
         userService.update(user)
             .then(user => res.json(user))
     })

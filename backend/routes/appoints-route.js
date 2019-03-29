@@ -16,35 +16,20 @@ function addAppointsRoutes(app) {
         var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
         appointsService.query(filterBy)
             .then((appoints) => {
-                console.log('APPOINTS : ',appoints);
                 res.json(appoints)
             })
     })
 
-    // app.get('/business', (req, res) => {
-    //     var filterBy = (Object.keys(req.query).length > 0) ? req.query : ''
-    //     businessService.query(filterBy)
-    //         .then(business => {
-    //             var newArr = business.map((bus) => {
-    //                 bus.dist = geolib.getDistance(   
-    //                 {latitude: bus.location.lat, longitude: bus.location.lng},
-    //                 {latitude: filterBy.locationLat, longitude: filterBy.locationLng}
-    //                 );
-    //                 return bus
-    //             })
-    //             newArr.sort((busA,busB) => {
-    //                 return busA.dist - busB.dist;
-    //             })
-    //             res.json(newArr)
-    //         })
-    // })
-
+    app.delete('/appoints/:appointId',_checkAdmin, (req, res) => {
+        const appointId = req.params.appointId;
+        appointsService.remove(appointId)
+            .then(() => res.end(`Deleted`))
+    })
+   
     app.post('/appoints',_checkAdmin, (req, res) => {
         var appoint = req.body
-        console.log('got this in backend : ',appoint)
         appointsService.add(appoint)
         .then((appoint) => {
-            console.log('APPOINT ADDED ON BACK : ',appoint);
             res.json(appoint)
         })
     })
@@ -52,11 +37,9 @@ function addAppointsRoutes(app) {
 
 
     app.get('/appoints/data/:businessId',_checkAdmin,(req,res) => {
-        console.log(req.params)
         var businessId = req.params.businessId
         appointsService.getBusinessData(businessId)
         .then((appoints) => {
-            console.log('DATA : ', appoints);
             res.json(appoints)
         })
     })

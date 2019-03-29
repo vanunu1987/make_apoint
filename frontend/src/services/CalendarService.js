@@ -1,21 +1,5 @@
 import moment from 'moment';
 
-// function getEvents(workHours, today,appoints) {
-//   console.log('get event activated: prop:',workHours)
-//   var eventList = []
-//   var days = _getWeekDaysLeft(today)
-//   days = days.map((day) => _adjustTimeRange(day,workHours))
-//   days.forEach((day) => {
-//     eventList.push(..._getDayEvents(day.date, day.timeRanges))
-//   })
-//   return eventList
-// } 
-var dayEvents = [{date: "2012-09-09", time: "10:00", duration: 60}
-,{date: "2012-09-09", time: "11:00", duration: 60}
-,{date: "2012-09-09", time: "13:00", duration: 60}]
-var dayAppoints = [{date: "2012-09-09", time: "10:00", duration: 60}
-,{date: "2012-09-09", time: "13:00", duration: 60}]
-
 function getDayEventsForCalendar(date,workHours,appoints){
 var day = _adjustTimeRange(date,workHours)
 var dayAppoints = getDayAppoints(date,appoints)
@@ -79,8 +63,6 @@ function getDayEvents(date, timeRanges) {
 
 
 export default {
-  // getEvents: getEvents,
-  // getDayEvents
   getDayEventsForCalendar
 }
 

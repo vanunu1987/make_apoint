@@ -25,6 +25,15 @@ function add(appoint) {
                 })
         })
 }
+
+function remove(appointId) {
+    appointId = new ObjectId(appointId)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('appoints');
+            return collection.remove({ _id: appointId })
+        })
+}
 function getBusinessData(businessId) {
     var queryToMongo = { business_id: businessId }
     return mongoService.connect()
@@ -56,5 +65,6 @@ function getBusinessData(businessId) {
 module.exports = {
     query,
     getBusinessData,
-    add
+    add,
+    remove
 }

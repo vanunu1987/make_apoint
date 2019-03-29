@@ -142,6 +142,7 @@ export default new Vuex.Store({
     },
 
     async signUpUser(context, { credentials, isNewBusiness }) {
+      credentials.isReg = true;
       var user = await UserService.signUpUser(credentials)
       if (!user) return
       var currBusiness = context.getters.currBusiness
@@ -202,6 +203,11 @@ export default new Vuex.Store({
       return res
     },
 
+    async removeAppoint(context, {appointId}) {
+      var res = await AppointsService.remove(appointId)
+      context.dispatch({type:'loadAppoints',listRequire:'user'})
+    },
+
     loadUserLocation(context){
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -211,7 +217,6 @@ export default new Vuex.Store({
       } else {
         console.log(navigator.geolocation);
       }
-      
     }
   }
 

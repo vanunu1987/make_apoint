@@ -39,7 +39,7 @@ export default {
 <style lang="scss">
 .make-appoint1{
 .v-btn:before{
-  background-color:red;
+  background-color:#008489;
   opacity: 0.9;
 }
 

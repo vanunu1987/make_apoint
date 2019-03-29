@@ -2,7 +2,7 @@
   <section class="page-continer" v-if="currBusiness">
  <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId" ></router-link>
 
-    <make-appoint class="calendar" style="width:500px;"></make-appoint>
+    <make-appoint class="calendar" ></make-appoint>
         <div  class="img-header"  
         :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
         </div>
@@ -279,14 +279,36 @@ a{
   // margin-top: 40px;
   background-color: white;
 }
-div.calendar{
-  // background-color:rgb(255, 233, 137);
-  // width:90%;
-  //  position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // z-index: 3;
+
+@media (max-width: 740px) {
+  .page-continer{
+  background-color: white;
+ display: grid;
+    grid-template-columns: 10px 1fr 10px;
+    grid-template-rows: 1.3fr 1fr 1fr .5fr;
+     grid-gap: 10px 20px;
+        // padding: 20px;
+    .img-header{
+      grid-column: 1/4;
+      grid-row: 1;
+    }
+    .profile-detais{
+      grid-column: 2;
+      grid-row: 2;      
+
+    }
+    .calendar{
+       grid-column: 2;
+      grid-row: 3; 
+      position: relative;
+      display: inline;
+    }
+    .midle{
+       grid-column: 1/4;
+      grid-row: 4;
+    }
+}
+  
 }
 </style>
 

@@ -31,12 +31,17 @@ async function add(appoint) {
     console.log('GOT NEW appoint : ', res.data);
     var appoint = await res.data
     return appoint
+}
 
+async function remove(appointId){
+    var res = await axios.delete(`${BASE_URL}/${appointId}`)
+    return res
 }
 
 
 export default {
     query,
     getBusinessData,
-    add
+    add,
+    remove
 }
