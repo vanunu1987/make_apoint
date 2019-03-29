@@ -2,7 +2,10 @@
   <div class="home">
     <!-- <img src="../assets/logo.png"> -->
     <header>
+      <section class="head-bar">
+      <h1>Find nearby service and schedule an appointment quick.</h1>
       <HomeFilter @find="filterList"/>
+      </section>
     </header>
     <div v-if="isScroll" class="secondary-header"></div>
     <BusinessList id="list" :business="businessToShow" :isSearch="isSearch"/>
@@ -48,6 +51,12 @@ export default {
 </script>
 
 <style <style lang="scss" scoped>
+
+#list{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 .secondary-header {
   position: fixed;
