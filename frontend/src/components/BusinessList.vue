@@ -39,20 +39,25 @@ $light-blue: #3498db;
 $black: #000000;
 
 ul {
+  padding: 0;
+  margin: 0;
+  max-width: 1050px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 20px;
+  padding: 20px;
   
   li {
-    float: left;
-    border-radius: 8px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    // float: left;
+    border-radius: 3px;
+    // box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     position: relative;
-    top: 0;
-    text-align: center;
+    // top: 0;
+    text-align: left;
     transition: all 0.4s;
 
     &:hover {
-      top: -5px;
-      box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
     }
     .BusinessPreview {
       height: 100%;

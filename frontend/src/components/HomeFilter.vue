@@ -1,7 +1,8 @@
 <template>
   <div class="home-filter">
     <!-- <h1>{{ msg }}</h1> -->
-    <input type="search" placeholder="Find your service" @keyup.enter="find">
+    <input type="search" placeholder="Search by business name or type" @keyup.enter="find">
+    <button class="search-btn">Search</button>
   </div>
 </template>
 
@@ -46,4 +47,30 @@ export default {
 
 
 <style scoped lang="scss">
+
+.home-filter{
+    display: flex;
+    position: relative;
+    height: auto;
+    vertical-align: baseline;
+}
+.search-btn{
+    height: 48px;
+    border-radius: 0 3px 3px 0;
+    padding: 12px 24px;
+    font-size: 14px;
+    flex-shrink: 0;
+    background-color: #1dbf73;
+    color: #fff;
+    border: 1px solid transparent;
+    margin: 0;
+    display: inline-block;
+    box-sizing: border-box;
+    -webkit-transition: color .2s,background-color .2s,box-shadow .2s,border .2s;
+    transition: color .2s,background-color .2s,box-shadow .2s,border .2s;
+
+    &:hover{
+    background-color: #3fca89;
+    }
+}
 </style>
