@@ -67,17 +67,17 @@ ul {
 #nav{
     position: absolute;
     // width: 100%;
-    padding: 10px;
+    padding:  10px 10px 10px 30px;
     z-index: 10;
     left: 0;
-    background-image: linear-gradient(to right, white , #ffffff00);
+    background-image: linear-gradient(to left, white , #ffffff00);
     width: 100%;
     z-index: 1000;
 }
 .home{
     header{
         height: 100vh;
-        padding-top: 100px;
+        padding-top: 140px;
         // background-image: url('./assets/cover2.jpg');
         // background-image: url('./assets/main-cover-3.png');
         background-attachment: fixed;
@@ -126,6 +126,11 @@ ul {
         padding: 7px 7px 7px 28px;
         resize: none;
         box-sizing: border-box;
+        &:focus{
+            outline: 1.1px solid #ccc !important;
+            // border:1.1px solid #ddd;
+    // box-shadow: 0 0 2px #719ECE;
+        }
     }
 }
 .Preview{

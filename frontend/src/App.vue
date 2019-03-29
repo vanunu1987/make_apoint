@@ -1,15 +1,20 @@
 <template>
   <div id="app">
     <userAppoints/>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
-       <router-link to="/login">Log in</router-link> | 
-       <router-link to="/edit">Add business</router-link> | 
-       <router-link v-if="loggedUser && loggedUser.business_id" 
-       :to="'business/'+loggedUser.business_id">{{loggedUser.userName}}'s Page |</router-link>
-    </div>
-    <router-view/>
+        <div id="nav">
+          <div class="logo">
+          <h1>Make Appoint<span>.</span></h1>
+          </div>
+          <section class="routes">
+          <router-link v-if="loggedUser && loggedUser.business_id" 
+          :to="'business/'+loggedUser.business_id">{{loggedUser.userName}}'s Page |</router-link>
+          <router-link to="/edit">Add business |</router-link>
+          <router-link to="/">Home |</router-link>
+          <router-link to="/about">About |</router-link>
+          <router-link to="/login">Log in</router-link>
+          </section>
+        </div>
+  <router-view/>
   </div>
 </template>
 
@@ -50,6 +55,30 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Baloo+Chettan');
+
+.logo{
+  h1{
+  font-family: 'Baloo Chettan', cursive;
+    position: relative;
+    font-weight: bold;
+    span{
+    position: absolute;
+    top: -101px;
+    font-size: 135px;
+    right: -13px;
+    z-index: -1;
+    color: #1dbf73;
+    height: 50px;
+    }
+  }
+}
+
+.routes{
+      display: flex;
+    align-items: flex-end;
+    font-size: 1.1rem;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,8 +87,9 @@ export default {
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  // padding: 30px;
   display: flex;
+  justify-content: space-between;
   a,.user-name,logout-btn {
     margin-right: 5px;
     margin-left: 5px;
