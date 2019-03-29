@@ -1,18 +1,19 @@
 <template>
   <div id="app">
+    <button class="nav-burger" @click="isOpenNav = !isOpenNav"><i class="fas fa-bars"></i></button>
     <userAppoints/>
-        <div id="nav">
-          <div class="logo">
-          <h1>Make Appoint<span>.</span></h1>
-          </div>
-          <section class="routes">
-          <router-link v-if="loggedUser && loggedUser.business_id" 
-          :to="'business/'+loggedUser.business_id">{{loggedUser.userName}}'s Page |</router-link>
-          <router-link to="/edit">Add business |</router-link>
-          <router-link to="/">Home |</router-link>
-          <router-link to="/about">About |</router-link>
-          <router-link to="/login">Log in</router-link>
-          </section>
+          <div id="nav">
+            <div class="logo">
+            <h1>Make Appoint<span>.</span></h1>
+            </div>
+            <section class="routes" :class="{ openNav: isOpenNav }">
+            <router-link v-if="loggedUser && loggedUser.business_id" 
+            :to="'business/'+loggedUser.business_id">{{loggedUser.userName}}'s Page <span>|</span></router-link>
+            <router-link to="/edit">Add business <span>|</span></router-link>
+            <router-link to="/">Home <span>|</span></router-link>
+            <router-link to="/about">About <span>|</span></router-link>
+            <router-link to="/login">Log in</router-link>
+            </section>
         </div>
   <router-view/>
   </div>
@@ -27,7 +28,7 @@ export default {
   },
   data() {
     return {
-  
+      isOpenNav:false
     };
   },
   computed: {
@@ -57,7 +58,7 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Baloo+Chettan');
 
-.logo{
+.logo,.mobile-logo{
   h1{
   font-family: 'Baloo Chettan', cursive;
     position: relative;
@@ -73,9 +74,14 @@ export default {
     }
   }
 }
-
+.mobile-logo{
+  display: none;
+}
+.nav-burger{
+  display: none;
+}
 .routes{
-      display: flex;
+    display: flex;
     align-items: flex-end;
     font-size: 1.1rem;
 }
@@ -100,5 +106,51 @@ export default {
       color: #42b983;
     }
   }
+}
+
+@media (max-width: 740px){
+
+
+.routes{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #eeeeee;
+  transform: translate(-100%,0);
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 100px 0 0 20px;
+  background-color: #f2f6f5;
+  transition: .3s ease-in-out;
+  &.openNav{
+    position: fixed;
+    transform: translate(0,0);
+    width: 60vw;
+  }
+}
+a{
+  margin-bottom: 10px;
+  span{
+    display: none;
+  }
+}
+.logo{
+//  display: block;
+//   position: absolute;
+//   top: 10px;
+//   left: 25%;
+}
+.nav-burger{
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 2rem;
+  z-index: 100000;
+  cursor: pointer;
+}
+
 }
 </style>

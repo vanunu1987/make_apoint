@@ -1,7 +1,7 @@
 <template>
     <div class="card-container">
       <router-link :to="'business/'+currBusiness._id">
-        <v-img :src="currBusiness.prefs.header_img_url" height="200px" width="250px"></v-img>
+        <v-img :src="currBusiness.prefs.header_img_url" height="200px"></v-img>
         <section class="card-details-container">
             <h3 class="preview-name">{{currBusiness.name}}</h3>
             <span class="address">{{adress}}</span>
@@ -63,14 +63,13 @@ export default {
 .card-container{
   border-radius: 3px;
   height: 100%;
-      background-color: #fff;
-    width: 240px;
-    // height: 300px;
-    padding: 0;
-    float: left;
-    position: relative;
-    border: 1px #e5e5e5 solid;
-    box-sizing: border-box;
+  background-color: #fff;
+  width: 240px;
+  padding: 0;
+  float: left;
+  position: relative;
+  border: 1px #e5e5e5 solid;
+  box-sizing: border-box;
 }
 
 a {
@@ -110,6 +109,13 @@ h3{
     word-break: break-word;
     -webkit-transition: .15s ease-in-out;
     transition: .15s ease-in-out;
+}
+
+@media (max-width: 740px){
+  .card-container{
+  
+  width: 90vw;
+}
 }
 
 </style>
