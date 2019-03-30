@@ -3,17 +3,17 @@
     <div class="sign-background"></div>
     <section class="form-container">
     <form v-if="!isNewUser" @submit.prevent="login">
-      <h1>LOGIN</h1>
+      <h1>Login</h1>
       <input type="text" placeholder="User Name" v-model="userCredentials.userName">
       <input type="password" placeholder="Password" v-model="userCredentials.password">
-      <button type="submit">OK</button>
+      <button type="submit">Continue</button>
     </form>
     <form v-if="isNewUser" @submit.prevent="signup">
-      <h1>SIGNUP</h1>
+      <h1>Signup</h1>
       <input type="text" placeholder="User Name" v-model="newUserCredentials.userName">
       <input type="password" placeholder="Password" v-model="newUserCredentials.password">
       <input type="tel" placeholder="Phone Number" v-model="newUserCredentials.phone">
-      <button type="submit">OK</button>
+      <button type="submit">Continue</button>
     </form>
     <button @click="isNewUser = !isNewUser">{{(!isNewUser)  ? 'New User' : 'Existing User'}}</button>
     </section>
@@ -74,6 +74,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@font-face{
+    font-family: AirbnbCereal;
+    src: url('../assets/fonts/AirbnbCereal-Book.ttf')
+
+}
+*{
+    font-family: 'AirbnbCereal', sans-serif;
+}
+
 h1 {
   margin-bottom: 30px;
 }
@@ -97,14 +107,14 @@ h1 {
 }
 
 .form-container{
-  background-color: #a2f7b5;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 3px;
+  border: 2px solid #a2f7b5;
+  height: 400px;
+  width: 300px;
 }
 form {
-  // border: 1px solid black;
-  height: 300px;
-  width: 300px;
+  height: 90%;
   display: flex;
   flex-direction: column;
   input {
@@ -114,6 +124,10 @@ form {
     border-radius: 5px;
     text-align: center;
   }
+}
+button{
+  background-color: #a2f7b559;
+  padding: 5px;
 }
 </style>
 
