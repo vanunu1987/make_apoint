@@ -201,7 +201,6 @@ h3 {
     Helvetica Neue, sans-serif !important;
   font-size: 16px !important;
   font-weight: 600 !important;
-  line-height: 1.375em !important;
   color: #484848 !important;
 }
 .details-head{
