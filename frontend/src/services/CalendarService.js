@@ -11,7 +11,7 @@ return availableDayEvents
 
 function getAvailableDayEvents(dayEvents,dayAppoints){
  return dayEvents.filter((event)=>{
-  return !dayAppoints.find((appoint)=>{return appoint.time === event.time})
+  return !dayAppoints.find((appoint)=>{return appoint.startTime === event.startTime})
   })
 }
 
@@ -52,7 +52,7 @@ function getDayEvents(date, timeRanges) {
       eventList.push(
         {
           date: date,
-          time: time,
+          startTime: time,
           duration: 60
         }
       )

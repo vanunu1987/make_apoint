@@ -3,12 +3,12 @@
    
     <span><i class="far fa-calendar-alt"></i> {{dayDate}}</span>
     <br/>
-    <div class="appoint" v-for="event in events" :key="event.time">
+    <div class="appoint" v-for="event in events" :key="event.startTime">
      <div>
-     <h5><i class="far fa-clock"></i> {{ event.time}} </h5>
+     <h5><i class="far fa-clock"></i> {{ event.startTime}} </h5>
      <h5><i class="far fa-hourglass"></i> {{ event.duration|hours}}</h5>
      </div>
-     <v-btn @click="checkIfLogin(event.time)" outline color="indigo">choose</v-btn>
+     <v-btn @click="checkIfLogin(event.startTime)" outline color="indigo">choose</v-btn>
     </div>
   </section>
 </template>
@@ -42,7 +42,7 @@ export default {
         .format("YYYY-MM-DD");
     },
     checkIfLogin(selectedTime){
-      this.$emit('update-appoint',{property:'time',value:selectedTime})
+      this.$emit('update-appoint',{property:'startTime',value:selectedTime})
       if(this.$store.getters.loggedInUser){
          
          this.$emit('move-to-cmp','MakeAppoint5')
