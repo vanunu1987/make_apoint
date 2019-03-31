@@ -1,20 +1,9 @@
 <template>
   <div class="ModalContiner">
     <div class="modalMain">
-        <h2>Pick your business type</h2>
-        <select  v-model="selctedType">
-            <option value="">Busines type</option>
-            <option v-for="(type,idx) in businessType " 
-            :key="idx"
-           >
-           {{type}}
-            </option>
-            
-        </select>
-        <div @click="saveType" class="save">
-      <button >save</button>
-      <span class="fas fa-save"></span>
-      </div>
+        <h2>Congratulations, enjoy your business link</h2>
+        <h3>http://localhost:8080/business/{{currBusiness._id}}</h3>
+      <button @click="saveType">save</button>
     </div>
   </div>
 </template>
@@ -29,7 +18,7 @@ export default {
     },
     methods:{
         saveType(){
-            this.$emit("saveType", this.selctedType )
+            this.$router.push('/business/' + this.currBusiness._id)
 
         }
     },
@@ -38,8 +27,8 @@ export default {
     },
     created(){
             
-                this.businessType=this.$store.getters.BusinessTypes
-                console.log(this.businessType);
+                // this.currBusiness=this.$store.getters.currBusiness
+                // console.log(this.businessType);
                 
 
     }
@@ -50,26 +39,24 @@ export default {
 .ModalContiner {
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: #131919ba;
+  background-color: #f0ffff4d;
   justify-content: center;
   align-items: center;
   z-index: 100;
 
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
-    height: 30vh;
-    width: 25vw;
+    height: 30vw;
+    width: 30vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    justify-content: space-around;
-    
   }
 
   select{
@@ -77,26 +64,11 @@ export default {
        &:focus {
       text-align: center;
     outline: none;
-    // background-color: #131919ba;
-    // border: dashed;
-    
+    border: dashed;
   }
   }
-}
-.save{
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    span{
-        margin-left: 5px;
-    }
-    cursor: pointer;
-
 }
 button{
     margin-top: 10px;
-}
-select{
-    cursor: pointer;
 }
 </style>

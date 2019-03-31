@@ -81,6 +81,7 @@ export default {
   },
   created() {
     let { businessId } = this.$route.params;
+
     this.businessId = businessId;
     this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
       var user = this.$store.getters.loggedInUser;
