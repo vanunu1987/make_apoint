@@ -72,15 +72,9 @@ span{
 $primary-color: rgb(0, 132, 137);
 
 section.calendar-date-picker.calendar{
-<<<<<<< HEAD
   width:70% !important;
   height: 0 !important; 
   padding-top:60% !important;
-=======
-  width:100% !important;
-  // height: 0 !important; 
-  padding-top:100% !important;
->>>>>>> c2a51676a9a4ef127beba1bbcabea07dcae54b43
   position:relative !important;
 }
 div.layout.wrap{
