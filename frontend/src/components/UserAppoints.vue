@@ -12,9 +12,9 @@
             :class="{ comingUp: appoint.isComingUp }"
           >
             <transition name="fade">
-              <v-badge v-if="showComing && appoint.isComingUp" color="#ff5c5d" left overlap>
+              <v-badge v-if="showComing && appoint.isComingUp" left overlap>
                 <template v-slot:badge>
-                  <v-icon dark small>far fa-calendar-alt</v-icon>
+                  <v-icon dark small>fas fa-stopwatch</v-icon>
                 </template>
               </v-badge>
             </transition>
@@ -156,40 +156,44 @@ p {
 }
 
 .v-badge {
-  background-color: #ff5c5d;
+  color: #ff5c5d;
   padding: 3px;
   position: absolute;
   right: 0;
   top: 0;
   border-radius: 3px;
+  .v-icon{
+    color: #ff5c5d;
+  }
 }
 
 .user-appoints {
   button {
     position: absolute;
     right: 20px;
-    top: 20px;
-    background-color: #a2f7b5;
+    top: 55px;
     height: 60px;
     width: 60px;
     border-radius: 100%;
     border: none;
     outline: none;
     z-index: 10;
+    border: 1px solid #a2f7b5;
+    background-color: white;
     &.remove-appoint{
         left: 0;
         top: -5px;
         height: 20px;
         width: 20px;
         font-size: 1.2rem;
+        background: none;
     }
   }
 }
 .appoints-card {
   position: absolute;
-  right: 70px;
-  top: 70px;
-  // height: 300px;
+  right: 75px;
+  top: 112px;
   width: 250px;
   padding: 10px;
   background: white;
@@ -197,6 +201,9 @@ p {
   height: 400px;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
   z-index: 9;
+  ul{
+    padding: 0;
+  }
 }
 $base-color: #a2f7b5;
 .appoint-container {
@@ -212,13 +219,13 @@ $base-color: #a2f7b5;
 }
 .notifications {
   position: fixed;
-  right: 75px;
-  top: 35px;
+      right: 78px;
+    top: 75px;
   background-color: #ff5c5d;
   padding: 1px;
   height: 18px;
   width: 18px;
   border-radius: 100px 100px 0 100px;
-  z-index: 11;
+  z-index: 100;
 }
 </style>
