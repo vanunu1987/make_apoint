@@ -17,7 +17,7 @@
 
 <script>
 import MakeAppoint1 from "@/components/MakeAppoint1.vue";
-import MakeAppoint2 from "@/components/MakeAppoint2.vue";
+import MakeAppointTimeDatePicker from "@/components/MakeAppointTimeDatePicker.vue";
 import MakeAppoint3 from "@/components/MakeAppoint3.vue";
 import MakeAppoint4 from "@/components/MakeAppoint4.vue";
 import MakeAppoint5 from "@/components/MakeAppoint5.vue";
@@ -66,7 +66,7 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
   },
   created() {
     this.cmps.push({ name: "MakeAppoint1" });
-    this.cmps.push({ name: "MakeAppoint2" });
+    this.cmps.push({ name: "MakeAppointTimeDatePicker" });
     this.cmps.push({ name: "MakeAppoint3" });
     this.cmps.push({ name: "MakeAppoint4" });
     this.cmps.push({ name: "MakeAppoint5" });
@@ -75,7 +75,7 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
   },
   components: {
     MakeAppoint1,
-    MakeAppoint2,
+    MakeAppointTimeDatePicker,
     MakeAppoint3,
     MakeAppoint4,
     MakeAppoint5,
@@ -86,7 +86,7 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
 
 <style lang="scss">
 .make-appoint {
-  border: 1px dotted black;
+  // border: 1px dotted black;
   border-radius: 3px;
 }
 </style>

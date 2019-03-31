@@ -189,6 +189,7 @@ export default new Vuex.Store({
         user._businessId = business._id
         UserService.updateUser(user)
         context.commit({ type: 'updateUser', user })
+        context.commit({ type: 'setCurrBusiness', business: business })
         return
       } else {
         console.log('store : ',currBusiness);

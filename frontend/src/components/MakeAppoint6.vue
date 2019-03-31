@@ -37,11 +37,10 @@ export default {
 
 <style lang="scss">
 .make-appoint6{
-   background-image: linear-gradient(rgb(23, 156, 245), rgb(255, 255, 248));
    font-size:50px;
    img{
-     max-width:100%;
-max-height:100%;
+     max-width:60%;
+max-height:60%;
    }
 
 

@@ -10,34 +10,29 @@
         <div class="img-profile" :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"></div>
       </div>
 
-      <span class="flex">
-        <span class="fas fa-map-pin"></span>
-        <h2 class="address-h2">Address</h2>
-      </span>
-      <h3>{{currBusiness.address}}</h3>
-      <span class="flex">
-        <span class="fas fa-phone"></span>
-        <h2>Phone number</h2>
-      </span>
-      <h3>{{currBusiness.phone}}</h3>
-      <span class="flex">
-        <span class="fas fa-address-card"></span>
-        <h2>About Us</h2>
-      </span>
-      <h3>{{currBusiness.prefs.description}}</h3>
-      <span class="flex">
-        <span class="fas fa-star-half-alt"></span>
-        <h2>Rating</h2>
-      </span>
-      <span class="rating-container flex">
-        <v-rating
-          :value="currBusiness.rank.avg"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
+          <span class="flex">
+         <span class="fas fa-map-marker-alt"></span> 
+         <h2 class="address-h2">Address</h2> 
+         </span>
+         <h3>{{currBusiness.address}}</h3>
+          <span class="flex">
+         <span class="fas fa-phone"></span> 
+         <h2>Phone number</h2> 
+         </span>
+         <h3>{{currBusiness.phone}}</h3>
+          <span class="flex">
+         <span class="fas fa-address-card"></span>
+         <h2>About Us</h2> 
+        </span>
+        <h3>{{currBusiness.prefs.description}}</h3>
+          <span class="flex">
+         <span class="fas fa-trophy"></span>
+         <h2>Rating</h2> 
+        </span>
+        <span class="rating-container flex">
+       <v-rating
+            :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
+          size="14" ></v-rating>
         <h3>({{currBusiness.rank.qty}})</h3>
       </span>
     </div>
@@ -174,29 +169,30 @@ h3 {
 }
 .page-continer {
   background-color: white;
-  display: grid;
-  grid-template-columns: 20px 1fr 1fr 20px;
-  grid-template-rows: 1.3fr 1fr 1fr 0.5fr;
-  grid-gap: 10px 20px;
-  // padding: 20px;
-  .img-header {
-    grid-column: 1/5;
-    grid-row: 1;
-  }
-  .profile-detais {
-    grid-column: 2;
-    grid-row: 2;
-  }
-  .calendar {
-    grid-column: 3;
-    grid-row: 2;
-    position: relative;
-    display: inline;
-  }
-  .midle {
-    grid-column: 1/5;
-    grid-row: 3;
-  }
+ display: grid;
+    grid-template-columns: 20px 1fr 2fr 20px;
+    grid-template-rows: 1fr 1fr 1fr .5fr;
+     grid-gap: 20px 20px;
+        // padding: 20px;
+    .img-header{
+      grid-column: 1/5;
+      grid-row: 1;
+    }
+    .profile-detais{
+      grid-column: 2;
+      grid-row: 2;      
+
+    }
+    .calendar{
+       grid-column: 3;
+      grid-row: 2; 
+      position: relative;
+      display: inline;
+    }
+    .midle{
+       grid-column: 1/5;
+      grid-row: 3;
+    }
 }
 .profile-detais {
   // margin-left: 30px;
@@ -205,13 +201,13 @@ h3 {
     Helvetica Neue, sans-serif !important;
   font-size: 16px !important;
   font-weight: 600 !important;
-  line-height: 1.375em !important;
   color: #484848 !important;
 }
-.details-head {
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 20px;
+.details-head{
+  text-align: left;
+align-items: center;
+justify-content: space-between;
+padding-right: 20px;
 }
 .img-profile {
   width: 75px;
@@ -275,7 +271,7 @@ a {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: 15px;
+  top: 55px;
   right: 15px;
   // margin-left: 35px;
   // margin-top: 40px;

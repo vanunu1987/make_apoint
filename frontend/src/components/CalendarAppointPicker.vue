@@ -1,12 +1,12 @@
 <template>
   <section class="calendar-appoint-picker">
    
-    <i class="far fa-calendar-alt"></i> {{dayDate}}
+    <span><i class="far fa-calendar-alt"></i> {{dayDate}}</span>
     <br/>
     <div class="appoint" v-for="event in events" :key="event.time">
      <div>
-     <h5><i class="far fa-clock"></i> start time: {{ event.time}} </h5>
-     <h5><i class="far fa-hourglass"></i> duration: {{ event.duration}}</h5>
+     <h5><i class="far fa-clock"></i> {{ event.time}} </h5>
+     <h5><i class="far fa-hourglass"></i> {{ event.duration|hours}}</h5>
      </div>
      <v-btn @click="checkIfLogin(event.time)" outline color="indigo">choose</v-btn>
     </div>
@@ -59,7 +59,13 @@ export default {
 
 
 <style lang="scss" scoped>
+span{
+  font-size:20px;
+}
 .calendar-appoint-picker{
+  margin-top:64px;
+  border: 1px solid rgb(182, 181, 181) !important;
+  overflow: auto;
 div.appoint{
   border-top:1px grey solid;
   display:flex;

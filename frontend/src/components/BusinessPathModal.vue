@@ -1,9 +1,10 @@
 <template>
   <div class="ModalContiner">
     <div class="modalMain">
-        <h2>Congratulations, enjoy your business link</h2>
+        <h1 class="h1Title">Congratulations !</h1>
+        <h2> enjoy your business link:</h2>
         <h3>http://localhost:8080/business/{{currBusiness._id}}</h3>
-      <button @click="saveType">save</button>
+      <button @click="savePath">save</button>
     </div>
   </div>
 </template>
@@ -17,17 +18,16 @@ export default {
         }
     },
     methods:{
-        saveType(){
+        savePath(){
             this.$router.push('/business/' + this.currBusiness._id)
-
+            this.$emit('setPath')
         }
     },
     components:{
-        UtilService
     },
     created(){
             
-                // this.currBusiness=this.$store.getters.currBusiness
+                this.currBusiness=this.$store.getters.currBusiness
                 // console.log(this.businessType);
                 
 
@@ -35,28 +35,31 @@ export default {
 }
 </script>
 
-<style lang="scss"  >
+<style scoped lang="scss"  >
 .ModalContiner {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: #f0ffff4d;
+  background-color: #131919ba;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 1000;
 
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
     height: 30vw;
-    width: 30vw;
+    width: 50vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    h3{
+        margin-top: 5px;
+    }
   }
 
   select{
@@ -71,4 +74,10 @@ export default {
 button{
     margin-top: 10px;
 }
+.h1Title{
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
 </style>

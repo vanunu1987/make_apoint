@@ -4,7 +4,7 @@
   <section class="make-appoint1">
     <product-picker  @update-appoint="updateAppoint"></product-picker>
       <div>
-        <v-btn @click="moveToCmp('MakeAppoint2')" depressed large color="error">Request to Book</v-btn>
+        <v-btn @click="moveToCmp('MakeAppointTimeDatePicker')" depressed large color="error">Request to Book</v-btn>
       </div>
   </section>
 </template>
