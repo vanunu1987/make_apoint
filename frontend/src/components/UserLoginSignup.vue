@@ -27,15 +27,16 @@ export default {
   components: {},
   data() {
     return {
-        isNewUser:null,
+      isNewUser:null,
       userCredentials: {
-        userName: null,
-        password: null
+      userName: null,
+      password: null
       },
       newUserCredentials: {
         userName: null,
         password: null,
-        phone:null
+        phone:null,
+        isReg:false
       },
     };
   },
@@ -51,6 +52,7 @@ export default {
     },
     signup() {
       console.log(this.newUserCredentials);
+      this.newUserCredentials.isReg = true;
       var credentials = { ...this.newUserCredentials };
       this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus })
       .then(() => {
@@ -112,6 +114,7 @@ h1 {
   border: 2px solid #a2f7b5;
   height: 400px;
   width: 300px;
+  background-color: white;
 }
 form {
   height: 90%;
@@ -128,6 +131,8 @@ form {
 button{
   background-color: #a2f7b559;
   padding: 5px;
+  border-radius: 3px;
+  width: 100%;
 }
 </style>
 
