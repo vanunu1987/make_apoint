@@ -58,7 +58,9 @@ export default {
     color: black;
 }
 .marked{
-    background-color: greenyellow;
+    background-color: #adff2f9e;
+    width: 42px;
+    height: 22px;
     
 }
 button{
@@ -72,5 +74,8 @@ button{
 /* ul{
     margin: 5px;
 } */
+ul{
+    padding: 0px;
+}
 </style>
 

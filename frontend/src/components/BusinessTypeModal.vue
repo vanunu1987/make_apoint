@@ -11,7 +11,10 @@
             </option>
             
         </select>
-      <button @click="saveType">save</button>
+        <div @click="saveType" class="save">
+      <button >save</button>
+      <span class="fas fa-save"></span>
+      </div>
     </div>
   </div>
 </template>
@@ -47,24 +50,26 @@ export default {
 .ModalContiner {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: #f0ffff4d;
+  background-color: #131919ba;
   justify-content: center;
   align-items: center;
   z-index: 100;
 
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
-    height: 30vw;
-    width: 30vw;
+    height: 30vh;
+    width: 25vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    justify-content: space-around;
+    
   }
 
   select{
@@ -72,11 +77,26 @@ export default {
        &:focus {
       text-align: center;
     outline: none;
-    border: dashed;
+    // background-color: #131919ba;
+    // border: dashed;
+    
   }
   }
 }
+.save{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    span{
+        margin-left: 5px;
+    }
+    cursor: pointer;
+
+}
 button{
     margin-top: 10px;
+}
+select{
+    cursor: pointer;
 }
 </style>

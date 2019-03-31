@@ -72,7 +72,7 @@ $primary-color: rgb(0, 132, 137);
 
 section.calendar-date-picker.calendar{
   width:100% !important;
-  height: 0 !important; 
+  // height: 0 !important; 
   padding-top:100% !important;
   position:relative !important;
 }
