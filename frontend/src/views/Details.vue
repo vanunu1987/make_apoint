@@ -86,7 +86,7 @@ export default {
     this.$store.dispatch({ type: "loadBusiness", businessId })
     .then(()=>{
       var user=this.$store.getters.loggedInUser
-    if (businessId===user.business_id) this.isAdmin= true
+    if (user&&businessId===user.business_id) this.isAdmin= true
 
       this.$store.dispatch({type:'loadAppoints',listRequire:'business'})
 
