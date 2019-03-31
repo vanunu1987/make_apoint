@@ -69,7 +69,6 @@
 import MakeAppoint from "../components/MakeAppoint.vue";
 import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
-// import MakeAppoint from '@/components/MakeAppoint.vue'
 import BusinessService from "@/services/UtilService.js";
 export default {
   components: {
@@ -80,15 +79,7 @@ export default {
     MakeAppoint
   },
   created() {
-    let { businessId } = this.$route.params;
-
-    this.businessId = businessId;
-    this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
-      var user = this.$store.getters.loggedInUser;
-      if (user && businessId === user.business_id) this.isAdmin = true;
-
-      this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
-    });
+    this.loadBusiness()
   },
   data() {
     return {
@@ -109,7 +100,6 @@ export default {
     var user = this.$store.getters.loggedInUser;
     console.log("MOUNTED : ", user);
   },
-
   computed: {
     currBusiness() {
       return this.$store.getters.currBusiness;
@@ -123,6 +113,9 @@ export default {
     },
     mapCenter() {
       return this.$store.getters.currBusiness.location;
+    },
+    businessIdParam(){
+      return this.$route.params.businessId
     }
   },
   methods: {
@@ -133,6 +126,21 @@ export default {
     },
     closeCalender() {
       this.showCalender = false;
+    },
+     loadBusiness(){
+    let { businessId } = this.$route.params;
+    this.businessId = businessId;
+    this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
+    var user = this.$store.getters.loggedInUser;
+    if (user && businessId === user.business_id) this.isAdmin = true;
+    this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
+    });
+
+  },
+  },
+  watch:{
+    businessIdParam: () => {
+      this.loadBusiness()
     }
   }
 };

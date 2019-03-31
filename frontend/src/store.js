@@ -142,7 +142,7 @@ export default new Vuex.Store({
     },
 
     async signUpUser(context, { credentials, isNewBusiness }) {
-      credentials.isReg = true;
+      // credentials.isReg = true;
       var user = await UserService.signUpUser(credentials)
       if (!user) return
       var currBusiness = context.getters.currBusiness

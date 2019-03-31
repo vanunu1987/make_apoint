@@ -3,13 +3,13 @@
     <button class="nav-burger" @click="isOpenNav = !isOpenNav"><i class="fas fa-bars"></i></button>
     <userAppoints/>
           <div id="nav">
-            <div class="logo">
+            <div class="logo" v-if="isHome">
             <h1>Make Appoint<span>.</span></h1>
             </div>
             <section class="routes" :class="{ openNav: isOpenNav }">
-            <router-link v-if="loggedUser && loggedUser.business_id" 
-            :to="'business/'+loggedUser.business_id">{{loggedUser.userName}}'s Page <span>|</span></router-link>
-            <router-link to="/edit">Add business <span>|</span></router-link>
+            <router-link v-if="loggedUser && loggedUser.business_id"
+            :to="'/business/'+loggedUser.business_id">{{loggedUser.userName}}'s Page <span>|</span></router-link>
+            <router-link to="/edit" @click="test">Add business <span>|</span></router-link>
             <router-link to="/about">About <span>|</span></router-link>
             <router-link to="/login">Log in |</router-link>
             <router-link to="/">Home <span>|</span></router-link>
@@ -28,7 +28,8 @@ export default {
   },
   data() {
     return {
-      isOpenNav:false
+      isOpenNav:false,
+      isHome:true
     };
   },
   computed: {
@@ -49,6 +50,11 @@ export default {
           title: 'Title',
           message: h('i', { style: 'color: teal' }, 'This is a reminder')
     });
+    },
+    test(){
+      console.log('ONCLICKKKKKKKKKKKKKKKKKKKKKKKK');
+      this.isHome = false
+      
     }
   },
   created() {}
