@@ -12,8 +12,6 @@
         </button>
       </div>
     </div>
-    {{start}}
-    {{myData}}
     <v-layout wrap>
       <v-calendar ref="calendar" v-model="start" :type="type" :end="end" color="primary"></v-calendar>
     </v-layout>
@@ -28,7 +26,6 @@ export default {
     type: "month",
     start: moment().format("YYYY-MM-DD"),
     end: "",
-    myData:null,
   }),
   computed: {
     monthName() {
@@ -49,6 +46,9 @@ export default {
 
 
 <style lang="scss" scoped>
+button.calendar{
+  margin-top:0px;
+}
 div.v-sheet {
   height: 360px !important;
 }
@@ -59,6 +59,7 @@ div.v-sheet {
   display:flex;
   justify-content: space-between;
   margin:22px 0px;
+  margin-top:0px;
 }
 span{
   font-size: 18px;
@@ -71,16 +72,22 @@ span{
 $primary-color: rgb(0, 132, 137);
 
 section.calendar-date-picker.calendar{
+<<<<<<< HEAD
+  width:70% !important;
+  height: 0 !important; 
+  padding-top:60% !important;
+=======
   width:100% !important;
   // height: 0 !important; 
   padding-top:100% !important;
+>>>>>>> c2a51676a9a4ef127beba1bbcabea07dcae54b43
   position:relative !important;
 }
 div.layout.wrap{
 flex:1 !important;
 }
 div.flex.mb-3.xs12{
-height: 100% !important;
+height: 70% !important;
 }
 
 .calendar-container{
@@ -90,7 +97,7 @@ height: 100% !important;
   top:0px !important;
   left:0px !important;
   width:100% !important;
-  height: 100% !important;
+  height:100% !important;
 }
 
 .v-calendar-weekly__head-weekday {

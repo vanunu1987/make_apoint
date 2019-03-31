@@ -1,13 +1,12 @@
 
 
 <template>
-  <section class="make-appoint2">
+  <section class="make-appoint-time-date-picker">
     <calendar-date-picker 
       class="calendar"
       @to-cmp-appoint-picker="sendToCmpAppointPicker"
       @update-appoint="updateAppoint"
     ></calendar-date-picker>
-    <!-- <div class="calendar-modal" v-if="showModal"  @click="this.showModal = false"></div> -->
     <calendar-appoint-picker  class="appoint-picker" @move-to-cmp="moveToCmp" @update-appoint="updateAppoint" :date="selectedDay">
     </calendar-appoint-picker>
 
@@ -49,26 +48,18 @@ export default {
 </script>
 
 <style lang="scss">
-section.make-appoint2{
+section.make-appoint-time-date-picker{
+  display:flex;
   position:relative;
-  .calendar-modal{
-    width:100%;
-    height: 100%;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background-color: #ffffff94;
-    z-index: 3;
-  }
+ 
   .appoint-picker{
     border: 2px solid grey;
     padding: 10px;
     background-color: white;
-    top: 33%;
-    left: -26%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+    // top: 33%;
+    // left: -26%;
+    // transform: translate(-50%, -50%);
+    // position: absolute;
     z-index: 4;
 }
   

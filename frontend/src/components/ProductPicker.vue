@@ -1,15 +1,6 @@
 <template>
 <section class="product-picker">
 
-    
-    <h1>Top Services</h1>
-    <!-- <select>
-      <option v-for="product in products" :key="product.title">
-          {{product.title}}
-          {{product.price | dollar}}
-      </option>
-      </select> -->
-
     <div @click="alert('hello')" class="block">
       <el-carousel  :interval="2500" trigger="click" height="150px">
       <el-carousel-item v-for="product in products" :key="product._id">
