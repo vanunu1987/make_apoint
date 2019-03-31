@@ -1,7 +1,7 @@
 <template>
   <section class="page-continer" v-if="!!currBusiness.prefs">
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
-    <business-path-modal class="businessType" v-if="isPathModal"/>
+    <business-path-modal @setPath="isPathModal=false" class="businessType" v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
     <user-login-signUp
       :isNewUserProp="true"
@@ -21,7 +21,7 @@
       class="img-header flex"
       :style="{backgroundImage: `url(${currBusiness.prefs.header_img_url})` }"
     >
-      <img src="@/assets/headerimg.jpg" alt style="width:200px">
+      <img v-if="!currBusiness.prefs.header_img_url" src="@/assets/headerimg.jpg" alt style="width:200px">
       <div class="headerImgContiner column" ref="header">
         <h1 v-if="!currBusiness.prefs.header_img_url">Mypage</h1>
         <h3 v-if="!currBusiness.prefs.header_img_url">Add your image</h3>
@@ -193,7 +193,7 @@ import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
 import CalendarDatePicker from "@/components/CalendarDatePicker.vue";
 import BusinessTypeModal from "@/components/BusinessTypeModal.vue";
-import BusinessPathModal from "@/components/BusinessTypeModal.vue";
+import BusinessPathModal from "@/components/BusinessPathModal.vue";
 import BusinessService from "@/services/BusinessService.js";
 import cloudinaryService from "@/services/cloudinary-service.js";
 import UtilService from "@/services/UtilService.js";
@@ -211,7 +211,8 @@ export default {
     ProductForm,
     WorkHours,
     userLoginSignUp,
-    cloudinaryService
+    cloudinaryService,
+    BusinessPathModal
   },
   created() {
     let { businessId } = this.$route.params;
@@ -332,8 +333,11 @@ export default {
           console.log("cmp : ", this.currBusiness);
           this.$store
             .dispatch({ type: "addBusiness", currBusiness: this.currBusiness })
-            .then(() =>
-              this.$router.push("/business/" + this.currBusiness._id)
+            .then(() =>{
+              var business= this.$store.getters.currBusiness
+              this.isPathModal=true
+              // this.$router.push("/business/" +business._id )
+            }
             );
         }
       });
@@ -395,6 +399,9 @@ span.flex {
   flex-direction: column;
   align-items: baseline;
   align-content: space-between;
+  button{
+    margin-top: 10px;
+  }
 }
 .profilTag {
   width: 90px;
@@ -626,6 +633,7 @@ h3 {
     border: 0.8px solid #aa4dc8;
     color: white;
     background-color: #aa4dc8;
+    margin-top: 100px;
 }
 
 .setings {

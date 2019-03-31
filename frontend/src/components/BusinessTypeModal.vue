@@ -3,7 +3,7 @@
     <div class="modalMain">
         <h2>Pick your business type</h2>
         <select  v-model="selctedType">
-            <option value="">Busines type</option>
+            <option value="">Busines type ▿</option>
             <option v-for="(type,idx) in businessType " 
             :key="idx"
            >
@@ -13,7 +13,7 @@
         </select>
         <div @click="saveType" class="save">
       <button >save</button>
-      <span class="fas fa-save"></span>
+      <span class=""></span>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style lang="scss"  >
+<style scoped lang="scss"  >
 .ModalContiner {
   display: flex;
   flex-direction: column;
@@ -69,19 +69,34 @@ export default {
     justify-content: center;
     align-items: center;
     justify-content: space-around;
+     button, select{
+      border-radius: 15px;
+      border: 0.8px solid #3899ec;
+      color: #3899ec;
+      background-color: #f0f4f7;
+      font-size: 1.5rem;
+      padding: 0 17px;
+       &:hover{
+      z-index: 1000;
+      visibility: visible;
+      background-color: #3899ec;
+      color: white;
+      
+    }
+     }
     
   }
 
-  select{
-      text-align: center;
-       &:focus {
-      text-align: center;
-    outline: none;
+//   select{
+//       text-align: center;
+//        &:focus {
+//       text-align: center;
+//     outline: none;
     // background-color: #131919ba;
     // border: dashed;
     
-  }
-  }
+//   }
+//   }
 }
 .save{
     display: flex;
