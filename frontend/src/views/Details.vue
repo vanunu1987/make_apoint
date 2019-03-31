@@ -1,79 +1,78 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
- <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId" ></router-link>
+    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
 
-    <make-appoint class="calendar" ></make-appoint>
-        <div  class="img-header"  
-        :style="{backgroundImage: `url(${imgPath.header_img_url})`}">
-        </div>
-        <div class="profile-detais culomn">
-          <div class="details-head flex">
-                <h1 class="name" >{{currBusiness.name}}</h1>
-              <div  class="img-profile"  :style="{backgroundImage: `url(${imgPath.profile_img_url})` }">
-          </div>
-          </div>
+    <make-appoint class="calendar"></make-appoint>
+    <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
+    <div class="profile-detais culomn">
+      <div class="details-head flex">
+        <h1 class="name">{{currBusiness.name}}</h1>
+        <div class="img-profile" :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"></div>
+      </div>
 
-          <span class="flex">
-         <span class="fas fa-map-pin"></span> 
-         <h2 class="address-h2">Address</h2> 
-         </span>
-         <h3>{{currBusiness.address}}</h3>
-          <span class="flex">
-         <span class="fas fa-phone"></span> 
-         <h2>Phone number</h2> 
-         </span>
-         <h3>{{currBusiness.phone}}</h3>
-          <span class="flex">
-         <span class="fas fa-address-card"></span>
-         <h2>About Us</h2> 
-        </span>
-        <h3>{{currBusiness.prefs.description}}</h3>
-          <span class="flex">
-         <span class="fas fa-star-half-alt"></span>
-         <h2>Rating</h2> 
-        </span>
-        <span class="rating-container flex">
-       <v-rating
-            :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
-          size="14" ></v-rating>
+      <span class="flex">
+        <span class="fas fa-map-pin"></span>
+        <h2 class="address-h2">Address</h2>
+      </span>
+      <h3>{{currBusiness.address}}</h3>
+      <span class="flex">
+        <span class="fas fa-phone"></span>
+        <h2>Phone number</h2>
+      </span>
+      <h3>{{currBusiness.phone}}</h3>
+      <span class="flex">
+        <span class="fas fa-address-card"></span>
+        <h2>About Us</h2>
+      </span>
+      <h3>{{currBusiness.prefs.description}}</h3>
+      <span class="flex">
+        <span class="fas fa-star-half-alt"></span>
+        <h2>Rating</h2>
+      </span>
+      <span class="rating-container flex">
+        <v-rating
+          :value="currBusiness.rank.avg"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
         <h3>({{currBusiness.rank.qty}})</h3>
-        </span>
-        </div>
-        <div class="midle">
-        <GmapMap
-  class="map"      
-  :center="mapCenter"
-  :zoom="16"
-  map-type-id="terrain"
-  style="width: 100vw; height: 300px"
-  :disableAutoPan="true"
-   :options="{scrollwheel: false}"
->
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in markers"
-    :position="mapCenter"
-    :clickable="true"
-    :draggable="true"
-    :disableAutoPan="true"
-   :options="{scrollwheel: false}"
-  />
-</GmapMap>
- 
-</div>
-
-    </section>
-
+      </span>
+    </div>
+    <div class="midle">
+      <GmapMap
+        class="map"
+        :center="mapCenter"
+        :zoom="16"
+        map-type-id="terrain"
+        style="width: 100vw; height: 300px"
+        :disableAutoPan="true"
+        :options="{scrollwheel: false}"
+      >
+        <GmapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="mapCenter"
+          :clickable="true"
+          :draggable="true"
+          :disableAutoPan="true"
+          :options="{scrollwheel: false}"
+        />
+      </GmapMap>
+    </div>
+  </section>
 </template>
 
 <script>
-import MakeAppoint from '../components/MakeAppoint.vue'
-import mapCmp from '../components/MapCmp.vue'
-import vueDraggable from '../components/VueDraggable.vue'
+import MakeAppoint from "../components/MakeAppoint.vue";
+import mapCmp from "../components/MapCmp.vue";
+import vueDraggable from "../components/VueDraggable.vue";
 // import MakeAppoint from '@/components/MakeAppoint.vue'
-import BusinessService from '@/services/UtilService.js'
+import BusinessService from "@/services/UtilService.js";
 export default {
-  components:{
+  components: {
     MakeAppoint,
     BusinessService,
     vueDraggable,
@@ -82,19 +81,18 @@ export default {
   },
   created() {
     let { businessId } = this.$route.params;
-    this.businessId=businessId
-    this.$store.dispatch({ type: "loadBusiness", businessId })
-    .then(()=>{
-      var user=this.$store.getters.loggedInUser
-    if (user&&businessId===user.business_id) this.isAdmin= true
 
-      this.$store.dispatch({type:'loadAppoints',listRequire:'business'})
+    this.businessId = businessId;
+    this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
+      var user = this.$store.getters.loggedInUser;
+      if (user && businessId === user.business_id) this.isAdmin = true;
 
-      })
+      this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
+    });
   },
   data() {
     return {
-      showCalender:false,
+      showCalender: false,
       imgIdx: 0,
       markers: [
         {
@@ -102,120 +100,118 @@ export default {
           position: { lat: 32.0877, lng: 34.8032 }
         }
       ],
-      editMode:false,
-    businessId:null,
-    isAdmin:false
-    }
+      editMode: false,
+      businessId: null,
+      isAdmin: false
+    };
   },
- mounted(){
-   var user = this.$store.getters.loggedInUser
-   console.log('MOUNTED : ',user);
- },
- 
+  mounted() {
+    var user = this.$store.getters.loggedInUser;
+    console.log("MOUNTED : ", user);
+  },
+
   computed: {
     currBusiness() {
       return this.$store.getters.currBusiness;
     },
-    address(){
-      let loc= this.currBusiness.location
-      return `${loc.street} ${loc.number} ${loc.city} ${loc.state}`
+    address() {
+      let loc = this.currBusiness.location;
+      return `${loc.street} ${loc.number} ${loc.city} ${loc.state}`;
     },
-    imgPath(){
-     return this.currBusiness.prefs
+    imgPath() {
+      return this.currBusiness.prefs;
     },
-    mapCenter(){
+    mapCenter() {
       return this.$store.getters.currBusiness.location;
-
     }
   },
-    methods:{
-        changeImgIdx(val){
-            if (this.imgIdx+val<0||this.imgIdx+val>this.imgPath.length-1)return
-            else this.imgIdx+=val
-            
-        },
-        closeCalender(){
-          this.showCalender = false
-        }
+  methods: {
+    changeImgIdx(val) {
+      if (this.imgIdx + val < 0 || this.imgIdx + val > this.imgPath.length - 1)
+        return;
+      else this.imgIdx += val;
     },
-}
+    closeCalender() {
+      this.showCalender = false;
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
-
 // helpers
-.flex{
+.flex {
   display: flex;
   flex: none;
 }
-.culomn{
+.culomn {
   display: flex;
   flex-direction: column;
 }
-span.flex{
-      align-items: baseline;
-      margin-top: 20px;
-      span{
-        margin: 3px;
-      }
+span.flex {
+  align-items: baseline;
+  margin-top: 20px;
+  span {
+    margin: 3px;
+  }
 }
-h1,h2,h3{
+h1,
+h2,
+h3 {
   font-weight: 100;
-  letter-spacing: .2px;
-  
+  letter-spacing: 0.2px;
 }
-.name{
+.name {
   font-size: 2.5rem;
   font-weight: 500;
 }
-.page-continer{
+.page-continer {
   background-color: white;
- display: grid;
-    grid-template-columns: 20px 1fr 1fr 20px;
-    grid-template-rows: 1.3fr 1fr 1fr .5fr;
-     grid-gap: 10px 20px;
-        // padding: 20px;
-    .img-header{
-      grid-column: 1/5;
-      grid-row: 1;
-    }
-    .profile-detais{
-      grid-column: 2;
-      grid-row: 2;      
-
-    }
-    .calendar{
-       grid-column: 3;
-      grid-row: 2; 
-      position: relative;
-      display: inline;
-    }
-    .midle{
-       grid-column: 1/5;
-      grid-row: 3;
-    }
+  display: grid;
+  grid-template-columns: 20px 1fr 1fr 20px;
+  grid-template-rows: 1.3fr 1fr 1fr 0.5fr;
+  grid-gap: 10px 20px;
+  // padding: 20px;
+  .img-header {
+    grid-column: 1/5;
+    grid-row: 1;
+  }
+  .profile-detais {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .calendar {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    display: inline;
+  }
+  .midle {
+    grid-column: 1/5;
+    grid-row: 3;
+  }
 }
-.profile-detais{
-// margin-left: 30px;
-word-wrap: break-word !important;
-    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.375em !important;
-    color: #484848 !important;
+.profile-detais {
+  // margin-left: 30px;
+  word-wrap: break-word !important;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
 }
-.details-head{
-align-items: center;
-justify-content: space-between;
-padding-right: 20px;
+.details-head {
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
 }
-.img-profile{
+.img-profile {
   width: 75px;
-    height: 75px;
-    background-size: cover;
-    border-radius: 50px;
-    background-position: center;
+  height: 75px;
+  background-size: cover;
+  border-radius: 50px;
+  background-position: center;
   margin-left: 10px;
-
 }
 
 .img-header {
@@ -232,36 +228,34 @@ button {
   font-weight: 800;
   font-size: 1.5rem;
 }
-h3{
+h3 {
   text-align: left;
 }
-.address-h2{
-margin-left: 6px;
+.address-h2 {
+  margin-left: 6px;
 }
 button:focus {
   border: none;
   outline: none;
 }
-span{
-  &.rating-container{
+span {
+  &.rating-container {
     margin-top: 5px;
-     display: flex;
-  // justify-content: center;
-  padding-bottom: 10px;
+    display: flex;
+    // justify-content: center;
+    padding-bottom: 10px;
   }
 }
-.fas{
+.fas {
   color: black;
-
 }
-.add-appoint{
+.add-appoint {
   border-radius: 5px;
   padding: 5px;
   border: none;
-
 }
 
-a{
+a {
   text-decoration: none;
   font-size: 2rem;
   padding: 5px;
@@ -281,34 +275,32 @@ a{
 }
 
 @media (max-width: 740px) {
-  .page-continer{
-  background-color: white;
- display: grid;
+  .page-continer {
+    background-color: white;
+    display: grid;
     grid-template-columns: 10px 1fr 10px;
-    grid-template-rows: 1.3fr 1fr 1fr .5fr;
-     grid-gap: 10px 20px;
-        // padding: 20px;
-    .img-header{
+    grid-template-rows: 1.3fr 1fr 1fr 0.5fr;
+    grid-gap: 10px 20px;
+    // padding: 20px;
+    .img-header {
       grid-column: 1/4;
       grid-row: 1;
     }
-    .profile-detais{
+    .profile-detais {
       grid-column: 2;
-      grid-row: 2;      
-
+      grid-row: 2;
     }
-    .calendar{
-       grid-column: 2;
-      grid-row: 3; 
+    .calendar {
+      grid-column: 2;
+      grid-row: 3;
       position: relative;
       display: inline;
     }
-    .midle{
-       grid-column: 1/4;
+    .midle {
+      grid-column: 1/4;
       grid-row: 4;
     }
-}
-  
+  }
 }
 </style>
 

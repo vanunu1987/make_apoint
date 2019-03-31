@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <!-- <img src="../assets/logo.png"> -->
     <header>
       <section class="head-bar">
       <h1>Find nearby service and schedule an appointment quick.</h1>
@@ -66,12 +65,13 @@ export default {
   background-color: black;
   z-index: 1;
 }
-img{
+.logo{
   position: absolute;
   height: 100px;
-  width: auto;
+  width: 100px;
   left: 5px;
   top: 0;
+  z-index: 10001;
 }
 
 
