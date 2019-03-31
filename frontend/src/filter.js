@@ -19,7 +19,7 @@ Vue.filter('hours', function (value) {
     if (!value||typeof value !== 'number') return value
     var strHtml =''
    var hours = Math.floor(value/60)
-   if(hours) strHtml += `${hours} hours`
+   if(hours) strHtml += `${hours} hour`
    var min = value%60
    if(min) strHtml += `${min} mins`
 

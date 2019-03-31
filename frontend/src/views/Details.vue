@@ -14,7 +14,7 @@
           </div>
 
           <span class="flex">
-         <span class="fas fa-map-pin"></span> 
+         <span class="fas fa-map-marker-alt"></span> 
          <h2 class="address-h2">Address</h2> 
          </span>
          <h3>{{currBusiness.address}}</h3>
@@ -29,7 +29,7 @@
         </span>
         <h3>{{currBusiness.prefs.description}}</h3>
           <span class="flex">
-         <span class="fas fa-star-half-alt"></span>
+         <span class="fas fa-trophy"></span>
          <h2>Rating</h2> 
         </span>
         <span class="rating-container flex">
@@ -159,6 +159,7 @@ span.flex{
       }
 }
 h1,h2,h3{
+  overflow:visible;
   font-weight: 100;
   letter-spacing: .2px;
   
@@ -170,9 +171,9 @@ h1,h2,h3{
 .page-continer{
   background-color: white;
  display: grid;
-    grid-template-columns: 20px 1fr 1fr 20px;
-    grid-template-rows: 1.3fr 1fr 1fr .5fr;
-     grid-gap: 10px 20px;
+    grid-template-columns: 20px 1fr 2fr 20px;
+    grid-template-rows: 1fr 1fr 1fr .5fr;
+     grid-gap: 20px 20px;
         // padding: 20px;
     .img-header{
       grid-column: 1/5;
@@ -204,6 +205,7 @@ word-wrap: break-word !important;
     color: #484848 !important;
 }
 .details-head{
+  text-align: left;
 align-items: center;
 justify-content: space-between;
 padding-right: 20px;

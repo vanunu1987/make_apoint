@@ -2,10 +2,29 @@
 
 <template>
   <section class="make-appoint3">
-    <h1>leave contacts for host</h1>
-    <input type="text" v-model="userName" placeholder="name"/>
-    <input type="text" v-model="phone" placeholder="phone"/>
-    <v-btn @click="sendAddUser">ok</v-btn>
+      <form>
+        <h1>contacts for host:</h1>
+    <v-text-field
+      v-model="phone"
+      v-validate="'required|max:10'"
+      :counter="10"
+      label="Name"
+      data-vv-name="name"
+      required
+    ></v-text-field>
+    <v-text-field
+      v-model="email"
+      v-validate="'required|email'"
+      label="phone"
+      data-vv-name="email"
+      required
+    ></v-text-field>
+   
+    <v-btn @click="sendAddUser">submit</v-btn>
+
+   
+  </form>
+    
   
   </section>
 </template>
@@ -61,8 +80,11 @@ export default {
   font-size: 23px;
   flex-direction:column;
  justify-content: space-between;
- align-items: center;
- background-image: linear-gradient(rgb(97, 183, 253), rgb(159, 236, 255));
+ align-items: left;
+
+ h1{
+   text-align: left;
+ }
  button.v-btn{
    background-color:#2f71ff !important;
    opacity: 0.9;
