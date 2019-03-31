@@ -264,7 +264,7 @@ a {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: 15px;
+  top: 55px;
   right: 15px;
   // margin-left: 35px;
   // margin-top: 40px;
