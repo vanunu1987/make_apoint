@@ -8,7 +8,7 @@
      <h5><i class="far fa-clock"></i> {{ event.startTime}} </h5>
      <h5><i class="far fa-hourglass"></i> {{ event.duration|hours}}</h5>
      </div>
-     <v-btn @click="checkIfLogin(event.startTime)" outline color="indigo">choose</v-btn>
+     <button @click="checkIfLogin(event.startTime)">choose</button>
     </div>
   </section>
 </template>

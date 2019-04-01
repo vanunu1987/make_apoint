@@ -443,6 +443,7 @@ button {
 }
 .bizInput{
   margin-left: 5px;
+  text-transform: capitalize !important;
 }
 
 .detailscontiner{

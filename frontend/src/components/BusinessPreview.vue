@@ -19,28 +19,6 @@
     </div>
 </template>
 
-    // <v-card class="mx-auto" color="grey lighten-4">
-    //   <router-link :to="'business/'+currBusiness._id">
-    //     <v-img :src="currBusiness.prefs.header_img_url" class="white--text" height="200px"></v-img>
-    //     <v-card-title primary-title>
-    //       <div>
-    //         <div class="preview-name">{{currBusiness.name}}</div>
-    //         <span class="grey--text">{{adress}}</span>
-    //       </div>
-    //     </v-card-title>
-    //     <section class="rank">
-    //       <v-rating
-    //         :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
-    //       size="14" ></v-rating>
-    //       <div class="ml-2 grey--text text--darken-2">
-    //         <span>{{ currBusiness.rank.avg }}</span>
-    //         <span>({{ currBusiness.rank.qty }})</span>
-    //       </div>
-    //     </section>
-    //   </router-link>
-    // </v-card>
-
-
 <script>
 import StarRating from "vue-star-rating";
 
@@ -101,6 +79,7 @@ h3{
     color: #303030;
     height: 45px;
     display: block;
+    text-transform: capitalize;
     // overflow: hidden;
     padding-top: 10px;
     -ms-word-wrap: break-word;
