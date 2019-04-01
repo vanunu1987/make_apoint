@@ -439,6 +439,7 @@ button {
 }
 .bizInput{
   margin-left: 5px;
+  text-transform: capitalize !important;
 }
 
 .detailscontiner{
@@ -684,7 +685,7 @@ h3 {
 
 .img-header {
   width: 100%;
-  height: 50vh;
+  // height: 50vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

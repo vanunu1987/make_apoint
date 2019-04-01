@@ -20,7 +20,7 @@
       required
     ></v-text-field>
    
-    <v-btn @click="sendAddUser">submit</v-btn>
+    <button @click="sendAddUser">submit</button>
 
    
   </form>
@@ -81,6 +81,21 @@ export default {
   flex-direction:column;
  justify-content: space-between;
  align-items: left;
+ button{
+  border-radius: 15px;
+      border: 0.8px solid #3899ec;
+      color: #3899ec;
+      background-color: #f0f4f7;
+      font-size: 1.5rem;
+      padding: 0 17px;
+      text-align: center;
+      &:hover{
+         z-index: 1000;
+      visibility: visible;
+      background-color: #3899ec;
+      color: white;
+      }
+}
 
  h1{
    text-align: left;

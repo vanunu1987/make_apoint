@@ -72,9 +72,9 @@ span{
 $primary-color: rgb(0, 132, 137);
 
 section.calendar-date-picker.calendar{
-  width:70% !important;
-  height: 0 !important; 
-  padding-top:60% !important;
+  // width:70% !important;
+  // height: 0 !important; 
+  // padding-top:60% !important;
   position:relative !important;
 }
 div.layout.wrap{
@@ -86,12 +86,14 @@ height: 70% !important;
 
 .calendar-container{
   display:flex !important;
-  position: absolute !important;
+  // position: absolute !important;
   flex-direction:column !important;
-  top:0px !important;
-  left:0px !important;
-  width:100% !important;
-  height:100% !important;
+  // top:0px !important;
+  // left:0px !important;
+  // width:100% !important;
+  // height:100% !important;
+  width: 400px;
+  height: 400px;
 }
 
 .v-calendar-weekly__head-weekday {

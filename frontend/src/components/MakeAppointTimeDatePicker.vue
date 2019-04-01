@@ -51,6 +51,7 @@ export default {
 section.make-appoint-time-date-picker{
   display:flex;
   position:relative;
+  height: 400px;
  
   .appoint-picker{
     border: 2px solid grey;
@@ -61,6 +62,7 @@ section.make-appoint-time-date-picker{
     // transform: translate(-50%, -50%);
     // position: absolute;
     z-index: 4;
+    width: 40%;
 }
   
 
