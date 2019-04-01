@@ -85,7 +85,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .workTimeCmp{
  display: flex;
  flex-direction: column;
@@ -95,7 +95,14 @@ export default {
 box-shadow: 4px 3px 14px 2px rgba(0,0,0,0.75);
 border-radius: 5px;
 padding: 10px;
-
+button{
+    font-size: 1.2rem;
+    padding: 0 17px;
+    border-radius: 15px;
+    border: 0.8px solid #42b983;
+    color: white;
+    background-color: #42b983;
+    }
 
 }
 
@@ -103,7 +110,7 @@ padding: 10px;
     display: flex;
     justify-content: center;
     margin: 5px;
-    
+   
 }
 .day{
     display: flex;
