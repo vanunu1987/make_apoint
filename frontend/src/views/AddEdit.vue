@@ -1,7 +1,7 @@
 <template>
   <section class="page-continer" v-if="!!currBusiness.prefs">
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
-    <business-path-modal @setPath="isPathModal=false" class="businessType" v-if="isPathModal"/>
+    <business-path-modal @setPath="setPathModal" class="businessType" v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
     <user-login-signUp
       :isNewUserProp="true"
@@ -132,20 +132,20 @@
           @click="isGalleryHeaderImg=!isGalleryHeaderImg"
           title="Setting"
           class="fas fa-cog "
-        >Settings</button>
+        > Settings</button>
         <button
           @click="isProductModal=true"
           v-show="!isGalleryHeaderImg"
           title="addImg"
-          class=" "
-        >Add product</button>
+          class="fas fa-plus"
+        > Add product</button>
         <!-- <product-form v-show="!isGalleryHeaderImg"/> -->
         <button
           v-show="!isGalleryHeaderImg"
           @click="isCalendar=!isCalendar"
-          class=""
-        >Add working hours</button>
-        <button v-show="!isGalleryHeaderImg" class="doneBtn" @click="saveCog">done</button>
+          class="fas fa-plus"
+        > Add working hours</button>
+        <button v-show="!isGalleryHeaderImg" class="doneBtn" @click="saveCog">Done</button>
       </div>
 
       <input
@@ -227,7 +227,6 @@ export default {
           type: "loadImgs",
           Businesstype: this.currBusiness.type
         });
-        this.isPathModal = true;
       }
     });
   },
@@ -288,9 +287,6 @@ export default {
       }
     },
     filteredItems() {
-      console.log(this.currBusiness.type);
-      console.log(this.imgUrls);
-
       return this.imgUrls[0].imgs.filter(img => img.filter === this.filterBy);
     },
     setType(val) {
@@ -356,7 +352,7 @@ export default {
           this.currBusiness.prefs.header_img_url = res.secure_url;
         else this.currBusiness.prefs.profile_img_url = res.secure_url;
       });
-    }
+    },
   },
   computed: {
     imgUrls() {
@@ -578,28 +574,38 @@ h3 {
       font-size: 1.5rem;
       padding: 0 17px;
 
+      transition: 0.3s ease-in;
       
     }
     .calendarBtn{
-        margin-top: 70px;
-         font-size: 1.5rem;
+      min-width: 220px;
+    margin-top: 70px;
+    font-size: 1.5rem;
     padding: 0 17px;
     border-radius: 15px;
     border: 0.8px solid #3899ec;
     color: #3899ec;
-    background-color: #f0f4f7
+    background-color: #f0f4f7;
+    // transition: 2s;
+   
       }
-    &:hover{
-      img{
+    &:hover img{
+      
         opacity: 1;
-      }
-      button{
-      z-index: 1000;
+        transition: 0.5s;
+
+      
+    //   button{
+   
+      
+    // }
+    }
+    &:hover button{
+     z-index: 1000;
       visibility: visible;
       background-color: #3899ec;
       color: white;
-      
-    }
+
     }
   }
   
@@ -630,10 +636,11 @@ h3 {
     font-size: 1.5rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #aa4dc8;
+    border: 0.8px solid #42b983;
     color: white;
-    background-color: #aa4dc8;
+    background-color: #42b983;
     margin-top: 100px;
+    margin-left: 70px;
 }
 
 .setings {
@@ -758,6 +765,7 @@ button:focus {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
   margin-left: 80px;
   height: 33px;
+  z-index: 10;
 }
 </style>
 

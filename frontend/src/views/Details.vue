@@ -1,6 +1,7 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
+    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId"> business</router-link>
 
     <make-appoint class="calendar"></make-appoint>
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
