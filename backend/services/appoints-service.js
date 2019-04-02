@@ -42,6 +42,8 @@ function query(filterBy) {
 
 
 function add(appoint) {
+    appoint.user_id = new ObjectId(appoint.user_id)
+    appoint.business_id = new ObjectId(appoint.business_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('appoints');
@@ -65,9 +67,8 @@ function remove(appointId) {
 }
 
 function getBusinessData(businessId) {
-    var queryToMongo = {
-        business_id: businessId
-    }
+    var queryToMongo = { business_id: new ObjectId(businessId) }
+
     return mongoService.connect()
         .then((db) => {
             return db.collection('appoints').aggregate(

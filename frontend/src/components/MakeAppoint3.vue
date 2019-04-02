@@ -2,8 +2,14 @@
 
 <template>
   <section class="make-appoint3">
-      <form>
-        <h1>contacts for host:</h1>
+    <form @submit.prevent="sendAddUser">
+    <h1>Please enter your details :</h1>
+    <input type="text" v-model="userName" placeholder="Your Name">
+    <input type="tel" v-model="phone" placeholder="Phone Number">
+    <button @click="sendAddUser">Submit</button>
+    </form>
+    <!-- <form>
+        <h1>Please enter your details :</h1>
     <v-text-field
       v-model="phone"
       v-validate="'required|max:10'"
@@ -19,11 +25,8 @@
       data-vv-name="email"
       required
     ></v-text-field>
-   
     <button @click="sendAddUser">submit</button>
-
-   
-  </form>
+  </form> -->
     
   
   </section>
@@ -66,6 +69,7 @@ export default {
       this.$emit("update-appoint", payload);
     },
     sendAddUser(){
+      console.log('details : ',this.user);
        this.$emit("add-user",this.user)
     }
   },
@@ -77,20 +81,28 @@ export default {
 .make-appoint3{
   height: 100%;
   display:flex;
-  font-size: 23px;
+  // font-size: 23px;
   flex-direction:column;
  justify-content: space-between;
- align-items: left;
+//  align-items: left;
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+}
  button{
-  border-radius: 15px;
+      border-radius: 3px;
       border: 0.8px solid #3899ec;
       color: #3899ec;
       background-color: #f0f4f7;
-      font-size: 1.5rem;
-      padding: 0 17px;
+      // font-size: 1.3rem;
+      padding: 5px;
       text-align: center;
+      transition: .3s ease;
+      width: 100px;
       &:hover{
-         z-index: 1000;
+      z-index: 1000;
       visibility: visible;
       background-color: #3899ec;
       color: white;
@@ -99,11 +111,10 @@ export default {
 
  h1{
    text-align: left;
+   font-size: 2rem;
+   margin-bottom: 100px;
  }
- button.v-btn{
-   background-color:#2f71ff !important;
-   opacity: 0.9;
- }
+ 
  input{
   //  border:1px black solid;
   background-color: #eeeeee;
@@ -111,6 +122,7 @@ export default {
   text-align: center;
   padding: 5px;
   border-radius: 3px;
+  margin-bottom: 10px;
    
  }
 }
