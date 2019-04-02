@@ -15,6 +15,7 @@ export default new Vuex.Store({
     currBusiness: null,
     appointsList:[],
     userAppointsList:[],
+    UserToShow:{},
     imgList:[],
     businessData:null,
     BusinessTypes:['Barber','Tattoo Artist','Cosmetics'],
@@ -56,6 +57,9 @@ export default new Vuex.Store({
     },
     currUserLocation(state){
       return state.currUserLocation
+    },
+    UserToShow(state){
+      return state.UserToShow
     }
   },
 
@@ -95,6 +99,11 @@ export default new Vuex.Store({
     },
     setCurrUserLocation(state,{userLocation}){
       state.currUserLocation = userLocation
+    },
+    setUserToShow(state,{user}){
+      state.UserToShow=user
+      console.log(user);
+      
     }
 
   },
@@ -218,6 +227,12 @@ export default new Vuex.Store({
       } else {
         console.log(navigator.geolocation);
       }
+    },
+    async findUserById(context,{userId}){
+      var user= await UserService.findUser(userId)
+      context.commit({type:'setUserToShow',user})
+      return user
+
     }
   }
 

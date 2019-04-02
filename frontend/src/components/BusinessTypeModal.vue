@@ -12,7 +12,7 @@
             
         </select>
         <div @click="saveType" class="save">
-      <button >save</button>
+      <button >Save</button>
       <span class=""></span>
       </div>
     </div>
@@ -69,11 +69,11 @@ export default {
     justify-content: center;
     align-items: center;
     justify-content: space-around;
-     button, select{
+      select{
       border-radius: 15px;
       border: 0.8px solid #3899ec;
       color: #3899ec;
-      background-color: #f0f4f7;
+      background-color: white;
       font-size: 1.5rem;
       padding: 0 17px;
        &:hover{
@@ -83,7 +83,19 @@ export default {
       color: white;
       
     }
+    &:focus{
+    outline: none;
+
+    }
      }
+      button{
+    font-size: 1.2rem;
+    padding: 0 17px;
+    border-radius: 15px;
+    border: 0.8px solid #42b983;
+    color: white;
+    background-color: #42b983;
+    }
     
   }
 

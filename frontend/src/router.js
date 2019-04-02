@@ -6,6 +6,7 @@ import AddEdit from './views/AddEdit.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
 import BusinessManage from './views/BusinessManage.vue'
+// import BusinessPage from './views/BusinessPage.vue'
 
 Vue.use(Router)
 
@@ -41,7 +42,7 @@ export default new Router({
     },
     {
       path: '/manage/:businessId',
-      name: 'BusinessManage',
+      name: 'BusinessPage',
       component: BusinessManage
     },
   ]

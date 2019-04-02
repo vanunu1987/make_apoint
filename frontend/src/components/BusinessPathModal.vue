@@ -2,9 +2,9 @@
   <div class="ModalContiner">
     <div class="modalMain">
         <h1 class="h1Title">Congratulations !</h1>
-        <h2> enjoy your business link:</h2>
+        <h2> Enjoy your business link:</h2>
         <h3>http://localhost:8080/business/{{currBusiness._id}}</h3>
-      <button @click="savePath">save</button>
+      <button @click="savePath">Done</button>
     </div>
   </div>
 </template>
@@ -20,7 +20,6 @@ export default {
     methods:{
         savePath(){
             this.$router.push('/business/' + this.currBusiness._id)
-            this.$emit('setPath')
         }
     },
     components:{
@@ -59,6 +58,14 @@ export default {
     align-items: center;
     h3{
         margin-top: 5px;
+    }
+    button{
+    font-size: 1.2rem;
+    padding: 0 17px;
+    border-radius: 15px;
+    border: 0.8px solid #42b983;
+    color: white;
+    background-color: #42b983;
     }
   }
 
