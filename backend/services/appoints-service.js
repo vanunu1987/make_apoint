@@ -4,8 +4,9 @@ const ObjectId = require('mongodb').ObjectId;
 
 function query(filterBy) {
     var queryToMongo = {}
-    if (filterBy.listRequire === 'business') queryToMongo.business_id = filterBy.listRequireId
-    else queryToMongo.user_id = filterBy.listRequireId
+    var id = new ObjectId(filterBy.listRequireId)
+    if (filterBy.listRequire === 'business') queryToMongo.business_id = id
+    else queryToMongo.user_id = id
     console.log('queryToMongo : ', queryToMongo);
     return mongoService.connect()
         .then((db) => {
@@ -15,6 +16,8 @@ function query(filterBy) {
 
 
 function add(appoint) {
+    appoint.user_id = new ObjectId(appoint.user_id)
+    appoint.business_id = new ObjectId(appoint.business_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('appoints');
@@ -35,7 +38,7 @@ function remove(appointId) {
         })
 }
 function getBusinessData(businessId) {
-    var queryToMongo = { business_id: businessId }
+    var queryToMongo = { business_id: new ObjectId(businessId) }
     return mongoService.connect()
         .then((db) => {
             return db.collection('appoints').aggregate(

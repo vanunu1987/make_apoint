@@ -54,8 +54,8 @@ section.make-appoint-time-date-picker{
   height: 400px;
  
   .appoint-picker{
-    border: 2px solid grey;
-    padding: 10px;
+    // border: 2px solid grey;
+    // padding: 10px;
     background-color: white;
     // top: 33%;
     // left: -26%;

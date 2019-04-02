@@ -10,7 +10,6 @@
     <h5>{{appoint.product.duration | hours}}</h5>
     <h5>{{appoint.product.price | dollar}}</h5>
     <button @click="sendAddAppoint">confirm</button>
-  
   </section>
 </template>
 

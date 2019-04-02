@@ -2,8 +2,8 @@
 
 <template>
   <section class="make-appoint6">
-    <h1>see you there!</h1>
-  <img src="../assets/success.gif">
+    <!-- <h1>see you there!</h1>
+  <img src="../assets/success.gif"> -->
   </section>
 </template>
 
@@ -31,6 +31,9 @@ export default {
        this.$emit('set-cmp','MakeAppoint6')
     }
   },
+  created(){
+    this.$swal("Its A Date!", "See you there", "success")
+  }
  
 };
 </script>

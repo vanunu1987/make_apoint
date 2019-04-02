@@ -12,6 +12,7 @@
         </button>
       </div>
     </div>
+    <!-- <h1>{{availableCount.length}}</h1> -->
     <v-layout wrap>
       <v-calendar ref="calendar" v-model="start" :type="type" :end="end" color="primary"></v-calendar>
     </v-layout>
@@ -21,6 +22,7 @@
 
 
 <script>
+import CalendarService from "../services/CalendarService.js";
 export default {
   data: () => ({
     type: "month",
@@ -31,9 +33,16 @@ export default {
     monthName() {
       return moment(this.start).format("MMMM");
     },
+    availableCount(){
+      return CalendarService.getDayEventsForCalendar(this.start,
+        this.$store.getters.currBusiness.workHours,
+        this.$store.getters.appointsList
+    )
+    }
   },
   watch:{
     start:function (){
+      console.log('month :::',this.start);
       this.$emit('update-appoint',{property:'date',value:this.start})
       this.$emit('to-cmp-appoint-picker',{property:'date',value:this.start})
     }
@@ -113,6 +122,9 @@ div.v-calendar-weekly__day {
   background-color: rgb(237, 246, 246);
   border: 1.5px solid white !important;
   border-radius: 6px !important;
+  &.available{
+    background-color:red;
+  }
 }
 
 div.v-calendar-weekly__day:hover {

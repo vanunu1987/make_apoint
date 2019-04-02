@@ -9,6 +9,7 @@ import './registerServiceWorker'
 import VueDraggable from 'vue-draggable'
 import resize from 'vue-resize-directive'
 import moment from 'moment'
+import VueSwal from 'vue-swal';
 import CalendarService from './services/CalendarService.js'
 window.moment = moment
 window.CalendarService = CalendarService
@@ -22,6 +23,7 @@ Vue.use(VueCharts)
  
 Vue.use(VueDraggable)
 Vue.use(resize)
+Vue.use(VueSwal)
 
 
 import * as VueGoogleMaps from 'vue2-google-maps'
