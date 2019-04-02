@@ -39,9 +39,20 @@ function update(user) {
         })
 }
 
+function query(filterBy) {
+    // var queryToMongo = {}
+    // queryToMongo.user_id = filterBy
+    const _id = new ObjectId(filterBy)
+    // console.log('queryToMongo : ', queryToMongo);
+    return mongoService.connect()
+        .then((db) => {
+            return db.collection('users').findOne({_id})
+        })
+}
 
 module.exports = {
     update,
     addUser,
-    checkLogin
+    checkLogin,
+    query
 }

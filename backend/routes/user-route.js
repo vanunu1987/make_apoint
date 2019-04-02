@@ -29,6 +29,12 @@ function addRoutes(app) {
             .then(user => res.json(user))
     })
 
+    app.get(`${BASE}/:userId`, (req, res) => {
+        const userId = req.params.userId;
+        userService.query(userId)
+            .then(user => res.json(user))
+    })
+
 }
 
 

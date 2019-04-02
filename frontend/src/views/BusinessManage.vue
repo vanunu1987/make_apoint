@@ -1,53 +1,41 @@
 <template>
 <section class="manage">
-    <h1>IM HERE</h1>
-    <!-- {{businessData}} -->
-     <!-- <v-card class="mx-auto text-xs-center" color="green" dark max-width="600">
-        <v-card-text>
-            <v-sheet color="rgba(0, 0, 0, .12)">
-                <v-sparkline :value="revenues" :labels="dates" color="rgba(255, 255, 255, .7)" height="100"
-                padding="24" stroke-linecap="round" smooth>
-                    <template v-slot:label="item">
-                        ${{ item.value }}
-                    </template>
-                </v-sparkline>
-            </v-sheet>
-        </v-card-text>
-
-    <v-card-text>
-      <div class="display-1 font-weight-thin">Sales</div>
-    </v-card-text>
-
-    <v-divider></v-divider>
-
-  </v-card> -->
-    <MonthlyIncome :data="{dates,revenues}" :height="200"/>
-    <IncomeByProduct :data="{products,productRevenues}" :height="200"
+    <h1>Dashbord</h1>
+    <div class="mainContiner">
+    <business-page/>
+    <div class="product">
+    <h2>Product distribution</h2>
+    <IncomeByProduct :data="{products,productRevc}" :height="300" :width="660"
     :backgroundcolor="mybackgroundcolor"
     :bordercolor="mybordercolor"
     :hoverbordercolor="myhoverbordercolor"/>
+    </div>
+    </div>
+    <h2>Day's revenues distribution</h2>
+    <MonthlyIncome :data="{dates,revenues}" :height="100"/>
 
-
-  <!-- <div id="chart">
-      <apexchart type=area height=350 :options="chartOptions" :series="revenues" />
-    </div> -->
 </section>
 </template>
 
 <script>
 import MonthlyIncome from '@/components/MonthlyIncome.vue'
 import IncomeByProduct from '@/components/IncomeByProduct.vue'
+import BusinessPage from '@/views/BusinessPage.vue'
 export default {
   name: "BusinessManage",
   components: {
     MonthlyIncome,
-    IncomeByProduct
+    IncomeByProduct,
+    BusinessPage
   },
   data(){
       return{
            mybackgroundcolor : ['rgba(75,0,192,0.1)','rgba(0,88,88,0.1)','rgba(75,192,0,0.1)','rgba(75,192,192,0.1)'],
             mybordercolor : ['rgba(75,0,192,1)','rgba(0,88,88,1)','rgba(75,192,0,1)','rgba(75,192,192,1)'],
             myhoverbordercolor : ['rgba(75,0,192,1)','rgba(0,88,88,1)','rgba(75,192,0,1)','rgba(75,192,192,1)'],
+            // height:100,
+           
+
       }
   },
   computed: {
@@ -78,6 +66,7 @@ export default {
             return bus._id
         })
     },
+   
   },
   created(){
       this.$store.dispatch('loadBusinessData')
@@ -86,9 +75,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.MonthlyIncome{
-    height: 400px;
-    width: 600px;
+.manage{
+    display: flex;
+    flex-direction: column;
+    h1{
+        margin-top: 100px;
+    }
+}
+.mainContiner{
+    display: flex;
+}
+.product{
+   display: flex;
+    flex-direction: column;  
 }
 </style>
 

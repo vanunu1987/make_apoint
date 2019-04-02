@@ -4,14 +4,41 @@ const ObjectId = require('mongodb').ObjectId;
 
 function query(filterBy) {
     var queryToMongo = {}
-    if (filterBy.listRequire === 'business') queryToMongo.business_id = filterBy.listRequireId
-    else queryToMongo.user_id = filterBy.listRequireId
+    var id = new ObjectId(filterBy.listRequireId)
+    if (filterBy.listRequire === 'business') queryToMongo.business_id = id
+    else queryToMongo.user_id = id
     console.log('queryToMongo : ', queryToMongo);
     return mongoService.connect()
-        .then((db) => {
-            return db.collection('appoints').find(queryToMongo).toArray()
-        })
+    .then(db =>
+        db.collection('appoints').aggregate([
+            {
+                $match: { business_id: filterBy.listRequireId }
+            },
+            {
+                $lookup:
+                {
+                    from: 'users',
+                    localField:'user_id',
+                    foreignField: '_id',
+                    as: 'userData'
+                }
+            }, 
+            {
+                $unwind: '$userData'
+            }
+        ]).toArray()
+    )
 }
+// function query(filterBy) {
+//     var queryToMongo = {}
+//     if (filterBy.listRequire === 'business') queryToMongo.business_id = filterBy.listRequireId
+//     else queryToMongo.user_id = filterBy.listRequireId
+//     console.log('queryToMongo : ', queryToMongo);
+//     return mongoService.connect()
+//         .then((db) => {
+//             return db.collection('appoints').find(queryToMongo).toArray()
+//         })
+// }
 
 
 function add(appoint) {
@@ -31,30 +58,68 @@ function remove(appointId) {
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('appoints');
-            return collection.remove({ _id: appointId })
+            return collection.remove({
+                _id: appointId
+            })
         })
 }
+
 function getBusinessData(businessId) {
-    var queryToMongo = { business_id: businessId }
+    var queryToMongo = {
+        business_id: businessId
+    }
     return mongoService.connect()
         .then((db) => {
             return db.collection('appoints').aggregate(
-                [
-                    { $match: queryToMongo },
-                    { $group: { _id: "$date", total: { $sum: "$product.price" }, count: { $sum: 1 } } },
-                    { $sort: { _id: 1 } }
-                ]
-            ).toArray()
+                    [{
+                            $match: queryToMongo
+                        },
+                        {
+                            $group: {
+                                _id: "$date",
+                                total: {
+                                    $sum: "$product.price"
+                                },
+                                count: {
+                                    $sum: 1
+                                }
+                            }
+                        },
+                        {
+                            $sort: {
+                                _id: 1
+                            }
+                        }
+                    ]
+                ).toArray()
                 .then((res1) => {
                     return db.collection('appoints').aggregate(
-                        [
-                            { $match: queryToMongo },
-                            { $group: { _id: "$product.title", total: { $sum: "$product.price" }, count: { $sum: 1 } } },
-                            { $sort: { _id: 1 } }
-                        ]
-                    ).toArray()
+                            [{
+                                    $match: queryToMongo
+                                },
+                                {
+                                    $group: {
+                                        _id: "$product.title",
+                                        total: {
+                                            $sum: "$product.price"
+                                        },
+                                        count: {
+                                            $sum: 1
+                                        }
+                                    }
+                                },
+                                {
+                                    $sort: {
+                                        _id: 1
+                                    }
+                                }
+                            ]
+                        ).toArray()
                         .then((res2) => {
-                            return { byDate: res1, byProduct: res2 }
+                            return {
+                                byDate: res1,
+                                byProduct: res2
+                            }
                         })
                 })
 

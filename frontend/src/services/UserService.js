@@ -1,6 +1,7 @@
 
 // import axios from 'axios'
 import Axios from 'axios';
+import { async } from 'q';
 var axios = Axios.create({
    withCredentials:true
 });
@@ -25,9 +26,15 @@ async function updateUser(user){
    
 }
 
+async function findUser(userId){
+   var res= await axios.get(`${BASE_URL}/${userId}`)
+   console.log('USER : ', res.data);
+   return res.data
+}
 
 export default {
     checkLogin,
     signUpUser,
-    updateUser
+    updateUser,
+    findUser
 }
