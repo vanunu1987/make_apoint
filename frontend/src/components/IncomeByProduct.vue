@@ -14,7 +14,7 @@ export default {
       datasets: [
         {
           label: this.data.products,
-          backgroundColor: '#3899ec',
+          backgroundColor: ['#f87979','#3899ec'],
           data: this.data.productRevenues
         }
       ]

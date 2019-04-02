@@ -12,7 +12,7 @@ function query(filterBy) {
     .then(db =>
         db.collection('appoints').aggregate([
             {
-                $match: { business_id: filterBy.listRequireId }
+                $match: queryToMongo 
             },
             {
                 $lookup:

@@ -26,7 +26,6 @@
       </div>
     </div>
     <!-- {{appointList}} -->
-   
   </div>
 </template>
 
@@ -47,12 +46,12 @@ export default {
       return this.$store.getters.appointsList;
     },
     dateNow(){
-        return moment(this.date).fromNow()
+        return moment(this.date).format('MMMM Do YYYY')
     }
   },
   data() {
     return {
-      date: "2019-03-01",
+      date: null,
       appoint:{
           date:null,
           startTime:null,
@@ -62,6 +61,9 @@ export default {
         },
         users:[],
     };
+  },
+  created(){
+      this.date = moment(Date.now()).format('YYYY') + '-' + moment(Date.now()).format('MM') + '-' + moment(Date.now()).format('DD')
   },
   methods: {
     filterByDate() {
