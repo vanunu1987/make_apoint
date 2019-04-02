@@ -10,15 +10,19 @@ export default {
   mounted () {
     // Overwriting base render method with actual data.
     this.renderChart({
-      labels: this.data.dates,
+      labels: this.data.products,
       datasets: [
         {
-          label: this.data.dates,
-          backgroundColor: '#f87979',
-          data: this.data.revenues
+          label: this.data.products,
+          backgroundColor: '#3899ec',
+          data: this.data.productRevenues
         }
       ]
     })
   }
 }
 </script>
+
+<style lang="sass" scoped>
+
+</style>

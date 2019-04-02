@@ -7,7 +7,7 @@
       </div>
       <div class="calendar_plan">
         <div class="cl_plan">
-          <div class="cl_title">Today</div>
+          <div class="cl_title"> {{dateNow}}</div>
           <div class="cl_copy">
             <input v-model="date" type="date">
           </div>
@@ -18,18 +18,20 @@
       </div>
       <div class="calendar_events">
         <p class="ce_title">Upcoming Events</p>
-        <div class="event_item" v-for="appoint in filterByDate() " :key="appoint._id">
+        <div class="event_item" v-for="(appoint) in filterByDate() " :key="appoint._id">
           <div class="ei_Dot dot_active"></div>
           <div class="ei_Title">{{appoint.startTime}}</div>
-          <div class="ei_Copy">{{appoint.product.title}}</div>
+          <div class="ei_Copy" >{{appoint.product.title}},{{finduser(appoint.user_id)}}</div>
         </div>
       </div>
     </div>
     <!-- {{appointList}} -->
+   
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   created() {
     let { businessId } = this.$route.params;
@@ -43,6 +45,9 @@ export default {
   computed: {
     appointList() {
       return this.$store.getters.appointsList;
+    },
+    dateNow(){
+        return moment(this.date).fromNow()
     }
   },
   data() {
@@ -54,7 +59,8 @@ export default {
           user_id:null,
           business_id:this.$store.getters.currBusiness._id,
           product:this.$store.getters.currBusiness.products[0]
-        }
+        },
+        users:[],
     };
   },
   methods: {
@@ -78,6 +84,17 @@ export default {
           // names must be equal
           return 0;
         });
+    },
+    finduser(userId){
+   return this.$store.dispatch({ type: "findUserById", userId }).then(() => {
+       console.log(this.$store.getters.UserToShow);
+       var user=this.$store.getters.UserToShow
+       console.log(user.userName);
+      this.users.push(user.userName) 
+       return 
+    })
+        
+
     }
   }
 };
@@ -99,12 +116,12 @@ input {
   }
 }
 .container {
-  margin: 100px auto;
+//   margin: 100px auto;
   width: 809px;
 }
 
 .light {
-  margin-top: 100px;
+//   margin-top: 100px;
   background-color: #fff;
 }
 .dark {
@@ -134,7 +151,7 @@ input {
 .cl_plan {
   width: 100%;
   height: 140px;
-  background-image: linear-gradient(-222deg, #ff8494, #ffa9b7);
+  background-image: linear-gradient(-222deg, #3899ec, #57aaf2);
   box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
   padding: 30px;
   color: #fff;
@@ -170,7 +187,7 @@ input {
   padding: 5px;
   cursor: pointer;
   &:hover {
-    background-image: linear-gradient(-222deg, #ff8494, #ffa9b7);
+    background-image: linear-gradient(-222deg, #3899ec, #57aaf2);
     box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
     .ei_Dot {
       background-color: #fff;
@@ -195,7 +212,7 @@ input {
   box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
 }
 .dot_active {
-  background-color: #ff8494;
+  background-color: #3899ec;
 }
 
 .ei_Title {
