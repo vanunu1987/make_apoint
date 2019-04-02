@@ -19,14 +19,7 @@ export default {
       ]
     });
   },
-  data() {
-    return {
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    };
-  }
+  
 };
 </script>
 <style lang="scss" scoped>

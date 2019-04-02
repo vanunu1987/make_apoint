@@ -1,11 +1,10 @@
 <template>
 <section class="manage">
-    <h1>Dashbord</h1>
     <div class="mainContiner">
     <business-page/>
     <div class="product">
     <h2>Product distribution</h2>
-    <IncomeByProduct :data="{products,productRevc}" :height="300" :width="660"
+    <IncomeByProduct :data="{products,productRevenues}" :height="300" :width="660"
     :backgroundcolor="mybackgroundcolor"
     :bordercolor="mybordercolor"
     :hoverbordercolor="myhoverbordercolor"/>
@@ -78,6 +77,7 @@ export default {
 .manage{
     display: flex;
     flex-direction: column;
+    padding-top: 100px;
     h1{
         margin-top: 100px;
     }
