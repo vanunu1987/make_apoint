@@ -164,7 +164,7 @@
         v-show="isGalleryHeaderImg"
         title="addImg"
         class="fas fa-image addImg"
-      ></button>
+      >Add image</button>
 
       <div v-if="isGalleryHeaderImg" class="headerGallery">
         <ul>
@@ -462,7 +462,7 @@ button {
 }
 .addImg {
   // position: absolute;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   // padding: 10px;
   // border-radius: 100%;
   // box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
@@ -526,7 +526,7 @@ h3 {
 .page-continer {
   background-color: #f0f4f7;
   display: grid;
-  grid-template-columns: 0.7fr 20px 2fr 1fr 20px 1px;
+  grid-template-columns: 1fr 20px 2fr 1fr 20px 1px;
   grid-template-rows: 1fr 1fr 1fr 0.5fr;
   grid-gap: 10px 20px;
   // padding: 20px;
@@ -552,11 +552,12 @@ h3 {
     background-color: white;
     padding: 5px;
     border-radius: 5px;
+
     // height: 100vh;
     img{
       position: absolute;
       opacity: 0.8;
-      width: 350px;
+      // width: 350px;
       top: 0;
       left: 0;
       height: 100%;

@@ -18,14 +18,13 @@
       </div>
       <div class="calendar_events">
         <p class="ce_title">Upcoming Events</p>
-        <div class="event_item" v-for="(appoint) in filterByDate() " :key="appoint._id">
-          <div class="ei_Dot dot_active"></div>
+        <div class="event_item" v-for="(appoint) in filterByDate() " :key="appoint._id" @click="isActiv=!isActiv">
+          <div class="ei_Dot" :class="{dot_active: isActiv}"  ></div>
           <div class="ei_Title">{{appoint.startTime}}</div>
-          <div class="ei_Copy" >{{appoint.product.title}},{{finduser(appoint.user_id)}}</div>
+          <div class="ei_Copy" >{{appoint.product.title}},{{appoint.userData.userName}}</div>
         </div>
       </div>
     </div>
-    <!-- {{appointList}} -->
   </div>
 </template>
 
@@ -60,6 +59,7 @@ export default {
           product:this.$store.getters.currBusiness.products[0]
         },
         users:[],
+        isActiv:false
     };
   },
   created(){
@@ -70,12 +70,8 @@ export default {
       return (this.appointList
         .filter(appoint => appoint.date === this.date))
         .sort((a, b) => {
-
-            console.log(a,b);
             var a= a.startTime.substr(0, 2)
             var b= b.startTime.substr(0, 2)
-            console.log(a,b);
-            
           if (a < b) {
             return -1;
           }
@@ -214,7 +210,7 @@ input {
   box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
 }
 .dot_active {
-  background-color: #3899ec;
+  background-color: #42b983;
 }
 
 .ei_Title {
