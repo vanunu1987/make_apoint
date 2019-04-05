@@ -77,15 +77,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@font-face{
-    font-family: AirbnbCereal;
-    src: url('../assets/fonts/AirbnbCereal-Book.ttf')
-
-}
-*{
-    font-family: 'AirbnbCereal', sans-serif;
-}
-
 h1 {
   margin-bottom: 30px;
 }
