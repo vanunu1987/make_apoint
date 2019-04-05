@@ -5,12 +5,15 @@
     </button>
     <userAppoints/>
     <div id="nav">
-      <div class="logo" v-if="isHome">
-        <h1>
-          Make Appoint
-          <span>.</span>
-        </h1>
-      </div>
+      <router-link to="/">
+        <div class="logo" v-if="isHome">
+          <h1>
+            Make Appoint
+            <span>.</span>
+          </h1>
+        </div>
+      </router-link>
+
       <section class="routes" :class="{ openNav: isOpenNav }">
         <router-link
           v-if="loggedUser && loggedUser.business_id"
@@ -19,7 +22,6 @@
         <router-link @click="test" to="/edit">Add business</router-link>
         <router-link to="/about">About</router-link>
         <router-link to="/login">Log in</router-link>
-        <router-link to="/">Home</router-link>
       </section>
     </div>
     <router-view/>
@@ -67,6 +69,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/scss/variables.scss";
+
 #nav {
   position: absolute;
   left: 0;
@@ -79,7 +83,7 @@ export default {
   height: 80px;
   padding-right: 10px;
   padding-left: 30px;
-  background-image: linear-gradient(to right, white, #ffffff00, white);
+  // background-image: linear-gradient(to right, white, #ffffff00, white);
 
   a,
   .user-name {
@@ -87,10 +91,38 @@ export default {
     font-weight: bold;
     color: #2c3e50;
     text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $primary-color;
+    }
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $primary-color;
     }
   }
+}
+
+.logo,
+.mobile-logo {
+  h1 {
+    font-family: "Baloo Chettan", cursive;
+    position: relative;
+    font-weight: bold;
+    color: black;
+
+    span {
+      position: absolute;
+      top: -101px;
+      font-size: 135px;
+      right: -13px;
+      z-index: -1;
+      color: $primary-color;
+      height: 50px;
+    }
+  }
+}
+.mobile-logo {
+  display: none;
 }
 </style>

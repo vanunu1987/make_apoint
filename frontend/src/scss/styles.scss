@@ -24,12 +24,6 @@ font-size: 2rem;
     top: 10px;
 }
 
-body{
-    // background-color: #e1f9f9;
-    background-color: #ecfbfb;
-    // background-color:#ff9900;
-}
-
 ul {
     list-style: none;
     &.business-list{
@@ -187,25 +181,6 @@ ul {
 
 @import url('https://fonts.googleapis.com/css?family=Baloo+Chettan');
 
-.logo,.mobile-logo{
-  h1{
-  font-family: 'Baloo Chettan', cursive;
-    position: relative;
-    font-weight: bold;
-    span{
-    position: absolute;
-    top: -101px;
-    font-size: 135px;
-    right: -13px;
-    z-index: -1;
-    color: $primary-color;
-    height: 50px;
-    }
-  }
-}
-.mobile-logo{
-  display: none;
-}
 .nav-burger{
   display: none;
 }
@@ -249,12 +224,6 @@ a{
   span{
     display: none;
   }
-}
-.logo{
-//  display: block;
-//   position: absolute;
-//   top: 10px;
-//   left: 25%;
 }
 .nav-burger{
   display: block;

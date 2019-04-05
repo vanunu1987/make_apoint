@@ -47,6 +47,7 @@ export default {
 
 
 <style scoped lang="scss">
+@import '@/scss/variables.scss';
 
 .home-filter{
     display: flex;
@@ -60,7 +61,7 @@ export default {
     padding: 12px 24px;
     font-size: 14px;
     flex-shrink: 0;
-    background-color: #1dbf73;
+    background-color: $primary-color;
     color: #fff;
     border: 1px solid transparent;
     margin: 0;
@@ -70,7 +71,7 @@ export default {
     transition: color .2s,background-color .2s,box-shadow .2s,border .2s;
 
     &:hover{
-    background-color: #3fca89;
+    background-color: $primary-color-light;
     }
 }
 </style>
