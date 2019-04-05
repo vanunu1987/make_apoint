@@ -1,7 +1,7 @@
 <template>
     <div class="card-container">
       <router-link :to="'business/'+currBusiness._id">
-        <v-img :src="currBusiness.prefs.header_img_url" height="200px"></v-img>
+        <v-img :src="currBusiness.prefs.header_img_url" height="330px"></v-img>
         <section class="card-details-container">
             <h3 class="preview-name">{{currBusiness.name}}</h3>
             <span class="address">{{adress}}</span>
