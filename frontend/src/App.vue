@@ -20,8 +20,12 @@
           :to="'/business/'+loggedUser.business_id"
         >{{loggedUser.userName}}'s Page</router-link>
         <router-link @click="test" to="/edit">Add business</router-link>
-        <!-- <router-link to="/about">About</router-link> -->
-        <router-link to="/login">Log in</router-link>
+
+        <a @click="toggleLogin">Log in</a>
+
+        <div v-if="isShowLogin" class="login-container" @click="toggleLogin">
+          <user-login-signup :isNewUserProp="false" @routeHome="toggleLogin"></user-login-signup>
+        </div>
       </section>
     </div>
     <router-view/>
@@ -30,15 +34,19 @@
 
 <script>
 import userAppoints from "@/components/UserAppoints.vue";
+import UserLoginSignup from "@/components/UserLoginSignup.vue";
+
 export default {
   name: "app",
   components: {
-    userAppoints
+    userAppoints,
+    UserLoginSignup
   },
   data() {
     return {
       isOpenNav: false,
-      isHome: true
+      isHome: true,
+      isShowLogin: false
     };
   },
   computed: {
@@ -48,7 +56,6 @@ export default {
       return currUser;
     },
     currBusiness() {
-      console.log(this.$store.getters.currBusiness);
       return this.$store.getters.currBusiness;
     }
   },
@@ -62,6 +69,9 @@ export default {
     },
     test() {
       this.isHome = false;
+    },
+    toggleLogin() {
+      this.isShowLogin = !this.isShowLogin
     }
   },
   created() {}
@@ -92,6 +102,7 @@ export default {
     color: #2c3e50;
     text-decoration: none;
     transition: color 0.3s;
+    cursor: pointer;
 
     &:hover {
       color: $primary-color;
@@ -124,5 +135,17 @@ export default {
 }
 .mobile-logo {
   display: none;
+}
+
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
