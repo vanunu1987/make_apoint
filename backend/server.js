@@ -14,6 +14,7 @@ app.use(cors({
   origin: ['http://localhost:8080'],
   credentials: true // enable set cookie
 }));
+
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({
