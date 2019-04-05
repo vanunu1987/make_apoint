@@ -20,7 +20,7 @@
           :to="'/business/'+loggedUser.business_id"
         >{{loggedUser.userName}}'s Page</router-link>
         <router-link @click="test" to="/edit">Add business</router-link>
-        <router-link to="/about">About</router-link>
+        <!-- <router-link to="/about">About</router-link> -->
         <router-link to="/login">Log in</router-link>
       </section>
     </div>
