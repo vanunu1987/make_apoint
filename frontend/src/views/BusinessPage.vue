@@ -2,7 +2,7 @@
   <div class="container">
     <div class="calendar light">
       <div class="calendar_header">
-        <h1 class="header_title">Welcome Back</h1>
+        <h1 class="header_title">{{currUser}}'s Dashbord</h1>
         <p class="header_copy">Calendar Plan</p>
       </div>
       <div class="calendar_plan">
@@ -46,6 +46,9 @@ export default {
     },
     dateNow(){
         return moment(this.date).format('MMMM Do YYYY')
+    },
+    currUser(){
+        return this.$store.getters.loggedInUser.userName
     }
   },
   data() {
@@ -61,6 +64,7 @@ export default {
         users:[],
         isActiv:false
     };
+
   },
   created(){
       this.date = moment(Date.now()).format('YYYY') + '-' + moment(Date.now()).format('MM') + '-' + moment(Date.now()).format('DD')
@@ -115,7 +119,8 @@ input {
 }
 .container {
 //   margin: 100px auto;
-  width: 809px;
+//   width: 809px;
+background-color: #23263e;
 }
 
 .light {
