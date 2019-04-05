@@ -1,6 +1,5 @@
 <template>
-  <div class="login">
-    <div class="sign-background"></div>
+  <div @click.stop>
     <section class="form-container">
     <form v-if="!isNewUser" @submit.prevent="login">
       <h1>Login</h1>
@@ -43,7 +42,6 @@ export default {
  
   methods: {
     login() {
-      console.log(this.userCredentials);
       var credentials = { ...this.userCredentials };
       this.$store.dispatch({ type: "loginUser", credentials });
       this.userCredentials.userName = null;
@@ -51,7 +49,6 @@ export default {
       this.$emit('routeHome')
     },
     signup() {
-      console.log(this.newUserCredentials);
       this.newUserCredentials.isReg = true;
       var credentials = { ...this.newUserCredentials };
       this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus })
@@ -76,6 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/scss/variables.scss';
 
 h1 {
   margin-bottom: 30px;
@@ -91,18 +89,10 @@ h1 {
   position: fixed;
    z-index: -1;
 }
-.sign-background{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  opacity: 0.3;
-   z-index: -10;
-}
-
 .form-container{
   padding: 10px;
   border-radius: 3px;
-  border: 2px solid #a2f7b5;
+  border: 2px solid $primary-color-light;
   height: 400px;
   width: 300px;
   background-color: white;
@@ -120,7 +110,8 @@ form {
   }
 }
 button{
-  background-color: #a2f7b559;
+  background-color: $primary-color;
+  color: white;
   padding: 5px;
   border-radius: 3px;
   width: 100%;
