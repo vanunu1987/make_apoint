@@ -2,7 +2,7 @@
   <div class="home">
     <header>
       <section class="head-bar">
-      <h1>Find nearby service and schedule an appointment quick.</h1>
+      <h1>Asaf is in the house</h1>
       <HomeFilter @find="filterList"/>
       </section>
     </header>
