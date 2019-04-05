@@ -2,7 +2,7 @@
   <div class="home">
     <header>
       <section class="head-bar">
-      <h1>Asaf is in the house</h1>
+      <h1>Find nearby service and schedule an appointment quick.</h1>
       <HomeFilter @find="filterList"/>
       </section>
     </header>
@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style <style lang="scss" scoped>
+<style lang="scss" scoped>
 
 #list{
   width: 100%;
@@ -65,6 +65,7 @@ export default {
   background-color: black;
   z-index: 1;
 }
+
 .logo{
   position: absolute;
   height: 100px;
