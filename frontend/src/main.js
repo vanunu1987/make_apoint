@@ -33,7 +33,7 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places', // This is required if you use the Autocomplete plugin
   },
 })
-import './styles.scss'
+import './scss/styles.scss'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 

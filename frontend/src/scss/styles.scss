@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One|Hammersmith+One');
+@import '@/scss/variables.scss';
 
 @font-face{
     font-family: AirbnbCereal;
-    src: url('./assets/fonts/AirbnbCereal-Book.ttf')
+    src: url('../assets/fonts/AirbnbCereal-Book.ttf')
 
 }
 *{
@@ -41,7 +42,7 @@ ul {
         display: grid;
         // grid-template-columns: repeat(4,minmax(min-content, auto));
         grid-template-columns: repeat(4,1fr);
-        grid-gap: 20px;
+        grid-gap: 16px;
         padding: 20px;
 
         li{
@@ -111,7 +112,7 @@ ul {
         height: 100vh;
         padding-top: 130px;
         // background-image: url('./assets/cover2.jpg');
-        background-image: url('./assets/background1.png');
+        background-image: url('../assets/background1.png');
         // background-attachment: fixed;
         background-size: cover;
         background-position-y: -100px;
@@ -211,7 +212,7 @@ ul {
     font-size: 135px;
     right: -13px;
     z-index: -1;
-    color: #1dbf73;
+    color: $primary-color;
     height: 50px;
     }
   }
@@ -246,7 +247,7 @@ ul {
     color: #2c3e50;
     text-decoration: none;
     &.router-link-exact-active {
-      color: #42b983;
+      color: $primary-color;
     }
   }
 }

@@ -370,6 +370,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import '@/scss/variables.scss';
 // helpers
 .flex {
   display: flex;
@@ -483,7 +484,7 @@ button {
   }
   button {
     &:hover {
-      background-color: #3899ec;
+      background-color: $secondary-color;
       color: white !important;
     }
   }
@@ -570,8 +571,8 @@ h3 {
       left: 50px;
       margin: 10px;
       border-radius: 15px;
-      border: 0.8px solid #3899ec;
-      color: #3899ec;
+      border: 0.8px solid $secondary-color;
+      color: $secondary-color;
       background-color: #f0f4f7;
       font-size: 1.5rem;
       padding: 0 17px;
@@ -585,8 +586,8 @@ h3 {
     font-size: 1.5rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #3899ec;
-    color: #3899ec;
+    border: 0.8px solid $secondary-color;
+    color: $secondary-color;
     background-color: #f0f4f7;
     // transition: 2s;
    
@@ -605,7 +606,7 @@ h3 {
     &:hover button{
      z-index: 1000;
       visibility: visible;
-      background-color: #3899ec;
+      background-color: $secondary-color;
       color: white;
 
     }
@@ -638,9 +639,9 @@ h3 {
     font-size: 1.5rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #42b983;
+    border: 0.8px solid $primary-color;
     color: white;
-    background-color: #42b983;
+    background-color: $primary-color;
     margin-top: 100px;
     margin-left: 70px;
 }
@@ -678,7 +679,7 @@ h3 {
 
   button{
     &:hover{
-      color: #3899ec !important;
+      color: $secondary-color !important;
     }
   }
 
@@ -697,8 +698,8 @@ h3 {
     font-size: 1rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #3899ec;
-    color: #3899ec;
+    border: 0.8px solid $secondary-color;
+    color: $secondary-color;
   }
 }
 button {
