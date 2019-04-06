@@ -94,7 +94,6 @@ export default {
   },
   mounted() {
     var user = this.$store.getters.loggedInUser;
-    console.log("MOUNTED : ", user);
   },
   computed: {
     currBusiness() {
