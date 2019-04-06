@@ -45,7 +45,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding-top: 56px;
 }
 
 .close-btn {
