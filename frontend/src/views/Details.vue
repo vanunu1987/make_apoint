@@ -1,13 +1,13 @@
 <template>
-  <section class="page-continer" v-if="currBusiness">
+  <section class="page-container" v-if="currBusiness">
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
     <img-carousel class="img-carousel-container"/>
     <details-page-footer/>
     <!-- <make-appoint class="calendar"></make-appoint> -->
-
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
+
     <div class="profile-detais culomn">
       <div class="details-head flex">
         <h1 class="name">{{currBusiness.name}}</h1>
@@ -45,13 +45,13 @@
         <h3>({{currBusiness.rank.qty}})</h3>
       </span>
     </div>
-    <div class="midle">
+    <div class="middle">
       <GmapMap
         class="map"
         :center="mapCenter"
         :zoom="16"
         map-type-id="terrain"
-        style="width: 100vw; height: 300px"
+        style="height: 300px"
         :disableAutoPan="true"
         :options="{scrollwheel: false}"
       >
@@ -178,34 +178,32 @@ h3 {
   font-size: 2.5rem;
   font-weight: 500;
 }
-.page-continer {
+.page-container {
   background-color: white;
   display: grid;
-  grid-template-columns: 20px 1fr 2fr 20px;
-  grid-template-rows: 1fr 1fr 1fr 0.5fr;
+  padding: 20px;
+  grid-template-columns: 1fr 2fr;
   grid-gap: 20px 20px;
-  // padding: 20px;
+
   .img-header {
-    grid-column: 1/5;
+    grid-column: 1/3;
     grid-row: 1;
   }
   .profile-detais {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 2;
   }
   .calendar {
     grid-column: 3;
-    grid-row: 2;
+    // grid-row: 2;
     position: relative;
     display: inline;
   }
-  .midle {
-    grid-column: 1/5;
-    grid-row: 3;
+  .middle {
+    grid-column: 1/3;
   }
 }
 .profile-detais {
-  // margin-left: 30px;
   word-wrap: break-word !important;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
     Helvetica Neue, sans-serif !important;
@@ -228,14 +226,6 @@ h3 {
   margin-left: 10px;
 }
 
-.img-header {
-  width: 100%;
-  // height: 50vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center !important;
-}
 button {
   background-color: #ffdead00;
   border: none;
@@ -289,36 +279,43 @@ a {
 }
 
 @media (max-width: 740px) {
-  .page-continer {
+  .page-container {
     background-color: white;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
     grid-template-rows: 1.3fr 1fr 1fr 0.5fr;
     grid-gap: 10px 20px;
-    // padding: 20px;
+
     .img-header {
-      grid-column: 1/4;
+      grid-column: 1/3;
       grid-row: 1;
     }
     .profile-detais {
-      grid-column: 3;
+      grid-column: 2;
       grid-row: 2;
     }
     .calendar {
-      grid-column: 2;
+      grid-column: 1;
       grid-row: 3;
       position: relative;
       display: inline;
     }
-    .midle {
-      grid-column: 1/4;
-      grid-row: 4;
+    .middle {
+      grid-column: 1/2;
     }
   }
 }
 
 .img-carousel {
-  grid-column: 2;
-  grid-row: 2;
+  grid-column: 1;
+}
+
+.img-header {
+  width: 100%;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center !important;
 }
 </style>

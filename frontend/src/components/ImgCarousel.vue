@@ -25,14 +25,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .img-carousel {
   .product {
     background-color: turquoise;
     border: 1px solid grey;
   }
-}
-.el-carousel, .el-carousel__container {
-  height: 100%;
+  .el-carousel,
+  .el-carousel__container,
+  .v-image {
+    height: 100% !important;
+  }
 }
 </style>

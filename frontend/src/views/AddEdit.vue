@@ -1,5 +1,5 @@
 <template>
-  <section class="page-continer" v-if="!!currBusiness.prefs">
+  <section class="page-container" v-if="!!currBusiness.prefs">
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
     <business-path-modal @setPath="setPathModal" class="businessType" v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
@@ -524,7 +524,7 @@ h3 {
   font-size: 2.5rem;
   font-weight: 500;
 }
-.page-continer {
+.page-container {
   background-color: #f0f4f7;
   display: grid;
   grid-template-columns: 1fr 20px 2fr 1fr 20px 1px;
