@@ -191,7 +191,7 @@ var axios = Axios.create({
 
 import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
-import CalendarDatePicker from "@/components/CalendarDatePicker.vue";
+import CalendarDatePicker from "@/components/Details/CalendarDatePicker.vue";
 import BusinessTypeModal from "@/components/BusinessTypeModal.vue";
 import BusinessPathModal from "@/components/BusinessPathModal.vue";
 import BusinessService from "@/services/BusinessService.js";

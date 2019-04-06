@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import CalendarDatePicker from "@/components/CalendarDatePicker.vue";
-import CalendarAppointPicker from "@/components/CalendarAppointPicker.vue";
+import CalendarDatePicker from "@/components/Details/CalendarDatePicker.vue";
+import CalendarAppointPicker from "@/components/Details/CalendarAppointPicker.vue";
 
 export default {
   data() {

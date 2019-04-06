@@ -22,7 +22,7 @@
 
 
 <script>
-import CalendarService from "../services/CalendarService.js";
+import CalendarService from "@/services/CalendarService.js";
 export default {
   data: () => ({
     type: "month",

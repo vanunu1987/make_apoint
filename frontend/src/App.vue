@@ -25,9 +25,9 @@
 
         <a @click="toggleLogin">Log in</a>
 
-        <div v-if="isShowLogin" class="dialog-container login-container" @click="toggleLogin">
+        <dialog-container v-if="isShowLogin" class="login-container" @dialogClick="toggleLogin">
           <user-login-signup :isNewUserProp="false" @routeHome="toggleLogin"></user-login-signup>
-        </div>
+        </dialog-container>
       </section>
     </div>
     <router-view/>
@@ -37,12 +37,14 @@
 <script>
 import userAppoints from "@/components/UserAppoints.vue";
 import UserLoginSignup from "@/components/UserLoginSignup.vue";
+import DialogContainer from '@/components/General/DialogContainer.vue'
 
 export default {
   name: "app",
   components: {
     userAppoints,
-    UserLoginSignup
+    UserLoginSignup,
+    DialogContainer,
   },
   data() {
     return {
