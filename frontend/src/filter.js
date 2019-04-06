@@ -9,7 +9,7 @@ Vue.filter('capitalize', function (value) {
 
 Vue.filter('dollar', function (value) {
     if (!value||typeof value !== 'number') return value
-    value = '$ '+value
+    value = '$'+value
     return value
   })
 
