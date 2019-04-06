@@ -7,10 +7,10 @@ cloudinary.config({
     cloud_name: 'dmr7h2h2h',
     api_key: '684627237884771',
     api_secret: 'UzOASIxY-D3Bcyu83yo7dLy4lpE'
- })
+})
 import Axios from 'axios';
 var axios = Axios.create({
-   withCredentials:true
+    withCredentials: true
 });
 
 
@@ -19,44 +19,35 @@ var axios = Axios.create({
 const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/business' : '//localhost:3003/business';
 
 
-async function query(filterBy){
+async function query(filterBy) {
     var filterBy = `?name=${filterBy.name}&locationLat=${filterBy.currUserLocation.lat}&locationLng=${filterBy.currUserLocation.lng}&type=${filterBy.type}&sortBy=${filterBy.sortBy}`;
-    console.log(filterBy);
     var res = await axios.get(`${BASE_URL}${filterBy}`)
     var businessList = await res.data
-    console.log('list : ',businessList);
     return businessList;
 }
-async function getImgs(type){
+async function getImgs(type) {
     var filterBy = `?type=${type}`;
-    console.log(filterBy);
     var res = await axios.get(`${BASE_URL}/imgs${filterBy}`)
-    console.log('gotttttt : ', res.data);
     return res.data
 }
 
-async function getById(businessId){
+async function getById(businessId) {
     if (!businessId) return _getEmptyBusiness()
     var res = await axios.get(`${BASE_URL}/${businessId}`)
     var business = await res.data
-    console.log(business);
     return business
 }
 
-async function add(currBusiness){
-    console.log(currBusiness);
-    var res = await axios.post(`${BASE_URL}`,currBusiness)
-    console.log('GOT NEW BUS : ', res.data);
+async function add(currBusiness) {
+    var res = await axios.post(`${BASE_URL}`, currBusiness)
     var business = await res.data
     return business
 }
 
-async function update(currBusiness){
+async function update(currBusiness) {
     var businessId = currBusiness._id
-    console.log('FRONT SERVICE : ',currBusiness.location);
-    var currBusiness =  JSON.parse(JSON.stringify(currBusiness))
-    var res = await axios.put(`${BASE_URL}/${businessId}`,currBusiness)
-    console.log('UPDATED : ', res.data);
+    var currBusiness = JSON.parse(JSON.stringify(currBusiness))
+    var res = await axios.put(`${BASE_URL}/${businessId}`, currBusiness)
     var business = await res.data
     return business
 }
@@ -64,7 +55,7 @@ async function update(currBusiness){
 
 
 
-function _getEmptyBusiness(){
+function _getEmptyBusiness() {
     return {
         "rank": {
             "qty": 0,
@@ -72,10 +63,10 @@ function _getEmptyBusiness(){
         },
         "type": "",
         "name": "",
-        "phone" : "",
+        "phone": "",
         "userName": "",
         "pass": "",
-        "address":"",
+        "address": "",
         "location": {
             "lat": 32.087971200000005,
             "lng": 34.8031581
@@ -165,13 +156,10 @@ function _getEmptyBusiness(){
 }
 
 function saveImage(imageToSave) {
-    console.log('imageToSave',imageToSave);
-    return cloudinary.v2.uploader.upload(imageToSave).then((data) =>{
-        console.log(data);
-       return data.secure_url
-        
+    return cloudinary.v2.uploader.upload(imageToSave).then((data) => {
+        return data.secure_url
     })
- } 
+}
 
 export default {
     query,

@@ -30,6 +30,12 @@ export default {
       isSearch: false
     };
   },
+  mounted() {
+    this.$store.commit("setHeaderAbsolute", { isAbsolute: true })
+  },
+  beforeDestroy() {
+    this.$store.commit("setHeaderAbsolute", { isAbsolute: false })
+  },
   computed: {
     businessToShow() {
       return this.$store.getters.businessList;
