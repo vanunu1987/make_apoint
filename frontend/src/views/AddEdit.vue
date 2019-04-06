@@ -164,7 +164,7 @@
         v-show="isGalleryHeaderImg"
         title="addImg"
         class="fas fa-image addImg"
-      >Add image</button>
+      > Add image</button>
 
       <div v-if="isGalleryHeaderImg" class="headerGallery">
         <ul>
