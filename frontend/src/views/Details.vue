@@ -4,6 +4,7 @@
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
     <make-appoint class="calendar"></make-appoint>
+    <product-picker  @update-appoint="updateAppoint"></product-picker>
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
     <div class="profile-detais culomn">
       <div class="details-head flex">
@@ -67,6 +68,7 @@
 </template>
 
 <script>
+import ProductPicker from "@/components/ProductPicker.vue";
 import MakeAppoint from "../components/MakeAppoint.vue";
 import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
