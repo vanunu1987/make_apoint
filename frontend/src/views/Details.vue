@@ -4,7 +4,7 @@
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
     <img-carousel class="img-carousel-container"/>
-
+    <details-page-footer/>
     <!-- <make-appoint class="calendar"></make-appoint> -->
 
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
@@ -71,18 +71,20 @@
 
 <script>
 import ImgCarousel from "@/components/ImgCarousel.vue";
-import MakeAppoint from "../components/MakeAppoint.vue";
+// import MakeAppoint from "../components/MakeAppoint.vue";
 import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
 import BusinessService from "@/services/UtilService.js";
+import DetailsPageFooter from "../components/DetailsPageFooter.vue";
 
 export default {
   components: {
-    MakeAppoint,
+    // MakeAppoint,
     BusinessService,
     vueDraggable,
     mapCmp,
-    ImgCarousel
+    ImgCarousel,
+    DetailsPageFooter
   },
   created() {
     this.loadBusiness();

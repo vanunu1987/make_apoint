@@ -3,10 +3,11 @@
 <template>
   <section class="details-page-footer">
     <div class="btn-container">
+        <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
       <button
         class="set-appoint-btn"
         @click="moveToCmp('MakeAppointTimeDatePicker')"
-      >Make an appointment</button>
+      >See Dates</button>
     </div>
     <section class="card-details-container">
         <h3 class="preview-type">{{currBusiness.type}}</h3>
@@ -34,8 +35,10 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  computed:{
+  currBusiness() {
+      return this.$store.getters.currBusiness;
+    }
   },
   methods: {
     moveToCmp(cmpName) {
@@ -48,6 +51,9 @@ export default {
       );
       this.$emit("update-appoint", payload);
     }
+  },
+  mounted(){
+    this.currBusiness = this.$store.getters.currBusiness
   }
 };
 </script>
@@ -55,6 +61,8 @@ export default {
 <style lang="scss">
 @import "@/scss/styles.scss";
 .details-page-footer {
+  width:100%;
+  z-index: 5;
   background-color:white;
   position: fixed;
   bottom: 0%;
