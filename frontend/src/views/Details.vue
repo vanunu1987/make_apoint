@@ -3,8 +3,10 @@
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
-    <make-appoint class="calendar"></make-appoint>
-    <product-picker  @update-appoint="updateAppoint"></product-picker>
+    <img-carousel class="img-carousel-container"/>
+
+    <!-- <make-appoint class="calendar"></make-appoint> -->
+
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
     <div class="profile-detais culomn">
       <div class="details-head flex">
@@ -68,18 +70,19 @@
 </template>
 
 <script>
-import ProductPicker from "@/components/ProductPicker.vue";
+import ImgCarousel from "@/components/ImgCarousel.vue";
 import MakeAppoint from "../components/MakeAppoint.vue";
 import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
 import BusinessService from "@/services/UtilService.js";
+
 export default {
   components: {
     MakeAppoint,
     BusinessService,
     vueDraggable,
     mapCmp,
-    MakeAppoint
+    ImgCarousel
   },
   created() {
     this.loadBusiness();
@@ -185,7 +188,7 @@ h3 {
     grid-row: 1;
   }
   .profile-detais {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 2;
   }
   .calendar {
@@ -296,7 +299,7 @@ a {
       grid-row: 1;
     }
     .profile-detais {
-      grid-column: 2;
+      grid-column: 3;
       grid-row: 2;
     }
     .calendar {
@@ -310,5 +313,10 @@ a {
       grid-row: 4;
     }
   }
+}
+
+.img-carousel {
+  grid-column: 2;
+  grid-row: 2;
 }
 </style>

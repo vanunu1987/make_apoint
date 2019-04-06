@@ -1,8 +1,11 @@
 <template>
-    <v-card class="mx-auto" color="grey lighten-4">
-        <v-img :src="this.$store.getters.currBusiness.prefs.preview_img_url" class="white--text" height="200px">
-        </v-img>
-        <v-card-title primary-title>
+  <!-- <v-card class="mx-auto" color="grey lighten-4"> -->
+  <v-img
+    :src="this.$store.getters.currBusiness.prefs.preview_img_url"
+    class="white--text"
+    height="200px"
+  ></v-img>
+  <!-- <v-card-title primary-title>
           <div>
             <div class="preview-name">{{product.title}}</div>
             <span class="grey--text">{{'adress'}}</span>
@@ -21,8 +24,8 @@
             <span>{{' product.rank.avg '}}</span>
             <span>({{ 'product.rank.qty' }})</span>
           </div>
-        </section>
-    </v-card>
+  </section>-->
+  <!-- </v-card> -->
 </template>
 
 <script>
@@ -37,7 +40,6 @@ export default {
 </script>
 
 <style scoped>
-
 a {
   text-decoration: none;
   color: black;
@@ -48,10 +50,10 @@ a {
   padding-bottom: 10px;
 }
 
-.v-card{
+.v-card {
   border-radius: 5px;
 }
-.v-img{
+.v-img {
   border-radius: 5px 5px 0 0;
 }
 .v-card--reveal {
