@@ -7,7 +7,7 @@
     <userAppoints />
 
     <div id="nav" :class="`${isHeaderAbsolute ? 'absolute-header' : 'basic-header'}`">
-      <router-link to="/">
+      <router-link class="logo-container" to="/">
         <div class="logo" v-if="isHome">
           <h1>
             Make Appoint
@@ -101,7 +101,7 @@ export default {
 
   a,
   .user-name {
-    margin: 0 16px;
+    margin-right:16px;
     font-weight: bold;
     color: #2c3e50;
     text-decoration: none;

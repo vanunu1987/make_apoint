@@ -2,19 +2,25 @@
   <div @click.stop>
     <section class="form-container">
     <form v-if="!isNewUser" @submit.prevent="login">
+      <header>
       <h1>Login</h1>
-      <input type="text" placeholder="User Name" v-model="userCredentials.userName">
-      <input type="password" placeholder="Password" v-model="userCredentials.password">
-      <button type="submit">Continue</button>
+     <div> <input type="text" placeholder="User Name" v-model="userCredentials.userName"><i class="fas fa-user"></i></div>
+     <div><input type="password" placeholder="Password" v-model="userCredentials.password"><i class="fas fa-lock"></i></div>
+     </header>
+      <button type="submit">Log in</button>
     </form>
     <form v-if="isNewUser" @submit.prevent="signup">
+      <header>
       <h1>Signup</h1>
-      <input type="text" placeholder="User Name" v-model="newUserCredentials.userName">
-      <input type="password" placeholder="Password" v-model="newUserCredentials.password">
-      <input type="tel" placeholder="Phone Number" v-model="newUserCredentials.phone">
-      <button type="submit">Continue</button>
+     <div> <input type="text" placeholder="User Name" v-model="userCredentials.userName"><i class="fas fa-user"></i></div>
+     <div><input type="password" placeholder="Password" v-model="userCredentials.password"><i class="fas fa-lock"></i></div>
+     <div><input type="tel" placeholder="Phone Number" v-model="newUserCredentials.phone"><i class="fas fa-phone"></i></div>
+     </header>
+      <button type="submit">Sign up</button>
     </form>
-    <button @click="isNewUser = !isNewUser">{{(!isNewUser)  ? 'New User' : 'Existing User'}}</button>
+    <span>{{(!isNewUser)  ? 'Don’t' : 'Already'}}</span>
+    <span> have an account? </span>
+    <a @click="isNewUser = !isNewUser">{{(!isNewUser)  ? 'Sign up' : 'Log in'}}</a>
     </section>
   </div>
 </template>
@@ -77,6 +83,8 @@ export default {
 
 h1 {
   margin-bottom: 30px;
+  text-align:left;
+  font-size:30px;
 }
 
 .login {
@@ -90,9 +98,9 @@ h1 {
    z-index: -1;
 }
 .form-container{
-  padding: 10px;
-  border-radius: 3px;
-  border: 2px solid $primary-color-light;
+  padding: 20px;
+  // border-radius: 3px;
+  // border: 2px solid $primary-color-light;
   height: 400px;
   width: 300px;
   background-color: white;
@@ -101,20 +109,40 @@ form {
   height: 90%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  div:focus-within{
+   border-color:$primary-color;
+  }
+  div{
+    padding:5px;
+    border:1px solid black;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:10px;
+    border-radius: 5px;
+
+    i{
+      margin-right:5px;
+    }
+  }
   input {
     height: 25px;
-    background-color: white;
-    margin-bottom: 10px;
     border-radius: 5px;
-    text-align: center;
+    width: 100%;
+    outline:none;
   }
 }
 button{
+  margin-bottom:12px;
   background-color: $primary-color;
   color: white;
-  padding: 5px;
+  padding: 15px;
   border-radius: 3px;
   width: 100%;
+  &:hover{
+    background-color: $primary-color-light;
+  }
 }
 </style>
 
