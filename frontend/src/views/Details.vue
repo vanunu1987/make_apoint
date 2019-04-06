@@ -175,8 +175,8 @@ h3 {
   letter-spacing: 0.2px;
 }
 .name {
-  font-size: 2.5rem;
-  font-weight: 500;
+  font-size: 46px;
+  font-weight: 800;
 }
 .page-container {
   background-color: white;
@@ -273,8 +273,6 @@ a {
   position: absolute;
   top: 55px;
   right: 15px;
-  // margin-left: 35px;
-  // margin-top: 40px;
   background-color: white;
 }
 
