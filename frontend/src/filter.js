@@ -1,5 +1,4 @@
 import Vue from 'vue';
-console.log('filter.js is connected!')
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
@@ -10,7 +9,7 @@ Vue.filter('capitalize', function (value) {
 
 Vue.filter('dollar', function (value) {
     if (!value||typeof value !== 'number') return value
-    value = '$ '+value
+    value = '$'+value
     return value
   })
 

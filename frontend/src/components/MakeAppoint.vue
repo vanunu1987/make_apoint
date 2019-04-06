@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import MakeAppoint1 from "@/components/MakeAppoint1.vue";
+import DetailsPageFooter from "@/components/DetailsPageFooter.vue";
 import MakeAppointTimeDatePicker from "@/components/MakeAppointTimeDatePicker.vue";
 import MakeAppoint3 from "@/components/MakeAppoint3.vue";
 import MakeAppoint4 from "@/components/MakeAppoint4.vue";
@@ -26,7 +26,7 @@ import MakeAppoint6 from "@/components/MakeAppoint6.vue";
 export default {
   data() {
     return {
-        currCmp:{ name: "MakeAppoint1" },
+        currCmp:{ name: "DetailsPageFooter" },
         cmps:[],
         appoint:{
           date:null,
@@ -65,7 +65,7 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
     }
   },
   created() {
-    this.cmps.push({ name: "MakeAppoint1" });
+    this.cmps.push({ name: "DetailsPageFooter" });
     this.cmps.push({ name: "MakeAppointTimeDatePicker" });
     this.cmps.push({ name: "MakeAppoint3" });
     this.cmps.push({ name: "MakeAppoint4" });
@@ -74,7 +74,7 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
     if(this.$store.getters.loggedInUser) this.appoint.user_id = this.$store.getters.loggedInUser._id
   },
   components: {
-    MakeAppoint1,
+    DetailsPageFooter,
     MakeAppointTimeDatePicker,
     MakeAppoint3,
     MakeAppoint4,

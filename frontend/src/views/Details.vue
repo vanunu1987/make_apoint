@@ -1,49 +1,61 @@
 <template>
-  <section class="page-continer" v-if="currBusiness">
+  <section class="page-container" v-if="currBusiness">
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
-    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId"> business</router-link>
+    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
-    <make-appoint class="calendar"></make-appoint>
+    <img-carousel class="img-carousel-container"/>
+
+    <calendar-dialog v-if="isShowCalendarDialog" @closeBtnClick="toggleCalendarDialog" />
+    <details-page-footer @btnClick="toggleCalendarDialog"/>
+    <!-- <make-appoint class="calendar"></make-appoint> -->
+
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
-    <div class="profile-detais culomn">
+
+    <div class="profile-details culomn">
       <div class="details-head flex">
         <h1 class="name">{{currBusiness.name}}</h1>
         <div class="img-profile" :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"></div>
       </div>
 
-          <span class="flex">
-         <span class="fas fa-map-marker-alt"></span> 
-         <h2 class="address-h2">Address</h2> 
-         </span>
-         <h3>{{currBusiness.address}}</h3>
-          <span class="flex">
-         <span class="fas fa-phone"></span> 
-         <h2>Phone number</h2> 
-         </span>
-         <h3>{{currBusiness.phone}}</h3>
-          <span class="flex">
-         <span class="fas fa-address-card"></span>
-         <h2>About Us</h2> 
-        </span>
-        <h3>{{currBusiness.prefs.description}}</h3>
-          <span class="flex">
-         <span class="fas fa-trophy"></span>
-         <h2>Rating</h2> 
-        </span>
-        <span class="rating-container flex">
-       <v-rating
-            :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
-          size="14" ></v-rating>
+      <span class="flex">
+        <span class="fas fa-map-marker-alt"></span>
+        <h2 class="address-h2">Address</h2>
+      </span>
+      <h3>{{currBusiness.address}}</h3>
+      <span class="flex">
+        <span class="fas fa-phone"></span>
+        <h2>Phone number</h2>
+      </span>
+      <h3>{{currBusiness.phone}}</h3>
+      <span class="flex">
+        <span class="fas fa-address-card"></span>
+        <h2>About Us</h2>
+      </span>
+      <h3>{{currBusiness.prefs.description}}</h3>
+      <span class="flex">
+        <span class="fas fa-trophy"></span>
+        <h2>Rating</h2>
+      </span>
+      <span class="rating-container flex">
+        <v-rating
+          :value="currBusiness.rank.avg"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
         <h3>({{currBusiness.rank.qty}})</h3>
       </span>
     </div>
-    <div class="midle">
+
+    <div class="middle">
       <GmapMap
         class="map"
         :center="mapCenter"
         :zoom="16"
         map-type-id="terrain"
-        style="width: 100vw; height: 300px"
+        style="height: 300px"
         :disableAutoPan="true"
         :options="{scrollwheel: false}"
       >
@@ -62,24 +74,24 @@
 </template>
 
 <script>
-import MakeAppoint from "../components/MakeAppoint.vue";
-import mapCmp from "../components/MapCmp.vue";
-import vueDraggable from "../components/VueDraggable.vue";
+import ImgCarousel from "@/components/Details/ImgCarousel.vue";
+import DetailsPageFooter from "../components/Details/DetailsPageFooter.vue";
+import CalendarDialog from '@/components/Details/CalendarDialog.vue';
+
 import BusinessService from "@/services/UtilService.js";
+
 export default {
   components: {
-    MakeAppoint,
-    BusinessService,
-    vueDraggable,
-    mapCmp,
-    MakeAppoint
+    ImgCarousel,
+    DetailsPageFooter,
+    CalendarDialog,
   },
   created() {
-    this.loadBusiness()
+    this.loadBusiness();
   },
   data() {
     return {
-      showCalender: false,
+      isShowCalendarDialog: false,
       imgIdx: 0,
       markers: [
         {
@@ -89,12 +101,11 @@ export default {
       ],
       editMode: false,
       businessId: null,
-      isAdmin: false
+      isAdmin: false,
     };
   },
   mounted() {
     var user = this.$store.getters.loggedInUser;
-    console.log("MOUNTED : ", user);
   },
   computed: {
     currBusiness() {
@@ -110,8 +121,8 @@ export default {
     mapCenter() {
       return this.$store.getters.currBusiness.location;
     },
-    businessIdParam(){
-      return this.$route.params.businessId
+    businessIdParam() {
+      return this.$route.params.businessId;
     }
   },
   methods: {
@@ -120,27 +131,27 @@ export default {
         return;
       else this.imgIdx += val;
     },
-    closeCalender() {
-      this.showCalender = false;
+    loadBusiness() {
+      let { businessId } = this.$route.params;
+      this.businessId = businessId;
+      this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
+        var user = this.$store.getters.loggedInUser;
+        if (user && businessId === user.business_id) this.isAdmin = true;
+        this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
+      });
     },
-     loadBusiness(){
-    let { businessId } = this.$route.params;
-    this.businessId = businessId;
-    this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
-    var user = this.$store.getters.loggedInUser;
-    if (user && businessId === user.business_id) this.isAdmin = true;
-    this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
-    });
-
+    toggleCalendarDialog() {
+      this.isShowCalendarDialog = !this.isShowCalendarDialog;
+    }
   },
-  },
-  watch:{
+  watch: {
     businessIdParam: () => {
-      this.loadBusiness()
+      this.loadBusiness();
     }
   }
 };
 </script>
+
 <style lang="scss" scoped>
 // helpers
 .flex {
@@ -165,38 +176,35 @@ h3 {
   letter-spacing: 0.2px;
 }
 .name {
-  font-size: 2.5rem;
-  font-weight: 500;
+  font-size: 46px;
+  font-weight: 800;
 }
-.page-continer {
+.page-container {
   background-color: white;
- display: grid;
-    grid-template-columns: 20px 1fr 2fr 20px;
-    grid-template-rows: 1fr 1fr 1fr .5fr;
-     grid-gap: 20px 20px;
-        // padding: 20px;
-    .img-header{
-      grid-column: 1/5;
-      grid-row: 1;
-    }
-    .profile-detais{
-      grid-column: 2;
-      grid-row: 2;      
+  display: grid;
+  padding: 20px 20px 100px;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px 20px;
 
-    }
-    .calendar{
-       grid-column: 3;
-      grid-row: 2; 
-      position: relative;
-      display: inline;
-    }
-    .midle{
-       grid-column: 1/5;
-      grid-row: 3;
-    }
+  .img-header {
+    grid-column: 1/3;
+    grid-row: 1;
+  }
+  .profile-details {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .calendar {
+    grid-column: 3;
+    // grid-row: 2;
+    position: relative;
+    display: inline;
+  }
+  .middle {
+    grid-column: 1/3;
+  }
 }
-.profile-detais {
-  // margin-left: 30px;
+.profile-details {
   word-wrap: break-word !important;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
     Helvetica Neue, sans-serif !important;
@@ -204,11 +212,11 @@ h3 {
   font-weight: 600 !important;
   color: #484848 !important;
 }
-.details-head{
+.details-head {
   text-align: left;
-align-items: center;
-justify-content: space-between;
-padding-right: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
 }
 .img-profile {
   width: 75px;
@@ -219,14 +227,6 @@ padding-right: 20px;
   margin-left: 10px;
 }
 
-.img-header {
-  width: 100%;
-  // height: 50vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center !important;
-}
 button {
   background-color: #ffdead00;
   border: none;
@@ -247,7 +247,6 @@ span {
   &.rating-container {
     margin-top: 5px;
     display: flex;
-    // justify-content: center;
     padding-bottom: 10px;
   }
 }
@@ -274,38 +273,52 @@ a {
   position: absolute;
   top: 55px;
   right: 15px;
-  // margin-left: 35px;
-  // margin-top: 40px;
   background-color: white;
 }
 
 @media (max-width: 740px) {
-  .page-continer {
+  .page-container {
     background-color: white;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
     grid-template-rows: 1.3fr 1fr 1fr 0.5fr;
     grid-gap: 10px 20px;
-    // padding: 20px;
+
     .img-header {
-      grid-column: 1/4;
+      grid-column: 1/3;
       grid-row: 1;
     }
-    .profile-detais {
+    .profile-details {
       grid-column: 2;
       grid-row: 2;
     }
     .calendar {
-      grid-column: 2;
+      grid-column: 1;
       grid-row: 3;
       position: relative;
       display: inline;
     }
-    .midle {
-      grid-column: 1/4;
-      grid-row: 4;
+    .middle {
+      grid-column: 1/2;
     }
   }
 }
-</style>
 
+.img-carousel {
+  grid-column: 1;
+}
+
+.img-header {
+  width: 100%;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center !important;
+}
+
+.calendar-dialog {
+  background-color: white;
+  z-index: 6;
+}
+</style>

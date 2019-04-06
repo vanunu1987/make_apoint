@@ -1,22 +1,31 @@
 <template>
-    <div class="card-container">
-      <router-link :to="'business/'+currBusiness._id">
-        <v-img :src="currBusiness.prefs.header_img_url" height="200px"></v-img>
-        <section class="card-details-container">
-            <h3 class="preview-name">{{currBusiness.name}}</h3>
-            <span class="address">{{adress}}</span>
-        </section>
-        <section class="rank">
-          <v-rating
-            :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
-          size="14" ></v-rating>
-          <div class="ml-2 grey--text text--darken-2">
-            <span>{{ currBusiness.rank.avg }}</span>
-            <span>({{ currBusiness.rank.qty }})</span>
-          </div>
-        </section>
-      </router-link>
-    </div>
+  <div class="card-container">
+    <router-link :to="'business/'+currBusiness._id">
+      <v-img class="image" :src="currBusiness.prefs.header_img_url" height="330px"></v-img>
+      <section class="card-details-container">
+        <h3 class="preview-type">{{currBusiness.type}}</h3>
+        <h3 class="preview-name">{{currBusiness.name}}</h3>
+        <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
+        <!-- <span class="address">{{adress}}</span> -->
+      </section>
+      
+        <!-- <v-rating
+          :value="currBusiness.rank.avg"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating> -->
+      <div class="rank">
+      <span class="avg">{{ currBusiness.rank.avg }}</span> 
+      <span class="star"><i class="fas fa-star"></i></span> 
+      <span class="qty">({{ currBusiness.rank.qty }})</span>
+      </div>
+       
+     
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -36,9 +45,32 @@ export default {
 };
 </script>
 
-<style <style lang="scss" scoped>
+<style lang="scss" scoped>
+@import "@/scss/variables.scss";
+@import "@/scss/fonts.scss";
 
-.card-container{
+
+a {
+  text-decoration: none;
+}
+
+div.rank{
+margin-top:5px;
+}
+span{
+  margin-right:2px;
+  text-align: center;
+  color:$star-blue;
+  font-size:12px;
+  &.star{
+    font-size:9px;
+  }
+  &.qty{
+    color:$text-grey;
+  }
+}
+
+.card-container {
   border-radius: 3px;
   height: 100%;
   background-color: #fff;
@@ -46,55 +78,61 @@ export default {
   padding: 0;
   float: left;
   position: relative;
-  border: 1px #e5e5e5 solid;
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-}
-.address,.rank{
-    line-height: 15px;
-    color: #b2b2b2;
-    padding: 0 12px 10px;
-    display: block;
-    min-height: 16px;
-}
-.rank {
-  display: flex;
-  padding: 0 11.5px 10px;
-  // padding-bottom: 10px;
-}
+// .address,
+// .rank {
+//   line-height: 15px;
+//   padding: 0 12px 10px;
+//   display: block;
+//   min-height: 16px;
+//   display: flex;
+//   padding: 0 11.5px 10px;
+//   // padding-bottom: 10px;
+// }
 
-.v-img{
-  // border-radius: 5px 5px 0 0;
+.v-img {
+  border-radius: 5px !important;
+}
+.image{
+  border-radius: 4px ;
 }
 
 h3{
-  margin: 0 12px 10px;
-    font-size: 18px;
-    line-height: 20px;
-    font-weight: 400;
-    color: #303030;
-    height: 45px;
-    display: block;
-    text-transform: capitalize;
-    // overflow: hidden;
-    padding-top: 10px;
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    -ms-word-break: break-word;
-    word-break: break-word;
-    -webkit-transition: .15s ease-in-out;
-    transition: .15s ease-in-out;
+  margin: 0 0px 0px;
+  margin-top:5px;
+  font-size: 18px;
+  display: block;
+  // overflow: hidden;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-word;
+  word-break: break-word;
+  -webkit-transition: 0.15s ease-in-out;
+  transition: 0.15s ease-in-out;
+  &.preview-type {
+  font-size: 12px;
+  font-family: AirbnbCereal-bold;
+  color:$text-grey;
+  text-transform: uppercase;
+  }
+  &.preview-name {
+  font-size: 16px;
+  color:$text-black;
+  font-family: AirbnbCereal-bold;
+  text-transform: capitalize;
+  }
+  &.preview-price {
+  font-size: 14px;
+  color:$text-black;
+  font-family: AirbnbCereal-light;
+  }
 }
 
-@media (max-width: 740px){
-  .card-container{
-  
-  width: 90vw;
+@media (max-width: 740px) {
+  .card-container {
+    width: 90vw;
+  }
 }
-}
-
 </style>

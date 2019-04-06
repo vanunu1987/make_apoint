@@ -1,5 +1,5 @@
 <template>
-  <section class="page-continer" v-if="!!currBusiness.prefs">
+  <section class="page-container" v-if="!!currBusiness.prefs">
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
     <business-path-modal @setPath="setPathModal" class="businessType" v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
@@ -191,7 +191,7 @@ var axios = Axios.create({
 
 import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
-import CalendarDatePicker from "@/components/CalendarDatePicker.vue";
+import CalendarDatePicker from "@/components/Details/CalendarDatePicker.vue";
 import BusinessTypeModal from "@/components/BusinessTypeModal.vue";
 import BusinessPathModal from "@/components/BusinessPathModal.vue";
 import BusinessService from "@/services/BusinessService.js";
@@ -370,6 +370,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import '@/scss/variables.scss';
 // helpers
 .flex {
   display: flex;
@@ -483,7 +484,7 @@ button {
   }
   button {
     &:hover {
-      background-color: #3899ec;
+      background-color: $secondary-color;
       color: white !important;
     }
   }
@@ -523,7 +524,7 @@ h3 {
   font-size: 2.5rem;
   font-weight: 500;
 }
-.page-continer {
+.page-container {
   background-color: #f0f4f7;
   display: grid;
   grid-template-columns: 1fr 20px 2fr 1fr 20px 1px;
@@ -570,8 +571,8 @@ h3 {
       left: 50px;
       margin: 10px;
       border-radius: 15px;
-      border: 0.8px solid #3899ec;
-      color: #3899ec;
+      border: 0.8px solid $secondary-color;
+      color: $secondary-color;
       background-color: #f0f4f7;
       font-size: 1.5rem;
       padding: 0 17px;
@@ -585,8 +586,8 @@ h3 {
     font-size: 1.5rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #3899ec;
-    color: #3899ec;
+    border: 0.8px solid $secondary-color;
+    color: $secondary-color;
     background-color: #f0f4f7;
     // transition: 2s;
    
@@ -605,7 +606,7 @@ h3 {
     &:hover button{
      z-index: 1000;
       visibility: visible;
-      background-color: #3899ec;
+      background-color: $secondary-color;
       color: white;
 
     }
@@ -638,9 +639,9 @@ h3 {
     font-size: 1.5rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #42b983;
+    border: 0.8px solid $primary-color;
     color: white;
-    background-color: #42b983;
+    background-color: $primary-color;
     margin-top: 100px;
     margin-left: 70px;
 }
@@ -678,7 +679,7 @@ h3 {
 
   button{
     &:hover{
-      color: #3899ec !important;
+      color: $secondary-color !important;
     }
   }
 
@@ -697,8 +698,8 @@ h3 {
     font-size: 1rem;
     padding: 0 17px;
     border-radius: 15px;
-    border: 0.8px solid #3899ec;
-    color: #3899ec;
+    border: 0.8px solid $secondary-color;
+    color: $secondary-color;
   }
 }
 button {

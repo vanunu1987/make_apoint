@@ -7,7 +7,7 @@
       </div>
       <div class="calendar_plan">
         <div class="cl_plan">
-          <div class="cl_title"> {{dateNow}}</div>
+          <div class="cl_title">{{dateNow}}</div>
           <div class="cl_copy">
             <input v-model="date" type="date">
           </div>
@@ -18,10 +18,15 @@
       </div>
       <div class="calendar_events">
         <p class="ce_title">Upcoming Events</p>
-        <div class="event_item" v-for="(appoint) in filterByDate() " :key="appoint._id" @click="isActiv=!isActiv">
-          <div class="ei_Dot" :class="{dot_active: isActiv}"  ></div>
+        <div
+          class="event_item"
+          v-for="(appoint) in filterByDate() "
+          :key="appoint._id"
+          @click="isActiv=!isActiv"
+        >
+          <div class="ei_Dot" :class="{dot_active: isActiv}"></div>
           <div class="ei_Title">{{appoint.startTime}}</div>
-          <div class="ei_Copy" >{{appoint.product.title}},{{appoint.userData.userName}}</div>
+          <div class="ei_Copy">{{appoint.product.title}},{{appoint.userData.userName}}</div>
         </div>
       </div>
     </div>
@@ -29,7 +34,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 export default {
   created() {
     let { businessId } = this.$route.params;
@@ -44,38 +49,42 @@ export default {
     appointList() {
       return this.$store.getters.appointsList;
     },
-    dateNow(){
-        return moment(this.date).format('MMMM Do YYYY')
+    dateNow() {
+      return moment(this.date).format("MMMM Do YYYY");
     },
-    currUser(){
-        return this.$store.getters.loggedInUser.userName
+    currUser() {
+      return this.$store.getters.loggedInUser.userName;
     }
   },
   data() {
     return {
       date: null,
-      appoint:{
-          date:null,
-          startTime:null,
-          user_id:null,
-          business_id:this.$store.getters.currBusiness._id,
-          product:this.$store.getters.currBusiness.products[0]
-        },
-        users:[],
-        isActiv:false
+      appoint: {
+        date: null,
+        startTime: null,
+        user_id: null,
+        business_id: this.$store.getters.currBusiness._id,
+        product: this.$store.getters.currBusiness.products[0]
+      },
+      users: [],
+      isActiv: false
     };
-
   },
-  created(){
-      this.date = moment(Date.now()).format('YYYY') + '-' + moment(Date.now()).format('MM') + '-' + moment(Date.now()).format('DD')
+  created() {
+    this.date =
+      moment(Date.now()).format("YYYY") +
+      "-" +
+      moment(Date.now()).format("MM") +
+      "-" +
+      moment(Date.now()).format("DD");
   },
   methods: {
     filterByDate() {
-      return (this.appointList
-        .filter(appoint => appoint.date === this.date))
+      return this.appointList
+        .filter(appoint => appoint.date === this.date)
         .sort((a, b) => {
-            var a= a.startTime.substr(0, 2)
-            var b= b.startTime.substr(0, 2)
+          var a = a.startTime.substr(0, 2);
+          var b = b.startTime.substr(0, 2);
           if (a < b) {
             return -1;
           }
@@ -87,16 +96,14 @@ export default {
           return 0;
         });
     },
-    finduser(userId){
-   return this.$store.dispatch({ type: "findUserById", userId }).then(() => {
-       console.log(this.$store.getters.UserToShow);
-       var user=this.$store.getters.UserToShow
-       console.log(user.userName);
-      this.users.push(user.userName) 
-       return 
-    })
-        
-
+    finduser(userId) {
+      return this.$store.dispatch({ type: "findUserById", userId }).then(() => {
+        console.log(this.$store.getters.UserToShow);
+        var user = this.$store.getters.UserToShow;
+        console.log(user.userName);
+        this.users.push(user.userName);
+        return;
+      });
     }
   }
 };
@@ -118,13 +125,13 @@ input {
   }
 }
 .container {
-//   margin: 100px auto;
-//   width: 809px;
-background-color: #23263e;
+  //   margin: 100px auto;
+  //   width: 809px;
+  background-color: #23263e;
 }
 
 .light {
-//   margin-top: 100px;
+  //   margin-top: 100px;
   background-color: #fff;
 }
 .dark {
