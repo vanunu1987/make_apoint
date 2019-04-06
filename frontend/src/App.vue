@@ -3,8 +3,10 @@
     <button class="nav-burger" @click="isOpenNav = !isOpenNav">
       <i class="fas fa-bars"></i>
     </button>
-    <userAppoints/>
-    <div id="nav">
+
+    <userAppoints />
+
+    <div id="nav" :style="`position: ${isHeaderAbsolute ? 'absolute' : ''}`">
       <router-link to="/">
         <div class="logo" v-if="isHome">
           <h1>
@@ -57,6 +59,9 @@ export default {
     },
     currBusiness() {
       return this.$store.getters.currBusiness;
+    },
+    isHeaderAbsolute() {
+      return this.$store.getters.isHeaderAbsolute;
     }
   },
   methods: {
@@ -71,7 +76,7 @@ export default {
       this.isHome = false;
     },
     toggleLogin() {
-      this.isShowLogin = !this.isShowLogin
+      this.isShowLogin = !this.isShowLogin;
     }
   },
   created() {}
@@ -82,7 +87,6 @@ export default {
 @import "@/scss/variables.scss";
 
 #nav {
-  position: absolute;
   left: 0;
   z-index: 1000;
   width: 100%;
