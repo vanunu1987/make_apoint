@@ -35,8 +35,6 @@ export default {
 
 
 <style lang="scss" scoped>
-$light-blue: #3498db;
-$black: #000000;
 
 ul {
   padding: 0;
