@@ -6,7 +6,7 @@
 
     <userAppoints />
 
-    <div id="nav" :style="`position: ${isHeaderAbsolute ? 'absolute' : ''}`">
+    <div id="nav" :class="`${isHeaderAbsolute ? 'absolute-header' : 'basic-header'}`">
       <router-link to="/">
         <div class="logo" v-if="isHome">
           <h1>
@@ -154,5 +154,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.basic-header {
+  border-bottom: 1px solid lightgray;
+}
+
+.absolute-header {
+  position: absolute;
 }
 </style>

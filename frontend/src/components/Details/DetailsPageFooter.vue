@@ -56,7 +56,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/scss/styles.scss";
+@import '@/scss/variables.scss';
+
 .details-page-footer {
   left:0;
   box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.05);

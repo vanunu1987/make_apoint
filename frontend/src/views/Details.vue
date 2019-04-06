@@ -6,9 +6,10 @@
     <img-carousel class="img-carousel-container"/>
     <details-page-footer/>
     <!-- <make-appoint class="calendar"></make-appoint> -->
+
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
 
-    <div class="profile-detais culomn">
+    <div class="profile-details culomn">
       <div class="details-head flex">
         <h1 class="name">{{currBusiness.name}}</h1>
         <div class="img-profile" :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"></div>
@@ -45,6 +46,7 @@
         <h3>({{currBusiness.rank.qty}})</h3>
       </span>
     </div>
+
     <div class="middle">
       <GmapMap
         class="map"
@@ -70,21 +72,15 @@
 </template>
 
 <script>
-import ImgCarousel from "@/components/ImgCarousel.vue";
-// import MakeAppoint from "../components/MakeAppoint.vue";
-import mapCmp from "../components/MapCmp.vue";
-import vueDraggable from "../components/VueDraggable.vue";
+import ImgCarousel from "@/components/Details/ImgCarousel.vue";
+import DetailsPageFooter from "../components/Details/DetailsPageFooter.vue";
+
 import BusinessService from "@/services/UtilService.js";
-import DetailsPageFooter from "../components/DetailsPageFooter.vue";
 
 export default {
   components: {
-    // MakeAppoint,
-    BusinessService,
-    vueDraggable,
-    mapCmp,
     ImgCarousel,
-    DetailsPageFooter
+    DetailsPageFooter,
   },
   created() {
     this.loadBusiness();
@@ -151,6 +147,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 // helpers
 .flex {
@@ -175,8 +172,8 @@ h3 {
   letter-spacing: 0.2px;
 }
 .name {
-  font-size: 2.5rem;
-  font-weight: 500;
+  font-size: 46px;
+  font-weight: 800;
 }
 .page-container {
   background-color: white;
@@ -189,7 +186,7 @@ h3 {
     grid-column: 1/3;
     grid-row: 1;
   }
-  .profile-detais {
+  .profile-details {
     grid-column: 2;
     grid-row: 2;
   }
@@ -203,7 +200,7 @@ h3 {
     grid-column: 1/3;
   }
 }
-.profile-detais {
+.profile-details {
   word-wrap: break-word !important;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
     Helvetica Neue, sans-serif !important;
@@ -246,7 +243,6 @@ span {
   &.rating-container {
     margin-top: 5px;
     display: flex;
-    // justify-content: center;
     padding-bottom: 10px;
   }
 }
@@ -273,8 +269,6 @@ a {
   position: absolute;
   top: 55px;
   right: 15px;
-  // margin-left: 35px;
-  // margin-top: 40px;
   background-color: white;
 }
 
@@ -290,7 +284,7 @@ a {
       grid-column: 1/3;
       grid-row: 1;
     }
-    .profile-detais {
+    .profile-details {
       grid-column: 2;
       grid-row: 2;
     }
