@@ -65,7 +65,7 @@ export default {
       if (this.$store.getters.loggedInUser) {
         this.$emit("move-to-cmp", "MakeAppoint5");
       } else {
-        this.$emit("move-to-cmp", "MakeAppoint3");
+        this.$emit("move-to-cmp", "UserLoginSignup");
       }
     }
   }

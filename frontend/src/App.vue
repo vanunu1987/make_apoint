@@ -26,7 +26,7 @@
         <a @click="toggleLogin">Log in</a>
 
         <dialog-container v-if="isShowLogin" class="login-container" @dialogClick="toggleLogin">
-          <user-login-signup :isNewUserProp="false" @routeHome="toggleLogin"></user-login-signup>
+          <user-login-signup :isNewUserProp="false" @loggedIn="toggleLogin"></user-login-signup>
         </dialog-container>
       </section>
     </div>

@@ -3,24 +3,28 @@
     <header>
       <i class="fas fa-times close-btn" @click="emitCloseBtnClick"></i>
     </header>
+
     <main>
-      <make-appoint-time-date-picker></make-appoint-time-date-picker>
+      <!-- <make-appoint-time-date-picker></make-appoint-time-date-picker> -->
+      <make-appoint class="calendar"></make-appoint>
     </main>
   </dialog-container>
 </template>
 
 <script>
 import DialogContainer from "@/components/General/DialogContainer.vue";
-import MakeAppointTimeDatePicker from "@/components/Details/MakeAppointTimeDatePicker.vue";
+import MakeAppoint from '@/components/MakeAppoint'
+// import MakeAppointTimeDatePicker from "@/components/Details/MakeAppointTimeDatePicker.vue";
 
 export default {
   components: {
     DialogContainer,
-    MakeAppointTimeDatePicker
+    // MakeAppointTimeDatePicker,
+    MakeAppoint,
   },
   methods: {
     emitCloseBtnClick() {
-      this.$emit('closeBtnClick')
+      this.$emit("closeBtnClick");
     }
   }
 };

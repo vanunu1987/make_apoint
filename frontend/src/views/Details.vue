@@ -7,7 +7,6 @@
 
     <calendar-dialog v-if="isShowCalendarDialog" @closeBtnClick="toggleCalendarDialog" />
     <details-page-footer @btnClick="toggleCalendarDialog"/>
-    <!-- <make-appoint class="calendar"></make-appoint> -->
 
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
 
