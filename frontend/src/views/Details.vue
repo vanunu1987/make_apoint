@@ -4,7 +4,9 @@
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
     <img-carousel class="img-carousel-container"/>
-    <details-page-footer/>
+
+    <calendar-dialog v-if="isShowCalendarDialog" @closeBtnClick="toggleCalendarDialog" />
+    <details-page-footer @btnClick="toggleCalendarDialog"/>
     <!-- <make-appoint class="calendar"></make-appoint> -->
 
     <div class="img-header" :style="{backgroundImage: `url(${imgPath.header_img_url})`}"></div>
@@ -74,6 +76,7 @@
 <script>
 import ImgCarousel from "@/components/Details/ImgCarousel.vue";
 import DetailsPageFooter from "../components/Details/DetailsPageFooter.vue";
+import CalendarDialog from '@/components/Details/CalendarDialog.vue';
 
 import BusinessService from "@/services/UtilService.js";
 
@@ -81,13 +84,14 @@ export default {
   components: {
     ImgCarousel,
     DetailsPageFooter,
+    CalendarDialog,
   },
   created() {
     this.loadBusiness();
   },
   data() {
     return {
-      showCalender: false,
+      isShowCalendarDialog: false,
       imgIdx: 0,
       markers: [
         {
@@ -97,7 +101,7 @@ export default {
       ],
       editMode: false,
       businessId: null,
-      isAdmin: false
+      isAdmin: false,
     };
   },
   mounted() {
@@ -127,9 +131,6 @@ export default {
         return;
       else this.imgIdx += val;
     },
-    closeCalender() {
-      this.showCalender = false;
-    },
     loadBusiness() {
       let { businessId } = this.$route.params;
       this.businessId = businessId;
@@ -138,6 +139,9 @@ export default {
         if (user && businessId === user.business_id) this.isAdmin = true;
         this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
       });
+    },
+    toggleCalendarDialog() {
+      this.isShowCalendarDialog = !this.isShowCalendarDialog;
     }
   },
   watch: {
@@ -178,7 +182,7 @@ h3 {
 .page-container {
   background-color: white;
   display: grid;
-  padding: 20px;
+  padding: 20px 20px 100px;
   grid-template-columns: 1fr 2fr;
   grid-gap: 20px 20px;
 
@@ -311,5 +315,10 @@ a {
   background-size: cover;
   background-attachment: fixed;
   background-position: center !important;
+}
+
+.calendar-dialog {
+  background-color: white;
+  z-index: 6;
 }
 </style>

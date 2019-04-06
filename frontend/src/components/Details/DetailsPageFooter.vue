@@ -5,7 +5,6 @@
     <div class="details">
       <h3 class="preview-type">{{currBusiness.type}}</h3>
       <h3 class="preview-name">{{currBusiness.name}}</h3>
-      <!-- <span class="address">{{adress}}</span> -->
       <div class="rank">
         <span class="avg">{{ currBusiness.rank.avg }}</span>
         <span class="star">
@@ -13,19 +12,11 @@
         </span>
         <span class="qty">({{ currBusiness.rank.qty }})</span>
       </div>
-      <!-- <v-rating
-          :value="currBusiness.rank.avg"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-      ></v-rating>-->
     </div>
 
     <div class="btn-container">
       <h3 class="preview-price">{{currBusiness.products[0].price|dollar}} per person</h3>
-      <button @click="moveToCmp('MakeAppointTimeDatePicker')">See Dates</button>
+      <button @click="emitClick">See Dates</button>
     </div>
   </section>
 </template>
@@ -38,28 +29,18 @@ export default {
     }
   },
   methods: {
-    moveToCmp(cmpName) {
-      this.$emit("set-cmp", cmpName);
-    },
-    updateAppoint(payload) {
-      console.log(
-        "update appoint recevied in DetailsPageFooter cmp with this payload",
-        payload
-      );
-      this.$emit("update-appoint", payload);
+    emitClick() {
+      this.$emit("btnClick");
     }
-  },
-  mounted() {
-    this.currBusiness = this.$store.getters.currBusiness;
   }
 };
 </script>
 
 <style lang="scss">
-@import '@/scss/variables.scss';
+@import "@/scss/variables.scss";
 
 .details-page-footer {
-  left:0;
+  left: 0;
   box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.05);
   border-top: 1px solid #ebebeb;
   padding: 10px 48px;

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import CalendarService from "../services/CalendarService.js";
+import CalendarService from "@/services/CalendarService.js";
 import moment from "moment";
 
 export default {
