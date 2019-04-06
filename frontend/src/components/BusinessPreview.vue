@@ -8,7 +8,7 @@
         <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
         <!-- <span class="address">{{adress}}</span> -->
       </section>
-      <section class="rank">
+      
         <!-- <v-rating
           :value="currBusiness.rank.avg"
           color="amber"
@@ -18,12 +18,12 @@
           size="14"
         ></v-rating> -->
       <div class="rank">
-      <span class="avg">{{ currBusiness.rank.avg }}</span>
-      <span class="star"><i class="fas fa-star"></i></span>
+      <span class="avg">{{ currBusiness.rank.avg }}</span> 
+      <span class="star"><i class="fas fa-star"></i></span> 
       <span class="qty">({{ currBusiness.rank.qty }})</span>
       </div>
        
-      </section>
+     
     </router-link>
   </div>
 </template>
@@ -58,6 +58,8 @@ div.rank{
 margin-top:5px;
 }
 span{
+  margin-right:2px;
+  text-align: center;
   color:$star-blue;
   font-size:12px;
   &.star{
