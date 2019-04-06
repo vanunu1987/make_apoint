@@ -25,7 +25,7 @@
 
         <a @click="toggleLogin">Log in</a>
 
-        <div v-if="isShowLogin" class="login-container" @click="toggleLogin">
+        <div v-if="isShowLogin" class="dialog-container login-container" @click="toggleLogin">
           <user-login-signup :isNewUserProp="false" @routeHome="toggleLogin"></user-login-signup>
         </div>
       </section>
@@ -141,12 +141,15 @@ export default {
   display: none;
 }
 
-.login-container {
+.dialog-container {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
+}
+
+.login-container {
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;

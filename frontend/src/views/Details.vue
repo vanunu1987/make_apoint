@@ -1,7 +1,7 @@
 <template>
   <section class="page-continer" v-if="currBusiness">
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
-    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId"> business</router-link>
+    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
 
     <make-appoint class="calendar"></make-appoint>
     <product-picker  @update-appoint="updateAppoint"></product-picker>
@@ -12,29 +12,34 @@
         <div class="img-profile" :style="{backgroundImage: `url(${imgPath.profile_img_url})` }"></div>
       </div>
 
-          <span class="flex">
-         <span class="fas fa-map-marker-alt"></span> 
-         <h2 class="address-h2">Address</h2> 
-         </span>
-         <h3>{{currBusiness.address}}</h3>
-          <span class="flex">
-         <span class="fas fa-phone"></span> 
-         <h2>Phone number</h2> 
-         </span>
-         <h3>{{currBusiness.phone}}</h3>
-          <span class="flex">
-         <span class="fas fa-address-card"></span>
-         <h2>About Us</h2> 
-        </span>
-        <h3>{{currBusiness.prefs.description}}</h3>
-          <span class="flex">
-         <span class="fas fa-trophy"></span>
-         <h2>Rating</h2> 
-        </span>
-        <span class="rating-container flex">
-       <v-rating
-            :value="currBusiness.rank.avg" color="amber" dense half-increments readonly 
-          size="14" ></v-rating>
+      <span class="flex">
+        <span class="fas fa-map-marker-alt"></span>
+        <h2 class="address-h2">Address</h2>
+      </span>
+      <h3>{{currBusiness.address}}</h3>
+      <span class="flex">
+        <span class="fas fa-phone"></span>
+        <h2>Phone number</h2>
+      </span>
+      <h3>{{currBusiness.phone}}</h3>
+      <span class="flex">
+        <span class="fas fa-address-card"></span>
+        <h2>About Us</h2>
+      </span>
+      <h3>{{currBusiness.prefs.description}}</h3>
+      <span class="flex">
+        <span class="fas fa-trophy"></span>
+        <h2>Rating</h2>
+      </span>
+      <span class="rating-container flex">
+        <v-rating
+          :value="currBusiness.rank.avg"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
         <h3>({{currBusiness.rank.qty}})</h3>
       </span>
     </div>
@@ -77,7 +82,7 @@ export default {
     MakeAppoint
   },
   created() {
-    this.loadBusiness()
+    this.loadBusiness();
   },
   data() {
     return {
@@ -111,8 +116,8 @@ export default {
     mapCenter() {
       return this.$store.getters.currBusiness.location;
     },
-    businessIdParam(){
-      return this.$route.params.businessId
+    businessIdParam() {
+      return this.$route.params.businessId;
     }
   },
   methods: {
@@ -124,20 +129,19 @@ export default {
     closeCalender() {
       this.showCalender = false;
     },
-     loadBusiness(){
-    let { businessId } = this.$route.params;
-    this.businessId = businessId;
-    this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
-    var user = this.$store.getters.loggedInUser;
-    if (user && businessId === user.business_id) this.isAdmin = true;
-    this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
-    });
-
+    loadBusiness() {
+      let { businessId } = this.$route.params;
+      this.businessId = businessId;
+      this.$store.dispatch({ type: "loadBusiness", businessId }).then(() => {
+        var user = this.$store.getters.loggedInUser;
+        if (user && businessId === user.business_id) this.isAdmin = true;
+        this.$store.dispatch({ type: "loadAppoints", listRequire: "business" });
+      });
+    }
   },
-  },
-  watch:{
+  watch: {
     businessIdParam: () => {
-      this.loadBusiness()
+      this.loadBusiness();
     }
   }
 };
@@ -171,30 +175,29 @@ h3 {
 }
 .page-continer {
   background-color: white;
- display: grid;
-    grid-template-columns: 20px 1fr 2fr 20px;
-    grid-template-rows: 1fr 1fr 1fr .5fr;
-     grid-gap: 20px 20px;
-        // padding: 20px;
-    .img-header{
-      grid-column: 1/5;
-      grid-row: 1;
-    }
-    .profile-detais{
-      grid-column: 2;
-      grid-row: 2;      
-
-    }
-    .calendar{
-       grid-column: 3;
-      grid-row: 2; 
-      position: relative;
-      display: inline;
-    }
-    .midle{
-       grid-column: 1/5;
-      grid-row: 3;
-    }
+  display: grid;
+  grid-template-columns: 20px 1fr 2fr 20px;
+  grid-template-rows: 1fr 1fr 1fr 0.5fr;
+  grid-gap: 20px 20px;
+  // padding: 20px;
+  .img-header {
+    grid-column: 1/5;
+    grid-row: 1;
+  }
+  .profile-detais {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .calendar {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    display: inline;
+  }
+  .midle {
+    grid-column: 1/5;
+    grid-row: 3;
+  }
 }
 .profile-detais {
   // margin-left: 30px;
@@ -205,11 +208,11 @@ h3 {
   font-weight: 600 !important;
   color: #484848 !important;
 }
-.details-head{
+.details-head {
   text-align: left;
-align-items: center;
-justify-content: space-between;
-padding-right: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
 }
 .img-profile {
   width: 75px;
@@ -309,4 +312,3 @@ a {
   }
 }
 </style>
-
