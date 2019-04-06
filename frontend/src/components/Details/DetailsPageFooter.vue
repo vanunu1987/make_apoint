@@ -3,40 +3,38 @@
 <template>
   <section class="details-page-footer">
     <div class="btn-container">
-        <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
-      <button
-        class="set-appoint-btn"
-        @click="moveToCmp('MakeAppointTimeDatePicker')"
-      >See Dates</button>
+      <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
+      <button class="set-appoint-btn" @click="moveToCmp('MakeAppointTimeDatePicker')">See Dates</button>
     </div>
     <section class="card-details-container">
-        <h3 class="preview-type">{{currBusiness.type}}</h3>
-        <h3 class="preview-name">{{currBusiness.name}}</h3>
-        <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
-        <!-- <span class="address">{{adress}}</span> -->
-      </section>
-      
-        <!-- <v-rating
+      <h3 class="preview-type">{{currBusiness.type}}</h3>
+      <h3 class="preview-name">{{currBusiness.name}}</h3>
+      <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
+      <!-- <span class="address">{{adress}}</span> -->
+    </section>
+
+    <!-- <v-rating
           :value="currBusiness.rank.avg"
           color="amber"
           dense
           half-increments
           readonly
           size="14"
-        ></v-rating> -->
-      <div class="rank">
-      <span class="avg">{{ currBusiness.rank.avg }}</span> 
-      <span class="star"><i class="fas fa-star"></i></span> 
+    ></v-rating>-->
+    <div class="rank">
+      <span class="avg">{{ currBusiness.rank.avg }}</span>
+      <span class="star">
+        <i class="fas fa-star"></i>
+      </span>
       <span class="qty">({{ currBusiness.rank.qty }})</span>
-      </div>
-       
+    </div>
   </section>
 </template>
 
 <script>
 export default {
-  computed:{
-  currBusiness() {
+  computed: {
+    currBusiness() {
       return this.$store.getters.currBusiness;
     }
   },
@@ -52,18 +50,19 @@ export default {
       this.$emit("update-appoint", payload);
     }
   },
-  mounted(){
-    this.currBusiness = this.$store.getters.currBusiness
+  mounted() {
+    this.currBusiness = this.$store.getters.currBusiness;
   }
 };
 </script>
 
 <style lang="scss">
-@import "@/scss/styles.scss";
+@import '@/scss/variables.scss';
+
 .details-page-footer {
-  width:100%;
+  width: 100%;
   z-index: 5;
-  background-color:white;
+  background-color: white;
   position: fixed;
   bottom: 0%;
   display: flex;
