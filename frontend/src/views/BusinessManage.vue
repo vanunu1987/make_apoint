@@ -115,7 +115,7 @@ export default {
 //   background-color: #f0f4f7;
   display: grid;
   grid-template-columns: 1fr 2fr .5fr 1px;
-  grid-template-rows:50px .5fr .7fr 1fr 0.5fr;
+  grid-template-rows: 15px .5fr .7fr 1fr 0.5fr;
   grid-gap: 10px 20px;
   // padding: 20px;
   .business-page {
@@ -129,19 +129,19 @@ export default {
   .product{
     grid-column: 2;
     grid-row: 2;
-    background-color: white;
+    background-color: #f5f2f2;
 
   }
   .mothlyRev{
     grid-column: 2;
     grid-row: 3;
-    background-color: white;
+    background-color: #f5f2f2;
 
   }
   .revenue{
    grid-column: 3;
     grid-row: 2;
-    background-color: white;   
+    background-color: #f5f2f2;   
     // margin: 10px;
     display: flex;
     flex-direction: column;
@@ -154,7 +154,7 @@ export default {
     .userCount{
    grid-column: 3;
     grid-row: 3;
-    background-color: white;   
+    background-color: #f5f2f2;   
     display: flex;
     flex-direction: column;
     align-items: center;

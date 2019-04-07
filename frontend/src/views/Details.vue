@@ -1,7 +1,7 @@
 <template>
   <section class="page-container" v-if="currBusiness">
     <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/edit/'+businessId"></router-link>
-    <router-link class="fas fa-users-cog" v-if="isAdmin" :to="'/manage/'+businessId">business</router-link>
+    <router-link class="manage fas fa-chart-bar" v-if="isAdmin" :to="'/manage/'+businessId"></router-link>
 
     <img-carousel class="img-carousel-container"/>
 
@@ -188,6 +188,9 @@ h3 {
   .img-header {
     grid-column: 1/3;
     grid-row: 1;
+  }
+  .manage{
+margin-right: 70px;
   }
   .profile-details {
     grid-column: 2;
