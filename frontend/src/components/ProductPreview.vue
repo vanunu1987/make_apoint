@@ -1,7 +1,14 @@
 <template>
   <v-img
-    :src="this.$store.getters.currBusiness.prefs.preview_img_url"
+    :src="img"
     class="white--text"
     height="200px"
   ></v-img>
 </template>
+
+<script>
+export default {
+  props: ["img"]
+}
+</script>
+

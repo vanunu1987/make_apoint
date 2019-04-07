@@ -58,6 +58,7 @@ export default {
         .format("YYYY-MM-DD");
     },
     checkIfLogin(selectedTime) {
+      console.log('f checkIfLogin activated in CalendarAppointPicker with payload:',selectedTime)
       this.$emit("update-appoint", {
         property: "startTime",
         value: selectedTime

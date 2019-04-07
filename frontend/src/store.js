@@ -18,7 +18,7 @@ export default new Vuex.Store({
     UserToShow: {},
     imgList: [],
     businessData: null,
-    BusinessTypes: ['Barber', 'Tattoo Artist', 'Cosmetics', 'lessons'],
+    BusinessTypes: ['Barber', 'Tattoo Artist', 'Cosmetics', 'Lessons'],
     filterBy: {
       name: '',
       type: '',
