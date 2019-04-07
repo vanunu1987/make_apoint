@@ -53,6 +53,7 @@ main {
 }
 
 .close-btn {
+  cursor: pointer;
   padding: 8px;
 }
 </style>

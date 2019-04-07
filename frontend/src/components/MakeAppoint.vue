@@ -18,7 +18,6 @@
 import MakeAppointTimeDatePicker from "@/components/Details/MakeAppointTimeDatePicker.vue";
 import UserLoginSignup from '@/components/UserLoginSignup.vue'
 import MakeAppoint3 from "@/components/MakeAppoint3.vue";
-import MakeAppoint4 from "@/components/MakeAppoint4.vue";
 import MakeAppoint5 from "@/components/MakeAppoint5.vue";
 import MakeAppoint6 from "@/components/MakeAppoint6.vue";
 
@@ -73,8 +72,9 @@ export default {
   },
   created() {
     this.cmps.push({ name: "MakeAppointTimeDatePicker" });
-    this.cmps.push({ name: "UserLoginSignup" });
-    this.cmps.push({ name: "MakeAppoint4" });
+
+    this.cmps.push({ name: "MakeAppoint3" });
+
     this.cmps.push({ name: "MakeAppoint5" });
     this.cmps.push({ name: "MakeAppoint6" });
     if (this.$store.getters.loggedInUser)
@@ -82,9 +82,9 @@ export default {
   },
   components: {
     MakeAppointTimeDatePicker,
-    UserLoginSignup,
-    // MakeAppoint3,
-    MakeAppoint4,
+
+    MakeAppoint3,
+
     MakeAppoint5,
     MakeAppoint6
   }
