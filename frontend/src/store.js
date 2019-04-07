@@ -91,6 +91,8 @@ export default new Vuex.Store({
       state.userAppointsList = appointsList
     },
     setLoggedInUser(state, { user }) {
+      console.log(user);
+      
       state.loggedInUser = user
     },
     setImgList(state, { imgList }) {
@@ -147,8 +149,8 @@ export default new Vuex.Store({
     },
     async loginUser(context, { credentials }) {
       var user = await UserService.checkLogin(credentials)
-      if (!user) return
-      if (user.business_id) context.dispatch({ type: 'loadBusiness', businessId: user.business_id })
+      // if (!user) return
+      if (user && user.business_id) context.dispatch({ type: 'loadBusiness', businessId: user.business_id })
       context.commit({ type: 'setLoggedInUser', user })
       context.dispatch({ type: 'loadAppoints', listRequire: 'user' })
     },

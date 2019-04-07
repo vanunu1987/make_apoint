@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-
+var history=require('connect-history-api-fallback')
 const addBusinessRoutes = require('./routes/business-route')
 const addAppointsRoutes = require('./routes/appoints-route')
 // const addReviewRoutes = require('./routes/review-route')
@@ -24,6 +24,7 @@ app.use(session({
   cookie: { secure: false }
 }))
 
+app.use(history())
 
 app.use(express.static('public'));
 const port = process.env.PORT || 3003;

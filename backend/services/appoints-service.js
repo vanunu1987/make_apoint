@@ -4,6 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 function query(filterBy) {
     var queryToMongo = {}
+    console.log(filterBy.listRequireId);
     var id = new ObjectId(filterBy.listRequireId)
     if (filterBy.listRequire === 'business') queryToMongo.business_id = id
     else queryToMongo.user_id = id

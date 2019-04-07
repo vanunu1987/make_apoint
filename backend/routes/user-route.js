@@ -15,10 +15,17 @@ function addRoutes(app) {
 
     app.put(`${BASE}/login`, (req, res) => {
         const credentials = req.body
+        console.log(credentials);
+        if (Object.keys(credentials).length===0){
+            req.session.user=null
+            return res.json(null)
+        }
+        
         userService.checkLogin(credentials)
-            .then(user => {
-                req.session.user = user
-                res.json(user)
+        .then(user => {
+            req.session.user = user
+            res.json(user)
+            console.log(user);
             })
     })
 
