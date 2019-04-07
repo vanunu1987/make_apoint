@@ -74,7 +74,7 @@ export default {
       border: 0.8px solid #3899ec;
       color: #3899ec;
       background-color: white;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       padding: 0 17px;
        &:hover{
       z-index: 1000;

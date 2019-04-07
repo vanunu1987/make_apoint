@@ -1,23 +1,22 @@
-
-
 <template>
   <section class="make-appoint">
-    <component 
-    :is="currCmp.name" 
-    :payload="currCmp.payload"
-    :appoint = "appoint"
-    @set-cmp="setCmp" 
-    @make-appoint="makeAppoint"
-    @update-appoint="updateAppoint"
-    @add-user="addUser"
-    >
-    </component>
+    <component
+      :is="currCmp.name"
+      :payload="currCmp.payload"
+      :appoint="appoint"
+      @set-cmp="setCmp"
+      @make-appoint="makeAppoint"
+      @update-appoint="updateAppoint"
+      @add-user="addUser"
+
+      @loggedIn="setCmp('MakeAppoint5')"
+    ></component>
   </section>
 </template>
 
 <script>
-import DetailsPageFooter from "@/components/DetailsPageFooter.vue";
-import MakeAppointTimeDatePicker from "@/components/MakeAppointTimeDatePicker.vue";
+import MakeAppointTimeDatePicker from "@/components/Details/MakeAppointTimeDatePicker.vue";
+import UserLoginSignup from '@/components/UserLoginSignup.vue'
 import MakeAppoint3 from "@/components/MakeAppoint3.vue";
 import MakeAppoint5 from "@/components/MakeAppoint5.vue";
 import MakeAppoint6 from "@/components/MakeAppoint6.vue";
@@ -25,20 +24,20 @@ import MakeAppoint6 from "@/components/MakeAppoint6.vue";
 export default {
   data() {
     return {
-        currCmp:{ name: "DetailsPageFooter" },
-        cmps:[],
-        appoint:{
-          date:null,
-          startTime:null,
-          user_id:null,
-          business_id:this.$store.getters.currBusiness._id,
-          product:this.$store.getters.currBusiness.products[0]
-        }
+      currCmp: { name: "MakeAppointTimeDatePicker" },
+      cmps: [],
+      appoint: {
+        date: null,
+        startTime: null,
+        user_id: null,
+        business_id: this.$store.getters.currBusiness._id,
+        product: this.$store.getters.currBusiness.products[0]
+      }
     };
   },
   methods: {
     setCmp(cmpName, payload) {
-      console.log('setCmp activated',cmpName)
+      console.log("setCmp activated", cmpName);
       //get the chosen cmp
       var component = this.cmps.find(cmp => cmp.name === cmpName);
       //upload payload on cmp and set the cmp
@@ -46,44 +45,54 @@ export default {
       this.currCmp = component;
     },
     updateAppoint(payload) {
-      var property = payload.property
-      var value = payload.value
-      console.log('updateAppoint activated',value)
-      this.appoint[property] = value
-      console.log('appoint is updated:',this.appoint)
+      var property = payload.property;
+      var value = payload.value;
+      console.log("updateAppoint activated", value);
+      this.appoint[property] = value;
+      console.log("appoint is updated:", this.appoint);
     },
-    addUser(user){
-      this.$store.dispatch({type:'signUpUser',credentials:user,isNewBusiness:false}).then(()=>{
-        console.log('promise return')
-        this.setCmp('MakeAppoint5')
-      })
-      console.log(user)
+    addUser(user) {
+      this.$store
+        .dispatch({
+          type: "signUpUser",
+          credentials: user,
+          isNewBusiness: false
+        })
+        .then(() => {
+          console.log("promise return");
+          this.setCmp("MakeAppoint5");
+        });
+      console.log(user);
     },
-    makeAppoint(){
-this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.log('sucsess!'))
+    makeAppoint() {
+      this.$store
+        .dispatch({ type: "addAppoint", appoint: this.appoint })
+        .then(() => console.log("sucsess!"));
     }
   },
   created() {
-    this.cmps.push({ name: "DetailsPageFooter" });
     this.cmps.push({ name: "MakeAppointTimeDatePicker" });
+
     this.cmps.push({ name: "MakeAppoint3" });
+
     this.cmps.push({ name: "MakeAppoint5" });
     this.cmps.push({ name: "MakeAppoint6" });
-    if(this.$store.getters.loggedInUser) this.appoint.user_id = this.$store.getters.loggedInUser._id
+    if (this.$store.getters.loggedInUser)
+      this.appoint.user_id = this.$store.getters.loggedInUser._id;
   },
   components: {
-    DetailsPageFooter,
     MakeAppointTimeDatePicker,
+
     MakeAppoint3,
+
     MakeAppoint5,
-    MakeAppoint6,
+    MakeAppoint6
   }
 };
 </script>
 
 <style lang="scss">
 .make-appoint {
-  // border: 1px dotted black;
-  border-radius: 3px;
+  width: 100%;
 }
 </style>

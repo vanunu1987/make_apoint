@@ -1,5 +1,6 @@
 <template>
   <section class="page-container" v-if="!!currBusiness.prefs">
+    <business-product-modal v-if="isProductModal" @saveProduct="setProduct"/>
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
     <business-path-modal @setPath="setPathModal" class="businessType" v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
@@ -164,7 +165,7 @@
         v-show="isGalleryHeaderImg"
         title="addImg"
         class="fas fa-image addImg"
-      >Add image</button>
+      > Add image</button>
 
       <div v-if="isGalleryHeaderImg" class="headerGallery">
         <ul>
@@ -193,6 +194,7 @@ import mapCmp from "../components/MapCmp.vue";
 import vueDraggable from "../components/VueDraggable.vue";
 import CalendarDatePicker from "@/components/Details/CalendarDatePicker.vue";
 import BusinessTypeModal from "@/components/BusinessTypeModal.vue";
+import BusinessProductModal from "@/components/BusinessProductModal.vue";
 import BusinessPathModal from "@/components/BusinessPathModal.vue";
 import BusinessService from "@/services/BusinessService.js";
 import cloudinaryService from "@/services/cloudinary-service.js";
@@ -212,7 +214,8 @@ export default {
     WorkHours,
     userLoginSignUp,
     cloudinaryService,
-    BusinessPathModal
+    BusinessPathModal,
+    BusinessProductModal
   },
   created() {
     let { businessId } = this.$route.params;
@@ -337,6 +340,11 @@ export default {
             );
         }
       });
+    },
+    setProduct(product){
+      this.currBusiness.products.push(product)
+      this.isProductModal=false
+      
     },
     closeSignUp() {
       console.log(this.loggedInUser);
