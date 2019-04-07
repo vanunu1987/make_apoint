@@ -19,7 +19,6 @@
 import DetailsPageFooter from "@/components/DetailsPageFooter.vue";
 import MakeAppointTimeDatePicker from "@/components/MakeAppointTimeDatePicker.vue";
 import MakeAppoint3 from "@/components/MakeAppoint3.vue";
-import MakeAppoint4 from "@/components/MakeAppoint4.vue";
 import MakeAppoint5 from "@/components/MakeAppoint5.vue";
 import MakeAppoint6 from "@/components/MakeAppoint6.vue";
 
@@ -68,7 +67,6 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
     this.cmps.push({ name: "DetailsPageFooter" });
     this.cmps.push({ name: "MakeAppointTimeDatePicker" });
     this.cmps.push({ name: "MakeAppoint3" });
-    this.cmps.push({ name: "MakeAppoint4" });
     this.cmps.push({ name: "MakeAppoint5" });
     this.cmps.push({ name: "MakeAppoint6" });
     if(this.$store.getters.loggedInUser) this.appoint.user_id = this.$store.getters.loggedInUser._id
@@ -77,7 +75,6 @@ this.$store.dispatch({type:'addAppoint',appoint:this.appoint}).then(()=>console.
     DetailsPageFooter,
     MakeAppointTimeDatePicker,
     MakeAppoint3,
-    MakeAppoint4,
     MakeAppoint5,
     MakeAppoint6,
   }
