@@ -1,8 +1,8 @@
 <template>
   <section class="img-carousel">
     <el-carousel :interval="2500" trigger="click">
-      <el-carousel-item v-for="product in products" :key="product._id">
-        <product-preview :product="product"/>
+      <el-carousel-item v-for="img in imgs" >
+        <product-preview :img="img"/>
       </el-carousel-item>
     </el-carousel>
   </section>
@@ -16,11 +16,11 @@ export default {
   },
   data() {
     return {
-      products: null
+     imgs: null
     };
   },
   created() {
-    this.products = this.$store.getters.currBusiness.products;
+    this.imgs = this.$store.getters.currBusiness.prefs.preview_imgs;
   }
 };
 </script>

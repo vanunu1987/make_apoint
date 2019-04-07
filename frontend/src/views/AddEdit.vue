@@ -527,7 +527,7 @@ h3 {
 .page-container {
   background-color: #f0f4f7;
   display: grid;
-  grid-template-columns: 1fr 20px 2fr 1fr 20px 1px;
+  grid-template-columns: 2fr 20px 2fr 1fr 20px 1px;
   grid-template-rows: 1fr 1fr 1fr 0.5fr;
   grid-gap: 10px 20px;
   // padding: 20px;
