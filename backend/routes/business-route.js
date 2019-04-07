@@ -47,7 +47,9 @@ function addBusinessRoutes(app) {
         const businessId = req.params.businessId;
             businessService.getById(businessId)
             .then((business) => {
+                console.log(business);
                 res.json(business)
+                
             })
     })
 

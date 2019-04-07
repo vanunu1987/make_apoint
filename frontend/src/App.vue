@@ -24,6 +24,7 @@
         <router-link @click="test" to="/edit">Add business</router-link>
 
         <a @click="toggleLogin"  v-if="!loggedUser">Log in</a>
+        <a @click="logOut"  v-if="loggedUser">Log out</a>
 
         <dialog-container v-if="isShowLogin" class="login-container" @dialogClick="toggleLogin">
           <user-login-signup :isNewUserProp="false" @loggedIn="toggleLogin"></user-login-signup>
@@ -56,7 +57,9 @@ export default {
   computed: {
     loggedUser() {
       var currUser = this.$store.getters.loggedInUser;
-      if (!currUser) return;
+      console.log(currUser);
+      
+      if (!currUser) return ;
       return currUser;
     },
     currBusiness() {
@@ -79,6 +82,10 @@ export default {
     },
     toggleLogin() {
       this.isShowLogin = !this.isShowLogin;
+    },
+    logOut(){
+      this.$store.dispatch({ type: "loginUser", credentials:null });
+
     }
   },
   created() {}

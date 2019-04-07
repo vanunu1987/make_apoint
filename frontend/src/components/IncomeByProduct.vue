@@ -19,7 +19,23 @@ export default {
         }
       ]
     })
-  }
+  },
+  watch: {
+ data(){
+   console.log('change',this.data);
+    this.renderChart({
+      labels: this.data.products,
+      datasets: [
+        {
+          label: this.data.products,
+          backgroundColor: ['#f87979','#3899ec'],
+          data: this.data.productRevenues
+        }
+      ]
+    })
+   
+ }
+   }
 }
 </script>
 

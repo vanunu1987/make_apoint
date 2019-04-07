@@ -15,7 +15,7 @@
     <MonthlyIncome :data="{dates,revenues}" :height="100"/>
     </div>
     <div class="revenue">
-        <h2>total Revenue</h2>
+        <h2>Total Revenue</h2>
         <div class="month">
          <h2>month:</h2>
         <select  v-model="selctedMonth">
@@ -29,7 +29,7 @@
         <h2 class="amount" v-if="businessData">{{revenueByMonth}}$</h2>
     </div>
     <div class="userCount">
-        <h2>users</h2>
+        <h2>Users</h2>
         <h2 class="count">20</h2>
 
     </div>

@@ -35,6 +35,7 @@ async function getById(businessId) {
     if (!businessId) return _getEmptyBusiness()
     var res = await axios.get(`${BASE_URL}/${businessId}`)
     var business = await res.data
+    console.log(typeof business._id);
     return business
 }
 
