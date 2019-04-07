@@ -1,9 +1,20 @@
 <template>
   <div class="ModalContiner">
     <div class="modalMain">
-        <h1 class="h1Title">Congratulations !</h1>
-        <h2> Enjoy your business link:</h2>
-        <h3>http://localhost:8080/business/{{currBusiness._id}}</h3>
+        <h1 class="productName">Product Details </h1>
+        <label for="productName">Product Name:
+        </label>
+        <input type="text" name="productName" v-model="product.title">
+
+        <label class="duration" for="productDuration" >Product Duration:
+        </label>
+        <input  type="number" name="productDuration" v-model="product.duration"/>
+
+        <label for="productPrice">Product Price:
+        </label>
+        <input type="number" name="productPrice" v-model="product.price"/>
+
+       
       <button @click="savePath">Done</button>
     </div>
   </div>
@@ -13,13 +24,12 @@ import UtilService from '@/services/UtilService.js'
 export default {
     data(){
         return{
-            businessType:[],
-            selctedType:''
+         product:{title:'',duration:'',price:''}
         }
     },
     methods:{
         savePath(){
-            this.$router.push('/business/' + this.currBusiness._id)
+            this.$emit("saveProduct", this.product )
         }
     },
     components:{
@@ -48,8 +58,8 @@ export default {
 
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
-    height: 15vw;
-    width: 37vw;
+    height: 20vw;
+    width: 25vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
@@ -86,5 +96,22 @@ button{
     font-weight: 800;
     margin-bottom: 10px;
 }
+input{
+    border: 1px solid rgb(235, 235, 235);
+    margin-bottom: 10px;
+    
+}
+.duration{
+        // margin-left: 20px;
+    }
 
+    label{
+        font-size: .9rem;
+        width: 147px;
+    text-align: start;
+    }
+    .productName{
+        margin-bottom: 15px;
+
+    }
 </style>

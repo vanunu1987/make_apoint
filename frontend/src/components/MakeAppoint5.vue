@@ -17,6 +17,9 @@
 
 export default {
   props:['appoint'],
+  created() {
+    console.log('created')
+  },
   methods: {
     sendToCmpAppointPicker(payload) {
       console.log("sendToCmpAppointPicker", payload);

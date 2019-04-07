@@ -52,7 +52,7 @@ export default {
       this.$store.dispatch({ type: "loginUser", credentials });
       this.userCredentials.userName = null;
       this.userCredentials.password = null;
-      this.$emit('routeHome')
+      this.$emit('loggedIn')
     },
     signup() {
       this.newUserCredentials.isReg = true;
@@ -60,19 +60,14 @@ export default {
       this.$store.dispatch({ type: "signUpUser", credentials,isNewBusiness: this.isNewBus })
       .then(() => {
         this.$emit('closeSignUp')
-        this.$emit('routeHome')
+        this.$emit('signedUp')
       })
       this.newUserCredentials.userName = null;
       this.newUserCredentials.password = null;
       this.newUserCredentials.phone = null;
     },
-    routeHome(){
-      this.$emit('routeHome')
-    }
   },
   created() {
-    console.log(this.isNewUserProp);
-    
       this.isNewUser = this.isNewUserProp
   }
 };
@@ -99,8 +94,6 @@ h1 {
 }
 .form-container{
   padding: 20px;
-  // border-radius: 3px;
-  // border: 2px solid $primary-color-light;
   height: 400px;
   width: 300px;
   background-color: white;
