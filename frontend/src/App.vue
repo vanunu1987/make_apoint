@@ -23,7 +23,7 @@
         >{{loggedUser.userName}}'s Page</router-link>
         <router-link @click="test" to="/edit">Add business</router-link>
 
-        <a @click="toggleLogin">Log in</a>
+        <a @click="toggleLogin"  v-if="!loggedUser">Log in</a>
 
         <dialog-container v-if="isShowLogin" class="login-container" @dialogClick="toggleLogin">
           <user-login-signup :isNewUserProp="false" @loggedIn="toggleLogin"></user-login-signup>
