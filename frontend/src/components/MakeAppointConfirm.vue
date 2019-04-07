@@ -1,7 +1,7 @@
 
 
 <template>
-  <section class="make-appoint5">
+  <section class="make-appoint-confirm">
     <h1>Almost there!</h1>
     <h1 style="text-decoration:underline;">Confirm appointment details:</h1>
     <h5>{{appoint.product.title | capitalize}}</h5>
@@ -17,20 +17,28 @@
 
 export default {
   props:['appoint'],
-  created() {
-    console.log('created')
-  },
+  created(){
+   this.$swal({
+     title: "Appointment details :",
+     text: this.appoint.product.title + '\n' + this.appoint.date  + ' At ' + this.appoint.startTime + '\n Price: ' + this.appoint.product.price + '$',
+     // icon: "success",
+     buttons: [true,"Confirm"]
+     // button: "Confirm",
+   }).then((res) => {
+     console.log('Clicked: ',res);
+     if (res) this.sendAddAppoint()
+     else this.moveToCmp('MakeAppointTimeDatePicker')
+
+   })
+ },
   methods: {
-    sendToCmpAppointPicker(payload) {
-      console.log("sendToCmpAppointPicker", payload);
-      this.selectedDay = payload.value;
-    },
+   
     moveToCmp(cmpName) {
       this.$emit("set-cmp", cmpName);
     },
     updateAppoint(payload) {
       console.log(
-        "update appoint recevied in makeappoint5 cmp with this payload",
+        "update appoint recevied in MakeAppointConfirm cmp with this payload",
         payload
       )
       this.$emit("update-appoint", payload);
@@ -45,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss">
-.make-appoint5{
+.make-appoint-confirm{
   h1,h2,h3,h5{
   font-weight:100;
   text-align: left;
