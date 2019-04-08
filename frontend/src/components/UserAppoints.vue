@@ -134,6 +134,8 @@ export default {
 
 
 <style scoped lang="scss">
+@import "@/scss/variables.scss";
+
 a {
   text-decoration: none;
   color: black;
@@ -170,6 +172,7 @@ p {
 .user-appoints {
   button {
     position: absolute;
+    font-weight: 900;
     right: 20px;
     top: 55px;
     height: 60px;
@@ -178,7 +181,7 @@ p {
     border: none;
     outline: none;
     z-index: 10;
-    border: 1px solid #a2f7b5;
+    border: 1px solid $primary-color;
     background-color: white;
     &.remove-appoint{
         left: 0;
@@ -191,6 +194,7 @@ p {
   }
 }
 .appoints-card {
+  border: 1px solid $primary-color;
   position: absolute;
   right: 75px;
   top: 112px;
@@ -205,10 +209,10 @@ p {
     padding: 0;
   }
 }
-$base-color: #a2f7b5;
+$base-color: $secondary-color;
 .appoint-container {
   cursor: pointer;
-  background-color: #a2f7b5;
+  background-color:  $secondary-color;
   padding: 3px;
   margin-bottom: 5px;
   position: relative;
@@ -221,7 +225,7 @@ $base-color: #a2f7b5;
   position: fixed;
       right: 78px;
     top: 75px;
-  background-color: #ff5c5d;
+  background-color: $secondary-color;
   padding: 1px;
   height: 18px;
   width: 18px;

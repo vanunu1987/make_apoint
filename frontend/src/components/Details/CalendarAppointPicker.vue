@@ -73,8 +73,7 @@ export default {
         this.$emit("move-to-cmp", "MakeAppointConfirm");
         bus.$emit("move-to-cmp", "MakeAppointConfirm");
       } else {
-        this.$emit("move-to-cmp", "UserLoginSignup");
-        bus.$emit("move-to-cmp", "UserLoginSignup");
+        bus.$emit("dialogClick");
       }
     }
   }
