@@ -3,7 +3,7 @@
     <div class="modalMain">
         <h1 class="h1Title">Congratulations !</h1>
         <h2> Enjoy your business link:</h2>
-        <h3>https://make-appoint.herokuapp.com/0/business/{{currBusiness._id}}</h3>
+        <h3>https://make-appoint.herokuapp.com/business/{{currBusiness._id}}</h3>
       <button @click="savePath">Done</button>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default {
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
     height: 15vw;
-    width: 45vw;
+    width: 50vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
