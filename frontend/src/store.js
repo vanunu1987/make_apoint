@@ -69,6 +69,8 @@ export default new Vuex.Store({
 
   mutations: {
     setCurrBusiness(state, { business }) {
+      console.log('stor',business);
+      
       state.currBusiness = business
     },
     setHeaderAbsolute(state, { isAbsolute }) {
@@ -197,6 +199,7 @@ export default new Vuex.Store({
     async addBusiness(context, { currBusiness }) {
 
       var businessId = (context.getters.currBusiness && context.getters.currBusiness._id)
+    
       console.log('got this : ',businessId);
       if (!businessId) {
         var business = await BusinessService.add(currBusiness)
@@ -207,7 +210,9 @@ export default new Vuex.Store({
         context.commit({ type: 'setCurrBusiness', business: business })
         return
       } else {
-        var business = await BusinessService.update(currBusiness)
+        var B
+        var businessToUpdate= context.getters.currBusiness
+        var business = await BusinessService.update(businessToUpdate)
         context.commit({ type: 'setCurrBusiness', business: business })
         return
       }
