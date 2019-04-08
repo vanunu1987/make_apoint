@@ -195,6 +195,7 @@ export default new Vuex.Store({
     },
 
     async addBusiness(context, { currBusiness }) {
+
       var businessId = (context.getters.currBusiness && context.getters.currBusiness._id)
       console.log('got this : ',businessId);
       if (!businessId) {
