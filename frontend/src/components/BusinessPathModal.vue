@@ -14,7 +14,8 @@ export default {
     data(){
         return{
             businessType:[],
-            selctedType:''
+            selctedType:'',
+            currBusiness:null
         }
     },
     methods:{

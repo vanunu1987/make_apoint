@@ -2,7 +2,7 @@
   <section class="page-container" v-if="!!currBusiness.prefs">
     <business-product-modal v-if="isProductModal" @saveProduct="setProduct"/>
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
-    <business-path-modal @setPath="setPathModal" class="businessType" v-if="isPathModal"/>
+    <business-path-modal  class="businessType" v-if="isPathModal"/>
     <work-hours class="workHourCmp" v-if="isCalendar" @setWorkTime="setWorkTime"/>
     <user-login-signUp
       :isNewUserProp="true"
