@@ -76,7 +76,7 @@
 import ImgCarousel from "@/components/Details/ImgCarousel.vue";
 import DetailsPageFooter from "../components/Details/DetailsPageFooter.vue";
 import CalendarDialog from '@/components/Details/CalendarDialog.vue';
-
+import {bus} from '@/main.js'
 import BusinessService from "@/services/UtilService.js";
 
 export default {
@@ -105,6 +105,9 @@ export default {
   },
   mounted() {
     var user = this.$store.getters.loggedInUser;
+    bus.$on("confirmClose", () => {
+      this.toggleCalendarDialog();
+    })
   },
   computed: {
     currBusiness() {
