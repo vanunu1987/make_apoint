@@ -48,8 +48,7 @@ function addBusinessRoutes(app) {
             businessService.getById(businessId)
             .then((business) => {
                 console.log(business);
-                res.json(business)
-                
+                res.json(business)  
             })
     })
 
