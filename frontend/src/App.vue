@@ -39,6 +39,7 @@
 import userAppoints from "@/components/UserAppoints.vue";
 import UserLoginSignup from "@/components/UserLoginSignup.vue";
 import DialogContainer from '@/components/General/DialogContainer.vue'
+import {bus} from '@/main.js'
 
 export default {
   name: "app",
@@ -88,7 +89,11 @@ export default {
 
     }
   },
-  created() {}
+  mounted() {
+    bus.$on("dialogClick", () => {
+      this.toggleLogin();
+    });
+  },
 };
 </script>
 
@@ -151,6 +156,7 @@ export default {
 }
 
 .dialog-container {
+  z-index: 10000;
   position: fixed;
   top: 0;
   left: 0;

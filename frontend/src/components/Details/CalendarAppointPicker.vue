@@ -27,6 +27,8 @@
 <script>
 import CalendarService from "@/services/CalendarService.js";
 import moment from "moment";
+import {bus} from '@/main.js'
+
 
 export default {
   props: ["date"],
@@ -59,14 +61,19 @@ export default {
     },
     checkIfLogin(selectedTime) {
       console.log('f checkIfLogin activated in CalendarAppointPicker with payload:',selectedTime)
-      this.$emit("update-appoint", {
+      bus.$emit("update-appoint", {
         property: "startTime",
         value: selectedTime
-      });
+      })
+      // this.$emit("update-appoint", {
+      //   property: "startTime",
+      //   value: selectedTime
+      // });
       if (this.$store.getters.loggedInUser) {
-        this.$emit("move-to-cmp", "MakeAppoint5");
+        this.$emit("move-to-cmp", "MakeAppointConfirm");
+        bus.$emit("move-to-cmp", "MakeAppointConfirm");
       } else {
-        this.$emit("move-to-cmp", "UserLoginSignup");
+        bus.$emit("dialogClick");
       }
     }
   }

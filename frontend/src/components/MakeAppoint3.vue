@@ -63,7 +63,7 @@ export default {
     },
     updateAppoint(payload) {
       console.log(
-        "update appoint recevied in makeappoint5 cmp with this payload",
+        "update appoint recevied in MakeAppointConfirm cmp with this payload",
         payload
       )
       this.$emit("update-appoint", payload);

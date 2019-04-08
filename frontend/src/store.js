@@ -195,7 +195,9 @@ export default new Vuex.Store({
     },
 
     async addBusiness(context, { currBusiness }) {
-      var businessId = context.getters.currBusiness._id
+
+      var businessId = (context.getters.currBusiness && context.getters.currBusiness._id)
+      console.log('got this : ',businessId);
       if (!businessId) {
         var business = await BusinessService.add(currBusiness)
         var user = context.getters.loggedInUser

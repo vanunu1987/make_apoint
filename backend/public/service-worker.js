@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.83cd925e94b40912fd1465bdbf8a6cc0.js"
+  "/precache-manifest.d4c50021c68542eb6a3ebe98b505ed1b.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "toys"});
+workbox.core.setCacheNameDetails({prefix: "make-a-point"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
