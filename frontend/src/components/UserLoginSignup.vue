@@ -12,8 +12,8 @@
     <form v-if="isNewUser" @submit.prevent="signup">
       <header>
       <h1>Signup</h1>
-     <div> <input type="text" placeholder="User Name" v-model="userCredentials.userName"><i class="fas fa-user"></i></div>
-     <div><input type="password" placeholder="Password" v-model="userCredentials.password"><i class="fas fa-lock"></i></div>
+     <div> <input type="text" placeholder="User Name" v-model="newUserCredentials.userName"><i class="fas fa-user"></i></div>
+     <div><input type="password" placeholder="Password" v-model="newUserCredentials.password"><i class="fas fa-lock"></i></div>
      <div><input type="tel" placeholder="Phone Number" v-model="newUserCredentials.phone"><i class="fas fa-phone"></i></div>
      </header>
       <button type="submit">Sign up</button>
