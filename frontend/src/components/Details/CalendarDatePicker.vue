@@ -180,6 +180,11 @@ div.calendar-button-container {
   .calendar-container{
         max-width: 320px;
      }
+     .calendar-date-picker{
+       display: flex;
+       justify-content: center;
+
+     }
 }
 </style>
 

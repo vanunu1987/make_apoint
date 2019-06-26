@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.9823ed90cf39fecaf8e5025bc3d71955.js"
+  "/precache-manifest.66121d197b712f2b00fd88d6b7b221c7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "make-a-point"});
