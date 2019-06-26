@@ -1,11 +1,5 @@
 <template>
   <div class="list">
-
-     <!-- <el-carousel v-if="!isSearch" :interval="2500" type="card" height="350px">
-        <el-carousel-item v-for="currBusiness in business" :key="currBusiness._id">
-          <BusinessPreview :currBusiness="currBusiness"/>
-        </el-carousel-item>
-      </el-carousel> -->
       <ul class="business-list">
           <li v-for="currBusiness in business" :key="currBusiness._id">
               <BusinessPreview :currBusiness="currBusiness"/>
@@ -46,17 +40,12 @@ ul {
   padding: 20px;
   
   li {
-    // float: left;
     border-radius: 3px;
-    // box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     position: relative;
-    // top: 0;
     text-align: left;
     transition: all 0.4s;
 
-    &:hover {
-    }
     .BusinessPreview {
       height: 100%;
     }

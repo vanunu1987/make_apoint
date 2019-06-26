@@ -60,5 +60,20 @@ section.make-appoint-time-date-picker {
     width: 40%;
   }
 }
+
+@media(max-width: 500px){
+  section.make-appoint-time-date-picker{
+    flex-direction: column;
+    // justify-content: space-between;
+    // height: auto;
+    justify-content: flex-start;
+    height: 100vh;
+    padding: 0 3px;
+    .appoint-picker{
+      width: 100%;
+    }
+  }
+
+}
 </style>
 

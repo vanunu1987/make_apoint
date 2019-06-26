@@ -1,6 +1,5 @@
 <template>
   <div class="home-filter">
-    <!-- <h1>{{ msg }}</h1> -->
     <input type="search" placeholder="Search by business name or type" @keyup.enter="find">
     <button class="search-btn">Search</button>
   </div>
