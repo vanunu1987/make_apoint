@@ -5,18 +5,9 @@
       <section class="card-details-container">
         <h3 class="preview-type">{{currBusiness.type}}</h3>
         <h3 class="preview-name">{{currBusiness.name}}</h3>
-        <h3 class="preview-price">{{currBusiness.products[0].price | dollar}} per person</h3>
+        <h3 class="address">{{adress}}</h3>
         <!-- <span class="address">{{adress}}</span> -->
       </section>
-      
-        <!-- <v-rating
-          :value="currBusiness.rank.avg"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating> -->
       <div class="rank">
       <span class="avg">{{ currBusiness.rank.avg }}</span> 
       <span class="star"><i class="fas fa-star"></i></span> 
@@ -104,7 +95,6 @@ h3{
   margin-top:5px;
   font-size: 18px;
   display: block;
-  // overflow: hidden;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
   -ms-word-break: break-word;
@@ -123,7 +113,7 @@ h3{
   font-family: AirbnbCereal-bold;
   text-transform: capitalize;
   }
-  &.preview-price {
+  &.address {
   font-size: 14px;
   color:$text-black;
   font-family: AirbnbCereal-light;

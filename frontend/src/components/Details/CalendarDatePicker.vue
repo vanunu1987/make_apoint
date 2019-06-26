@@ -176,5 +176,13 @@ div.calendar-button-container {
   display: flex;
   justify-content: flex-end;
 }
+
+
+@media(max-width:500px) {
+  .calendar-container{
+    width: 100%;
+    height: auto;
+  }
+}
 </style>
 
