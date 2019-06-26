@@ -127,7 +127,7 @@
         />
       </GmapMap>
     </div>
-    <div class="setings">
+    <div class="setings" :class="{ stingOpen: isSetingOpen }">
       <div class="bar culomn">
         <button
           @click="isGalleryHeaderImg=!isGalleryHeaderImg"
@@ -243,6 +243,7 @@ export default {
       isGalleryHeaderImg: false,
       showCalender: false,
       imgIdx: 0,
+      isSetingOpen: false,
       m: {
         position: { lat: 34.38, lng: 34.8 }
       },
@@ -279,7 +280,7 @@ export default {
     },
     setHeaderImg(img, filter) {
       console.log("img", img);
-
+      this.isSetingOpen = !this.isSetingOpen
       if (filter === "header") {
         this.currBusiness.prefs.header_img_url = img.url;
         this.isGalleryHeaderImg = false;
@@ -302,6 +303,7 @@ export default {
       });
     },
     setFilterBy(val) {
+      this.isSetingOpen = !this.isSetingOpen
       if (!this.isGalleryHeaderImg) {
         this.isGalleryHeaderImg = !this.isGalleryHeaderImg;
         this.filterBy = val;
@@ -561,7 +563,6 @@ h3 {
     background-color: white;
     padding: 5px;
     border-radius: 5px;
-
     // height: 100vh;
     img{
       position: absolute;
@@ -641,6 +642,88 @@ h3 {
     ul {
       padding: 0px;
     }
+  }
+
+}
+@media (max-width: 740px) {
+  .sideBar{
+    display: none;
+  }
+  
+  .page-container {
+  background-color: #f0f4f7;
+  display: grid;
+  grid-template-columns: 1fr;
+  // padding: 20px;
+  .img-header {
+    grid-column: 0;
+    grid-row: 1;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 330px;
+  }
+  .profile-detais {
+    grid-column: 2;
+    grid-row: 2;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 330px;
+
+  }
+  .calendarContiner {
+    grid-column: 2;
+    grid-row: 3;
+    position: relative;
+    // display: inline;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 330px ;
+    img{
+      max-width: 330px;
+    
+    }
+    section.calendar-date-picker.calendar {
+      max-width: 330px;
+      
+    }
+}
+
+.midle {
+    grid-column: 0/1;
+    grid-row: 4;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 330px;
+  }
+  .setings {
+    // grid-column: 0;
+    // grid-row: 5;
+    position: absolute;
+    transform: translateX(-380px);
+    padding: 5px;
+    border-radius: 5px;
+    ul {
+      padding: 0px;
+    }
+  }
+  .stingOpen{
+        transform: translateX(0px);
+        position: fixed;
+        height: 100vh;
+        z-index: 100;
+
+  }
+  .details-head {
+  align-items: center;
+  input {
+    min-width: 205px;
+    border-radius: 5px;
+  }
+}
   }
 }
 .doneBtn{

@@ -177,12 +177,23 @@ div.calendar-button-container {
   justify-content: flex-end;
 }
 
+@media (max-width: 740px) {
+  .calendar-container{
+        max-width: 320px;
+     }
 
+.calendar-date-picker{
+       display: flex;
+       justify-content: center;
+
+     }
+}
 @media(max-width:500px) {
   .calendar-container{
     width: 100%;
     height: auto;
   }
+
   section.calendar-date-picker.calendar{
     margin: 20px 0;
   }
@@ -197,6 +208,9 @@ div.calendar-button-container {
   .calendar-container{
     max-width: 320px;
   }
+
+
 }
+
 </style>
 
