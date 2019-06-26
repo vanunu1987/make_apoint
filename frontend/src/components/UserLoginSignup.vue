@@ -90,7 +90,9 @@ h1 {
   height: 100vh;
   width: 100vw;
   position: fixed;
-   z-index: -1;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 .form-container{
   padding: 20px;
