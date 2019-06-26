@@ -61,7 +61,7 @@ export default {
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
     height: 30vh;
-    width: 25vw;
+    width: 43vw;
     background-color: white;
     border-radius: 5px;
     display: flex;
