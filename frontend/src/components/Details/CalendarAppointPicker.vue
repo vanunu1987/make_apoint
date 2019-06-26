@@ -1,6 +1,6 @@
 <template>
   <section class="calendar-appoint-picker">
-    <h1>{{events.length}} times available</h1>
+    <h1>{{events.length}} appoints available</h1>
 
     <span>
       <i class="far fa-calendar-alt"></i>
@@ -139,6 +139,12 @@ export default {
   }
   h5:not(:last-child) {
     margin-bottom: 8px;
+  }
+}
+
+@media(max-width:500px){
+  .calendar-appoint-picker{
+    overflow-y: scroll
   }
 }
 </style>

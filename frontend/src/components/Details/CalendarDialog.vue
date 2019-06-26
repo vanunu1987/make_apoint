@@ -56,4 +56,15 @@ main {
   cursor: pointer;
   padding: 8px;
 }
+
+@media(max-width:500px){
+    main{
+        // height: 100vh;
+        padding-top: 0;
+        flex-direction: column;
+        justify-content: space-between;
+        display: block;
+
+    }
+}
 </style>

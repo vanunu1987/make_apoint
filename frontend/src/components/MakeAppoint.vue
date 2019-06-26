@@ -101,5 +101,6 @@ export default {
 <style lang="scss">
 .make-appoint {
   width: 100%;
+  // height: 100vh;
 }
 </style>
