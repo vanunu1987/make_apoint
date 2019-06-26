@@ -26,10 +26,12 @@
         <a @click="toggleLogin"  v-if="!loggedUser">Log in</a>
         <a @click="logOut"  v-if="loggedUser">Log out</a>
 
+      </section>
+
         <dialog-container v-if="isShowLogin" class="login-container" @dialogClick="toggleLogin">
           <user-login-signup :isNewUserProp="false" @loggedIn="toggleLogin"></user-login-signup>
         </dialog-container>
-      </section>
+
     </div>
     <router-view/>
   </div>
@@ -58,8 +60,6 @@ export default {
   computed: {
     loggedUser() {
       var currUser = this.$store.getters.loggedInUser;
-      console.log(currUser);
-      
       if (!currUser) return ;
       return currUser;
     },
@@ -155,13 +155,13 @@ export default {
   display: none;
 }
 
-.dialog-container {
+.login-container {
   z-index: 10000;
   position: fixed;
   top: 0;
   left: 0;
-  // height: 100vh;
-  height: auto;
+  height: 100vh;
+  // height: auto;
   width: 100vw;
 }
 
