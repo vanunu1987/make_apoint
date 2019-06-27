@@ -56,7 +56,7 @@ export default {
   background-color: #131919ba;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 105;
 
   .modalMain {
   box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);

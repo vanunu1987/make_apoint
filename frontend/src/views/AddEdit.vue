@@ -1,5 +1,6 @@
 <template>
   <section class="page-container" v-if="!!currBusiness.prefs">
+    <button class="fas fa-users-cog " :class="{settingCog : isSetingOpen}" @click="isSetingOpen = !isSetingOpen"></button>
     <business-product-modal v-if="isProductModal" @saveProduct="setProduct"/>
     <business-type-modal class="businessType" @saveType="setType" v-if="isTypeModal"/>
     <business-path-modal @setPath="setPathModal" class="businessType" v-if="isPathModal"/>
@@ -414,6 +415,18 @@ span.flex {
   width: 90px;
   margin-left: 250px;
 }
+.fa-users-cog{
+  position: fixed;
+    top: 95px;
+    left: 10px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 4px 3px 14px 2px rgba(0, 0, 0, 0.75);
+    background: white;
+    z-index: 103;
+    visibility: hidden;
+}
 .Setting {
   // position: fixed;
   font-size: 2.5rem;
@@ -649,7 +662,9 @@ h3 {
   .sideBar{
     display: none;
   }
-  
+  .fa-users-cog{
+    visibility: visible;
+  }
   .page-container {
   background-color: #f0f4f7;
   display: grid;

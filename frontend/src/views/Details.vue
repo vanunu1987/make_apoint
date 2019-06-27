@@ -304,8 +304,11 @@ a {
       display: inline;
     }
     .middle {
-      grid-column: 1/2;
+      grid-column: 2;
     }
+  }
+  .img-profile{
+    width: 110px;
   }
 }
 

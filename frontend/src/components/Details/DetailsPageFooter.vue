@@ -72,7 +72,7 @@ export default {
     }
     button {
       padding: 15px;
-      width: 200px;
+      width: 130px;
       border-radius: 3px;
       background-color: $primary-color;
       opacity: 0.9;
