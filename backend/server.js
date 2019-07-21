@@ -8,7 +8,7 @@ const addBusinessRoutes = require('./routes/business-route')
 const addAppointsRoutes = require('./routes/appoints-route')
 // const addReviewRoutes = require('./routes/review-route')
 const addUserRoutes = require('./routes/user-route')
-
+require('dotenv').config()
 const app = express()
 app.use(cors({
   origin: ['http://localhost:8080'],
@@ -35,6 +35,7 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
 
 addBusinessRoutes(app)
 addAppointsRoutes(app)

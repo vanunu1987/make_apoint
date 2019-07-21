@@ -16,6 +16,17 @@ window.CalendarService = CalendarService
 // main.js
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import '@/filter.js'
+// import dotenv from 'dotenv'
+
+// const result = dotenv.config()
+ 
+// if (result.error) {
+//   throw result.error
+// }
+ 
+// console.log(result)
+
+console.log(process.env)
 
 import VueCharts from 'vue-chartjs'
 // import { Bar, Line } from 'vue-chartjs'

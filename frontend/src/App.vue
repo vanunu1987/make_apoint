@@ -21,7 +21,7 @@
           v-if="loggedUser && loggedUser.business_id"
           :to="'/business/'+loggedUser.business_id"
         >{{loggedUser.userName}}'s Page</router-link>
-        <router-link @click="test" to="/edit">Add business</router-link>
+        <router-link @click.native="test" to="/edit">Add business</router-link>
 
         <a @click="toggleLogin"  v-if="!loggedUser">Log in</a>
         <a @click="logOut"  v-if="loggedUser">Log out</a>

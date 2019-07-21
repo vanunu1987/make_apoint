@@ -32,6 +32,8 @@ export default {
   },
   mounted() {
     this.$store.commit("setHeaderAbsolute", { isAbsolute: true })
+    console.log(process.env.VUE_APP_TEST);
+    
   },
   beforeDestroy() {
     this.$store.commit("setHeaderAbsolute", { isAbsolute: false })
@@ -52,6 +54,7 @@ export default {
     this.$store.dispatch("loadUserLocation");
     var filterBy = this.$store.getters.filterBy;
     this.$store.dispatch({ type: "loadBusinesses", filterBy });
+    
   }
 };
 </script>

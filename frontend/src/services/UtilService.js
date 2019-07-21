@@ -1,5 +1,6 @@
 
 const API_KEY= 'AIzaSyB_X6Bay_XrtVq2O3S7a4ZdiHyxRCsxXrM&callback'
+
 function getFromStorage(key) {
     var val = localStorage.getItem(key);
     return JSON.parse(val)
